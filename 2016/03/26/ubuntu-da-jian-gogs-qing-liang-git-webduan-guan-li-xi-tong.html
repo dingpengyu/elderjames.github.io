@@ -26,6 +26,8 @@
     
     
     
+        <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+    
     
     
     
@@ -35,7 +37,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="James Yeung">
-    <meta name="description" itemprop="description" content="">
+    <meta name="description" itemprop="description" content="学习、札记、分享">
     <meta name="keywords" content="null,
 - git
 - gogs">
@@ -69,7 +71,7 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Ubuntu 搭建Gogs ：轻量Git Web端管理系统 | ElderJames&#39; Blog">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="">
+    <meta property="og:description" content="学习、札记、分享">
     <meta property="og:article:tag" content="
 - git
 - gogs"> 
@@ -81,7 +83,7 @@
 
     <!-- The Twitter Card protocol -->
     <meta name="twitter:title" content="Ubuntu 搭建Gogs ：轻量Git Web端管理系统 | ElderJames&#39; Blog">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="学习、札记、分享">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://elderjames.github.io" />
@@ -118,7 +120,7 @@
     "url": "https://elderjames.github.io/2016/03/26/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html",
     "datePublished": "3月 26, 2016",
     "dateModified": "3月 28, 2016",
-    "description": "",
+    "description": "学习、札记、分享",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://elderjames.github.io"
@@ -165,6 +167,10 @@
     
     
     
+    
+    .footer-sns-github {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNCA3OGMtNi40IDEuNC0yNi40IDE0LjItMzYgMjIuOC04IDcuMi0yMiAyOS44LTI0LjQgMzkuMi0xLjYgNi40LTIgMTEzLjItMS42IDM2OCAuNiAyOTkuNCAxIDM1OS44IDMuNCAzNjQgMTEgMjAuMiAyMS42IDMyLjQgMzcuMiA0MyAxNS42IDEwLjYgMTcuMiAxMS4yIDM0LjIgMTMuMiAxMC42IDEuMiA2My40IDEuNiAxMjcuNiAxLjRsMTA5LjYtLjYgNi02LjggNi4yLTYuOC0xLjItMjUuMmMtLjgtMTUuOC0uMi0zMy40IDEuNC00Ny4yIDMtMjUuNCAxLjQtMzYuMi02LTQzLjItNS00LjYtNi4yLTQuOC0zMC42LTQuMi0yNy42LjgtMjQgMS42LTY4LjgtMTYtOC42LTMuNC0yMi42LTE4LTI4LjQtMjkuOC0xMS40LTIyLjgtMjctNDUtMzkuMi01NS42LTE0LTEyLjItMTkuOC0yMC44LTE5LjgtMjguNiAwLTExLjYgMTMuNi0xMi42IDMzLjItMi40IDE2LjYgOC44IDIwLjggMTIuNCA0MC44IDM2LjIgMjQuMiAyOC42IDMxIDMzLjYgNTQgMzkuNiAxNS4yIDQgNDIuMiAzIDUxLjQtMS44IDktNC42IDE4LTE1LjIgMjQuNC0yOS4yIDExLjQtMjQuMiA3LjQtMzEuMi0yMC42LTM2LjgtOS44LTItMjkuMi04LTQzLjQtMTMuNC00MC40LTE1LjgtNjQuNi0zNy40LTg1LjQtNzYuMi0xMS42LTIxLjgtMTUuNC0zMy0xOC4yLTUzLjYtNC4yLTMyLjItNC44LTYwLjItMS40LTg0IDMuNC0yMy44IDYuOC0zMi44IDIwLjItNTQgNC02IDguOC0xNS42IDExLTIxLjQgMy44LTEwIDMuOC0xMS42IDEtMzAtNS4yLTM0LjItMy4yLTUyLjQgNy42LTcwLjIgNy4yLTEyLjIgMTUtMTcuMiAyNC4yLTE1LjggMTIuOCAyLjIgNTIgMTcuNCA2Ni44IDI2LjIgMjYgMTUgMjkgMTUuNCA4Mi40IDcuMiAyNC42LTMuOCAzMy44LTQuMiA2MC0zLjIgMTcgLjYgNDEuNCAzIDU0IDUuMiAzOC40IDYuNiA0OS42IDUuMiA3My0xMCA2LjYtNC4yIDE3LjQtOS40IDI0LTExLjYgNi42LTIuMiAxNi01LjggMjEtOC4yIDEzLTYgMjgtNS42IDM1LjYuOCAxMi40IDEwLjQgMTguNiA0MS40IDE0LjQgNzEuNi00LjQgMzAuNi0zIDM5LjQgOC40IDUzLjggMy40IDQuNCAxMS4yIDE5LjIgMTcuNCAzMy4yTDc3NSA0NDN2NzhsLTEwIDI4Yy0xNS4yIDQzLjItMzYuOCA3My4yLTY2LjIgOTIuOC0xMy40IDguOC01NyAyNS40LTc2LjggMjktMjguMiA1LjItMzMuMiAxMi42LTIyIDMyLjIgMTEuMiAxOS40IDEyLjQgMzIuOCAxMS42IDEyOS42bC0uNiA4NS44IDUuNCA0LjZjMy42IDMgOS4yIDUuMiAxNiA2IDUuOC44IDYwLjIgMSAxMjAuNi42IDEwOC40LS42IDExMC4yLS42IDExOS01IDI0LTExLjYgNDAtMjcuNCA1MS42LTUwLjZsNS40LTExIC42LTM0N2MuNC0yMjMtLjItMzUzLjQtMS40LTM2NS0yLTE3LTIuNi0xOC42LTEzLTM0LTEwLjYtMTUuNC0yMi44LTI2LjItNDMuMi0zNy4yLTQuMi0yLjQtNjQuNi0yLjgtMzY2LTMuMi0xOTguNiAwLTM2NCAuNC0zNjcuNiAxLjR6Ii8+PC9zdmc+);
+    }
     
     
     
@@ -286,7 +292,7 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 
 
     
@@ -441,6 +447,17 @@
     
 
     
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
 
     <!-- Share Weibo -->
     
@@ -505,12 +522,27 @@
 <li>反向代理 代理ip为 <a href="http://localhost:3000/" target="_blank" rel="external">http://localhost:3000/</a></li>
 <li>持续进程 使用supervisor</li>
 </ul>
-<p><code>sudo apt-get -y install supervisor</code></p>
-<p><code>sudo mkdir -p /var/log/gogs</code></p>
+<figcaption>apt-get -y install supervisor</code></p></figcaption><pre class=" language-sudo"><code class="language-sudo"><p><code>sudo mkdir -p /var/log/gogs</code></p>
 <p><code>sudo nano /etc/supervisor/supervisord.conf</code></p>
-<p>在这个文件最下面添加应用信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[program:gogs]</div><div class="line">directory=/home/gogs/</div><div class="line">command=/home/gogs/gogs web</div><div class="line">autostart=true</div><div class="line">autorestart=true</div><div class="line">startsecs=10</div><div class="line">stdout_logfile=/var/log/gogs/stdout.log</div><div class="line">stdout_logfile_maxbytes=1MB</div><div class="line">stdout_logfile_backups=10</div><div class="line">stdout_capture_maxbytes=1MB</div><div class="line">stderr_logfile=/var/log/gogs/stderr.log</div><div class="line">stderr_logfile_maxbytes=1MB</div><div class="line">stderr_logfile_backups=10</div><div class="line">stderr_capture_maxbytes=1MB</div><div class="line">environment = HOME=&quot;/home/git&quot;, USER=&quot;git&quot;</div><div class="line">user = git</div></pre></td></tr></table></figure></p>
-<p>其中directory和command中的路径是gogs目录的路径</p>
-<p>最后执行重启服务<br><code>sudo service supervisor restart</code></p>
+<p>在这个文件最下面添加应用信息</p>
+<pre><code>[program:gogs]
+directory=/home/gogs/
+command=/home/gogs/gogs web
+autostart=true
+autorestart=true
+startsecs=10
+stdout_logfile=/var/log/gogs/stdout.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=10
+stdout_capture_maxbytes=1MB
+stderr_logfile=/var/log/gogs/stderr.log
+stderr_logfile_maxbytes=1MB
+stderr_logfile_backups=10
+stderr_capture_maxbytes=1MB
+environment = HOME="/home/git", USER="git"
+user = git
+</code></pre><p>其中directory和command中的路径是gogs目录的路径</p>
+<p>最后执行重启服务<br><code>sudo service supervisor restart</code></pre>
 <p>提示Starting supervisor: supervisord.</p>
 <p>然后执行<code>ps -ef | grep gogs</code>查看服务是否已经启动</p>
 <p>如果有如下类似信息则表示服务启动成功：</p>
@@ -528,6 +560,35 @@
                 <!-- Post Comments -->
                 
                     
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://elderjames.github.io/2016/03/26/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://elderjames.github.io/2016/03/26/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//elderjames-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
                 
             </div>
 
@@ -540,7 +601,7 @@
                 <i class="material-icons">arrow_back</i>
             </button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
+            上一篇
         </a>
     
 
@@ -550,7 +611,7 @@
     <!-- Next Nav -->
     
         <a href="/2016/03/24/xiu-fu-apt-getbao-guan-li.html" id="post_nav-older" class="next-content">
-            旧篇
+            下一篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_forward</i>
@@ -659,7 +720,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -690,7 +751,7 @@
         <li>
             <a href="/tags" title="标签云">
                 
-                    <i class="material-icons sidebar-material-icons">tags</i>
+                    <i class="material-icons sidebar-material-icons">local_offer</i>
                 
                 标签云
             </a>
@@ -708,9 +769,9 @@
         
     
         <li>
-            <a href="/links" title="朋友">
+            <a href="/friends" title="朋友">
                 
-                    <i class="material-icons sidebar-material-icons">local_offer</i>
+                    <i class="material-icons sidebar-material-icons">people</i>
                 
                 朋友
             </a>
@@ -783,7 +844,7 @@ It will not impact the appearance and can give developers a lot of support :)
                     
 
                     <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
+<footer class="mdl-mini-footer" id="bottom"  style="background-image:url(https://repository-hunter.herokuapp.com/contribution/ElderJames.svg);background-repeat: repeat-x;">
     
         <!-- Paradox Footer Left Section -->
         <div class="mdl-mini-footer--left-section sns-list">
@@ -824,6 +885,12 @@ It will not impact the appearance and can give developers a lot of support :)
     
 
     <!-- Github -->
+    
+        <a href="https://github.com/ElderJames" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
     
 
     <!-- LinkedIn -->
@@ -907,7 +974,13 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
+    <!-- Busuanzi -->
+    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//elderjames-github-io.disqus.com/count.js" async></script>
 
 
 
@@ -960,7 +1033,7 @@ It will not impact the appearance and can give developers a lot of support :)
             lsloader.runInlineScript(item.id,item.id);
         }
     })()
-console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+// console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
 </script>
 
                 </main>
@@ -974,7 +1047,7 @@ console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viose
         right: 0px;
         z-index: 999;
         pointer-events: none;
-        bottom: 0px;
+        bottom: 60px;
       }
     </style>
     <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json")</script>

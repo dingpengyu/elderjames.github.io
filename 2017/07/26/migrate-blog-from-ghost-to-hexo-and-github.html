@@ -12,7 +12,7 @@
     
     <title>
         
-            links | 
+            Hello Hexo! 从Ghost迁移博客到Hexo | 
         
         ElderJames&#39; Blog
     </title>
@@ -26,6 +26,8 @@
     
     
     
+        <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
+    
     
     
     
@@ -35,8 +37,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="James Yeung">
-    <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="null">
+    <meta name="description" itemprop="description" content="学习、札记、分享">
+    <meta name="keywords" content="null,Hexo">
 
     <!-- Site Verification -->
     
@@ -65,29 +67,62 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://elderjames.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="links | ElderJames&#39; Blog">
+    <meta property="og:title" content="Hello Hexo! 从Ghost迁移博客到Hexo | ElderJames&#39; Blog">
     <meta property="og:image" content="/img/favicon.png" />
-    <meta property="og:description" content="">
-    
+    <meta property="og:description" content="学习、札记、分享">
+    <meta property="og:article:tag" content="Hexo"> 
 
+    
+        <meta property="article:published_time" content="7月 26, 2017" />
+        <meta property="article:modified_time" content="7月 26, 2017" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="links | ElderJames&#39; Blog">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:title" content="Hello Hexo! 从Ghost迁移博客到Hexo | ElderJames&#39; Blog">
+    <meta name="twitter:description" content="学习、札记、分享">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://elderjames.github.io" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://elderjames.github.io/links/index.html" />
+        <link rel="canonical" href="https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "ElderJames&#39; Blog",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "James Yeung",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "Hello Hexo! 从Ghost迁移博客到Hexo",
+    "url": "https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html",
+    "datePublished": "7月 26, 2017",
+    "dateModified": "7月 26, 2017",
+    "description": "学习、札记、分享",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://elderjames.github.io"
+    }
+}
+</script>
 
 
     
@@ -128,6 +163,10 @@
     
     
     
+    
+    .footer-sns-github {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgY2xhc3M9Imljb24iIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxwYXRoIGQ9Ik0xMzguNCA3OGMtNi40IDEuNC0yNi40IDE0LjItMzYgMjIuOC04IDcuMi0yMiAyOS44LTI0LjQgMzkuMi0xLjYgNi40LTIgMTEzLjItMS42IDM2OCAuNiAyOTkuNCAxIDM1OS44IDMuNCAzNjQgMTEgMjAuMiAyMS42IDMyLjQgMzcuMiA0MyAxNS42IDEwLjYgMTcuMiAxMS4yIDM0LjIgMTMuMiAxMC42IDEuMiA2My40IDEuNiAxMjcuNiAxLjRsMTA5LjYtLjYgNi02LjggNi4yLTYuOC0xLjItMjUuMmMtLjgtMTUuOC0uMi0zMy40IDEuNC00Ny4yIDMtMjUuNCAxLjQtMzYuMi02LTQzLjItNS00LjYtNi4yLTQuOC0zMC42LTQuMi0yNy42LjgtMjQgMS42LTY4LjgtMTYtOC42LTMuNC0yMi42LTE4LTI4LjQtMjkuOC0xMS40LTIyLjgtMjctNDUtMzkuMi01NS42LTE0LTEyLjItMTkuOC0yMC44LTE5LjgtMjguNiAwLTExLjYgMTMuNi0xMi42IDMzLjItMi40IDE2LjYgOC44IDIwLjggMTIuNCA0MC44IDM2LjIgMjQuMiAyOC42IDMxIDMzLjYgNTQgMzkuNiAxNS4yIDQgNDIuMiAzIDUxLjQtMS44IDktNC42IDE4LTE1LjIgMjQuNC0yOS4yIDExLjQtMjQuMiA3LjQtMzEuMi0yMC42LTM2LjgtOS44LTItMjkuMi04LTQzLjQtMTMuNC00MC40LTE1LjgtNjQuNi0zNy40LTg1LjQtNzYuMi0xMS42LTIxLjgtMTUuNC0zMy0xOC4yLTUzLjYtNC4yLTMyLjItNC44LTYwLjItMS40LTg0IDMuNC0yMy44IDYuOC0zMi44IDIwLjItNTQgNC02IDguOC0xNS42IDExLTIxLjQgMy44LTEwIDMuOC0xMS42IDEtMzAtNS4yLTM0LjItMy4yLTUyLjQgNy42LTcwLjIgNy4yLTEyLjIgMTUtMTcuMiAyNC4yLTE1LjggMTIuOCAyLjIgNTIgMTcuNCA2Ni44IDI2LjIgMjYgMTUgMjkgMTUuNCA4Mi40IDcuMiAyNC42LTMuOCAzMy44LTQuMiA2MC0zLjIgMTcgLjYgNDEuNCAzIDU0IDUuMiAzOC40IDYuNiA0OS42IDUuMiA3My0xMCA2LjYtNC4yIDE3LjQtOS40IDI0LTExLjYgNi42LTIuMiAxNi01LjggMjEtOC4yIDEzLTYgMjgtNS42IDM1LjYuOCAxMi40IDEwLjQgMTguNiA0MS40IDE0LjQgNzEuNi00LjQgMzAuNi0zIDM5LjQgOC40IDUzLjggMy40IDQuNCAxMS4yIDE5LjIgMTcuNCAzMy4yTDc3NSA0NDN2NzhsLTEwIDI4Yy0xNS4yIDQzLjItMzYuOCA3My4yLTY2LjIgOTIuOC0xMy40IDguOC01NyAyNS40LTc2LjggMjktMjguMiA1LjItMzMuMiAxMi42LTIyIDMyLjIgMTEuMiAxOS40IDEyLjQgMzIuOCAxMS42IDEyOS42bC0uNiA4NS44IDUuNCA0LjZjMy42IDMgOS4yIDUuMiAxNiA2IDUuOC44IDYwLjIgMSAxMjAuNi42IDEwOC40LS42IDExMC4yLS42IDExOS01IDI0LTExLjYgNDAtMjcuNCA1MS42LTUwLjZsNS40LTExIC42LTM0N2MuNC0yMjMtLjItMzUzLjQtMS40LTM2NS0yLTE3LTIuNi0xOC42LTEzLTM0LTEwLjYtMTUuNC0yMi44LTI2LjItNDMuMi0zNy4yLTQuMi0yLjQtNjQuNi0yLjgtMzY2LTMuMi0xOTguNiAwLTM2NCAuNC0zNjcuNiAxLjR6Ii8+PC9zdmc+);
+    }
     
     
     
@@ -249,7 +288,7 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 
 
     
@@ -272,115 +311,351 @@
 
                     <!-- Post TOC -->
 
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装Hexo"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装Hexo</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#发布到GitHub"><span class="post-toc-number">2.</span> <span class="post-toc-text">发布到GitHub</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#尝试写一篇新文章"><span class="post-toc-number">3.</span> <span class="post-toc-text">尝试写一篇新文章</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装主题"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装主题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从Ghost迁移文章"><span class="post-toc-number">5.</span> <span class="post-toc-text">从Ghost迁移文章</span></a></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
 
 <!-- Layouts -->
 
-    <!-- Single Links Page -->
-    <style>
-    .md-links {
-        min-height: calc(100% - 120px - 5pc - 6em);
-        text-align: center;
-        overflow: auto;
-        padding: 0;
-        margin: 0 auto;
-        max-width: 320px;
-    }
+    <!-- Post Module -->
+    <div class="material-post_container">
 
-    @media screen and (min-width: 680px) {
-        .md-links {
-            max-width: 640px;
-        }
-    }
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
 
-    @media screen and (min-width: 1000px) {
-        .md-links {
-            max-width: 960px;
-        }
-    }
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-    @media screen and (min-width: 1320px) {
-        .md-links {
-            max-width: 1280px;
-        }
-    }
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
 
-    @media screen and (min-width: 1640px) {
-        .md-links {
-            max-width: 1600px;
-        }
-    }
+        
+    
+            <p class="article-headline-p">
+                Hello Hexo! 从Ghost迁移博客到Hexo
+            </p>
+        </div>
 
-    @media screen and (max-width: 480px) {
-        .md-links {
-            min-height: calc(100% - 200px - 5pc - 6em);
-            margin-top: 6em;
-        }
-    }
 
-    .md-links-item {
-        background: #fff;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
-        height: 72px;
-        line-height: 15px;
-        margin: 20px 10px;
-        padding: 0px 0px;
-        transition: box-shadow 0.25s;
-    }
 
-    .md-links a {
-        color: #333;
-        text-decoration: none;
-    }
 
-    .md-links li {
-        width: 300px;
-        float: left;
-        list-style: none;
-    }
 
-    .md-links-item img {
-        float: left;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 11px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    }
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
 
-    .md-links-item:hover {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="https://avatars0.githubusercontent.com/u/7550366?v=4&s=460" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>James Yeung</strong>
+        <span>7月 26, 2017</span>
+    </div>
 
-    .md-links-item a:hover{
-        cursor: pointer;
-    }
+    <div class="section-spacer"></div>
 
-    .md-links-title {
-        font-size: 20px;
-        line-height: 50px;
-    }
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
 
-    #scheme-Paradox .mdl-mini-footer{
-        clear: left;
-    }
-    #bottom{
-        position: relative;
-    }
-</style>
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADi0lEQVR42u3ay27bQBAEQP3/TyfXAI7p7pldRQGKJ8GmRW350JrH65frj+uFAAcOHDhw4MCBAweOD+Z4xddf3ii+P7nzu9fPP/n6V+1ZcODAgQPHDY4foig4XvIRnw+T8D3DDc+CAwcOHDiuceSPT+JtFX4x6OYsOHDgwIHjczhm9z/HXnLgPGhx4MCBA8f/yLFv3j3fmccqDhw4cOD4TI48DmdR2jYfkzbigWfhwIEDB44LHHnz7vNfv3W/AwcOHDhwfOFor1kBlrxPWyKeunDgwIEDx1mOPKg246KcL3/uM/Hz++DAgQMHjnsceaSdHTjlQ6l9qbYq4XDgwIEDx4gjj9JZ6XXqt3mo5yUfDhw4cOA4yzE72GwcdWNVYrMCjgMHDhw43slx6mH75mDb8mvX7HDgwIEDx1mOdpiUB+ep9YW2UZjHMA4cOHDguMExW307OzpKyGZLFcPvHThw4MCBY8GRF2/5QCgf/LQl2aYtWO934MCBAweOEUfbHMxbeG3hN1t6my094MCBAweOexxtmy9v2CWHnzUfNwVk8b0DBw4cOHAc4mjbhfth0mwlbtM6xIEDBw4c7+GYlV75sCqP6mRxoW1f4sCBAweOf8WxWW7YRHj+PvnwKYpqHDhw4MBxgSMPyHwRYbOOMDzYqeYgDhw4cOBYcGwe0Lbn2qbhrBRcNQdx4MCBA8c1jjyu2qPmJdzz67Yd+S03Dhw4cOC4wLEprtql7VmZNzv8MGhx4MCBA8eCY1awzRYIZrGa/23+RQEHDhw4cNzmSA6ZF1R5KM4Q2y8KP8QwDhw4cOC4wDF7cF7gbUK9XlCIPycOHDhw4LjBkcfkLPDyQG2HYe2ga7gqhwMHDhw4FhzJ4sIsUGf3zyI5/zfjwIEDB457HJtBUdv4S34yW1loFylw4MCBA8dtjrbo2hRyx1p7+0U6HDhw4MDxFo62qdc27GZLCXmRljPhwIEDB46zHO21X55LorRdtsuLTxw4cODAcZujDapNY3E2ZMoHUe3qAw4cOHDguMeRhGsSgfmAanZnWzRG74MDBw4cOK5x7Aut2SJCHrptuRg9BQcOHDhwfAxH20Zsw7VtWQ7XMnDgwIEDxwdwHFhQi1fx2hZk+6lw4MCBA8c9jiTGNh99Nl5qC796JQIHDhw4cFzg2JRbOeLtID8WtDhw4MCBY8HhwoEDBw4cOHDgwIEDx4ddvwElKwIqkHNEBgAAAABJRU5ErkJggg==">
+    
+</ul>
+    
 
-<ul class="md-links">
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Hexo/">Hexo</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Hello Hexo! 从Ghost迁移博客到Hexo&url=https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Hello Hexo! 从Ghost迁移博客到Hexo&url=https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html&via=James Yeung" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
     
 </ul>
 
-<script type="text/ls-javascript" id="page-links-script">
-    var adjustFooter = function() {
-        if( ($('#bottom').offset().top + $('#bottom').outerHeight() )<$(window).height() ) {
-            var footerBottom = $(window).height() - $('#bottom').outerHeight() - $('#bottom').offset().top;
-            $('#bottom').css('bottom', '-' + footerBottom + 'px');
-        }
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>很高兴用上了hexo来搭建博客！</p>
+<p>因为最近使用学习angular、vue、cordova等框架和技术，慢慢喜欢上了用node来构建应用程序的过程。我原来的博客系统是Ghost,部署在亚马逊AWS上。最近AWS一年免费体验准备到期了，博客也要找个别的地方安放。</p>
+<p>早就知道了github上能搭建博客，但是之前是觉得构建起来很复杂，就没有尝试。这次，我就要尝试一下了！就是你现在看到的模样！</p>
+<p>这篇文章要记下来整个迁移过程。从hexo的安装、构建、部署、安装主题、从Ghost迁移文章。</p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p><em><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="external">官方文档</a></em></p>
+<ol>
+<li>安装 <a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> 命令行输入 <code>npm</code>,有相关信息则安装成功 </li>
+<li>安装 <a href="http://git-scm.com/" target="_blank" rel="external">Git</a> 命令行输入<code>Git</code>，有相关信息则安装成功</li>
+<li><p>在命令行输入以下命令安装Hexo</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
+</code></pre>
+</li>
+<li><p>初始化博客</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 初始化一个目录，&lt;folder>不填则为当前目录</span>
+$ hexo init <span class="token operator">&lt;</span>folder<span class="token operator">></span>
+$ <span class="token function">cd</span> <span class="token operator">&lt;</span>folder<span class="token operator">></span>
+
+<span class="token comment" spellcheck="true"># 安装依赖包</span>
+$ <span class="token function">npm</span> <span class="token function">install</span>
+</code></pre>
+<p>新建完成后，指定文件夹的目录如下：</p>
+<pre><code>.
+├── _config.yml   -&gt; 全局配置文件
+├── package.json  -&gt; node的项目配置文件，用来配置依赖包和一些npm命令
+├── scaffolds     -&gt; 模板文件夹。当您新建文章或页面时，Hexo 会根据 scaffold 来建立文件
+├── source        -&gt; 资源文件夹是存放用户资源的地方,在里面创建文章、页面、图片等博客的内容
+|   ├── _drafts   -&gt; 草稿文件夹
+|   └── _posts    -&gt; 文章文件夹
+└── themes        -&gt; 主题文件夹。Hexo 会根据主题来生成静态页面
+</code></pre></li>
+<li><p>输入以下命令，启动站点查看效果</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo server
+</code></pre>
+<p>如果想更换端口，可以在命令后追加参数</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo server -p 8080
+</code></pre>
+<p>此时在浏览器访问 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 就可以看到博客效果啦！</p>
+<p>什么?默认主题不好看？别急，后面会讲如何安装主题~ 接下来介绍如何发布到Github！</p>
+</li>
+</ol>
+<h2 id="发布到GitHub"><a href="#发布到GitHub" class="headerlink" title="发布到GitHub"></a>发布到GitHub</h2><p>接下来介绍如何把这个博客发布到Github Page。</p>
+<p>Github Pages是Github为开源项目提供展示文档和示例的功能，有300M的空间，但只是放置静态文件，所以Hexo就必须先编译成静态文件，再push到Github Pages仓库。</p>
+<ol>
+<li><p>创建Github仓库，名称必须是[Github用户名].github.io,例如本博客的仓库 <a href="https://elderjames.github.io">elderjames.github.io</a>,然后获得git仓库的地址，如<a href="https://github.com/ElderJames/elderjames.github.io.git" target="_blank" rel="external">https://github.com/ElderJames/elderjames.github.io.git</a></p>
+</li>
+<li><p>部署配置</p>
+<p>在开始之前，您必须先在 _config.yml 中修改参数</p>
+<pre class=" language-yml"><code class="language-yml">deploy:
+ type: git
+ repo: https://github.com/ElderJames/elderjames.github.io.git
+</code></pre>
+</li>
+<li><p>命令行输入以下命令，安装部署工具 hexo-deployer-git</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save
+</code></pre>
+</li>
+<li><p>输入以下命令，编译并发布到Github</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo deploy --generate
+</code></pre>
+<p><em>这个命令是可以分开的，一个是编译静态文件，一个是发布，具体请<a href="https://hexo.io/zh-cn/docs/generating.html" target="_blank" rel="external">参阅文档</a></em></p>
+</li>
+<li><p>如果成功提交到Github,则可以马上访问仓库名的那个地址 <a href="https://elderjames.github.io">https://elderjames.github.io</a></p>
+</li>
+</ol>
+<h2 id="尝试写一篇新文章"><a href="#尝试写一篇新文章" class="headerlink" title="尝试写一篇新文章"></a>尝试写一篇新文章</h2><pre class=" language-bash"><code class="language-bash">  $ hexo new <span class="token string">"My New Post"</span>
+</code></pre>
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>  主题在Github上有很多了，比如我现在安装这个，只要把主题文件复制到 themes 目录下，每个子目录代表一个主题。主题还能有很多扩展的设置，具体可能要参考主题的文档。</p>
+<h2 id="从Ghost迁移文章"><a href="#从Ghost迁移文章" class="headerlink" title="从Ghost迁移文章"></a>从Ghost迁移文章</h2><p>  由于我之前的博客部署在 AWS 上，是 Ghost 博客系统，好处是文章用 markdown 编写，可以很好的迁移到 Hexo。</p>
+<ol>
+<li><p>从Ghost博客导出博客数据，几下保存的路径</p>
+<p>访问 <a href="http://yourblog.com/ghost/debug/" target="_blank" rel="external">http://yourblog.com/ghost/debug/</a> , 点击 【导出】按钮下载一个 Json 文件。</p>
+</li>
+<li><p>安装迁移工具</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-migrator-ghost
+</code></pre>
+</li>
+<li><p>输入以下命令导入文章到 Hexo, <code>&lt;source&gt;</code> 为第0步下载的json文件的路径。</p>
+<pre class=" language-bash"><code class="language-bash">$ hexo migrate ghost <span class="token operator">&lt;</span>source<span class="token operator">></span>
+</code></pre>
+</li>
+</ol>
+<p>然后，可以愉快得看到 <code>./source/_posts</code>（如果有草稿，则包括<code>./source/_dragts</code>）文件夹里已经出现了原来在 Ghost 中的文章。</p>
+<p>好了，再执行一次 <code>hexo deploy --generate</code> 发布文章吧！！</p>
+<p>别忘了互相关注哦！晚安！</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
-    $(document).ready(function() {
-        adjustFooter();
-    });
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//elderjames-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
 </script>
 
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
 
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/03/14/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html" id="post_nav-older" class="next-content">
+            下一篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
 
 
 
@@ -479,7 +754,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -510,7 +785,7 @@
         <li>
             <a href="/tags" title="标签云">
                 
-                    <i class="material-icons sidebar-material-icons">tags</i>
+                    <i class="material-icons sidebar-material-icons">local_offer</i>
                 
                 标签云
             </a>
@@ -528,9 +803,9 @@
         
     
         <li>
-            <a href="/links" title="朋友">
+            <a href="/friends" title="朋友">
                 
-                    <i class="material-icons sidebar-material-icons">local_offer</i>
+                    <i class="material-icons sidebar-material-icons">people</i>
                 
                 朋友
             </a>
@@ -593,9 +868,17 @@ It will not impact the appearance and can give developers a lot of support :)
                     
 
                     
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
 
                     <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
+<footer class="mdl-mini-footer" id="bottom"  style="background-image:url(https://repository-hunter.herokuapp.com/contribution/ElderJames.svg);background-repeat: repeat-x;">
     
         <!-- Paradox Footer Left Section -->
         <div class="mdl-mini-footer--left-section sns-list">
@@ -636,6 +919,12 @@ It will not impact the appearance and can give developers a lot of support :)
     
 
     <!-- Github -->
+    
+        <a href="https://github.com/ElderJames" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
     
 
     <!-- LinkedIn -->
@@ -719,7 +1008,13 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
+    <!-- Busuanzi -->
+    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//elderjames-github-io.disqus.com/count.js" async></script>
 
 
 
@@ -772,7 +1067,7 @@ It will not impact the appearance and can give developers a lot of support :)
             lsloader.runInlineScript(item.id,item.id);
         }
     })()
-console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+// console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
 </script>
 
                 </main>
@@ -786,7 +1081,7 @@ console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viose
         right: 0px;
         z-index: 999;
         pointer-events: none;
-        bottom: 0px;
+        bottom: 60px;
       }
     </style>
     <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json")</script>
