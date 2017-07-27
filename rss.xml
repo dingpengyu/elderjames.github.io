@@ -8,14 +8,14 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Tue, 25 Jul 2017 17:19:08 GMT</pubDate>
+    <pubDate>Wed, 26 Jul 2017 01:19:08 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>Hello Hexo! 从Ghost迁移博客到Hexo</title>
       <link>https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html</link>
       <guid>https://elderjames.github.io/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html</guid>
-      <pubDate>Tue, 25 Jul 2017 17:19:08 GMT</pubDate>
+      <pubDate>Wed, 26 Jul 2017 01:19:08 GMT</pubDate>
       <description>
       
         &lt;p&gt;很高兴用上了hexo来搭建博客！&lt;/p&gt;
@@ -30,7 +30,7 @@
       <title>Visual Studio 2017 正式版安装问题及解决方案记录</title>
       <link>https://elderjames.github.io/2017/03/14/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</link>
       <guid>https://elderjames.github.io/2017/03/14/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</guid>
-      <pubDate>Tue, 14 Mar 2017 02:05:42 GMT</pubDate>
+      <pubDate>Tue, 14 Mar 2017 10:05:42 GMT</pubDate>
       <description>
       
         &lt;p&gt;##Visual Studio 2017正式版终于出来啦！&lt;/p&gt;
@@ -46,7 +46,7 @@
       <title>NPM 国内镜像</title>
       <link>https://elderjames.github.io/2016/09/22/n.html</link>
       <guid>https://elderjames.github.io/2016/09/22/n.html</guid>
-      <pubDate>Thu, 22 Sep 2016 07:18:28 GMT</pubDate>
+      <pubDate>Thu, 22 Sep 2016 15:18:28 GMT</pubDate>
       <description>
       
         &lt;p&gt;npm由于很多时候都需要从国外的服务器下载组件，由于&lt;strong&gt;众所周知&lt;/strong&gt;的原因，国内安装时往往会很慢甚至卡住安装不上的情况，这时就需要替换一下安装源，使用国内服务商提供的镜像：&lt;/p&gt;
@@ -62,7 +62,7 @@
       <title>ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext</title>
       <link>https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html</link>
       <guid>https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html</guid>
-      <pubDate>Thu, 22 Sep 2016 05:58:52 GMT</pubDate>
+      <pubDate>Thu, 22 Sep 2016 13:58:52 GMT</pubDate>
       <description>
       
         &lt;p&gt;很高兴，我的博客又回来了。&lt;/p&gt;
@@ -78,7 +78,7 @@
       <title>EF Core For Mysql 的DataBase First（基于已有数据库）方式连接数据库</title>
       <link>https://elderjames.github.io/2016/07/30/ef-core-for-mysql-de-databasefang-shi-lian-jie-shu-ju-ku.html</link>
       <guid>https://elderjames.github.io/2016/07/30/ef-core-for-mysql-de-databasefang-shi-lian-jie-shu-ju-ku.html</guid>
-      <pubDate>Sat, 30 Jul 2016 03:30:16 GMT</pubDate>
+      <pubDate>Sat, 30 Jul 2016 11:30:16 GMT</pubDate>
       <description>
       
         &lt;p&gt;.NET要跨平台，就一定要使用同样可以跨平台的数据库，而轻量的MySQL自然是首选。.NET Core发展到现在，虽然官方的Entity Framework还没发布MySQL版本，但是刚认识的柚子大神已经首先把它做出来了（&lt;a href=&quot;http://www.1234.s
@@ -92,7 +92,7 @@
       <title>.NET Core以依赖注入的方式配置MySql的DbContext</title>
       <link>https://elderjames.github.io/2016/07/30/yi-zhu-ru-de-fang-shi.html</link>
       <guid>https://elderjames.github.io/2016/07/30/yi-zhu-ru-de-fang-shi.html</guid>
-      <pubDate>Sat, 30 Jul 2016 03:04:28 GMT</pubDate>
+      <pubDate>Sat, 30 Jul 2016 11:04:28 GMT</pubDate>
       <description>
       
         &lt;p&gt;使用ASP.NET Core开发Web项目，在很多方面都跟之前的.NET版本有很大不同，在Startup.cs的配置方面,一言不合就使用依赖注入。当然，这对于整个项目的解耦是极好的。这次踩的坑在DbContext的配置上。&lt;/p&gt;
@@ -107,7 +107,7 @@
       <title>使用SecureCRT连接免费的亚马逊云服务器</title>
       <link>https://elderjames.github.io/2016/07/19/shi-yong-securecrtlian-jie-ya-ma-xun-yun-fu-wu-qi.html</link>
       <guid>https://elderjames.github.io/2016/07/19/shi-yong-securecrtlian-jie-ya-ma-xun-yun-fu-wu-qi.html</guid>
-      <pubDate>Tue, 19 Jul 2016 14:09:21 GMT</pubDate>
+      <pubDate>Tue, 19 Jul 2016 22:09:21 GMT</pubDate>
       <description>
       
         &lt;p&gt;亚马逊AWS有一年的免费体验，相比国内的阿里云、腾讯云的优惠政策更实在，而且又不用认证、也不用备案，一个邮箱帐号就能获得，简直就是我等学生（虽然已经不是了，但刚出来工作没几个钱呀！）的福利！&lt;/p&gt;
@@ -122,7 +122,7 @@
       <title>.NET Core 资料整理</title>
       <link>https://elderjames.github.io/2016/07/12/net-core-zi-liao-zheng-li.html</link>
       <guid>https://elderjames.github.io/2016/07/12/net-core-zi-liao-zheng-li.html</guid>
-      <pubDate>Tue, 12 Jul 2016 05:09:47 GMT</pubDate>
+      <pubDate>Tue, 12 Jul 2016 13:09:47 GMT</pubDate>
       <description>
       
         &lt;p&gt;##工具下载&lt;/p&gt;
@@ -138,7 +138,7 @@
       <title>记在Mono 4.2 上EF使用Select操作时会发生的错误</title>
       <link>https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html</link>
       <guid>https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html</guid>
-      <pubDate>Tue, 12 Jul 2016 02:38:39 GMT</pubDate>
+      <pubDate>Tue, 12 Jul 2016 10:38:39 GMT</pubDate>
       <description>
       
         &lt;p&gt;错误提示：The classes in the module cannot be loaded.&lt;/p&gt;
@@ -154,7 +154,7 @@
       <title>ASP.NET Core使用Session方法</title>
       <link>https://elderjames.github.io/2016/07/08/as.html</link>
       <guid>https://elderjames.github.io/2016/07/08/as.html</guid>
-      <pubDate>Fri, 08 Jul 2016 06:18:16 GMT</pubDate>
+      <pubDate>Fri, 08 Jul 2016 14:18:16 GMT</pubDate>
       <description>
       
         &lt;ul&gt;
@@ -171,7 +171,7 @@
       <title>从旧版.NET Core 升级到.NET Core 1.0正式版</title>
       <link>https://elderjames.github.io/2016/06/30/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html</link>
       <guid>https://elderjames.github.io/2016/06/30/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html</guid>
-      <pubDate>Thu, 30 Jun 2016 06:00:33 GMT</pubDate>
+      <pubDate>Thu, 30 Jun 2016 14:00:33 GMT</pubDate>
       <description>
       
         &lt;p&gt;6月28日凌晨，RedHat 开发者大会上微软正式发布.NET Core正式版，我作为.NET爱好者，马上就想安装来玩玩，不过因为之前电脑上就装有旧版本，在这次正式版的安装中遇到了一些坑，装了n遍，死活装不上，停留在旧版本。&lt;/p&gt;
@@ -188,7 +188,7 @@
       <title>git 操作笔记</title>
       <link>https://elderjames.github.io/2016/03/28/git-cao-zuo-bi-ji.html</link>
       <guid>https://elderjames.github.io/2016/03/28/git-cao-zuo-bi-ji.html</guid>
-      <pubDate>Mon, 28 Mar 2016 06:17:16 GMT</pubDate>
+      <pubDate>Mon, 28 Mar 2016 14:17:16 GMT</pubDate>
       <description>
       
         &lt;figcaption&gt;cd myproject&lt;/code&gt;  你建立的项目文件夹&lt;/p&gt;&lt;/figcaption&gt;&lt;pre class=&quot; language-$&quot;&gt;&lt;code class=&quot;language-$&quot;&gt;&lt;p&gt;&lt;code&gt;$ git init&lt;/code&gt;   执行
@@ -202,7 +202,7 @@
       <title>Ubuntu 搭建Gogs ：轻量Git Web端管理系统</title>
       <link>https://elderjames.github.io/2016/03/26/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html</link>
       <guid>https://elderjames.github.io/2016/03/26/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html</guid>
-      <pubDate>Sat, 26 Mar 2016 14:36:31 GMT</pubDate>
+      <pubDate>Sat, 26 Mar 2016 22:36:31 GMT</pubDate>
       <description>
       
         &lt;p&gt;Gogs是国人开发的开源git管理系统，类似gitlab，可在服务器上搭建私人的git版本管理系统。内建很多功能，但俾比gitlab安装更方便，占用更少的资源。&lt;br&gt;详细介绍还是看看官方网站吧：&lt;a href=&quot;https://gogs.io&quot; target=&quot;_blan
@@ -216,7 +216,7 @@
       <title>修复apt-get包管理</title>
       <link>https://elderjames.github.io/2016/03/24/xiu-fu-apt-getbao-guan-li.html</link>
       <guid>https://elderjames.github.io/2016/03/24/xiu-fu-apt-getbao-guan-li.html</guid>
-      <pubDate>Thu, 24 Mar 2016 03:31:49 GMT</pubDate>
+      <pubDate>Thu, 24 Mar 2016 11:31:49 GMT</pubDate>
       <description>
       
         &lt;p&gt;1.通过&lt;code&gt;wget http://oss.aliyuncs.com/aliyunecs/update_source.tgz&lt;/code&gt; 下载update_source的压缩包。&lt;/p&gt;
@@ -231,7 +231,7 @@
       <title>C#利用反射机制动态创建泛型接口实例</title>
       <link>https://elderjames.github.io/2016/03/21/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html</link>
       <guid>https://elderjames.github.io/2016/03/21/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html</guid>
-      <pubDate>Mon, 21 Mar 2016 11:19:10 GMT</pubDate>
+      <pubDate>Mon, 21 Mar 2016 19:19:10 GMT</pubDate>
       <description>
       
         &lt;p&gt;我很懒，不希望写重复的copy代码，所以希望在写代码时能尽量简化和重用，一些设计上有但没必要的能不写就不写，但当然必须要实现。&lt;/p&gt;
@@ -246,7 +246,7 @@
       <title>Ubuntu安装mono 4.2.1 最新版教程</title>
       <link>https://elderjames.github.io/2015/12/03/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html</link>
       <guid>https://elderjames.github.io/2015/12/03/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html</guid>
-      <pubDate>Thu, 03 Dec 2015 04:00:04 GMT</pubDate>
+      <pubDate>Thu, 03 Dec 2015 12:00:04 GMT</pubDate>
       <description>
       
         &lt;p&gt;现在安装mono已经不用make命令来编译，可以直接执行&lt;code&gt;apt-get mono-complete&lt;/code&gt;来安装最新的mono版本。&lt;/p&gt;
@@ -263,7 +263,7 @@
       <title>ASP.NET 连接 Mysql 支持中文编码</title>
       <link>https://elderjames.github.io/2015/11/06/make-mysql-support-chinese-encoding.html</link>
       <guid>https://elderjames.github.io/2015/11/06/make-mysql-support-chinese-encoding.html</guid>
-      <pubDate>Fri, 06 Nov 2015 08:44:28 GMT</pubDate>
+      <pubDate>Fri, 06 Nov 2015 16:44:28 GMT</pubDate>
       <description>
       
         &lt;p&gt;1、关闭mysql服务&lt;br&gt;&lt;code&gt;service mysql stop&lt;/code&gt;&lt;/p&gt;
@@ -279,7 +279,7 @@
       <title>ASP.NET MVC 中UEditor 1.4.3 前台直接上传文件到七牛云存储</title>
       <link>https://elderjames.github.io/2015/10/30/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html</link>
       <guid>https://elderjames.github.io/2015/10/30/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html</guid>
-      <pubDate>Fri, 30 Oct 2015 04:52:35 GMT</pubDate>
+      <pubDate>Fri, 30 Oct 2015 12:52:35 GMT</pubDate>
       <description>
       
         &lt;p&gt;最近在做一个ASP.NET MVC 的项目，当然是离不开富文本编辑器，这里我选择的是百度的UEditor，虽然不够轻量，界面也不好看，但是功能还是挺多的。而因为项目主要面对移动端的用户，所以为了减轻低配服务器的压力，也为了用户体验更佳，决定在项目中接入七牛云存储。&lt;/p&gt;
@@ -294,7 +294,7 @@
       <title>Ghost博客邮件SMTP服务配置</title>
       <link>https://elderjames.github.io/2015/10/13/the-smtp-setting-for-ghost-blog.html</link>
       <guid>https://elderjames.github.io/2015/10/13/the-smtp-setting-for-ghost-blog.html</guid>
-      <pubDate>Tue, 13 Oct 2015 08:57:04 GMT</pubDate>
+      <pubDate>Tue, 13 Oct 2015 16:57:04 GMT</pubDate>
       <description>
       
         &lt;p&gt;前天由于回到学校，用回了我的Pocker2机械键盘，在输入密码时连续不知道大小写切换键换了地方，连续输错了密码，帐号被封了……&lt;/p&gt;
@@ -309,7 +309,7 @@
       <title>Framework7多视图（View）工具栏布局</title>
       <link>https://elderjames.github.io/2015/10/10/the-multiple-views-structure-on-framework7.html</link>
       <guid>https://elderjames.github.io/2015/10/10/the-multiple-views-structure-on-framework7.html</guid>
-      <pubDate>Sat, 10 Oct 2015 15:33:25 GMT</pubDate>
+      <pubDate>Sat, 10 Oct 2015 23:33:25 GMT</pubDate>
       <description>
       
         &lt;p&gt;HiApp 可以算是一个比较完整的App，其中有很多能够学习的地方，比如它用的RequireJS 、它的界面交互等等，而对于初学者来说，它的布局结构是很值得学习的。因为它的结构是目前绝大多数App的常用布局，分为顶部导航栏Navbar，中 部多个视图View，底部是切换vi
