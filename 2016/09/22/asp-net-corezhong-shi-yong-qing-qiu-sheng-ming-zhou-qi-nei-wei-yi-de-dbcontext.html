@@ -67,7 +67,7 @@
     <meta name="apple-mobile-web-app-title" content="ElderJames&#39; Blog">
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://www.shriek.tech">
+    <meta property="og:url" content="https://elderjames.github.io">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext | ElderJames&#39; Blog">
     <meta property="og:image" content="/img/favicon.png" />
@@ -86,11 +86,11 @@
     <meta name="twitter:description" content="学习、札记、分享">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.shriek.tech" />
+    <meta name="twitter:url" content="https://elderjames.github.io" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html" />
+        <link rel="canonical" href="https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -117,13 +117,13 @@
         "description": "Hi, nice to meet you"
     },
     "headline": "ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext",
-    "url": "https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html",
+    "url": "https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html",
     "datePublished": "9月 22, 2016",
     "dateModified": "9月 22, 2016",
     "description": "学习、札记、分享",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://www.shriek.tech"
+        "@id": "https://elderjames.github.io"
     }
 }
 </script>
@@ -419,7 +419,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAENElEQVR42u3aSXIbMRAEQP3/0/YDZFFV3bDNgRInhYIcDJIH9PbxywrWBwJMmDBhwoTJwoQJE6a3Z/qI1+dv/eHRnz7/+ruvd3n9nq/f5/Uu0RkxYcKECdNFTN9cjV+8xFccG5r8OZv/RGfEhAkTJkzXMX11gOTVZ1dy/mO8/tb+R8KECRMmTJiSpDdPWROC17vM0m9MmDBhwoQpZ5oVT/Pv5txnP4MJEyZMmG5lyq/hvDi7aYgmz0lO8R9q4ZgwYcKE6c2Y8uv5uX//0/kmTJgwYcL0Nkztyi/pfVG4TX3z6z86KSZMmDBhuoIpvzhncHkjc7bXLJ2O9sKECRMmTFcw7cdi2sLuvqx8apDom7fFhAkTJkxXMOXJ5CalPDVamh94VqrGhAkTJky3MiUc7eDprNS7b6Pm4ciBCgEmTJgwYXp7przg24YLm4JvUsbdD85+84NhwoQJE6YrmGYJ59m0Ob+qo9HSU81RTJgwYcJ0BVN7feYHTg6zSU3zff/R4A4mTJgwYXpLprZVuUl025bnrODbNjiHXV9MmDBhwvQQpllbcVbqTY6RhwJJi7QNZTBhwoQJ061M+eBLW/BtR3zy4GBW5C1+eEyYMGHCdAVT+9BN2XdWlm1DhDZ8qSsEmDBhwoTpUUx5Cnps+7Jpemq06FiRFxMmTJgwPZapvbCTYuvZYZo8KGnf/1gtHBMmTJgwvRnT5vD5a82akXkg0paPk/NiwoQJE6abmJJSaZuI5qXhZK9ZM3U1yoMJEyZMmC5iagOCNhRoA4UZVv7/Y11fTJgwYcL0EKa2RLtpXm5GdvIxo7aUXKe+mDBhwoTpIUztZTnbeJPEthd5Ww7GhAkTJkw/k6m9YpMgI0m588+05en8P5gwYcKE6T6mdjhmdpH/Cta+yHus+YoJEyZMmK5g2pRxP0arbY7myers5xx2fTFhwoQJ00OY2u3bBuQm9W2LxRvQYdyECRMmTJgexZQM30RJYzB2k+zeNixPtVcxYcKECdPPYZoR5Kny/tivvzV7MiZMmDBhuo9pk+LODjZLWTcl4DbswIQJEyZMdzAlh08u4LY42w6S1s3IUfCBCRMmTJjuYzp7Mc8+uT9q/mMXDU5MmDBhwnQRU1Ki3YQRs6Gc2ZDQrNxcD+5gwoQJE6aHMM3SwvpyDcrBm/BiVqSui7yYMGHChOmBTO3Kk9hZU3MPmj+/jpswYcKECdMDmdpUcxY0zAq+eRm3RYwCHUyYMGHCdBFT29rcNybzRmObuLYBASZMmDBh+jlMmyGbTdl3FojkTcq2WYsJEyZMmDBtUtC8YZmUgM+2VDFhwoQJE6biQo2Ls387sJiFL5gwYcKE6T6m/EGz6/9U2DErCrctWEyYMGHCdBPTPn3NL+A2HGmfk+wyDAgwYcKECdMDmawoILAwYcKECRMmTBYmTJjeZf0GeEmQ0OKibVgAAAAASUVORK5CYII=">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAAE+CAAAAAAxUyPsAAAE20lEQVR42u3aUVJjORAEQO5/6d0DzBqqup5hZjb1RRjjJ6WIcKtaH/8Yw/hAgA8fPnwGPnz48Bn48P0hfB/x+I8P+uX1z1/59dNe/TafyatPe7n4/Yn48OHDhw/fzJc/8tVvP2dKlvH5s5Jlf76FyTujfxF8+PDhw4fvIb7kMUthcStf2rm129wS48OHDx8+fN/Ptx/Xc6wEosXChw8fPnz4/iy+JMrfI/Kcu30PPnz48OHD9zvwLYu/NcXbgP6p+P7Heh348OHDhw9fWUD8fT9/6/0+fPjw4cP3v+drR9LAbg/8y+E/f2JerHwhgA8fPnz48A18N4j8eP9s0ZCHEXmbvF0vPnz48OHD9xRf2yy/LaYtHW7E7eqK+B4fPnz48OEb+NqmeN7kThaQvDN/Sh4r5M+qw3p8+PDhw4dvbpO35Uh7mSzfwjaIz0uTvJzChw8fPnz4Fr59wUnj/NYeaA/8T0UMdd2HDx8+fPjwDWfe/GDfRt5LYXELCNo2QLQKfPjw4cOHb+BrS5P3lQ5tAZSH7EemV+/Hhw8fPnz4HuVrm+h5WdOWKS30UtYUxRY+fPjw4cM38yXH+PziWh6L5+HFEgckrf1iU/Hhw4cPH76B79kWcl46tLHFXrjctgEfPnz48OF7H99Olof1e3x/K1zaQKS4oIYPHz58+PCVfd7lyH07ir+jDFo2e+p14MOHDx8+fCe+Wws5L0rybci3Nm+E3y7Y4cOHDx8+fO/gy0PwfHLt0X1vGLTFUBtM4MOHDx8+fDtfG7K34UIeT7TbsDTIb/EHPnz48OHD9yxfHhO0wfpeXixN9Fvojw8fPnz48D3Ll3/Z50C3yD5vG9xii3xdRWSADx8+fPjwlXy3L/j2AJ8XH/sWHiN4fPjw4cOH74f4bkVA24Ten3WL9W+tCHz48OHDh+8dfEkQkLwzj8LzK2hL6ZO3EKK14MOHDx8+fG/m21vmbYnTRvy3NkCySQ8ULvjw4cOHD19QUrQBelvEPHW8b4ut9pXolgE+fPjw4cNX8uUH+Bt03vZuo4TPZ5K/nlPiw4cPHz58C9+zTfEWa2+xJ2VK3m6PghJ8+PDhw4dv5lu+zpMDfwKalyn5liezaqMQfPjw4cOHb+Erjspl0/qpy2TLstuNrAsXfPjw4cOH78SXN7b3EDxvh+dxwBIrPNDrwIcPHz58+E58t1Z0MtE9ak/Kmtsc6nXhw4cPHz58A19+8L61tJOFtYu/hfL5PL+YOT58+PDhwzfwLQfvfdl5ZNDO9taEiAIUfPjw4cOHb+C7lSbLla/kWXkk0ZYy+d++3Bh8+PDhw4fvIb58AcvUb63r/YJaXpoUbXJ8+PDhw4ev5Lt9eecH/vaVfEuWAusW6+PDhw8fPnw7Xzvyx+Sx/hL65yXRrSUfhfX48OHDhw9fzHcL4vNHthfR8sigLYaWFgI+fPjw4cP3LF9brLTlRRuI3yKJdnseK1zw4cOHDx++E1/7Zf8+7mUmeYlzLNfw4cOHDx++b+e7HeDz8uXW0r61FpKrb/jw4cOHD9/P8iUBQVsQJNuQt8yXOX/Big8fPnz48D3E117z2kP5/Nh/CwX2+eDDhw8fPnzv4Fvi8uMkTu3qhOa2Yfm/BT58+PDhw7fwGe3Ahw8fPnwGPnz48Bn48P3G419Tpjro+TAs6gAAAABJRU5ErkJggg==">
     
 </ul>
     
@@ -461,7 +461,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext&url=https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext&url=https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -470,7 +470,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext&url=https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html&via=James Yeung" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext&url=https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html&via=James Yeung" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -479,7 +479,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -488,7 +488,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -555,8 +555,8 @@
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://www.shriek.tech/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://elderjames.github.io/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 <script type="text/ls-javascript" id="disqus-thread-script">

@@ -68,7 +68,7 @@
     <meta name="apple-mobile-web-app-title" content="ElderJames&#39; Blog">
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://www.shriek.tech">
+    <meta property="og:url" content="https://elderjames.github.io">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="记在Mono 4.2 上EF使用Select操作时会发生的错误 | ElderJames&#39; Blog">
     <meta property="og:image" content="/img/favicon.png" />
@@ -88,11 +88,11 @@
     <meta name="twitter:description" content="学习、札记、分享">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.shriek.tech" />
+    <meta name="twitter:url" content="https://elderjames.github.io" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html" />
+        <link rel="canonical" href="https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -119,13 +119,13 @@
         "description": "Hi, nice to meet you"
     },
     "headline": "记在Mono 4.2 上EF使用Select操作时会发生的错误",
-    "url": "https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html",
+    "url": "https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html",
     "datePublished": "7月 12, 2016",
     "dateModified": "7月 20, 2016",
     "description": "学习、札记、分享",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://www.shriek.tech"
+        "@id": "https://elderjames.github.io"
     }
 }
 </script>
@@ -421,7 +421,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC10lEQVR42u3a0U5CQQwEUP//p/UDDDDTAoG95z4ZIbinJtZO9+f3ks8PNjY2NjY2NjY29keyf+Inef//T/7/9a335K+2Z8bGxsa+AvvBn/67gLY0eTluvbM9MzY2NvZ12MnhbrWH/Lh588tbY1JQbGxsbOxkGMjHhk2hsbGxsbFf18A2QdXma2xsbGzsNqCZHSUpd/75b83SsLGxsT+e/c5m84qm9ab9NjY2NvZHsl9yzbFcIcxaYH0qbGxs7EPZefQ/O+7+ms5+6YuNjY19NjsJ92eDQR4htWvgvBFiY2NjX4G9X6a2wf1sSZBfIRrut7GxsbG/nJ23gc3qty3W7FpnvRXBxsbG/nJ2PoS0w8bsek3yCxh+BxsbG/todv5Beei/bz95uaN2iI2NjX0oOxk5ZtF8C96smYcTGDY2NvYR7GQUaRtS2xrzuGq1bMbGxsY+lJ23k6Q0bevKl8rtciIaRbCxsbEPYs/GjPaIbSDVIrGxsbGxNzFQuwBoh5+2EEWWho2Njf3l7HwxkAfxz71wMxtOsLGxsa/Dfu61mDbW3zfRpPTY2NjYV2C3raK9dtlGS8+Nn7CxsbHPZt//kS3j/oIhb3KzcOrBegMbGxv7UPYs7k8Ym0PPlgfDm0rY2NjYR7DzHz97NblY0w4/9VoCGxsb+2h29K/8IhiKQp/4ys7TsjRsbGzs49j5CNEGT5uRJm9dD0YXbGxs7KPZeTy0J7Wh0mbBjI2NjX019qxdJSH+b/xsWumwgWFjY2N/Obt92sEgaTCz0aI+DzY2Nvah7Fl4tFkV5+uH/VCEjY2NfR32pmm1x52Vsr3os8rSsLGxsb+WnV/E2UT2m1FkE2NhY2NjY7fB0GxEycvRNjxsbGxs7HY4KYaEeA2wKg02Njb2BdhJqNQ2oXwgadfMybiCjY2NfR32ftE7a4Szws2CKmxsbOxT2dd5sLGxsbGxsbGxsT/m+QO90VMlnch4xAAAAABJRU5ErkJggg==">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADj0lEQVR42u3ay25aQRAEUP7/p5NtJAdc1T1jsHTuKorBzBwW5X48/nj+eR4IcODAgQMHDhw4cOD4YI5H/Dx7/dff9vSDn7w++ZTXr5zdBQcOHDhw3OP4JorKa389XP4/7XsP3AUHDhw4cFzjSMLs2btmUZrHbc5d3wUHDhw4cLyVoy2rWr7X0ZicDQcOHDhw/EaOJEqjkU9A0xLgwIEDB47P4WgPnVwg4WuvmrcLr/dKceDAgQPHoYWGT/73G/Y7cODAgQPH4snjrR0szZYk9g8OHDhw4DjLceMyLVlS8h2L1VlFiwMHDhw4Yo5No7BdUEjeOxsd5W1HHDhw4MBxm6M9UBvMp4I2idv2DwgcOHDgwHGDY0ZTf2R56E3BlqxB4MCBAweO2xz54sKpa7cDp1NfEg4cOHDguM3RjnxWHxwHYcLXRmxR0eLAgQMHjnU3LC+W8te3o6Z8aJTHdnQeHDhw4MBxgWPWqtsMrvKB1iyqi6UKHDhw4MBxlCMPtpagLcnyYE7ajsVJcODAgQPHUY68FTi7xmwQtWkpvo5tHDhw4MBxm2MWXZt1hDzIZ4OuVXMQBw4cOHAcHTvN1hc26w5trOaIxZeNAwcOHDiOcuTtv3wgNBsL5Z8+i3YcOHDgwPHzHG0B1i5GJNG7b0G2Xy0OHDhw4DjLkQfnbCmtGP/Eg67Zch4OHDhw4PhJjk0BdrYJ2C7kzZhw4MCBA8dtjln4tWSbxYjNIl09hcOBAwcOHAuOUyOi5Ko56yN4kncNe6U4cODAgePQnCU/xGaklEfpDLH+owEHDhw4cBzlaEugTYnVhnH7roTyPyfHgQMHDhwXOJKrJj89tY7QDsba34ADBw4cOH6GIymW2vbcftTUhn3e1sSBAwcOHDc42svPGnkJTXuq2aoEDhw4cOB4L8c3ERUXbMkAqY3tWXMTBw4cOHDc5ngddXkQ5gtqZ9cmWnocOHDgwHGbY7+4kJdM+6W3nO9AcxAHDhw4cCzGTrMVtCLM4rWJWaE4w8WBAwcOHPc48kWBWSNvRrwpL4sVOhw4cODAcY1jVoa1bcS2SNuMuKKVCxw4cODA8VaO/DKbJmO79JCXfIeDFgcOHDhwHOLIj5UEc7sGlzcfIywcOHDgwHGNI28O7lcKkovlZJtmIg4cOHDguMHRttiSo+yHVfl78+FWVMLhwIEDB44FhwcHDhw4cODAgQMHDhwf9vwFc06vKBI2dwgAAAAASUVORK5CYII=">
     
 </ul>
     
@@ -464,7 +464,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=记在Mono 4.2 上EF使用Select操作时会发生的错误&url=https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=记在Mono 4.2 上EF使用Select操作时会发生的错误&url=https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -473,7 +473,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=记在Mono 4.2 上EF使用Select操作时会发生的错误&url=https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html&via=James Yeung" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=记在Mono 4.2 上EF使用Select操作时会发生的错误&url=https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html&via=James Yeung" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -482,7 +482,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -491,7 +491,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -561,8 +561,8 @@
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://www.shriek.tech/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://elderjames.github.io/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 <script type="text/ls-javascript" id="disqus-thread-script">
