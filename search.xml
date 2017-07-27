@@ -941,6 +941,12 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
+      <title></title>
+      <url>/README.html</url>
+      <content type="html"><![CDATA[<h1 id="Welcome-to-my-blog"><a href="#Welcome-to-my-blog" class="headerlink" title="Welcome to my blog! "></a>Welcome to my blog! <a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io" target="_blank" rel="external"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj?svg=true" alt="Build status"></a></h1>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about/index.html</url>
       <content type="html"><![CDATA[<h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -973,8 +979,15 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Friends]]></title>
+      <url>/friends/index.html</url>
       <content type="html"></content>
     </entry>
     
@@ -985,16 +998,9 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[Friends]]></title>
-      <url>/friends/index.html</url>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
       <content type="html"></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
     </entry>
     
     <entry>

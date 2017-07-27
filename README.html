@@ -12,8 +12,6 @@
     
     <title>
         
-            归档: 2016/6 | 
-        
         ElderJames&#39; Blog
     </title>
 
@@ -67,7 +65,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://www.shriek.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档: 2016/6 | ElderJames&#39; Blog">
+    <meta property="og:title" content="ElderJames&#39; Blog">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="学习、札记、分享">
     
@@ -75,7 +73,7 @@
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="归档: 2016/6 | ElderJames&#39; Blog">
+    <meta name="twitter:title" content="ElderJames&#39; Blog">
     <meta name="twitter:description" content="学习、札记、分享">
     <meta name="twitter:image" content="/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -83,7 +81,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://www.shriek.com/archives/2016/06/index.html" />
+        <link rel="canonical" href="https://www.shriek.com/README.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -276,96 +274,212 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
-    
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2016/06/30/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html">从旧版.NET Core 升级到.NET Core 1.0正式版</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            6月28日凌晨，RedHat 开发者大会上微软正式发布.NET Core正式版，我作为.NET爱好者，马上就想安装来玩玩，不过因为之前电脑上就装有旧...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2016/06/30/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="https://avatars0.githubusercontent.com/u/7550366?v=4&amp;s=460" width="44px" height="44px" alt="James Yeung's avatar">
-            </div>
-            <div>
-                <strong>James Yeung</strong>
-                <span>6月 30, 2016</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/NET-Core/">.NET Core</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="https://avatars0.githubusercontent.com/u/7550366?v=4&s=460" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>James Yeung</strong>
+        <span>7月 27, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAAB4UlEQVR42u3ay47CMBAEQP7/p3evK60I3XZ4hCmfEAqRi8PI457bz1esGwYGBgYGBgbGxzBu8br3/N/v7735/zPH7zzeAwYGxkzGg9J2uN3ktwk43wMGBsZkRlJMk+fvAfJCHOExMDAwNo59DwolBgYGxksKbo5sj4YYGBgY+01s+6v8iPnSXhwDA+OCjDYYeMbnN+QbGBgYF2GcNvpwGHauhQpvmBnBwMD4SEbegrbNbbL1tYYWAwNjGiPZ+n5g2UYCx+/EwMCYxth5dbvF44JbF2sMDIwxjDZ6TEpqvt12RAMDA2MyY38IrB1XzY+AGBgYGPtNbBJGtuV4McLEwMAYzIgOaktFuR1sxcDAwMibzPxSLG9QayQGBsZIRn6k2y+dbcu6lcRiYGBcnLE2yHXcjq41wC0YAwNjGqMdsMiL5lljr9EcLgYGxgBG3r7mV2P55/pvwsDAGMnYjyR3ynGLwcDAmMNo11mDX0kbXN8aYmBgfCmjLXlRKSwb1zY2wMDAmMnIi2wbQCbFd210AwMDYyZj5yr/rJghZ2NgYGC0l/v7R8A6isDAwMBY2u7zDpEYGBgYbRiQXOXn7ehaOcbAwJjG2Gkpc8BaqPD0fAMDA+PjGdddGBgYGBgYGBhvXb9DlQ0BBPNBvwAAAABJRU5ErkJggg==">
+    
+</ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=&url=https://www.shriek.com/README.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=&url=https://www.shriek.com/README.html&via=James Yeung" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://www.shriek.com/README.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://www.shriek.com/README.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="Welcome-to-my-blog"><a href="#Welcome-to-my-blog" class="headerlink" title="Welcome to my blog! "></a>Welcome to my blog! <a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io" target="_blank" rel="external"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj?svg=true" alt="Build status"></a></h1>
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 gitcoment -->
+<div id="gitment-comment">
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  //id: '页面 ID', // 可选。默认为 location.href
+  owner: 'ElderJames',
+  repo: 'elderjames.github.io',
+  oauth: {
+    client_id: '695234dcb3266b06c9bc',
+    client_secret: '9012a4415f4672e4858df564fc9999e9b6d5cec0',
+  },
+})
+gitment.render('container')
+</script>
+</div>
+<style>
+    #gitment-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -575,14 +689,6 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
-
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
 
                     
 
