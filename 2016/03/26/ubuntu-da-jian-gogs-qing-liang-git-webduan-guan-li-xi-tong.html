@@ -575,7 +575,11 @@ var gitment = new Gitment({
     client_secret: '9012a4415f4672e4858df564fc9999e9b6d5cec0',
   },
 })
+console.log(gitment.state)
+// if (!gitment.state.meta)
+     gitment.init();
 gitment.render('container')
+
 </script>
 </div>
 <style>
