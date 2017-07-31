@@ -221,7 +221,31 @@
 <!-- Import Font -->
 <!-- Import Roboto -->
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.svg#Roboto) format('svg')
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: regular;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.svg#Roboto) format('svg')
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 500;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.svg#Roboto) format('svg')
+        }
+    </style>
 
 
 <!-- Import Material Icon -->
@@ -510,7 +534,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>很高兴用上了hexo来搭建博客！</p>
+        <script src="/assets/js/APlayer.min.js"> </script><p>很高兴用上了hexo来搭建博客！</p>
 <p>因为最近使用学习angular、vue、cordova等框架和技术，慢慢喜欢上了用node来构建应用程序的过程。我原来的博客系统是Ghost,部署在亚马逊AWS上。最近AWS一年免费体验准备到期了，博客也要找个别的地方安放。</p>
 <p>早就知道了github上能搭建博客，但是之前是觉得构建起来很复杂，就没有尝试。这次，我就要尝试一下了！就是你现在看到的模样！</p>
 <p>这篇文章要记下来整个迁移过程。从hexo的安装、构建、部署、安装主题、从Ghost迁移文章。</p>
@@ -636,6 +660,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/08/01/Use-Appveyor-to-continuously-integrate-your-Hexo-blog.html" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
@@ -734,7 +766,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
             </ul>
         </li>
         
@@ -752,7 +784,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -761,7 +793,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     <!-- Pages  -->
     
         <li>
-            <a href="/tags" title="标签云">
+            <a href="/tags.html" title="标签云">
                 
                     <i class="material-icons sidebar-material-icons">local_offer</i>
                 
@@ -771,7 +803,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
     
         <li>
-            <a href="/timeline" title="时间轴">
+            <a href="/timeline.html" title="时间轴">
                 
                     <i class="material-icons sidebar-material-icons">list</i>
                 
@@ -781,7 +813,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
     
         <li>
-            <a href="/contact" title="留言板">
+            <a href="/contact.html" title="留言板">
                 
                     <i class="material-icons sidebar-material-icons">forum</i>
                 
@@ -791,7 +823,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
     
         <li>
-            <a href="/about" title="关于我">
+            <a href="/about.html" title="关于我">
                 
                     <i class="material-icons sidebar-material-icons">face</i>
                 
@@ -801,7 +833,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
     
         <li>
-            <a href="/gallery" title="相册">
+            <a href="/gallery.html" title="相册">
                 
                     <i class="material-icons sidebar-material-icons">image</i>
                 
@@ -811,7 +843,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
     
         <li>
-            <a href="/friends" title="朋友">
+            <a href="/friends.html" title="朋友">
                 
                     <i class="material-icons sidebar-material-icons">people</i>
                 
@@ -826,7 +858,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">21</span>
+                <span class="sidebar-badge">22</span>
             </a>
         </li>
         
@@ -871,7 +903,7 @@ It will not impact the appearance and can give developers a lot of support :)
     <!-- Sidebar Image -->
     
     <span id="footer-image">
-        <a href="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" target="_blank" title="AppVeyor">
+        <a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io" target="_blank" title="AppVeyor">
             <img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj?svg=true" alt="AppVeyor"><!--
      --></a>
     </span>

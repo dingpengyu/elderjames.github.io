@@ -221,7 +221,31 @@
 <!-- Import Font -->
 <!-- Import Roboto -->
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-300.svg#Roboto) format('svg')
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: regular;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-regular.svg#Roboto) format('svg')
+        }
+
+        @font-face {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 500;
+            src: url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.eot);
+            src: local('Roboto'),local('Roboto-Normal'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.eot?#iefix) format('embedded-opentype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.woff2) format('woff2'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.woff) format('woff'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.ttf) format('truetype'),url(https://lib.baomitu.com/fonts/roboto/roboto-v15-latin-500.svg#Roboto) format('svg')
+        }
+    </style>
 
 
 <!-- Import Material Icon -->
@@ -492,7 +516,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <ul>
+        <script src="/assets/js/APlayer.min.js"> </script><ul>
 <li><p>在project.json配置文件中引入程序集：<code>&quot;Microsoft.AspNetCore.Session&quot;: &quot;1.0.0&quot;</code></p>
 </li>
 <li><p>在Startup.cs的ConfigureService方法中加入以下代码：</p>
@@ -651,7 +675,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
             </ul>
         </li>
         
@@ -669,7 +693,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -678,7 +702,7 @@
     <!-- Pages  -->
     
         <li>
-            <a href="/tags" title="标签云">
+            <a href="/tags.html" title="标签云">
                 
                     <i class="material-icons sidebar-material-icons">local_offer</i>
                 
@@ -688,7 +712,7 @@
         
     
         <li>
-            <a href="/timeline" title="时间轴">
+            <a href="/timeline.html" title="时间轴">
                 
                     <i class="material-icons sidebar-material-icons">list</i>
                 
@@ -698,7 +722,7 @@
         
     
         <li>
-            <a href="/contact" title="留言板">
+            <a href="/contact.html" title="留言板">
                 
                     <i class="material-icons sidebar-material-icons">forum</i>
                 
@@ -708,7 +732,7 @@
         
     
         <li>
-            <a href="/about" title="关于我">
+            <a href="/about.html" title="关于我">
                 
                     <i class="material-icons sidebar-material-icons">face</i>
                 
@@ -718,7 +742,7 @@
         
     
         <li>
-            <a href="/gallery" title="相册">
+            <a href="/gallery.html" title="相册">
                 
                     <i class="material-icons sidebar-material-icons">image</i>
                 
@@ -728,7 +752,7 @@
         
     
         <li>
-            <a href="/friends" title="朋友">
+            <a href="/friends.html" title="朋友">
                 
                     <i class="material-icons sidebar-material-icons">people</i>
                 
@@ -743,7 +767,7 @@
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">21</span>
+                <span class="sidebar-badge">22</span>
             </a>
         </li>
         
@@ -788,7 +812,7 @@ It will not impact the appearance and can give developers a lot of support :)
     <!-- Sidebar Image -->
     
     <span id="footer-image">
-        <a href="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" target="_blank" title="AppVeyor">
+        <a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io" target="_blank" title="AppVeyor">
             <img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj?svg=true" alt="AppVeyor"><!--
      --></a>
     </span>
