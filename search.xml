@@ -941,14 +941,21 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
-      <title><![CDATA[Friends]]></title>
-      <url>/friends/index.html</url>
+      <title><![CDATA[categories]]></title>
+      <url>/categories/index.html</url>
       <content type="html"></content>
     </entry>
     
     <entry>
-      <title><![CDATA[categories]]></title>
-      <url>/categories/index.html</url>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Friends]]></title>
+      <url>/friends/index.html</url>
       <content type="html"></content>
     </entry>
     
@@ -1000,13 +1007,6 @@ reproxy=/  http://127.0.0.1:236
       <title><![CDATA[timeline]]></title>
       <url>/timeline/index.html</url>
       <content type="html"></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
     </entry>
     
     <entry>
