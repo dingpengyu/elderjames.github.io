@@ -4,20 +4,20 @@
     
     <entry>
       <title><![CDATA[使用AppVeyor持续集成你的Hexo博客]]></title>
-      <url>/2017/08/01/Use-Appveyor-to-continuously-integrate-your-Hexo-blog.html</url>
+      <url>/Use-Appveyor-to-continuously-integrate-your-Hexo-blog.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>炎热的盛夏，真的是让人难以入眠。在这种不免之夜，如果还加上停电……简直就是惨绝人寰了！</p>
 <p>还好，今晚没停电，可以让我吹着风扇安心去写这篇文章。</p>
 <p>距离我建立这个博客都过去一周了，一直都在做这个站点的建设。首先是找到个好看的主题，之后绑定自己的https域名，然后是寻找更多玩法，比如放了只可爱的猫咪在右下角，它会跟随者你的鼠标摇头摆尾~比如在底部贴了我的GitHub贡献马赛克，在我的朋友页面抓取我的Github followers，还有就是这篇文章的重点，用AppVeyor去持续集成Hexo博客。</p>
 <p>AppVeyor是目前唯一支持.NET开源项目的持续集成功能，运行环境是Windows，身为.NET开发者和软粉的我，怎么不支持一下这个有情怀的服务商呢？</p>
 <p><del>太晚了，挖坑，明天继续写。</del> </p>
 <h4 id="第一步，创建CI项目"><a href="#第一步，创建CI项目" class="headerlink" title="第一步，创建CI项目"></a>第一步，创建CI项目</h4><p>访问<a href="https://ci.appveyor.com/projects" target="_blank" rel="external">AppVeyor网站</a>，注册或使用Github帐号授权登录，在PROJECTS页面点击【NEW PROJECT】，然后在右侧选择你的Hexo博客所在的仓库。</p>
-<p><img src="/2017/08/01/1.png" alt=""></p>
+<p><img src="/images/1.png" alt=""></p>
 <h4 id="第二步，配置项目和环境变量"><a href="#第二步，配置项目和环境变量" class="headerlink" title="第二步，配置项目和环境变量"></a>第二步，配置项目和环境变量</h4><p>点击项目里的[SETTING]选项卡，配置以下几项：</p>
 <ol>
 <li>Default branch -&gt; [你存放原文件的分支名]</li>
 <li>Branches to build -&gt; 选择Only branches specified below,并填入[你存放原文件的分支名]</li>
 </ol>
-<p>如下图，然后点击一下下方的Save按钮。<br><img src="/2017/08/01/2.png" alt=""></p>
+<p>如下图，然后点击一下下方的Save按钮。<br><img src="/images/2.png" alt=""></p>
 <p>点击右侧的Environment标签，添加环境变量：</p>
 <table>
 <thead>
@@ -46,9 +46,9 @@
 </tbody>
 </table>
 <p>如下图，然后点击一下下方的Save按钮。</p>
-<p><img src="/2017/08/01/3.png" alt=""></p>
+<p><img src="/images/3.png" alt=""></p>
 <h4 id="第三步，获取Access-Token"><a href="#第三步，获取Access-Token" class="headerlink" title="第三步，获取Access Token"></a>第三步，获取Access Token</h4><p>访问个人设置页面：</p>
-<p><img src="/2017/08/01/4.png" alt=""></p>
+<p><img src="/images/4.png" alt=""></p>
 <p>点击边栏下方的【Personal access tokens】选项卡，并点击右上方的【Generate new token】按钮。Token description任意填写，下方的选项中全选repo即可。</p>
 <p>最后，点击下方绿色的【Generate token】按钮。此时就能得到你的Access Token。</p>
 <p>也可以参考<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="external">官方文档</a></p>
@@ -96,7 +96,7 @@
 </code></pre>
 <p>大致的意思是从github仓库的当前分支拉取下来，编译成静态文件后，在push到目标分支。由于AppVeyor环境中是通过Access Token访问我们的仓库的，而Hexo自带的部署则在访问的过程中需要我们输入帐号密码，所以Hexo g -d的命令就不适合在这里使用。需要先编译成静态文件，再把public文件夹的静态文件push到目标分支。</p>
 <p>最后，把这个文件提交到Github上就可以测试了！在AppVeyor的首页可以看到部署的过程和结果~</p>
-<p><img src="/2017/08/01/5.png" alt=""></p>
+<p><img src="/images/5.png" alt=""></p>
 <p>别说我没告诉你，还可以添加一枚徽章装装逼哦！<a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io/branch/files" target="_blank" rel="external"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" alt="Build status"></a></p>
 <p>可以看看我的<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml" target="_blank" rel="external">配置文件</a>，以及底部的两篇参考文章~</p>
 <p>参考文章：</p>
@@ -137,7 +137,7 @@
     
     <entry>
       <title><![CDATA[Hello Hexo! 从Ghost迁移博客到Hexo]]></title>
-      <url>/2017/07/26/migrate-blog-from-ghost-to-hexo-and-github.html</url>
+      <url>/migrate-blog-from-ghost-to-hexo-and-github.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>很高兴用上了hexo来搭建博客！</p>
 <p>因为最近使用学习angular、vue、cordova等框架和技术，慢慢喜欢上了用node来构建应用程序的过程。我原来的博客系统是Ghost,部署在亚马逊AWS上。最近AWS一年免费体验准备到期了，博客也要找个别的地方安放。</p>
 <p>早就知道了github上能搭建博客，但是之前是觉得构建起来很复杂，就没有尝试。这次，我就要尝试一下了！就是你现在看到的模样！</p>
@@ -241,7 +241,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[Visual Studio 2017 正式版安装问题及解决方案记录]]></title>
-      <url>/2017/03/14/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</url>
+      <url>/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>##Visual Studio 2017正式版终于出来啦！</p>
 <p>下载地址：<a href="https://www.visualstudio.com/zh-hans/" target="_blank" rel="external">请到主页</a></p>
 <p>推荐使用安装器下载，速度比以前快了很多！必装的Web和.NET Core组件只需要15分钟就可以安装完（当然，视网速而定，15分钟是用100M/bs的宽带下载的，下载峰值在5M/s左右）</p>
@@ -256,7 +256,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[NPM 国内镜像]]></title>
-      <url>/2016/09/22/n.html</url>
+      <url>/n.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>npm由于很多时候都需要从国外的服务器下载组件，由于<strong>众所周知</strong>的原因，国内安装时往往会很慢甚至卡住安装不上的情况，这时就需要替换一下安装源，使用国内服务商提供的镜像：</p>
 <ul>
 <li><a href="http://npm.hacknodejs.com/" target="_blank" rel="external">http://npm.hacknodejs.com/</a></li>
@@ -273,7 +273,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext]]></title>
-      <url>/2016/09/22/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html</url>
+      <url>/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>很高兴，我的博客又回来了。</p>
 <p>在使用.NET Core来开发项目已经有两个多月了，想在这里记录一些在.NET Core中比较方便的知识。</p>
 <p>这里讲一讲在ASP.NET Core中使用依赖注入的方式请求生命周期内唯一的DbContext。<br>按照以往.NET Framework中的Web应用程序使用EF，我们会把DbContext实例放入CallContext中，这是在一个线程周期中可共享的存储对象，来达到获得线程内唯一的DbContext等其它对象。但是在.NET Core时代，已经不需要CallContext了，而是使用最突出的特点——依赖注入。</p>
@@ -315,7 +315,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[EF Core For Mysql 的DataBase First（基于已有数据库）方式连接数据库]]></title>
-      <url>/2016/07/30/ef-core-for-mysql-de-databasefang-shi-lian-jie-shu-ju-ku.html</url>
+      <url>/ef-core-for-mysql-de-databasefang-shi-lian-jie-shu-ju-ku.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>.NET要跨平台，就一定要使用同样可以跨平台的数据库，而轻量的MySQL自然是首选。.NET Core发展到现在，虽然官方的Entity Framework还没发布MySQL版本，但是刚认识的柚子大神已经首先把它做出来了（<a href="http://www.1234.sh/post/pomelo-data-mysql" target="_blank" rel="external">他的博客</a>）。</p>
 <p>同时，他也开源了它使用MySql for Entity Framework Core写的轻量博客系统，可惜在数据库连接是使用Code First。Code First当时是好，也是微软官方推荐的数据操作方式，可是，对于已有数据库的项目，希望创建基于已有数据库的.NET Core应用，或者对已有项目进行移植的开发者，就显得力不从心了。</p>
 <p>虽然官方有从数据库创建模型的方法（<a href="https://docs.efproject.net/en/latest/platforms/aspnetcore/existing-db.html" target="_blank" rel="external">地址</a>），但是它使用了下面这三个只适用于SqlServer的工具包：</p>
@@ -352,12 +352,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[.NET Core以依赖注入的方式配置MySql的DbContext]]></title>
-      <url>/2016/07/30/yi-zhu-ru-de-fang-shi.html</url>
+      <url>/yi-zhu-ru-de-fang-shi.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>使用ASP.NET Core开发Web项目，在很多方面都跟之前的.NET版本有很大不同，在Startup.cs的配置方面,一言不合就使用依赖注入。当然，这对于整个项目的解耦是极好的。这次踩的坑在DbContext的配置上。</p>
 <p>在<a href="http://www.1234.sh/post/pomelo-data-mysql" target="_blank" rel="external">柚子大神的博客</a>中,有介绍他移植过来的mysql for ef core的使用方法是在Startup中注册服务：</p>
 <pre class=" language-aspnet"><code class="language-aspnet">services.AddDbContext<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span>(x => x.UseMySql("server=localhost;database=yourdb;uid=root;pwd=yourpwd"));
 </code></pre>
-<p>但是，这样配置之后，又需要在YourContext中配置：<br><img src="/2016/07/30/content/images/2016/07/0e1ef77c-b03e-439f-a894-cb1de1811695.png" alt=""></p>
+<p>但是，这样配置之后，又需要在YourContext中配置：<br><img src="/content/images/2016/07/0e1ef77c-b03e-439f-a894-cb1de1811695.png" alt=""></p>
 <p>这样的话，其实是等于配置了两次，在DbContext中是直接写ConnectionString的，不能（我还不会）从配置文件中读取。因此，需要寻找一个从Startup中配置的有效方法。</p>
 <p>通过对比MVC6项目模版的sqlserver配置方式，和<a href="https://docs.efproject.net/en/latest/miscellaneous/configuring-dbcontext.html" target="_blank" rel="external">官方文档的介绍</a>，发现DbContext里是可以通过注入的方式注册ConnectionString的，方法就是设置构造函数注入DbContextOptions：</p>
 <pre class=" language-aspnet"><code class="language-aspnet">  public YourContext(DbContextOptions<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span> options)
@@ -371,7 +371,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[使用SecureCRT连接免费的亚马逊云服务器]]></title>
-      <url>/2016/07/19/shi-yong-securecrtlian-jie-ya-ma-xun-yun-fu-wu-qi.html</url>
+      <url>/shi-yong-securecrtlian-jie-ya-ma-xun-yun-fu-wu-qi.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>亚马逊AWS有一年的免费体验，相比国内的阿里云、腾讯云的优惠政策更实在，而且又不用认证、也不用备案，一个邮箱帐号就能获得，简直就是我等学生（虽然已经不是了，但刚出来工作没几个钱呀！）的福利！</p>
 <p>在亚马逊中，选择“新加坡”、“首尔”、“东京”这几个位于亚洲的节点响应速度都算是比较快的，虽然比不上国内，但是结合七牛等CDN云服务一样可以做到不错的响应速度。</p>
 <p>而本篇的主题，就是因AWS的特殊连接方式而产生的，虽然网上已经有很多前辈给了教程，但是始终不如自己写一下，等以后可以方便地查到更方便。</p>
@@ -414,7 +414,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[.NET Core 资料整理]]></title>
-      <url>/2016/07/12/net-core-zi-liao-zheng-li.html</url>
+      <url>/net-core-zi-liao-zheng-li.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>##工具下载</p>
 <ul>
 <li><p><a href="http://download.microsoft.com/download/c/2/6/c26892d8-6a5d-4871-9d46-629f4d430146/vs2015.3.vsu.iso" target="_blank" rel="external">Visual Studio 2015 Update3 升级包</a></p>
@@ -448,7 +448,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[记在Mono 4.2 上EF使用Select操作时会发生的错误]]></title>
-      <url>/2016/07/12/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html</url>
+      <url>/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>错误提示：The classes in the module cannot be loaded.</p>
 <p>代码还原：</p>
 <pre class=" language-aspnet"><code class="language-aspnet"> var data = await db.Set<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FormulaCarType</span><span class="token punctuation">></span></span>()
@@ -494,7 +494,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[ASP.NET Core使用Session方法]]></title>
-      <url>/2016/07/08/as.html</url>
+      <url>/as.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ul>
 <li><p>在project.json配置文件中引入程序集：<code>&quot;Microsoft.AspNetCore.Session&quot;: &quot;1.0.0&quot;</code></p>
 </li>
@@ -513,7 +513,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[从旧版.NET Core 升级到.NET Core 1.0正式版]]></title>
-      <url>/2016/06/30/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html</url>
+      <url>/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>6月28日凌晨，RedHat 开发者大会上微软正式发布.NET Core正式版，我作为.NET爱好者，马上就想安装来玩玩，不过因为之前电脑上就装有旧版本，在这次正式版的安装中遇到了一些坑，装了n遍，死活装不上，停留在旧版本。</p>
 <p>下载地址：</p>
 <ol>
@@ -543,7 +543,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[git 操作笔记]]></title>
-      <url>/2016/03/28/git-cao-zuo-bi-ji.html</url>
+      <url>/git-cao-zuo-bi-ji.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><figcaption>cd myproject</code>  你建立的项目文件夹</p></figcaption><pre class=" language-$"><code class="language-$"><p><code>$ git init</code>   执行git的本地初始化</p>
 <p><code>$ git add .</code>  将所有的文件添加到版本控制系统</p>
 <p><code>$ git commit -m "initial commit"</code>  在本地提交到版本库</p>
@@ -567,7 +567,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
     
     <entry>
       <title><![CDATA[Ubuntu 搭建Gogs ：轻量Git Web端管理系统]]></title>
-      <url>/2016/03/26/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html</url>
+      <url>/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Gogs是国人开发的开源git管理系统，类似gitlab，可在服务器上搭建私人的git版本管理系统。内建很多功能，但俾比gitlab安装更方便，占用更少的资源。<br>详细介绍还是看看官方网站吧：<a href="https://gogs.io" target="_blank" rel="external">https://gogs.io</a></p>
 <p>现在结合本人的安装过程，在这里做一个记录。适合小白参考。</p>
 <p>安装方法有三种：二进制安装，源码安装，包管理安装，我认为最方便的还是二进制安装。</p>
@@ -619,7 +619,7 @@ user = git
     
     <entry>
       <title><![CDATA[修复apt-get包管理]]></title>
-      <url>/2016/03/24/xiu-fu-apt-getbao-guan-li.html</url>
+      <url>/xiu-fu-apt-getbao-guan-li.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>1.通过<code>wget http://oss.aliyuncs.com/aliyunecs/update_source.tgz</code> 下载update_source的压缩包。</p>
 <p>2.<code>tar xvf update_source.tgz</code>解压后予执行权限<code>chmod 777 update_source.sh</code>。</p>
 <p>3.执行该脚本<code>./update_source.sh</code>进行自动变更源操作。</p>
@@ -634,7 +634,7 @@ user = git
     
     <entry>
       <title><![CDATA[C#利用反射机制动态创建泛型接口实例]]></title>
-      <url>/2016/03/21/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html</url>
+      <url>/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>我很懒，不希望写重复的copy代码，所以希望在写代码时能尽量简化和重用，一些设计上有但没必要的能不写就不写，但当然必须要实现。</p>
 <p>最近学会用C#的反射机制，觉得非常好，可以通过类名实例化一个对应的对象。于是我就想到了在设计业务层时，一些通用的数据库操作是以泛型基类的形式供给各个模型使用的，只需替换传入的模型的类型参数，即刻操作相应的模型，而对于一些模型需要的特殊操作，则以这个基类派生出包含特殊方法的子类来实现。</p>
 <p>但是这里会出现一些问题，就是在各层透明的情况下，其他层是不知道模型是否包含有特殊的方法，最初的解决方法是为每个模型都写一个继承业务基类的子类，就算它里面是空的（没有特殊方法）。而现在，通过反射，我们可以很好地实现统一的业务实例化操作，实现自动判断该模型是否拥有对应的业务子类。</p>
@@ -731,7 +731,7 @@ user = git
     
     <entry>
       <title><![CDATA[Ubuntu安装mono 4.2.1 最新版教程]]></title>
-      <url>/2015/12/03/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html</url>
+      <url>/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>现在安装mono已经不用make命令来编译，可以直接执行<code>apt-get mono-complete</code>来安装最新的mono版本。</p>
 <p>下面看看怎么安装：</p>
 <ul>
@@ -758,7 +758,7 @@ user = git
     
     <entry>
       <title><![CDATA[ASP.NET 连接 Mysql 支持中文编码]]></title>
-      <url>/2015/11/06/make-mysql-support-chinese-encoding.html</url>
+      <url>/make-mysql-support-chinese-encoding.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>1、关闭mysql服务<br><code>service mysql stop</code></p>
 <p>2、修改 /etc/mysql/my.cnf  （默认的安装路径）<br><code>vim /etc/mysql/my.cnf</code></p>
 <p>3、打开my.cnf后，在文件内的[mysqld]下增加如下两行设置:</p>
@@ -775,7 +775,7 @@ collation-server=utf8_general_ci
     
     <entry>
       <title><![CDATA[ASP.NET MVC 中UEditor 1.4.3 前台直接上传文件到七牛云存储]]></title>
-      <url>/2015/10/30/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html</url>
+      <url>/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>最近在做一个ASP.NET MVC 的项目，当然是离不开富文本编辑器，这里我选择的是百度的UEditor，虽然不够轻量，界面也不好看，但是功能还是挺多的。而因为项目主要面对移动端的用户，所以为了减轻低配服务器的压力，也为了用户体验更佳，决定在项目中接入七牛云存储。</p>
 <p>选择七牛是看重他的CDN、上传加速和图片处理功能，最神奇的是在获取图片时只需在Url中加入几个参数即刻，而且还可以自己定图片的大小，大大减少了服务器在图片处理上的压力。</p>
 <p>好吧，在这里就不继续安利了。</p>
@@ -845,7 +845,7 @@ collation-server=utf8_general_ci
     
     <entry>
       <title><![CDATA[Ghost博客邮件SMTP服务配置]]></title>
-      <url>/2015/10/13/the-smtp-setting-for-ghost-blog.html</url>
+      <url>/the-smtp-setting-for-ghost-blog.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>前天由于回到学校，用回了我的Pocker2机械键盘，在输入密码时连续不知道大小写切换键换了地方，连续输错了密码，帐号被封了……</p>
 <p>Ghost也是的，连博客主人的号都能封，还不能（也可能是我不会）通过操作服务器（比如Wordpress能通过删除配置文件）来重置密码，只能通过发送邮件，好吧，之前就一直配置不成功，现在好了，只能硬着头皮给它设置好了。</p>
 <p>看过几篇关于配置邮箱的文章，但还是不行，我就以为是我人品不好了。但是今天重新看了配置文件之后，终于发现了我错在哪，所以现在记录一下吧。</p>
@@ -881,7 +881,7 @@ collation-server=utf8_general_ci
     
     <entry>
       <title><![CDATA[Framework7多视图（View）工具栏布局]]></title>
-      <url>/2015/10/10/the-multiple-views-structure-on-framework7.html</url>
+      <url>/the-multiple-views-structure-on-framework7.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>HiApp 可以算是一个比较完整的App，其中有很多能够学习的地方，比如它用的RequireJS 、它的界面交互等等，而对于初学者来说，它的布局结构是很值得学习的。因为它的结构是目前绝大多数App的常用布局，分为顶部导航栏Navbar，中 部多个视图View，底部是切换view的工具栏Toolbar。</p>
 <p>它的特殊之处在于在界面首层显示了工具栏，而且4个view的底部都是给工具栏空出了位置，而进入到第二层以后，就自动隐藏了工具栏，view内的页 面没有给工具栏留出位置。这是一个很巧妙的结构。</p>
 <p>在文档里，介绍的布局实例里都没有提及这种布局，所以我才说应该去学习。</p>
@@ -990,7 +990,7 @@ $$(document).on(&#39;pageBeforeAnimation&#39;, function (e) {
     
     <entry>
       <title><![CDATA[在Jexus环境部署Ghost博客系统]]></title>
-      <url>/2015/10/05/install-ghost-blog-on-jexus-successfully.html</url>
+      <url>/install-ghost-blog-on-jexus-successfully.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>###建博感言<br>很久以前就想有自己的博客，但由于无暇顾及而荒废了。之前使用过WordPress，它的功能十分强大，安装之后就一直手痒弄着主题和插件。但是这实在太麻烦了，也不是我最终需要的，。我自认不是一个设计师，不能做出个漂亮的东西，但我喜欢什么样的博客我还是知道的。</p>
 <p>###本文主题<br>Ghost博客系统由node.js写成，它的轻便以及高性能不言而喻，界面用bootstrap风格，原生多种客户端，默认使用Markdown编辑器，完全就是为书写而打造，实在是漂亮，很早之前就想使用，但由于没有自己的服务器，所以一直没用上，现在阿里云有学生优惠，买了配置很低的服务器，就打算使用Ghost来作为我的博客。</p>
 <p>而我的服务器环境有点特殊。</p>
@@ -1093,6 +1093,12 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -1133,12 +1139,6 @@ reproxy=/  http://127.0.0.1:236
     <entry>
       <title><![CDATA[时间轴]]></title>
       <url>/timeline.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
