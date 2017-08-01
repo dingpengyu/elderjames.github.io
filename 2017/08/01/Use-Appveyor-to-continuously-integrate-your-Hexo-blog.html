@@ -529,7 +529,48 @@
 <p>还好，今晚没停电，可以让我吹着风扇安心去写这篇文章。</p>
 <p>距离我建立这个博客都过去一周了，一直都在做这个站点的建设。首先是找到个好看的主题，之后绑定自己的https域名，然后是寻找更多玩法，比如放了只可爱的猫咪在右下角，它会跟随者你的鼠标摇头摆尾~比如在底部贴了我的GitHub贡献马赛克，在我的朋友页面抓取我的Github followers，还有就是这篇文章的重点，用AppVeyor去持续集成Hexo博客。</p>
 <p>AppVeyor是目前唯一支持.NET开源项目的持续集成功能，运行环境是Windows，身为.NET开发者和软粉的我，怎么不支持一下这个有情怀的服务商呢？</p>
-<p>太晚了，挖坑，明天继续写。可以先看看我的<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml" target="_blank" rel="external">配置文件</a>，以及底部的两篇参考文章~</p>
+<p><del>太晚了，挖坑，明天继续写。</del> 可以先看看我的[配置文件]：</p>
+<p>在Hexo的根目录下新建一个<code>appveyor.yml</code>文件，写下以下内容</p>
+<pre class=" language-bash"><code class="language-bash">
+clone_depth: 5
+
+branches:
+  only:
+  - files
+
+environment:
+  access_token:
+    secure: github上申请的access_token
+
+install:
+  - ps: Install-Product node 6.0
+  - node --version
+  - <span class="token function">npm</span> --version
+  - <span class="token function">npm</span> <span class="token function">install</span>
+  - <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+
+build_script:
+  - hexo generate
+
+artifacts:
+  - path: public
+
+on_success:
+  - <span class="token function">git</span> config --global credential.helper store
+  - ps: Add-Content <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.git-credentials"</span> <span class="token string">"https://<span class="token variable"><span class="token variable">$(</span>$env:access_token<span class="token variable">)</span></span>:x-oauth-basic@github.com`n"</span>
+  - <span class="token function">git</span> config --global user.email <span class="token string">"%GIT_USER_EMAIL%"</span>
+  - <span class="token function">git</span> config --global user.name <span class="token string">"%GIT_USER_NAME%"</span>
+  - <span class="token function">git</span> clone --depth 5 -q --branch<span class="token operator">=</span>%TARGET_BRANCH% %STATIC_SITE_REPO% %TEMP%\static-site
+  - <span class="token function">cd</span> %TEMP%\static-site
+  - del * /f /q
+  - <span class="token keyword">for</span> /d %%p IN <span class="token punctuation">(</span>*<span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token function">rmdir</span> <span class="token string">"%%p"</span> /s /q
+  - SETLOCAL EnableDelayedExpansion <span class="token operator">&amp;</span> robocopy <span class="token string">"%APPVEYOR_BUILD_FOLDER%\public"</span> <span class="token string">"%TEMP%\static-site"</span> /e <span class="token operator">&amp;</span> IF <span class="token operator">!</span>ERRORLEVEL<span class="token operator">!</span> EQU 1 <span class="token punctuation">(</span>exit 0<span class="token punctuation">)</span> ELSE <span class="token punctuation">(</span>IF <span class="token operator">!</span>ERRORLEVEL<span class="token operator">!</span> EQU 3 <span class="token punctuation">(</span>exit 0<span class="token punctuation">)</span> ELSE <span class="token punctuation">(</span>exit 1<span class="token punctuation">))</span>
+  - <span class="token function">git</span> add -A
+  - <span class="token function">git</span> commit -m <span class="token string">"Update Static Site"</span>
+  - <span class="token function">git</span> push origin %TARGET_BRANCH%
+  - appveyor AddMessage <span class="token string">"Static Site Updated"</span>
+</code></pre>
+<p>(<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml)，以及底部的两篇参考文章~" target="_blank" rel="external">https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml)，以及底部的两篇参考文章~</a></p>
 <div id="aplayer0" class="aplayer" style="margin-bottom: 20px;width:400px;"></div>
 		<script>
 			new APlayer({
