@@ -375,6 +375,15 @@
     <!-- Left aligned menu below button -->
     
     
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步，创建CI项目"><span class="post-toc-number">1.</span> <span class="post-toc-text">第一步，创建CI项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步，配置项目和环境变量"><span class="post-toc-number">2.</span> <span class="post-toc-text">第二步，配置项目和环境变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第三步，获取Access-Token"><span class="post-toc-number">3.</span> <span class="post-toc-text">第三步，获取Access Token</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第四步，加密Access-Token"><span class="post-toc-number">4.</span> <span class="post-toc-text">第四步，加密Access Token</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第五步，配置文件"><span class="post-toc-number">5.</span> <span class="post-toc-text">第五步，配置文件</span></a></li></ol>
+    </ul>
+    
 
 
 
@@ -529,48 +538,101 @@
 <p>还好，今晚没停电，可以让我吹着风扇安心去写这篇文章。</p>
 <p>距离我建立这个博客都过去一周了，一直都在做这个站点的建设。首先是找到个好看的主题，之后绑定自己的https域名，然后是寻找更多玩法，比如放了只可爱的猫咪在右下角，它会跟随者你的鼠标摇头摆尾~比如在底部贴了我的GitHub贡献马赛克，在我的朋友页面抓取我的Github followers，还有就是这篇文章的重点，用AppVeyor去持续集成Hexo博客。</p>
 <p>AppVeyor是目前唯一支持.NET开源项目的持续集成功能，运行环境是Windows，身为.NET开发者和软粉的我，怎么不支持一下这个有情怀的服务商呢？</p>
-<p><del>太晚了，挖坑，明天继续写。</del> 可以先看看我的[配置文件]：</p>
-<p>在Hexo的根目录下新建一个<code>appveyor.yml</code>文件，写下以下内容</p>
-<pre class=" language-bash"><code class="language-bash">
-clone_depth: 5
+<p><del>太晚了，挖坑，明天继续写。</del> </p>
+<h4 id="第一步，创建CI项目"><a href="#第一步，创建CI项目" class="headerlink" title="第一步，创建CI项目"></a>第一步，创建CI项目</h4><p>访问<a href="https://ci.appveyor.com/projects" target="_blank" rel="external">AppVeyor网站</a>，注册或使用Github帐号授权登录，在PROJECTS页面点击【NEW PROJECT】，然后在右侧选择你的Hexo博客所在的仓库。</p>
+<p><img src="/2017/08/01/1.png" alt=""></p>
+<h4 id="第二步，配置项目和环境变量"><a href="#第二步，配置项目和环境变量" class="headerlink" title="第二步，配置项目和环境变量"></a>第二步，配置项目和环境变量</h4><p>点击项目里的[SETTING]选项卡，配置以下几项：</p>
+<ol>
+<li>Default branch -&gt; [你存放原文件的分支名]</li>
+<li>Branches to build -&gt; 选择Only branches specified below,并填入[你存放原文件的分支名]</li>
+</ol>
+<p>如下图，然后点击一下下方的Save按钮。<br><img src="/2017/08/01/2.png" alt=""></p>
+<p>点击右侧的Environment标签，添加环境变量：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">左对齐标题</th>
+<th style="text-align:left">右对齐标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>STATIC_SITE_REPO</code></td>
+<td style="text-align:left">你的仓库地址</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>TARGET_BRANCH</code></td>
+<td style="text-align:left">编译后文件存放的分支</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GIT_USER_EMAIL</code></td>
+<td style="text-align:left">Github的用户邮箱</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GIT_USER_NAME</code></td>
+<td style="text-align:left">Github用户名</td>
+</tr>
+</tbody>
+</table>
+<p>如下图，然后点击一下下方的Save按钮。</p>
+<p><img src="/2017/08/01/3.png" alt=""></p>
+<h4 id="第三步，获取Access-Token"><a href="#第三步，获取Access-Token" class="headerlink" title="第三步，获取Access Token"></a>第三步，获取Access Token</h4><p>访问个人设置页面：</p>
+<p><img src="/2017/08/01/4.png" alt=""></p>
+<p>点击边栏下方的【Personal access tokens】选项卡，并点击右上方的【Generate new token】按钮。Token description任意填写，下方的选项中全选repo即可。</p>
+<p>最后，点击下方绿色的【Generate token】按钮。此时就能得到你的Access Token。</p>
+<p>也可以参考<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="external">官方文档</a></p>
+<h4 id="第四步，加密Access-Token"><a href="#第四步，加密Access-Token" class="headerlink" title="第四步，加密Access Token"></a>第四步，加密Access Token</h4><p>由于这个AccessToken是可以直接操作你的仓库的，而且配置文件是公开的，所以这时就要求对AccessToken进行加密。可到<a href="https://ci.appveyor.com/tools/encrypt" target="_blank" rel="external">AppVeyor Token加密页面</a>进行加密。把加密后的字符串填入下一步中的配置文件里。</p>
+<h4 id="第五步，配置文件"><a href="#第五步，配置文件" class="headerlink" title="第五步，配置文件"></a>第五步，配置文件</h4><p>在Hexo的<strong>根目录</strong>下新建一个<code>appveyor.yml</code>文件，写下以下内容</p>
+<pre class=" language-yaml"><code class="language-yaml">
+<span class="token key atrule">clone_depth</span><span class="token punctuation">:</span> <span class="token number">5</span>
 
-branches:
-  only:
-  - files
+<span class="token comment" spellcheck="true"># 这里是限制了只编译有源文件的分支，这样在创建了其它分支时就不会再次编译了</span>
+<span class="token key atrule">branches</span><span class="token punctuation">:</span>
+  <span class="token key atrule">only</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> files
 
-environment:
-  access_token:
-    secure: github上申请的access_token
+<span class="token key atrule">environment</span><span class="token punctuation">:</span>
+  <span class="token key atrule">access_token</span><span class="token punctuation">:</span>
+    <span class="token key atrule">secure</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#加密后的access_token</span>
 
-install:
-  - ps: Install-Product node 6.0
-  - node --version
-  - <span class="token function">npm</span> --version
-  - <span class="token function">npm</span> <span class="token function">install</span>
-  - <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+<span class="token key atrule">install</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">ps</span><span class="token punctuation">:</span> Install<span class="token punctuation">-</span>Product node 6.0 <span class="token comment" spellcheck="true">#原始环境的node 是4.x的版本，最好升级到最新的版本，防止Hexo的插件无法安装</span>
+  <span class="token punctuation">-</span> node <span class="token punctuation">-</span><span class="token punctuation">-</span>version
+  <span class="token punctuation">-</span> npm <span class="token punctuation">-</span><span class="token punctuation">-</span>version
+  <span class="token punctuation">-</span> npm install
+  <span class="token punctuation">-</span> npm install hexo<span class="token punctuation">-</span>cli <span class="token punctuation">-</span>g
 
-build_script:
-  - hexo generate
+<span class="token key atrule">build_script</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> hexo generate
 
-artifacts:
-  - path: public
+<span class="token key atrule">artifacts</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">path</span><span class="token punctuation">:</span> public
 
-on_success:
-  - <span class="token function">git</span> config --global credential.helper store
-  - ps: Add-Content <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.git-credentials"</span> <span class="token string">"https://<span class="token variable"><span class="token variable">$(</span>$env:access_token<span class="token variable">)</span></span>:x-oauth-basic@github.com`n"</span>
-  - <span class="token function">git</span> config --global user.email <span class="token string">"%GIT_USER_EMAIL%"</span>
-  - <span class="token function">git</span> config --global user.name <span class="token string">"%GIT_USER_NAME%"</span>
-  - <span class="token function">git</span> clone --depth 5 -q --branch<span class="token operator">=</span>%TARGET_BRANCH% %STATIC_SITE_REPO% %TEMP%\static-site
-  - <span class="token function">cd</span> %TEMP%\static-site
-  - del * /f /q
-  - <span class="token keyword">for</span> /d %%p IN <span class="token punctuation">(</span>*<span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token function">rmdir</span> <span class="token string">"%%p"</span> /s /q
-  - SETLOCAL EnableDelayedExpansion <span class="token operator">&amp;</span> robocopy <span class="token string">"%APPVEYOR_BUILD_FOLDER%\public"</span> <span class="token string">"%TEMP%\static-site"</span> /e <span class="token operator">&amp;</span> IF <span class="token operator">!</span>ERRORLEVEL<span class="token operator">!</span> EQU 1 <span class="token punctuation">(</span>exit 0<span class="token punctuation">)</span> ELSE <span class="token punctuation">(</span>IF <span class="token operator">!</span>ERRORLEVEL<span class="token operator">!</span> EQU 3 <span class="token punctuation">(</span>exit 0<span class="token punctuation">)</span> ELSE <span class="token punctuation">(</span>exit 1<span class="token punctuation">))</span>
-  - <span class="token function">git</span> add -A
-  - <span class="token function">git</span> commit -m <span class="token string">"Update Static Site"</span>
-  - <span class="token function">git</span> push origin %TARGET_BRANCH%
-  - appveyor AddMessage <span class="token string">"Static Site Updated"</span>
+<span class="token key atrule">on_success</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> git config <span class="token punctuation">-</span><span class="token punctuation">-</span>global credential.helper store
+  <span class="token punctuation">-</span> <span class="token key atrule">ps</span><span class="token punctuation">:</span> Add<span class="token punctuation">-</span>Content "$env<span class="token punctuation">:</span>USERPROFILE\.git<span class="token punctuation">-</span>credentials" "https<span class="token punctuation">:</span>//$($env<span class="token punctuation">:</span>access_token)<span class="token punctuation">:</span>x<span class="token punctuation">-</span>oauth<span class="token punctuation">-</span>basic@github.com`n"
+  <span class="token punctuation">-</span> git config <span class="token punctuation">-</span><span class="token punctuation">-</span>global user.email "%GIT_USER_EMAIL%"
+  <span class="token punctuation">-</span> git config <span class="token punctuation">-</span><span class="token punctuation">-</span>global user.name "%GIT_USER_NAME%"
+  <span class="token punctuation">-</span> git clone <span class="token punctuation">-</span><span class="token punctuation">-</span>depth 5 <span class="token punctuation">-</span>q <span class="token punctuation">-</span><span class="token punctuation">-</span>branch=%TARGET_BRANCH% %STATIC_SITE_REPO% %TEMP%\static<span class="token punctuation">-</span>site
+  <span class="token punctuation">-</span> cd %TEMP%\static<span class="token punctuation">-</span>site
+  <span class="token punctuation">-</span> del * /f /q
+  <span class="token punctuation">-</span> for /d %%p IN (*) do rmdir "%%p" /s /q
+  <span class="token punctuation">-</span> SETLOCAL EnableDelayedExpansion &amp; robocopy "%APPVEYOR_BUILD_FOLDER%\public" "%TEMP%\static<span class="token punctuation">-</span>site" /e &amp; IF <span class="token tag">!ERRORLEVEL!</span> EQU 1 (exit 0) ELSE (IF <span class="token tag">!ERRORLEVEL!</span> EQU 3 (exit 0) ELSE (exit 1))
+  <span class="token punctuation">-</span> git add <span class="token punctuation">-</span>A
+  <span class="token punctuation">-</span> git commit <span class="token punctuation">-</span>m "Update Static Site"
+  <span class="token punctuation">-</span> git push origin %TARGET_BRANCH%
+  <span class="token punctuation">-</span> appveyor AddMessage "Static Site Updated"
 </code></pre>
-<p>(<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml)，以及底部的两篇参考文章~" target="_blank" rel="external">https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml)，以及底部的两篇参考文章~</a></p>
+<p>大致的意思是从github仓库的当前分支拉取下来，编译成静态文件后，在push到目标分支。由于AppVeyor环境中是通过Access Token访问我们的仓库的，而Hexo自带的部署则在访问的过程中需要我们输入帐号密码，所以Hexo g -d的命令就不适合在这里使用。需要先编译成静态文件，再把public文件夹的静态文件push到目标分支。</p>
+<p>最后，把这个文件提交到Github上就可以测试了！在AppVeyor的首页可以看到部署的过程和结果~</p>
+<p><img src="/2017/08/01/5.png" alt=""></p>
+<p>别说我没告诉你，还可以添加一枚徽章装装逼哦！<a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io/branch/files" target="_blank" rel="external"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" alt="Build status"></a></p>
+<p>可以看看我的<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml" target="_blank" rel="external">配置文件</a>，以及底部的两篇参考文章~</p>
+<p>参考文章：</p>
+<ul>
+<li><a href="http://www.shong.win/blog/2017/02/19/hexo-ci/" target="_blank" rel="external">Hexo利用AppVeyor持续集成</a></li>
+<li><a href="https://formulahendry.github.io/2016/12/04/hexo-ci/" target="_blank" rel="external">Hexo的版本控制与持续集成</a></li>
+</ul>
 <div id="aplayer0" class="aplayer" style="margin-bottom: 20px;width:400px;"></div>
 		<script>
 			new APlayer({
@@ -586,12 +648,6 @@ on_success:
 				}
 			});
 		</script>
-<p>参考文章：</p>
-<ul>
-<li><a href="http://www.shong.win/blog/2017/02/19/hexo-ci/" target="_blank" rel="external">Hexo利用AppVeyor持续集成</a></li>
-<li><a href="https://formulahendry.github.io/2016/12/04/hexo-ci/" target="_blank" rel="external">Hexo的版本控制与持续集成</a></li>
-</ul>
-
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>
