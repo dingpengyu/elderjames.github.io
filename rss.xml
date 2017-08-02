@@ -8,8 +8,24 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Tue, 01 Aug 2017 01:19:08 GMT</pubDate>
+    <pubDate>Wed, 02 Aug 2017 12:14:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>给你的域名加把锁：免费Https申请</title>
+      <link>https://yangshunjie.com/how-to-request-a-free-https.html</link>
+      <guid>https://yangshunjie.com/how-to-request-a-free-https.html</guid>
+      <pubDate>Wed, 02 Aug 2017 15:58:36 GMT</pubDate>
+      <description>
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;关于Https的介绍，先引用一段维基百科的描述：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;超文本传输安全协议（英语：Hypertext Transfer Protocol S
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/how-to-request-a-free-https.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>使用AppVeyor持续集成你的Hexo博客</title>
@@ -289,21 +305,6 @@
       </description>
       
       <comments>https://yangshunjie.com/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ghost博客邮件SMTP服务配置</title>
-      <link>https://yangshunjie.com/the-smtp-setting-for-ghost-blog.html</link>
-      <guid>https://yangshunjie.com/the-smtp-setting-for-ghost-blog.html</guid>
-      <pubDate>Tue, 13 Oct 2015 16:57:04 GMT</pubDate>
-      <description>
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;前天由于回到学校，用回了我的Pocker2机械键盘，在输入密码时连续不知道大小写切换键换了地方，连续输错了密码，帐号被封了……&lt;/p&gt;
-&lt;p&gt;Ghost也是的，连博客主人的号
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/the-smtp-setting-for-ghost-blog.html#disqus_thread</comments>
     </item>
     
   </channel>
