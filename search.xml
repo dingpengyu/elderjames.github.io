@@ -11,8 +11,59 @@
 </blockquote>
 <p>除了平常我们看不见的安全性外，拥有Https前缀的域名被浏览器加了把锁，看起来就比没有的牛~而且，苹果在去年已经规定所有应用内链接都需要有https了！</p>
 <p>企业级ssl证书费用高昂，如果只是个人网站没必要用企业级的，使用一些免费的就好了。接下来，我就以我的个人域名为例，介绍下申请免费https的流程。</p>
+<p>此处炫耀一下：  <img src="/images/15.png" alt=""></p>
+<h4 id="提前准备"><a href="#提前准备" class="headerlink" title="提前准备"></a>提前准备</h4><ol>
+<li>一个自己的域名，可以在国内的域名注册商购买注册，如阿里云、腾讯云，然后最好是做好备案，因为微信等一些客户端的链接分享都要求备案过的域名才能正常访问。当然，不备案也不妨碍绑定Github Pages和国外服务器。</li>
+</ol>
+<h4 id="教程目标"><a href="#教程目标" class="headerlink" title="教程目标"></a>教程目标</h4><ol>
+<li>给自己的域名设置 Flexible SSL 认证，即网站到解析服务器间的加密传输，让域名可以使用https</li>
+<li>访问http域名，自动301跳转到https</li>
+<li>访问<a href="http://www.yourdomain.com" target="_blank" rel="external">http://www.yourdomain.com</a> ,会自动跳转到<a href="https://yourdomain.com（当然，可以反过来）" target="_blank" rel="external">https://yourdomain.com（当然，可以反过来）</a></li>
+</ol>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li><p>注册CloudFlare帐户，并添加域名解析</p>
+<p> 访问<a href="https://www.cloudflare.com/a/sign-up" target="_blank" rel="external">CloudFlare注册页面</a>,简单地输入邮箱和密码就能注册成功好。</p>
+</li>
+<li><p>添加域名</p>
+<p> 登录后，访问<a href="https://www.cloudflare.com/a/add-site" target="_blank" rel="external">Add Websites页面</a>添加一个域名，如我的是yangshunjie.com，然后点击【Begin Scan】扫描。大概需要等待1分钟，完成后点击【Continue Setup】继续下一步。</p>
+<p> <img src="/images/6.png" alt=""></p>
+</li>
+<li><p>设置解析项</p>
+<p> 这时，我们需要添加域名解析了，将域名解析到指向的服务器。这跟普通的域名解析绑定是一样的。如果要绑定Github Pages，就需要参考<a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider" target="_blank" rel="external">Github Help官方指南</a>添加A记录分别指向<code>192.30.252.153</code>和<code>192.30.252.154</code>。另外再设置一个www的CNAME记录，指向yangshunjie.com。</p>
+<p> <img src="/images/7.png" alt=""></p>
+</li>
+<li><p>修改域名解析服务器</p>
+<p> 登录你的域名注册商的控制后台，把DNS解析服务器改为CloudFlare提供的两个地址。然后等待转移完成。我的域名是在阿里云注册的，所以这里截图演示一下：</p>
+<p> <img src="/images/8.png" alt=""><br> <img src="/images/9.png" alt=""></p>
+<blockquote>
+<p>注：官方说明，域名服务器修改最长需要72小时生效 ，用了两个域名测试，大约需要 5~30 分钟，看到 Status: Active 即可。</p>
+</blockquote>
+<p> <img src="/images/10.png" alt=""></p>
+</li>
+<li><p>回到CloudFlare，点击上部的 crypto 菜单 , 然后设置 Flexible SSL。</p>
+<p> <img src="/images/11.png" alt=""></p>
+</li>
+<li><p>接着点击 Page Rules 菜单，添加两个规则，一个是将<code>http://yangshunjie.com/*</code>设为 Always Use HTTPS,一个是讲<code>http://www.yangshunjie.com/</code>重定向到<code>https://yangshunjie.com/</code>(如果需要默认跳转到www开头的域名，则这里就重定向到<code>https://www.yangshunjie.com/</code>即可)。</p>
+<p> <img src="/iamges/12.png" alt=""><br> <img src="/iamges/13.png" alt=""><br> <img src="/images/14.png" alt=""></p>
+</li>
+</ol>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
+<li>以后你需要绑定其它服务器，都需要在这里配置。DNS记录视缓存的时间一般需要5~30分钟生效。</li>
+</ol>
 ]]></content>
       
+        <categories>
+            
+            <category> Github Page,HTTPS </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Github Page,Https,SSL,Hexo </tag>
+            
+        </tags>
         
     </entry>
     
@@ -1094,16 +1145,16 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[留言板]]></title>
       <url>/contact.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
