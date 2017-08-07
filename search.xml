@@ -1094,16 +1094,16 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[留言板]]></title>
       <url>/contact.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
@@ -1142,6 +1142,12 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[标签]]></title>
+      <url>/tags.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
@@ -1191,12 +1197,6 @@ reproxy=/  http://127.0.0.1:236
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
   

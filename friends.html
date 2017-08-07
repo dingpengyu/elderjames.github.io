@@ -448,6 +448,7 @@
             
                 $.ajax({
                     url:'https://api.github.com/users/ElderJames',
+                     data: {access_token: '42a28ac4d4bc8274ed62045631a80efb97259476' }, 
                     jsonp:'callback',
                     success:function(userData){
                         friends.push(userData);
@@ -459,6 +460,7 @@
             
                  $.ajax({
                     url: 'https://api.github.com/users/ElderJames/followers',
+                     data: {access_token: '42a28ac4d4bc8274ed62045631a80efb97259476' }, 
                     jsonp:'callback',
                     success:function(data){
                         data.forEach(function(item){
@@ -466,6 +468,7 @@
                                 friends.push(item);
                                 $.ajax({
                                     url:'https://api.github.com/users/'+item.login,
+                                     data: {access_token: '42a28ac4d4bc8274ed62045631a80efb97259476' }, 
                                     jsonp:'callback',
                                     success:function(userData){
                                         addGithubLink(userData); 
@@ -480,6 +483,7 @@
             
                 $.ajax({
                     url: 'https://api.github.com/users/ElderJames/following',
+                     data: {access_token: '42a28ac4d4bc8274ed62045631a80efb97259476' }, 
                     jsonp:'callback',
                     success: function(data){
                         data.forEach(function(item){
@@ -487,6 +491,7 @@
                                 friends.push(item);
                                 $.ajax({
                                     url:'https://api.github.com/users/'+item.login,
+                                     data: {access_token: '42a28ac4d4bc8274ed62045631a80efb97259476' }, 
                                     jsonp:'callback',
                                     success: function(userData){
                                         addGithubLink(userData);
