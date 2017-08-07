@@ -20,33 +20,21 @@
 <li>访问http域名，自动301跳转到https</li>
 <li>访问<a href="http://www.yourdomain.com" target="_blank" rel="external">http://www.yourdomain.com</a> ,会自动跳转到<a href="https://yourdomain.com（当然，可以反过来）" target="_blank" rel="external">https://yourdomain.com（当然，可以反过来）</a></li>
 </ol>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
-<li><p>注册CloudFlare帐户，并添加域名解析</p>
-<p> 访问<a href="https://www.cloudflare.com/a/sign-up" target="_blank" rel="external">CloudFlare注册页面</a>,简单地输入邮箱和密码就能注册成功好。</p>
-</li>
-<li><p>添加域名</p>
-<p> 登录后，访问<a href="https://www.cloudflare.com/a/add-site" target="_blank" rel="external">Add Websites页面</a>添加一个域名，如我的是yangshunjie.com，然后点击【Begin Scan】扫描。大概需要等待1分钟，完成后点击【Continue Setup】继续下一步。</p>
-<p> <img src="/images/6.png" alt=""></p>
-</li>
-<li><p>设置解析项</p>
-<p> 这时，我们需要添加域名解析了，将域名解析到指向的服务器。这跟普通的域名解析绑定是一样的。如果要绑定Github Pages，就需要参考<a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider" target="_blank" rel="external">Github Help官方指南</a>添加A记录分别指向<code>192.30.252.153</code>和<code>192.30.252.154</code>。另外再设置一个www的CNAME记录，指向yangshunjie.com。</p>
-<p> <img src="/images/7.png" alt=""></p>
-</li>
-<li><p>修改域名解析服务器</p>
-<p> 登录你的域名注册商的控制后台，把DNS解析服务器改为CloudFlare提供的两个地址。然后等待转移完成。我的域名是在阿里云注册的，所以这里截图演示一下：</p>
-<p> <img src="/images/8.png" alt=""><br> <img src="/images/9.png" alt=""></p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="注册CloudFlare帐户，并添加域名解析"><a href="#注册CloudFlare帐户，并添加域名解析" class="headerlink" title="注册CloudFlare帐户，并添加域名解析"></a>注册CloudFlare帐户，并添加域名解析</h5><p>访问<a href="https://www.cloudflare.com/a/sign-up" target="_blank" rel="external">CloudFlare注册页面</a>,简单地输入邮箱和密码就能注册成功好。</p>
+<h5 id="添加域名"><a href="#添加域名" class="headerlink" title="添加域名"></a>添加域名</h5><p>登录后，访问<a href="https://www.cloudflare.com/a/add-site" target="_blank" rel="external">Add Websites页面</a>添加一个域名，如我的是yangshunjie.com，然后点击【Begin Scan】扫描。大概需要等待1分钟，完成后点击【Continue Setup】继续下一步。</p>
+<p><img src="/images/6.png" alt=""></p>
+<h5 id="设置解析项"><a href="#设置解析项" class="headerlink" title="设置解析项"></a>设置解析项</h5><p>这时，我们需要添加域名解析了，将域名解析到指向的服务器。这跟普通的域名解析绑定是一样的。如果要绑定Github Pages，就需要参考<a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider" target="_blank" rel="external">Github Help官方指南</a>添加A记录分别指向<code>192.30.252.153</code>和<code>192.30.252.154</code>。另外再设置一个www的CNAME记录，指向yangshunjie.com。</p>
+<p><img src="/images/7.png" alt=""></p>
+<h5 id="修改域名解析服务器"><a href="#修改域名解析服务器" class="headerlink" title="修改域名解析服务器"></a>修改域名解析服务器</h5><p>登录你的域名注册商的控制后台，把DNS解析服务器改为CloudFlare提供的两个地址。然后等待转移完成。我的域名是在阿里云注册的，所以这里截图演示一下：</p>
+<p><img src="/images/8.png" alt=""><br><img src="/images/9.png" alt=""></p>
 <blockquote>
 <p>注：官方说明，域名服务器修改最长需要72小时生效 ，用了两个域名测试，大约需要 5~30 分钟，看到 Status: Active 即可。</p>
 </blockquote>
-<p> <img src="/images/10.png" alt=""></p>
-</li>
-<li><p>回到CloudFlare，点击上部的 crypto 菜单 , 然后设置 Flexible SSL。</p>
-<p> <img src="/images/11.png" alt=""></p>
-</li>
-<li><p>接着点击 Page Rules 菜单，添加两个规则，一个是将<code>http://yangshunjie.com/*</code>设为 Always Use HTTPS,一个是讲<code>http://www.yangshunjie.com/</code>重定向到<code>https://yangshunjie.com/</code>(如果需要默认跳转到www开头的域名，则这里就重定向到<code>https://www.yangshunjie.com/</code>即可)。</p>
-<p> <img src="/images/12.png" alt=""><br> <img src="/images/13.png" alt=""><br> <img src="/images/14.png" alt=""></p>
-</li>
-</ol>
+<p><img src="/images/10.png" alt=""></p>
+<h5 id="设置加密方式"><a href="#设置加密方式" class="headerlink" title="设置加密方式"></a>设置加密方式</h5><p>回到CloudFlare，点击上部的 crypto 菜单 , 然后设置 <strong><em>Flexible SSL</em></strong> 。</p>
+<p><img src="/images/11.png" alt=""></p>
+<h5 id="设置页面规则"><a href="#设置页面规则" class="headerlink" title="设置页面规则"></a>设置页面规则</h5><p> 接着点击 Page Rules 菜单，添加两个规则，一个是将<code>http://yangshunjie.com/*</code>设为 Always Use HTTPS,一个是讲<code>http://www.yangshunjie.com/</code>重定向到<code>https://yangshunjie.com/</code>(如果需要默认跳转到www开头的域名，则这里就重定向到<code>https://www.yangshunjie.com/</code>即可)。</p>
+<p><img src="/images/12.png" alt=""><br><img src="/images/13.png" alt=""><br><img src="/images/14.png" alt=""></p>
 <h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
 <li>以后你需要绑定其它服务器，都需要在这里配置。DNS记录视缓存的时间一般需要5~30分钟生效。</li>
 </ol>
@@ -54,14 +42,14 @@
       
         <categories>
             
-            <category> Github Page,HTTPS </category>
+            <category> Github Pages,HTTPS </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Github Page,Https,SSL,Hexo </tag>
+            <tag> Github Pages,Https,SSL,Hexo </tag>
             
         </tags>
         
@@ -1202,12 +1190,6 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[欢迎使用 Ghost 博客系统]]></title>
       <url>/welcome-to-ghost-2.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>Yeah，博客上线了！这篇文章的目的是向你介绍 Ghost 编辑器并帮你快速上手。通过 <code>&lt;your blog URL&gt;/ghost/</code> 链接就可以登录系统后台管理你的博客内容了。当你进入后台，你就能看到左侧文章列表处列出的这篇文章，右侧就是这篇文章的预览效果。点击预览栏右上角的铅笔图标就能进入内容编辑页面。 </p>
@@ -1248,6 +1230,12 @@ reproxy=/  http://127.0.0.1:236
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
   
