@@ -44,7 +44,7 @@
 <p> <img src="/images/11.png" alt=""></p>
 </li>
 <li><p>接着点击 Page Rules 菜单，添加两个规则，一个是将<code>http://yangshunjie.com/*</code>设为 Always Use HTTPS,一个是讲<code>http://www.yangshunjie.com/</code>重定向到<code>https://yangshunjie.com/</code>(如果需要默认跳转到www开头的域名，则这里就重定向到<code>https://www.yangshunjie.com/</code>即可)。</p>
-<p> <img src="/iamges/12.png" alt=""><br> <img src="/iamges/13.png" alt=""><br> <img src="/images/14.png" alt=""></p>
+<p> <img src="/images/12.png" alt=""><br> <img src="/images/13.png" alt=""><br> <img src="/images/14.png" alt=""></p>
 </li>
 </ol>
 <h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
@@ -1145,16 +1145,16 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[留言板]]></title>
       <url>/contact.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
