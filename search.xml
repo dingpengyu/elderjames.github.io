@@ -42,14 +42,20 @@
       
         <categories>
             
-            <category> Github Pages,HTTPS </category>
+            <category> Github Pages </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> Github Pages,Https,SSL,Hexo </tag>
+            <tag> Hexo </tag>
+            
+            <tag> Github Pages </tag>
+            
+            <tag> Https </tag>
+            
+            <tag> SSL </tag>
             
         </tags>
         
@@ -182,7 +188,11 @@
         
         <tags>
             
-            <tag> Hexo,Appveyor,ci </tag>
+            <tag> Hexo </tag>
+            
+            <tag> Appveyor </tag>
+            
+            <tag> CI </tag>
             
         </tags>
         
@@ -288,6 +298,8 @@ $ <span class="token function">npm</span> <span class="token function">install</
             
             <tag> Hexo </tag>
             
+            <tag> Github Pages </tag>
+            
         </tags>
         
     </entry>
@@ -305,6 +317,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
 ]]></content>
       
         
+        <tags>
+            
+            <tag> Visual Studio </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -321,6 +339,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <p><code>npm --registry "http://npm.hacknodejs.com/" install underscore</code></pre>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> NPM </tag>
+            
+        </tags>
         
     </entry>
     
@@ -358,9 +382,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> 
-- .NET
-- .NET Core </tag>
+            <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -401,6 +425,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
 ]]></content>
       
         
+        <tags>
+            
+            <tag> .NET Core </tag>
+            
+            <tag> Mysql </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -419,6 +451,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
 </code></pre>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> .NET Core </tag>
+            
+            <tag> Mysql </tag>
+            
+        </tags>
         
     </entry>
     
@@ -463,6 +503,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
 ]]></content>
       
         
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Amazon AWS </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -496,6 +544,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
 </ul>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> .NET Core </tag>
+            
+        </tags>
         
     </entry>
     
@@ -536,10 +590,11 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> 
-- mono
-- .NET
-- EF </tag>
+            <tag> .NET </tag>
+            
+            <tag> mono </tag>
+            
+            <tag> EF </tag>
             
         </tags>
         
@@ -561,6 +616,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <p>于是，Session就可以用啦！</p>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
+            
+        </tags>
         
     </entry>
     
@@ -588,7 +651,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core,.NET </tag>
+            <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -615,6 +680,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <p>文章来源：<a href="http://www.cnblogs.com/wangkangluo1/archive/2011/09/02/2164313.html" target="_blank" rel="external">git 远程分支创建与推送</a></p>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
         
     </entry>
     
@@ -662,9 +733,13 @@ user = git
         
         <tags>
             
-            <tag> 
-- git
-- gogs </tag>
+            <tag> git </tag>
+            
+            <tag> gogs </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
         
@@ -682,6 +757,14 @@ user = git
 <p>来源：<a href="http://www.iisiis.com/web/vps/1884.html" target="_blank" rel="external">http://www.iisiis.com/web/vps/1884.html</a></p>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
+            
+        </tags>
         
     </entry>
     
@@ -780,6 +863,14 @@ user = git
 </code></pre>]]></content>
       
         
+        <tags>
+            
+            <tag> .NET </tag>
+            
+            <tag> C# </tag>
+            
+        </tags>
+        
     </entry>
     
     <entry>
@@ -801,9 +892,11 @@ user = git
         
         <tags>
             
-            <tag> 
-- mono
-- 安装 </tag>
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> mono </tag>
             
         </tags>
         
@@ -823,6 +916,12 @@ collation-server=utf8_general_ci
 <p>5、连接字符串加入<code>CharSet=utf8;</code></p>
 ]]></content>
       
+        
+        <tags>
+            
+            <tag> Mysql </tag>
+            
+        </tags>
         
     </entry>
     
@@ -889,8 +988,9 @@ collation-server=utf8_general_ci
         
         <tags>
             
-            <tag> 
-- 七牛 </tag>
+            <tag> .NET </tag>
+            
+            <tag> 七牛 </tag>
             
         </tags>
         
@@ -924,9 +1024,9 @@ collation-server=utf8_general_ci
         
         <tags>
             
-            <tag> 
-- ghost
-- smtp </tag>
+            <tag> ghost </tag>
+            
+            <tag> smtp </tag>
             
         </tags>
         
@@ -1034,8 +1134,9 @@ $$(document).on(&#39;pageBeforeAnimation&#39;, function (e) {
         
         <tags>
             
-            <tag> 
-- Framework7 </tag>
+            <tag> Framework7 </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
         
@@ -1116,8 +1217,13 @@ reproxy=/  http://127.0.0.1:236
         
         <tags>
             
-            <tag> 
-- 环境部署 </tag>
+            <tag> Linux </tag>
+            
+            <tag> 环境部署 </tag>
+            
+            <tag> Jexus </tag>
+            
+            <tag> Blog </tag>
             
         </tags>
         
@@ -1125,31 +1231,6 @@ reproxy=/  http://127.0.0.1:236
     
   
   
-    
-    <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
     
     <entry>
       <title><![CDATA[关于我]]></title>
@@ -1184,8 +1265,39 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[标签]]></title>
       <url>/tags.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -1230,12 +1342,6 @@ reproxy=/  http://127.0.0.1:236
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
   
