@@ -427,9 +427,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> Mysql </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -454,9 +454,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> Mysql </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -1233,6 +1233,25 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -1265,27 +1284,8 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[朋友们]]></title>
       <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
