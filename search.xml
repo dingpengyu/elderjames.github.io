@@ -733,13 +733,13 @@ user = git
         
         <tags>
             
-            <tag> git </tag>
-            
-            <tag> gogs </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> git </tag>
+            
+            <tag> gogs </tag>
             
         </tags>
         
@@ -892,11 +892,11 @@ user = git
         
         <tags>
             
+            <tag> mono </tag>
+            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
-            
-            <tag> mono </tag>
             
         </tags>
         
@@ -988,9 +988,9 @@ collation-server=utf8_general_ci
         
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> 七牛 </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
         
@@ -1233,6 +1233,12 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[留言板]]></title>
       <url>/contact.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
@@ -1240,14 +1246,14 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -1281,12 +1287,6 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
