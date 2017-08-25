@@ -8,8 +8,22 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Thu, 24 Aug 2017 17:30:13 GMT</pubDate>
+    <pubDate>Fri, 25 Aug 2017 09:42:11 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>领域驱动设计（DDD）项目收集</title>
+      <link>https://yangshunjie.com/ddd-project-collection.html</link>
+      <guid>https://yangshunjie.com/ddd-project-collection.html</guid>
+      <pubDate>Fri, 25 Aug 2017 15:58:36 GMT</pubDate>
+      <description>
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做&lt;a href=&quot;&quot;&gt;尖叫(Shriek)&lt;/a&gt;的轻量DDD框架，下面列出一些在学习和开发过程中参考过
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/ddd-project-collection.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>给你的域名加把锁：免费Https申请</title>
@@ -289,20 +303,6 @@
       </description>
       
       <comments>https://yangshunjie.com/make-mysql-support-chinese-encoding.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>ASP.NET MVC 中UEditor 1.4.3 前台直接上传文件到七牛云存储</title>
-      <link>https://yangshunjie.com/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html</link>
-      <guid>https://yangshunjie.com/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html</guid>
-      <pubDate>Fri, 30 Oct 2015 12:52:35 GMT</pubDate>
-      <description>
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;最近在做一个ASP.NET MVC 的项目，当然是离不开富文本编辑器，这里我选择的是百度的UEditor，虽然不够轻量，界面也不好看，但是功能还是挺多的。而因为项目主要面对移
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/use-qiniu-upload-file-service-on-ueditor-for-asp-net-mvc.html#disqus_thread</comments>
     </item>
     
   </channel>

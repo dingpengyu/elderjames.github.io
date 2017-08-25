@@ -3,6 +3,40 @@
   
     
     <entry>
+      <title><![CDATA[领域驱动设计（DDD）项目收集]]></title>
+      <url>/ddd-project-collection.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做<a href="">尖叫(Shriek)</a>的轻量DDD框架，下面列出一些在学习和开发过程中参考过的DDD开源项目。</p>
+<h3 id="NET-Core"><a href="#NET-Core" class="headerlink" title=".NET Core"></a>.NET Core</h3><ul>
+<li><a href="https://github.com/Weapsy/Weapsy" target="_blank" rel="external">Weapsy</a></li>
+<li><a href="https://github.com/EduardoPires/EquinoxProject" target="_blank" rel="external">EquinoxProject</a></li>
+<li><a href="https://github.com/thangchung/magazine-website" target="_blank" rel="external">magazine-website</a></li>
+<li><a href="https://github.com/daxnet/Apworks" target="_blank" rel="external">Apworks</a></li>
+<li><a href="https://github.com/daxnet/we-text" target="_blank" rel="external">we-text</a></li>
+</ul>
+<h3 id="NET"><a href="#NET" class="headerlink" title=".NET"></a>.NET</h3><ul>
+<li><a href="https://github.com/tangxuehua/enode" target="_blank" rel="external">ENode</a></li>
+<li><a href="https://github.com/ElderJames/MyDiary.CQRS" target="_blank" rel="external">MyDiary.CQRS</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> DDD </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> .NET Core </tag>
+            
+            <tag> DDD </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[给你的域名加把锁：免费Https申请]]></title>
       <url>/how-to-request-a-free-https.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>关于Https的介绍，先引用一段维基百科的描述：</p>
@@ -1233,6 +1267,31 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -1262,31 +1321,6 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
