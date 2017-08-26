@@ -5,9 +5,14 @@
     
     
     
+    
+    
+    
+    
+    
   <url>
     <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
-    <lastmod>2017-08-25T09:42:11.234Z</lastmod>
+    <lastmod>2017-08-26T14:36:20.844Z</lastmod>
     <data>
         <display>
         <title>给你的域名加把锁：免费Https申请</title>
@@ -31,20 +36,17 @@
     </url>
 
     
-    
-    
-    
-    
-    
   <url>
     <loc>https://yangshunjie.com/ddd-project-collection.html</loc>
-    <lastmod>2017-08-25T09:42:11.219Z</lastmod>
+    <lastmod>2017-08-26T14:36:20.828Z</lastmod>
     <data>
         <display>
         <title>领域驱动设计（DDD）项目收集</title>
         <pubTime>2017-08-25T15:58:36.000Z</pubTime>
         
         <tag>.NET Core</tag>
+         
+        <tag>.NET</tag>
          
         <tag>DDD</tag>
          
@@ -337,13 +339,13 @@
         <title>Ubuntu 搭建Gogs ：轻量Git Web端管理系统</title>
         <pubTime>2016-03-26T22:36:31.000Z</pubTime>
         
-        <tag>Linux</tag>
-         
-        <tag>Ubuntu</tag>
-         
         <tag>git</tag>
          
         <tag>gogs</tag>
+         
+        <tag>Linux</tag>
+         
+        <tag>Ubuntu</tag>
          
          
            
@@ -379,11 +381,11 @@
         <title>Ubuntu安装mono 4.2.1 最新版教程</title>
         <pubTime>2015-12-03T12:00:04.000Z</pubTime>
         
-        <tag>mono</tag>
-         
         <tag>Linux</tag>
          
         <tag>Ubuntu</tag>
+         
+        <tag>mono</tag>
          
          
            

@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[领域驱动设计（DDD）项目收集]]></title>
       <url>/ddd-project-collection.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做<a href="">尖叫(Shriek)</a>的轻量DDD框架，下面列出一些在学习和开发过程中参考过的DDD开源项目。</p>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做<a href="https://github.com/ElderJames/ShriekFx" target="_blank" rel="external">尖叫(Shriek)</a>的轻量DDD开源框架，下面列出一些在学习和开发过程中参考过的DDD开源项目。</p>
 <h3 id="NET-Core"><a href="#NET-Core" class="headerlink" title=".NET Core"></a>.NET Core</h3><ul>
 <li><a href="https://github.com/Weapsy/Weapsy" target="_blank" rel="external">Weapsy</a></li>
 <li><a href="https://github.com/EduardoPires/EquinoxProject" target="_blank" rel="external">EquinoxProject</a></li>
@@ -29,6 +29,8 @@
         <tags>
             
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
             <tag> DDD </tag>
             
@@ -767,13 +769,13 @@ user = git
         
         <tags>
             
-            <tag> Linux </tag>
-            
-            <tag> Ubuntu </tag>
-            
             <tag> git </tag>
             
             <tag> gogs </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
         
@@ -926,11 +928,11 @@ user = git
         
         <tags>
             
-            <tag> mono </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> mono </tag>
             
         </tags>
         
@@ -1273,19 +1275,6 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[相册]]></title>
       <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
@@ -1321,6 +1310,12 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
@@ -1375,6 +1370,13 @@ reproxy=/  http://127.0.0.1:236
 <input type="text" placeholder="这是个输入框！">
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
 ]]></content>
     </entry>
     

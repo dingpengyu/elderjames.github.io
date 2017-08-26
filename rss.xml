@@ -8,7 +8,7 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Fri, 25 Aug 2017 09:42:11 GMT</pubDate>
+    <pubDate>Sat, 26 Aug 2017 14:36:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -18,7 +18,7 @@
       <pubDate>Fri, 25 Aug 2017 15:58:36 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做&lt;a href=&quot;&quot;&gt;尖叫(Shriek)&lt;/a&gt;的轻量DDD框架，下面列出一些在学习和开发过程中参考过
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做&lt;a href=&quot;https://github.com/ElderJames/ShriekFx&quot; tar
       
       </description>
       
