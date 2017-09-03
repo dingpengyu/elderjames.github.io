@@ -528,9 +528,10 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="\assets\js\APlayer.min.js"> </script><figcaption>cd myproject</code>  你建立的项目文件夹</p></figcaption><pre class=" language-$"><code class="language-$"><p><code>$ git init</code>   执行git的本地初始化</p>
+        <script src="\assets\js\APlayer.min.js"> </script><p><code>$ cd myproject</code>  你建立的项目文件夹</p>
+<p><code>$ git init</code>   执行git的本地初始化</p>
 <p><code>$ git add .</code>  将所有的文件添加到版本控制系统</p>
-<p><code>$ git commit -m "initial commit"</code>  在本地提交到版本库</p>
+<p><code>$ git commit -m &quot;initial commit&quot;</code>  在本地提交到版本库</p>
 <p><code>$ git remote add origin git@116.255.160.144://srv/gitserver/jewels.git</code> 添加远程仓库(jewels是服务器端项目管理到名字，与本地项目名字无关)</p>
 <p><code>$ git push origin master</code> 将本地版本库推送到远程仓库</p>
 <p><code>git checkout master</code> //进入master分支</p>
@@ -539,7 +540,7 @@
 <p><code>git push ssh://git@dev.lemote.com/rt4ls.git master</code> </p>
 <p>或使用标记</p>
 <p><code>$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git</code></p>
-<p><code>$ git push origin master</code></pre>
+<p><code>$ git push origin master</code></p>
 <p><code>$ git push origin test:master</code>         // 提交本地test分支作为远程的master分支</p>
 <p><code>$ git push origin test:test</code>             // 提交本地test分支作为远程的test分支</p>
 <p><code>$ git push origin :test</code>              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心</p>
@@ -1158,7 +1159,7 @@ console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viose
         bottom: 60px;
       }
     </style>
-    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json")</script>
+    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json",0.5)</script>
   
             
         </body>

@@ -534,10 +534,11 @@
 <li>首先，在mono-project的安装指南页面获得最新的注册信息，<br><a href="http://www.mono-project.com/docs/getting-started/install/linux/#debian-ubuntu-and-derivatives" target="_blank" rel="external">这是地址</a>。</li>
 </ul>
 <p>然后按照上面的命令执行</p>
-<figcaption>apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF</code></p></figcaption><pre class=" language-sudo"><code class="language-sudo"><p><code>echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list</code></p>
+<p><code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF</code></p>
+<p><code>echo &quot;deb http://download.mono-project.com/repo/debian wheezy main&quot; | sudo tee /etc/apt/sources.list.d/mono-xamarin.list</code></p>
 <p><code>sudo apt-get update</code></p>
 <p>然后，再执行</p>
-<p><code>sudo apt-get install mono-complete</code></pre>
+<p><code>sudo apt-get install mono-complete</code></p>
 <p>OK,完成。不用再等久久的编译咯！</p>
 
         
@@ -1153,7 +1154,7 @@ console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viose
         bottom: 60px;
       }
     </style>
-    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json")</script>
+    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json",0.5)</script>
   
             
         </body>

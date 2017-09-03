@@ -538,7 +538,8 @@
 <li>反向代理 代理ip为 <a href="http://localhost:3000/" target="_blank" rel="external">http://localhost:3000/</a></li>
 <li>持续进程 使用supervisor</li>
 </ul>
-<figcaption>apt-get -y install supervisor</code></p></figcaption><pre class=" language-sudo"><code class="language-sudo"><p><code>sudo mkdir -p /var/log/gogs</code></p>
+<p><code>sudo apt-get -y install supervisor</code></p>
+<p><code>sudo mkdir -p /var/log/gogs</code></p>
 <p><code>sudo nano /etc/supervisor/supervisord.conf</code></p>
 <p>在这个文件最下面添加应用信息</p>
 <pre><code>[program:gogs]
@@ -555,10 +556,10 @@ stderr_logfile=/var/log/gogs/stderr.log
 stderr_logfile_maxbytes=1MB
 stderr_logfile_backups=10
 stderr_capture_maxbytes=1MB
-environment = HOME="/home/git", USER="git"
+environment = HOME=&quot;/home/git&quot;, USER=&quot;git&quot;
 user = git
 </code></pre><p>其中directory和command中的路径是gogs目录的路径</p>
-<p>最后执行重启服务<br><code>sudo service supervisor restart</code></pre>
+<p>最后执行重启服务<br><code>sudo service supervisor restart</code></p>
 <p>提示Starting supervisor: supervisord.</p>
 <p>然后执行<code>ps -ef | grep gogs</code>查看服务是否已经启动</p>
 <p>如果有如下类似信息则表示服务启动成功：</p>
@@ -1178,7 +1179,7 @@ console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viose
         bottom: 60px;
       }
     </style>
-    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json")</script>
+    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json",0.5)</script>
   
             
         </body>
