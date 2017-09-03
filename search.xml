@@ -11,46 +11,16 @@
 <li><a href="https://github.com/EduardoPires/EquinoxProject" target="_blank" rel="external">EquinoxProject</a></li>
 <li><a href="https://github.com/thangchung/magazine-website" target="_blank" rel="external">magazine-website</a></li>
 <li><a href="https://github.com/daxnet/Apworks" target="_blank" rel="external">Apworks</a></li>
-<li><a href="https://github.com/daxnet/we-text" target="_blank" rel="external">we-text</a><br>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</li>
-<li><h1 id="Merp"><a href="#Merp" class="headerlink" title="Merp"></a><a href="https://github.com/mastreeno/Merp" target="_blank" rel="external">Merp</a></h1></li>
-<li><a href="https://github.com/Kation/ComBoost" target="_blank" rel="external">ComBoost</a><blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7d76ba798e5c7861ea419b959d484002130b7c89</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
+<li><a href="https://github.com/daxnet/we-text" target="_blank" rel="external">we-text</a></li>
+<li><a href="https://github.com/mastreeno/Merp" target="_blank" rel="external">Merp</a></li>
+<li><a href="https://github.com/Kation/ComBoost" target="_blank" rel="external">ComBoost</a></li>
 </ul>
 <h1 id="NET"><a href="#NET" class="headerlink" title=".NET"></a>.NET</h1><ul>
 <li><a href="https://github.com/tangxuehua/enode" target="_blank" rel="external">ENode</a></li>
-<li><a href="https://github.com/ElderJames/MyDiary.CQRS" target="_blank" rel="external">MyDiary.CQRS</a><br>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</li>
+<li><a href="https://github.com/ElderJames/MyDiary.CQRS" target="_blank" rel="external">MyDiary.CQRS</a></li>
 <li><a href="https://github.com/ElderJames/naa4e" target="_blank" rel="external">Microsoft .NET企业级应用架构设计（第2版）源码</a></li>
 </ul>
-<h1 id="最近身体不适，对这些项目的介绍我会在身体好了之后补上。"><a href="#最近身体不适，对这些项目的介绍我会在身体好了之后补上。" class="headerlink" title="最近身体不适，对这些项目的介绍我会在身体好了之后补上。"></a>最近身体不适，对这些项目的介绍我会在身体好了之后补上。</h1><p>晚点补充各项目的介绍。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>7d76ba798e5c7861ea419b959d484002130b7c89</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>最近身体不适，对这些项目的介绍我会在身体好了之后补上。</p>
 ]]></content>
       
         <categories>
@@ -1307,6 +1277,31 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -1336,31 +1331,6 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
