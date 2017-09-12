@@ -2,65 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yangshunjie.com/timeline.html</loc>
-    
-    <lastmod>2017-09-03T16:35:28.580Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://yangshunjie.com/tags.html</loc>
     
-    <lastmod>2017-09-03T16:35:28.580Z</lastmod>
+    <lastmod>2017-09-12T05:25:27.143Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yangshunjie.com/gallery/index.html</loc>
+    <loc>https://yangshunjie.com/timeline.html</loc>
     
-    <lastmod>2017-09-03T16:35:28.565Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yangshunjie.com/friends.html</loc>
-    
-    <lastmod>2017-09-03T16:35:28.549Z</lastmod>
+    <lastmod>2017-09-12T05:25:27.143Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/categories.html</loc>
     
-    <lastmod>2017-09-03T16:35:28.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yangshunjie.com/about.html</loc>
-    
-    <lastmod>2017-09-03T16:35:28.549Z</lastmod>
+    <lastmod>2017-09-12T05:25:27.080Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/contact.html</loc>
     
-    <lastmod>2017-09-03T16:35:28.549Z</lastmod>
+    <lastmod>2017-09-12T05:25:27.080Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/gallery/index.html</loc>
+    
+    <lastmod>2017-09-12T05:25:27.080Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/friends.html</loc>
+    
+    <lastmod>2017-09-12T05:25:27.080Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
     
-    <lastmod>2017-09-03T16:35:28.533Z</lastmod>
+    <lastmod>2017-09-12T05:25:27.065Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</loc>
+    
+    <lastmod>2017-09-12T05:25:27.065Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/about.html</loc>
+    
+    <lastmod>2017-09-12T05:25:27.065Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/ddd-project-collection.html</loc>
     
-    <lastmod>2017-09-03T16:35:28.514Z</lastmod>
+    <lastmod>2017-09-12T05:25:27.049Z</lastmod>
     
   </url>
   

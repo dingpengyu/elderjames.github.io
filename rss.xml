@@ -8,8 +8,22 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Sun, 03 Sep 2017 16:35:28 GMT</pubDate>
+    <pubDate>Tue, 12 Sep 2017 05:25:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>更换阿里云Docker镜像源</title>
+      <link>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</link>
+      <guid>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</guid>
+      <pubDate>Tue, 12 Sep 2017 11:54:17 GMT</pubDate>
+      <description>
+      
+        由于国内网络连接Docker官方源很慢，所以这篇文章介绍如何把Docker源更换为阿里云的。
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>领域驱动设计（DDD）项目收集</title>
@@ -18,7 +32,10 @@
       <pubDate>Fri, 25 Aug 2017 15:58:36 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;自从来了现在这家公司之后，就喜欢实践DD
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;自从来了现在这家公司之后，就喜欢实践DD
+        
       
       </description>
       
@@ -46,9 +63,12 @@
       <pubDate>Tue, 01 Aug 2017 01:19:08 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;炎热的盛夏，真的是让人难以入眠。在这种不免之夜，如果还加上停电……简直就是惨绝人寰了！&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;炎热的盛夏，真的是让人难以入眠。在这种不免之夜，如果还加上停电……简直就是惨绝人寰了！&lt;/p&gt;
 &lt;p&gt;还好，今晚没停电，可以让我吹着风扇安心去写这篇文章。&lt;/p&gt;
 &lt;p&gt;距离
+        
       
       </description>
       
@@ -62,8 +82,11 @@
       <pubDate>Wed, 26 Jul 2017 01:19:08 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;很高兴用上了hexo来搭建博客！&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;很高兴用上了hexo来搭建博客！&lt;/p&gt;
 &lt;p&gt;因为最近使用学习angular、vue、cordova等框架和技术，慢慢喜欢上了用node来构建应用程序的过程。我原来的博客系
+        
       
       </description>
       
@@ -77,8 +100,11 @@
       <pubDate>Tue, 14 Mar 2017 10:05:42 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;##Visual Studio 2017正式版终于出来啦！&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;##Visual Studio 2017正式版终于出来啦！&lt;/p&gt;
 &lt;p&gt;下载地址：&lt;a href=&quot;https://www.visualstudio.com/zh-hans
+        
       
       </description>
       
@@ -92,7 +118,10 @@
       <pubDate>Thu, 22 Sep 2016 15:18:28 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;npm由于很多时候都需要从国外的服务器下载组件，由于&lt;strong&gt;众所周知&lt;/strong&gt;的原因，国内安装时往往会很慢甚至卡住安装不上的情况，这时就需要替换一下安装源，使
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;npm由于很多时候都需要从国外的服务器下载组件，由于&lt;strong&gt;众所周知&lt;/strong&gt;的原因，国内安装时往往会很慢甚至卡住安装不上的情况，这时就需要替换一下安装源，使
+        
       
       </description>
       
@@ -106,9 +135,12 @@
       <pubDate>Thu, 22 Sep 2016 13:58:52 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;很高兴，我的博客又回来了。&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;很高兴，我的博客又回来了。&lt;/p&gt;
 &lt;p&gt;在使用.NET Core来开发项目已经有两个多月了，想在这里记录一些在.NET Core中比较方便的知识。&lt;/p&gt;
 &lt;p&gt;这里讲一讲
+        
       
       </description>
       
@@ -122,7 +154,10 @@
       <pubDate>Sat, 30 Jul 2016 11:30:16 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;.NET要跨平台，就一定要使用同样可以跨平台的数据库，而轻量的MySQL自然是首选。.NET Core发展到现在，虽然官方的Entity Framework还没发布MySQL
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;.NET要跨平台，就一定要使用同样可以跨平台的数据库，而轻量的MySQL自然是首选。.NET Core发展到现在，虽然官方的Entity Framework还没发布MySQL
+        
       
       </description>
       
@@ -136,7 +171,10 @@
       <pubDate>Sat, 30 Jul 2016 11:04:28 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;使用ASP.NET Core开发Web项目，在很多方面都跟之前的.NET版本有很大不同，在Startup.cs的配置方面,一言不合就使用依赖注入。当然，这对于整个项目的解耦是
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;使用ASP.NET Core开发Web项目，在很多方面都跟之前的.NET版本有很大不同，在Startup.cs的配置方面,一言不合就使用依赖注入。当然，这对于整个项目的解耦是
+        
       
       </description>
       
@@ -150,7 +188,10 @@
       <pubDate>Tue, 19 Jul 2016 22:09:21 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;亚马逊AWS有一年的免费体验，相比国内的阿里云、腾讯云的优惠政策更实在，而且又不用认证、也不用备案，一个邮箱帐号就能获得，简直就是我等学生（虽然已经不是了，但刚出来工作没几个
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;亚马逊AWS有一年的免费体验，相比国内的阿里云、腾讯云的优惠政策更实在，而且又不用认证、也不用备案，一个邮箱帐号就能获得，简直就是我等学生（虽然已经不是了，但刚出来工作没几个
+        
       
       </description>
       
@@ -164,9 +205,12 @@
       <pubDate>Tue, 12 Jul 2016 13:09:47 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;##工具下载&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;##工具下载&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://download.microsoft.com/download/c/2/6/c26892d8-6
+        
       
       </description>
       
@@ -180,9 +224,12 @@
       <pubDate>Tue, 12 Jul 2016 10:38:39 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;错误提示：The classes in the module cannot be loaded.&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;错误提示：The classes in the module cannot be loaded.&lt;/p&gt;
 &lt;p&gt;代码还原：&lt;/p&gt;
 &lt;pre class=&quot; language
+        
       
       </description>
       
@@ -196,8 +243,11 @@
       <pubDate>Fri, 08 Jul 2016 14:18:16 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;ul&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;在project.json配置文件中引入程序集：&lt;code&gt;&amp;quot;Microsoft.AspNetCore.Session&amp;quot;: &amp;quot;
+        
       
       </description>
       
@@ -211,7 +261,10 @@
       <pubDate>Thu, 30 Jun 2016 14:00:33 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;6月28日凌晨，RedHat 开发者大会上微软正式发布.NET Core正式版，我作为.NET爱好者，马上就想安装来玩玩，不过因为之前电脑上就装有旧版本，在这次正式版的安装中
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;6月28日凌晨，RedHat 开发者大会上微软正式发布.NET Core正式版，我作为.NET爱好者，马上就想安装来玩玩，不过因为之前电脑上就装有旧版本，在这次正式版的安装中
+        
       
       </description>
       
@@ -225,8 +278,11 @@
       <pubDate>Mon, 28 Mar 2016 14:17:16 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;code&gt;$ cd myproject&lt;/code&gt;  你建立的项目文件夹&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;code&gt;$ cd myproject&lt;/code&gt;  你建立的项目文件夹&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;$ git init&lt;/code&gt;   执行git的本地初始化&lt;/p&gt;
+        
       
       </description>
       
@@ -240,7 +296,10 @@
       <pubDate>Sat, 26 Mar 2016 22:36:31 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;Gogs是国人开发的开源git管理系统，类似gitlab，可在服务器上搭建私人的git版本管理系统。内建很多功能，但俾比gitlab安装更方便，占用更少的资源。&lt;br&gt;详细介
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;Gogs是国人开发的开源git管理系统，类似gitlab，可在服务器上搭建私人的git版本管理系统。内建很多功能，但俾比gitlab安装更方便，占用更少的资源。&lt;br&gt;详细介
+        
       
       </description>
       
@@ -254,7 +313,10 @@
       <pubDate>Thu, 24 Mar 2016 11:31:49 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;1.通过&lt;code&gt;wget http://oss.aliyuncs.com/aliyunecs/update_source.tgz&lt;/code&gt; 下载update_sour
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;1.通过&lt;code&gt;wget http://oss.aliyuncs.com/aliyunecs/update_source.tgz&lt;/code&gt; 下载update_sour
+        
       
       </description>
       
@@ -268,8 +330,11 @@
       <pubDate>Mon, 21 Mar 2016 19:19:10 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;我很懒，不希望写重复的copy代码，所以希望在写代码时能尽量简化和重用，一些设计上有但没必要的能不写就不写，但当然必须要实现。&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;我很懒，不希望写重复的copy代码，所以希望在写代码时能尽量简化和重用，一些设计上有但没必要的能不写就不写，但当然必须要实现。&lt;/p&gt;
 &lt;p&gt;最近学会用C#的反射机制，觉得非
+        
       
       </description>
       
@@ -283,27 +348,15 @@
       <pubDate>Thu, 03 Dec 2015 12:00:04 GMT</pubDate>
       <description>
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;现在安装mono已经不用make命令来编译，可以直接执行&lt;code&gt;apt-get mono-complete&lt;/code&gt;来安装最新的mono版本。&lt;/p&gt;
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;现在安装mono已经不用make命令来编译，可以直接执行&lt;code&gt;apt-get mono-complete&lt;/code&gt;来安装最新的mono版本。&lt;/p&gt;
 &lt;p&gt;下面看看
+        
       
       </description>
       
       <comments>https://yangshunjie.com/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>ASP.NET 连接 Mysql 支持中文编码</title>
-      <link>https://yangshunjie.com/make-mysql-support-chinese-encoding.html</link>
-      <guid>https://yangshunjie.com/make-mysql-support-chinese-encoding.html</guid>
-      <pubDate>Fri, 06 Nov 2015 16:44:28 GMT</pubDate>
-      <description>
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;1、关闭mysql服务&lt;br&gt;&lt;code&gt;service mysql stop&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;2、修改 /etc/mysql/my.cnf  （默认的安装路径）
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/make-mysql-support-chinese-encoding.html#disqus_thread</comments>
     </item>
     
   </channel>

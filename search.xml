@@ -3,6 +3,51 @@
   
     
     <entry>
+      <title><![CDATA[更换阿里云Docker镜像源]]></title>
+      <url>/change-the-docker-image-origin-to-aliyun.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>由于Docker技术比虚拟机技术更为轻便、快捷。自 2013 年 3 月以Apache 2.0授权协议开源后，到近两年成为当下分布式系统最热门的开发运维方式。由于国内网络连接Docker官方源很慢，甚至无法从官方源拉取镜像创建容器，所以这篇文章介绍如何把Docker源更换为阿里云的，使中国开发者也能学习并运用到Docker带来的DevOps变革。</p>
+<h4 id="运行环境-与换源无关-："><a href="#运行环境-与换源无关-：" class="headerlink" title="运行环境 (与换源无关)："></a>运行环境 (与换源无关)：</h4><ul>
+<li>Windows 10</li>
+<li>Docker for Windows <a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe" target="_blank" rel="external">下载</a></li>
+<li>Kitematic <a href="https://github.com/docker/kitematic/releases/download/v0.17.1/Kitematic-0.17.1-Windows.zip" target="_blank" rel="external">下载</a></li>
+</ul>
+<p>安装Docker的同时，我们可以先登录阿里云管理平台，通过前台页面进入【容器服务控制台】(<a href="https://cs.console.aliyun.com/#/repo" target="_blank" rel="external">https://cs.console.aliyun.com/#/repo</a>)</p>
+<h4 id="登录阿里云容器服务控制台"><a href="#登录阿里云容器服务控制台" class="headerlink" title="登录阿里云容器服务控制台"></a>登录阿里云容器服务控制台</h4><p>容器控制台的入口不是在一开始登录控制台的页面里的，所以如果以后记不住这个地址，可以按以下页面进入。</p>
+<ol>
+<li><p>指向阿里云首页的导航栏“产品”选项，从下拉的列表中点击“容器服务”</p>
+<p> <img src="/images/aliyun-docker/1.png" alt=""></p>
+</li>
+<li><p>从容器服务页面的上宣传图中点击“管理控制台”按钮进入。</p>
+<p> <img src="/images/aliyun-docker/2.png" alt=""></p>
+</li>
+</ol>
+<h4 id="获取镜像地址"><a href="#获取镜像地址" class="headerlink" title="获取镜像地址"></a>获取镜像地址</h4><p>进入控制台后，点击副侧边栏的“镜像”选项卡，在进入的页面中点击右上方的“镜像仓库控制台”链接。</p>
+<p><img src="/images/aliyun-docker/3.png" alt=""></p>
+<p>再点击副侧边栏的“Docker Hub 镜像站点”选项卡，就能看到阿里云分配的“专属加速器地址”：</p>
+<p><img src="/images/aliyun-docker/4.png" alt=""></p>
+<h4 id="配置到Docker"><a href="#配置到Docker" class="headerlink" title="配置到Docker"></a>配置到Docker</h4><p>这个地址怎么用呢？当然是配置到Docker的设置里了。运行Docker后，右键点击Docker Logo，点击setting按钮。在进入设置面板后，点击“Daemon”选项卡，点击“Basic”左边的开关，在下边输入框中会出现空的配置json字符串，这时就把从阿里云获取到的镜像地址填入“registry-mirrors”节点，如图：</p>
+<p><img src="/images/aliyun-docker/5.png" alt=""></p>
+<p>然后点击Apply，大功告成！</p>
+<p>我们可以通过在Kitematic中选择一个镜像创建一个容器试试看。</p>
+<p><img src="/images/aliyun-docker/6.png" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Docker </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[领域驱动设计（DDD）项目收集]]></title>
       <url>/ddd-project-collection.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做<a href="https://github.com/ElderJames/ShriekFx" target="_blank" rel="external">尖叫(Shriek)</a>的轻量DDD开源框架，下面列出一些在学习和开发过程中参考过的DDD开源项目。希望对淋浴驱动设计有兴趣的同行可以一起交流。</p>
@@ -776,13 +821,13 @@ user = git
         
         <tags>
             
-            <tag> git </tag>
-            
-            <tag> gogs </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> git </tag>
+            
+            <tag> gogs </tag>
             
         </tags>
         
@@ -936,11 +981,11 @@ user = git
         
         <tags>
             
+            <tag> mono </tag>
+            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
-            
-            <tag> mono </tag>
             
         </tags>
         
@@ -1296,12 +1341,6 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -1331,6 +1370,12 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
