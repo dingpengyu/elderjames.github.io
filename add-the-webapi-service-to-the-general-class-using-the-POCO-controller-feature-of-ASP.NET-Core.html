@@ -39,7 +39,7 @@
     
     <title>
         
-            更换阿里云Docker镜像源 | 
+            ASP.NET Core中POCO控制器特性：把普通类变成控制器 | 
         
         ElderJames&#39; Blog
     </title>
@@ -50,8 +50,8 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="James Yeung">
-    <meta name="description" itemprop="description" content="由于国内网络连接Docker官方源很慢，所以这篇文章介绍如何把Docker源更换为阿里云的。">
-    <meta name="keywords" content="ElderJames&#39; Blog,Docker">
+    <meta name="description" itemprop="description" content="这篇文章主要就是说说我最近在为自己的框架写基础设施的时候，实现一个类库，能把引用它的类库中指定接口的实现类变成Controller，实现无MVC依赖添加WebApi服务的过程。">
+    <meta name="keywords" content="ElderJames&#39; Blog,.NET Core,ASP.NET Core,WebApi">
 
     <!-- Import lsloader -->
     <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
@@ -266,26 +266,26 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://yangshunjie.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="更换阿里云Docker镜像源 | ElderJames&#39; Blog">
+    <meta property="og:title" content="ASP.NET Core中POCO控制器特性：把普通类变成控制器 | ElderJames&#39; Blog">
     <meta property="og:image" content="https://yangshunjie.com/img/favicon.png" />
-    <meta property="og:description" content="由于国内网络连接Docker官方源很慢，所以这篇文章介绍如何把Docker源更换为阿里云的。">
-    <meta property="og:article:tag" content="Docker"> 
+    <meta property="og:description" content="这篇文章主要就是说说我最近在为自己的框架写基础设施的时候，实现一个类库，能把引用它的类库中指定接口的实现类变成Controller，实现无MVC依赖添加WebApi服务的过程。">
+    <meta property="og:article:tag" content=".NET Core"> <meta property="og:article:tag" content="ASP.NET Core"> <meta property="og:article:tag" content="WebApi"> 
 
     
-        <meta property="article:published_time" content="Tue Sep 12 2017 11:54:17 GMT+0000" />
+        <meta property="article:published_time" content="Tue Sep 12 2017 17:00:00 GMT+0000" />
         <meta property="article:modified_time" content="Tue Sep 12 2017 10:57:04 GMT+0000" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="更换阿里云Docker镜像源 | ElderJames&#39; Blog">
-    <meta name="twitter:description" content="由于国内网络连接Docker官方源很慢，所以这篇文章介绍如何把Docker源更换为阿里云的。">
+    <meta name="twitter:title" content="ASP.NET Core中POCO控制器特性：把普通类变成控制器 | ElderJames&#39; Blog">
+    <meta name="twitter:description" content="这篇文章主要就是说说我最近在为自己的框架写基础设施的时候，实现一个类库，能把引用它的类库中指定接口的实现类变成Controller，实现无MVC依赖添加WebApi服务的过程。">
     <meta name="twitter:image" content="https://yangshunjie.com/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://yangshunjie.com" />
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html" />
+        <link rel="canonical" href="https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -297,9 +297,9 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html",
-    "headline": "更换阿里云Docker镜像源",
-    "datePublished": "Tue Sep 12 2017 11:54:17 GMT+0000",
+    "mainEntityOfPage": "https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html",
+    "headline": "ASP.NET Core中POCO控制器特性：把普通类变成控制器",
+    "datePublished": "Tue Sep 12 2017 17:00:00 GMT+0000",
     "dateModified": "Tue Sep 12 2017 10:57:04 GMT+0000",
     "author": {
         "@type": "Person",
@@ -318,8 +318,8 @@
             "url": "/img/favicon.png"
         }
     },
-    "keywords": ",DockerElderJames&#39; Blog",
-    "description": "由于国内网络连接Docker官方源很慢，所以这篇文章介绍如何把Docker源更换为阿里云的。",
+    "keywords": ",.NET Core,ASP.NET Core,WebApiElderJames&#39; Blog",
+    "description": "这篇文章主要就是说说我最近在为自己的框架写基础设施的时候，实现一个类库，能把引用它的类库中指定接口的实现类变成Controller，实现无MVC依赖添加WebApi服务的过程。",
 }
 </script>
 
@@ -384,7 +384,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#运行环境-与换源无关-："><span class="post-toc-number">1.</span> <span class="post-toc-text">运行环境 (与换源无关)：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#登录阿里云容器服务控制台"><span class="post-toc-number">2.</span> <span class="post-toc-text">登录阿里云容器服务控制台</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#获取镜像地址"><span class="post-toc-number">3.</span> <span class="post-toc-text">获取镜像地址</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置到Docker"><span class="post-toc-number">4.</span> <span class="post-toc-text">配置到Docker</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#POCO控制器简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">POCO控制器简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#POCO控制器原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">POCO控制器原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现自定义判断规则"><span class="post-toc-number">3.</span> <span class="post-toc-text">实现自定义判断规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#看看效果"><span class="post-toc-number">4.</span> <span class="post-toc-text">看看效果</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
     </ul>
     
 
@@ -403,11 +403,20 @@
                 
     <!-- Paradox Post Header -->
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(https://www.docker.com/sites/default/files/group_5622_0.png)">
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
     
             <p class="article-headline-p">
-                更换阿里云Docker镜像源
+                ASP.NET Core中POCO控制器特性：把普通类变成控制器
             </p>
         </div>
 
@@ -448,7 +457,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0UlEQVR42u3aQW7DMAwEwPz/0+21QAplSTqBI41ORevYHgUooSUfP0euBzY2NjY2NjY2NvYt2Y94/XOjP79/vmb9m+c753frvTM2Njb23uwX//oH7GQ78q9h8s7Y2NjYJ7CTx+SPX7OTApmXumRrsLGxsbHzQ0J+5+qV2NjY2NjvKGC9ktY7omBjY2Njz0Ol9WOqsPlR5ENZGjY2Nvbt2XnT9D4/f7S/jY2NjX1jdnUlcX+1zOSNhNGbY2NjY2/KzgvDVZ9aH2N62xEdabCxsbE3Za+LTR7iVwOmvAHQaxhgY2Njn8Oel6JqsyG5w7q8JV/AqL+NjY2N/eXsSRt4/tcEE5UrbGxs7OPZk6ioN1iZNJirCxsbG/scdjX6yaP86tZUBzdHjV5sbGzs7dj5i+at314AlG9xIYTCxsbGPobdi+MnZW/S0C20LrCxsbE3ZVcLzLo4lQcii5/Nn/7iKIKNjY29ETs5VFQLW3JlApi0hLGxsbHPYVfHYq5t+vZ4zXfDxsbG3pTdC+6T0pVvSu/6PIrCxsbG3pvdKwx56zePpXpN3EKAhY2Njb01Ow938gNM7xhTjZAK74mNjY29NTsfgqmWmWRDE9KkQGJjY2NjVxu6k7tVQ6tCmxkbGxt7U/a88PRGea5dUSHExsbG3prdG7XJC1g1nJrHTNjY2NinsavjL+Uma9wMSBrAediEjY2NfSZ7Eu5PGrT5m1zQHsDGxsbemp0H8fMS2Av9q2ETNjY29t7s6qpuRB7o9wphIbTCxsbG3pTdKwZ5PFSNfnpPiZ6IjY2NvTW7+sjq0Mw6+qmWt/zO2NjY2Kex58OX5YHIS8OjFwckbGxsbOzl9dHQzGAc54JYChsbGxv7DYeNpIxNGhjY2NjYp7EnB4Z8TKfXfsi3rFzAsLGxsbdgV4ObddGajOPMN+Ut/W1sbGzsG7PPWdjY2NjY2NjY2Ni3Wb/Z95rdp+4uQwAAAABJRU5ErkJggg==">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEKUlEQVR42u3aS1IjMRAFQO5/aWZLxATNe1U2puXsFWFsqZVaqD76+PQEzwcCTJgwYcKEyYMJEyZMf57pI36+fj8f4fpX/4/w3XeSGZPxk7fFhAkTJkznMf1wNH6z4ORFr8nqV78cJ9mSZI2YMGHChOlUptnC8kM9AY2S0phvtkZMmDBhwvTOTMmR36apbVLdomPChAkTJkxtQJDzbdLddnv2AQ0mTJgwYTqbKU81k5T1euTkVznc7P2fWAvHhAkTJkx/jGl2SN/r75fdb8KECRMmTC9lmj15S3KW1rYtzLzoXKwREyZMmDAdwZQ3EZOG4uwY3gQlM8qEFRMmTJgwncE0a1ImrcTrEGE212zePIHHhAkTJkxnM20uwURHbJAw503Q/ZYMAwJMmDBhwnQrpuT4TODaBHi2Ge0328QYEyZMmDCdzdRebdkf4W1q3c6ehwWYMGHChOkdmPJlt4drPk4brMw+Sd4BEyZMmDCdxDRLeq+P2zbR3bQt23nrdiYmTJgwYbotU9sazLH2C8tnnzVNiyIvJkyYMGG6OdOGLE+JZ79K3jAny0u9mDBhwoTpJKZZ+3D2uu3xnDc+Z21LTJgwYcJ0NtP1BG3Tsf1tO2O7SXmCjQkTJkyYTmWapaDJMTz7bz5jEhbkuJgwYcKE6R2YZldkNqCzNuosXKgTbEyYMGHCdART/rNhqXQ0/gwu56gv7mDChAkTptsyJS83KwEnL5qMv0mkn1ghwIQJEyZMN2SaHeT7VmIecLTp9Kp1igkTJkyYDmKalXp/pxk5CxqeUgvHhAkTJkw3ZErKnXV5dJ3W5teJZo3SCA4TJkyYMB3BlDwPaA1el1ODhmWyefkqou9jwoQJE6YjmPJjOE+S2w1oi78562oDMGHChAnTEUxtKXbTIGyDj/xyat4QLQIITJgwYcJ0EFN+iXO2jBw9T7ZbuLqUjAkTJkyYjmBqJ8j59glqwveorcKECRMmTGczzUqum7RzX1xut7MtLmPChAkTpjOYkgLr9aDt9dBZ4XXDl4xQ18IxYcKECdNNmPZBQB4ozLiTYm4ycr15mDBhwoTpCKZHBQf599vrPu3i8zT7h08wYcKECdNBTO1hmbQS24BjmKCW21C8CSZMmDBhOoIpX+qjgob8Mk277HauusiLCRMmTJhuyNQ+G45NotsWi9srPpgwYcKE6VSm9vjctBhnpdvZaHnTtO76YsKECROmGzLNgoBZkpkf2HkJeBMQRO1MTJgwYcJ0BNMssXzUr/IibBtAtOVdTJgwYcKEqW0uzlqSyWWdtrVZ/BcTJkyYML0l06a8myDms+dzzQq+mDBhwoTpPKYk1dx/UjQUy0AhCVny6zuYMGHChOkkps3Fnc/42cDNyr5JivtL95swYcKECdOLmDyYMGHChAkTJg8mTJgw3er5B73kceHEtNvQAAAAAElFTkSuQmCC">
     
 </ul>
 
@@ -462,7 +471,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Docker/">Docker</a>
+        <a class="post_tag-link" href="/tags/NET-Core/">.NET Core</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/ASP-NET-Core/">ASP.NET Core</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/WebApi/">WebApi</a>
     </ul>
     
 
@@ -489,7 +498,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=更换阿里云Docker镜像源&url=https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html&pic=https://yangshunjie.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ASP.NET Core中POCO控制器特性：把普通类变成控制器&url=https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html&pic=https://yangshunjie.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -510,7 +519,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=ElderJames&#39; Blog&title=更换阿里云Docker镜像源&summary=学习、札记、分享&pics=https://yangshunjie.com/img/favicon.png&url=https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=ElderJames&#39; Blog&title=ASP.NET Core中POCO控制器特性：把普通类变成控制器&summary=学习、札记、分享&pics=https://yangshunjie.com/img/favicon.png&url=https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -528,31 +537,118 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="\assets\js\APlayer.min.js"> </script><p>由于Docker技术比虚拟机技术更为轻便、快捷。自 2013 年 3 月以Apache 2.0授权协议开源后，到近两年成为当下分布式系统最热门的开发运维方式。由于国内网络连接Docker官方源很慢，甚至无法从官方源拉取镜像创建容器，所以这篇文章介绍如何把Docker源更换为阿里云的，使中国开发者也能学习并运用到Docker带来的DevOps变革。</p>
-<h4 id="运行环境-与换源无关-："><a href="#运行环境-与换源无关-：" class="headerlink" title="运行环境 (与换源无关)："></a>运行环境 (与换源无关)：</h4><ul>
-<li>Windows 10</li>
-<li>Docker for Windows <a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe" target="_blank" rel="external">下载</a></li>
-<li>Kitematic <a href="https://github.com/docker/kitematic/releases/download/v0.17.1/Kitematic-0.17.1-Windows.zip" target="_blank" rel="external">下载</a></li>
-</ul>
-<p>安装Docker的同时，我们可以先登录阿里云管理平台，通过前台页面进入【容器服务控制台】(<a href="https://cs.console.aliyun.com/#/repo" target="_blank" rel="external">https://cs.console.aliyun.com/#/repo</a>)</p>
-<h4 id="登录阿里云容器服务控制台"><a href="#登录阿里云容器服务控制台" class="headerlink" title="登录阿里云容器服务控制台"></a>登录阿里云容器服务控制台</h4><p>容器控制台的入口不是在一开始登录控制台的页面里的，所以如果以后记不住这个地址，可以按以下页面进入。</p>
-<ol>
-<li><p>指向阿里云首页的导航栏“产品”选项，从下拉的列表中点击“容器服务”</p>
-<p> <img src="/images/aliyun-docker/1.png" alt=""></p>
-</li>
-<li><p>从容器服务页面的上宣传图中点击“管理控制台”按钮进入。</p>
-<p> <img src="/images/aliyun-docker/2.png" alt=""></p>
-</li>
-</ol>
-<h4 id="获取镜像地址"><a href="#获取镜像地址" class="headerlink" title="获取镜像地址"></a>获取镜像地址</h4><p>进入控制台后，点击副侧边栏的“镜像”选项卡，在进入的页面中点击右上方的“镜像仓库控制台”链接。</p>
-<p><img src="/images/aliyun-docker/3.png" alt=""></p>
-<p>再点击副侧边栏的“Docker Hub 镜像站点”选项卡，就能看到阿里云分配的“专属加速器地址”：</p>
-<p><img src="/images/aliyun-docker/4.png" alt=""></p>
-<h4 id="配置到Docker"><a href="#配置到Docker" class="headerlink" title="配置到Docker"></a>配置到Docker</h4><p>这个地址怎么用呢？当然是配置到Docker的设置里了。运行Docker后，右键点击Docker Logo，点击setting按钮。在进入设置面板后，点击“Daemon”选项卡，点击“Basic”左边的开关，在下边输入框中会出现空的配置json字符串，这时就把从阿里云获取到的镜像地址填入“registry-mirrors”节点，如图：</p>
-<p><img src="/images/aliyun-docker/5.png" alt=""></p>
-<p>然后点击Apply，大功告成！</p>
-<p>我们可以通过在Kitematic中选择一个镜像创建一个容器试试看。</p>
-<p><img src="/images/aliyun-docker/6.png" alt=""></p>
+        <script src="\assets\js\APlayer.min.js"> </script><p>POCO Controller是 <strong>ASP.NET Core</strong> 中的一个特性，虽然在2015年刚发布的时候就有这个特性了，可是大多数开发者都只是按原有的方式去写，而没有用到这个特性，但是把这个特性稍微封装后用在SOA架构中Service层的场景中是极其便利的。这篇文章主要就是说说我最近在为自己的框架写基础设施的时候，实现一个类库，能把引用它的类库中指定接口的实现类变成Controller，实现无MVC依赖添加WebApi服务的过程。</p>
+<h3 id="POCO控制器简介"><a href="#POCO控制器简介" class="headerlink" title="POCO控制器简介"></a>POCO控制器简介</h3><p>POCO控制器就是ASP.NET Core项目中所有带有<code>Controller</code>后缀的类、或者标记了<code>[Controller]</code>特性的类，虽然没有像模版项目中那样继承自<strong>Controller类</strong>，也会被识别为控制器,拥有跟普通控制器一样的功能，像下面这段代码中，两个类都会被识别成控制器：</p>
+<pre><code>public class PocoController
+{
+    public IActionResult Index()
+    {
+        return new ContentResult() { Content = “Hello from POCO controller!” };
+    }
+}
+
+[Controller]
+public class Poco
+{
+    public IActionResult Index()
+    {
+        return new ContentResult() { Content = “Hello from POCO controller!” };
+    }
+}
+</code></pre><h3 id="POCO控制器原理"><a href="#POCO控制器原理" class="headerlink" title="POCO控制器原理"></a>POCO控制器原理</h3><p>其实，在ASP.NET Core中，已经不像ASP.NET WebApi 那样，通过ControllerFactory来创建Controller，多亏于ASP.NET Core一脉相承的IoC框架 <code>Microsoft.Extensions.DependencyInjection</code>,ASP.NET Core中的内部实现变得更优雅。其中POCO控制器的核心原理就在<a href="https://github.com/aspnet/Mvc/blob/2bacb6003f3bc2c3b58107c1118346dca3f5fa13/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/IApplicationFeatureProviderOfT.cs" target="_blank" rel="external">IApplicationFeatureProvider<controllerfeature></controllerfeature></a>这个接口的实现<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="external">ControllerFeatureProvider</a>。</p>
+<p>通过<a href="https://github.com/aspnet/Mvc/search?p=1&amp;q=IApplicationFeatureProvider&amp;type=&amp;utf8=%E2%9C%93" target="_blank" rel="external">aspnet/Mvc项目的Github源码仓库</a>中查询得知，Mvc里把Controller、ViewComponent、TagHelper、Views等组件定义为特性(Feature)，如ControllerFeature，特性里就存放了应用中被识别为相组件的类型的集合，如如ControllerFeature中就存放了所有Controller类型。<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>这个接口是用来给MVC应用提供的控制器类型识别的接口，当把这个接口的实现注册到服务配置中，就能为其中识别的类型提供控制器功能。</p>
+<p><a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="external">ControllerFeatureProvider</a>是这个接口的默认实现，其中有一个方法<code>IsController(TypeInfo typeInfo)</code>的功能就是判断某类型是否为控制器的。而接口方法<code>PopulateFeature(IEnumerable&lt;ApplicationPart&gt; parts,ControllerFeature feature)</code>则为把传入的 “Mvc应用部分（ApplicationPart，大概是指Mvc的作用程序集）”中的类型都一一判断，如果是控制器，那么就加入控制器特性对象中。</p>
+<h3 id="实现自定义判断规则"><a href="#实现自定义判断规则" class="headerlink" title="实现自定义判断规则"></a>实现自定义判断规则</h3><p>通过上面的剖析，我们就知道要实现自定义的控制器判断规则，只需要重写ControllerFeature类或者重新实现IApplicationFeatureProvider<controllerfeature>接口，但是由于PopulateFeature不是虚方法或抽象方法，所以不能被重写，那么只能重新写一个类来实现IApplicationFeatureProvider<controllerfeature>接口了。为了兼容原来规则，我把原来的规则照搬过来，复制了<code>IsController</code>的方法（开源的好处），并且在PopulateFeature中加入了自己的规则。先贴代码,避免篇幅过长，<code>IsController</code>方法的实现就直接链接到<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L41" target="_blank" rel="external">源码</a>了：</controllerfeature></controllerfeature></p>
+<pre class=" language-CSharp"><code class="language-CSharp">
+ internal class ServiceControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
+    {
+        private const string ControllerTypeNameSuffix = "Controller";
+        private readonly IEnumerable<Type> ServiceTypes;
+
+        public ServiceControllerFeatureProvider(IEnumerable<Type> ServiceTypes)
+        {
+            this.ServiceTypes = ServiceTypes;
+        }
+
+        public void PopulateFeature(IEnumerable<ApplicationPart> parts,
+            ControllerFeature feature)
+        {
+            foreach (var type in Reflection.CurrentAssembiles.SelectMany(o => o.DefinedTypes))
+            {
+                if (IsController(type) || ServiceTypes.Any(o => type.IsClass && o.IsAssignableFrom(type)) && !feature.Controllers.Contains(type))
+                {
+                    feature.Controllers.Add(type);
+                }
+            }
+        }
+
+        protected bool IsController(TypeInfo typeInfo)
+        {
+            //...
+        }
+    }
+</code></pre>
+<p>上面代码的原理，是按照我的框架的需求来改写的，构造方法传入的参数ServiceTypes是定义了服务方法的接口的类型，接口和对应实现类似于以下代码，这些代码可以写在一个.NET Core控制台项目中。</p>
+<pre class=" language-CSharp"><code class="language-CSharp">    public interface ITestService
+    {
+        string Test(string name);
+    }
+
+    [Route("test")]
+    public class TestService : ITestService
+    {
+        [Route("{name}"), HttpGet]
+        public string Test(string name)
+        {
+            return "Hello " + name;
+        }
+    }
+</code></pre>
+<p>其中TestService类就是会被识别为控制器的类，但是接口和实现是可以分开在不同程序集的。通过原本<code>ControllerFeatureProvider</code>类中<code>PopulateFeature</code>方法的<code>parts</code>参数中的类型是不包括除了引用了Mvc的程序集的其它程序集的，所以我这里用自己实现的类型扫描类<code>Reflection</code>中的<code>CurrentAssembiles</code>静态变量来获取当前应用程序的所有引用的（自己创建的项目）程序集的，具体实现的代码在我的框架[Shriek]的<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Utils/Reflection.cs" target="_blank" rel="external">源码中</a>。</p>
+<h3 id="看看效果"><a href="#看看效果" class="headerlink" title="看看效果"></a>看看效果</h3><p>现在，在TestService类所在项目文件中引入以下Nuget包：</p>
+<pre class=" language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.Hosting<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2.0.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.Mvc.Core<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2.0.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.Mvc.Formatters.Json<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2.0.0<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+</code></pre>
+<p>创建一个Startup.cs文件,写入以下代码：</p>
+<pre class=" language-CSharp"><code class="language-CSharp">    public class Startup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            var builder = services.AddMvcCore()
+                  .AddJsonFormatters()
+                  .AddFormatterMappings();
+
+            builder.ConfigureApplicationPartManager(manager =>
+            {
+                var featureProvider = new ServiceControllerFeatureProvider(typeof(ITest));
+                manager.FeatureProviders.Add(featureProvider);
+                builder.Services.AddSingleton<IApplicationFeatureProvider<ControllerFeature>>(featureProvider);
+            });
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            app.UseMvc();
+        }
+    }
+</code></pre>
+<p>然后在控制台程序的入口文件Program.cs的Main方法中写入一下代码：</p>
+<pre class=" language-CSharp"><code class="language-CSharp">    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            new WebHostBuilder()
+                .UseKestrel()
+                .UseStartup<Startup>()
+                .UseUrls("http://*:8080")
+                .Build()
+                .Start();
+        }
+    }
+</code></pre>
+<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="external">http://localhost:8080/test/elderjames</a>”,如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这篇文章中主要介绍了通过实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口实现自定义控制器的方法。其实这个方法的发现源于我在社区交流中Lemon同学的指点。在接下来的文章中，我会介绍如何从接口获取自定义特性标签，实现从接口获得mvc特性，而接口和实现类都不依赖mvc的方法。敬请期待！</p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
@@ -561,7 +657,7 @@
                             <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
                         </strong>
                         <br>
-                        <strong>本文链接：</strong><a href="https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html">https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</a>
+                        <strong>本文链接：</strong><a href="https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html">https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html</a>
                     </p>
                 </blockquote>
         
@@ -610,21 +706,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/ddd-project-collection.html" id="post_nav-older" class="next-content">
+        <a href="/change-the-docker-image-origin-to-aliyun.html" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

@@ -8,8 +8,22 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Tue, 12 Sep 2017 05:25:27 GMT</pubDate>
+    <pubDate>Tue, 12 Sep 2017 10:57:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>ASP.NET Core中POCO控制器特性：把普通类变成控制器</title>
+      <link>https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html</link>
+      <guid>https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html</guid>
+      <pubDate>Tue, 12 Sep 2017 17:00:00 GMT</pubDate>
+      <description>
+      
+        这篇文章主要就是说说我最近在为自己的框架写基础设施的时候，实现一个类库，能把引用它的类库中指定接口的实现类变成Controller，实现无MVC依赖添加WebApi服务的过程。
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>更换阿里云Docker镜像源</title>
@@ -339,24 +353,6 @@
       </description>
       
       <comments>https://yangshunjie.com/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ubuntu安装mono 4.2.1 最新版教程</title>
-      <link>https://yangshunjie.com/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html</link>
-      <guid>https://yangshunjie.com/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html</guid>
-      <pubDate>Thu, 03 Dec 2015 12:00:04 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;现在安装mono已经不用make命令来编译，可以直接执行&lt;code&gt;apt-get mono-complete&lt;/code&gt;来安装最新的mono版本。&lt;/p&gt;
-&lt;p&gt;下面看看
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html#disqus_thread</comments>
     </item>
     
   </channel>

@@ -7,11 +7,9 @@
     
     
     
-    
-    
   <url>
     <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
-    <lastmod>2017-09-12T05:25:27.065Z</lastmod>
+    <lastmod>2017-09-12T10:57:04.321Z</lastmod>
     <data>
         <display>
         <title>给你的域名加把锁：免费Https申请</title>
@@ -35,9 +33,11 @@
     </url>
 
     
+    
+    
   <url>
     <loc>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</loc>
-    <lastmod>2017-09-12T05:25:27.065Z</lastmod>
+    <lastmod>2017-09-12T10:57:04.321Z</lastmod>
     <data>
         <display>
         <title>更换阿里云Docker镜像源</title>
@@ -57,8 +57,32 @@
     
     
   <url>
+    <loc>https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html</loc>
+    <lastmod>2017-09-12T10:57:04.290Z</lastmod>
+    <data>
+        <display>
+        <title>ASP.NET Core中POCO控制器特性：把普通类变成控制器</title>
+        <pubTime>2017-09-12T17:00:00.000Z</pubTime>
+        
+        <tag>.NET Core</tag>
+         
+        <tag>ASP.NET Core</tag>
+         
+        <tag>WebApi</tag>
+         
+         
+           
+             
+              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yangshunjie.com/ddd-project-collection.html</loc>
-    <lastmod>2017-09-12T05:25:27.049Z</lastmod>
+    <lastmod>2017-09-12T10:57:04.290Z</lastmod>
     <data>
         <display>
         <title>领域驱动设计（DDD）项目收集</title>
