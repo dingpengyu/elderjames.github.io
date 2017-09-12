@@ -105,7 +105,7 @@
 
         
             
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?tBL1lTWwcN+S42nZObHMzQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
                 <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
@@ -334,7 +334,8 @@
     <!-- Custom Head -->
     
 
-<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-vs.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -530,7 +531,7 @@
     
         <script src="\assets\js\APlayer.min.js"> </script><p>错误提示：The classes in the module cannot be loaded.</p>
 <p>代码还原：</p>
-<pre class=" language-aspnet"><code class="language-aspnet"> var data = await db.Set<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FormulaCarType</span><span class="token punctuation">></span></span>()
+<pre class="line-numbers language-aspnet"><code class="language-aspnet"> var data = await db.Set<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FormulaCarType</span><span class="token punctuation">></span></span>()
 .Where(c => c.Status == (int)CommonStatus.启用)
 .Select(c => new FormulaCarModel
             {
@@ -542,9 +543,9 @@
                 CreateTime = c.CreateTime,
                 Status = (CommonStatus)c.Status
             }).ToListAsync();
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在查询中，在查询方法（ToListAsync）执行前进行了select的操作，则在执行的时候就会出错（在Windows上运行时不会发生），因此，需要在select前执行查询，再对查询结果进行select的操作。如下则不会出错：</p>
-<pre class=" language-aspnet"><code class="language-aspnet">var result = await db.Set<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FormulaCarType</span><span class="token punctuation">></span></span>()
+<pre class="line-numbers language-aspnet"><code class="language-aspnet">var result = await db.Set<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FormulaCarType</span><span class="token punctuation">></span></span>()
 .Where(c => c.Status == (int)CommonStatus.启用).ToListAsync();
  var data = result.Select(c => new FormulaCarModel
             {
@@ -556,7 +557,7 @@
                 CreateTime = c.CreateTime,
                 Status = (CommonStatus)c.Status
             });
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">

@@ -105,7 +105,7 @@
 
         
             
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?tBL1lTWwcN+S42nZObHMzQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
                 <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
@@ -334,7 +334,8 @@
     <!-- Custom Head -->
     
 
-<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-vs.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -577,7 +578,7 @@
 <p>也可以参考<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="external">官方文档</a></p>
 <h4 id="第四步，加密Access-Token"><a href="#第四步，加密Access-Token" class="headerlink" title="第四步，加密Access Token"></a>第四步，加密Access Token</h4><p>由于这个AccessToken是可以直接操作你的仓库的，而且配置文件是公开的，所以这时就要求对AccessToken进行加密。可到<a href="https://ci.appveyor.com/tools/encrypt" target="_blank" rel="external">AppVeyor Token加密页面</a>进行加密。把加密后的字符串填入下一步中的配置文件里。</p>
 <h4 id="第五步，配置文件"><a href="#第五步，配置文件" class="headerlink" title="第五步，配置文件"></a>第五步，配置文件</h4><p>在Hexo的<strong>根目录</strong>下新建一个<code>appveyor.yml</code>文件，写下以下内容</p>
-<pre class=" language-yaml"><code class="language-yaml">
+<pre class="line-numbers language-yaml"><code class="language-yaml">
 <span class="token key atrule">clone_depth</span><span class="token punctuation">:</span> <span class="token number">5</span>
 
 <span class="token comment" spellcheck="true"># 这里是限制了只编译有源文件的分支，这样在创建了其它分支时就不会再次编译了</span>
@@ -616,7 +617,7 @@
   <span class="token punctuation">-</span> git commit <span class="token punctuation">-</span>m "Update Static Site"
   <span class="token punctuation">-</span> git push origin %TARGET_BRANCH%
   <span class="token punctuation">-</span> appveyor AddMessage "Static Site Updated"
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>大致的意思是从github仓库的当前分支拉取下来，编译成静态文件后，在push到目标分支。由于AppVeyor环境中是通过Access Token访问我们的仓库的，而Hexo自带的部署则在访问的过程中需要我们输入帐号密码，所以Hexo g -d的命令就不适合在这里使用。需要先编译成静态文件，再把public文件夹的静态文件push到目标分支。</p>
 <p>最后，把这个文件提交到Github上就可以测试了！在AppVeyor的首页可以看到部署的过程和结果~</p>
 <p><img src="/images/5.png" alt=""></p>

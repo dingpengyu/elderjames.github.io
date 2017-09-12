@@ -105,7 +105,7 @@
 
         
             
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?tBL1lTWwcN+S42nZObHMzQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
                 <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
@@ -334,7 +334,8 @@
     <!-- Custom Head -->
     
 
-<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-vs.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -530,15 +531,15 @@
     
         <script src="\assets\js\APlayer.min.js"> </script><p>使用ASP.NET Core开发Web项目，在很多方面都跟之前的.NET版本有很大不同，在Startup.cs的配置方面,一言不合就使用依赖注入。当然，这对于整个项目的解耦是极好的。这次踩的坑在DbContext的配置上。</p>
 <p>在<a href="http://www.1234.sh/post/pomelo-data-mysql" target="_blank" rel="external">柚子大神的博客</a>中,有介绍他移植过来的mysql for ef core的使用方法是在Startup中注册服务：</p>
-<pre class=" language-aspnet"><code class="language-aspnet">services.AddDbContext<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span>(x => x.UseMySql("server=localhost;database=yourdb;uid=root;pwd=yourpwd"));
-</code></pre>
+<pre class="line-numbers language-aspnet"><code class="language-aspnet">services.AddDbContext<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span>(x => x.UseMySql("server=localhost;database=yourdb;uid=root;pwd=yourpwd"));
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但是，这样配置之后，又需要在YourContext中配置：<br><img src="/content/images/2016/07/0e1ef77c-b03e-439f-a894-cb1de1811695.png" alt=""></p>
 <p>这样的话，其实是等于配置了两次，在DbContext中是直接写ConnectionString的，不能（我还不会）从配置文件中读取。因此，需要寻找一个从Startup中配置的有效方法。</p>
 <p>通过对比MVC6项目模版的sqlserver配置方式，和<a href="https://docs.efproject.net/en/latest/miscellaneous/configuring-dbcontext.html" target="_blank" rel="external">官方文档的介绍</a>，发现DbContext里是可以通过注入的方式注册ConnectionString的，方法就是设置构造函数注入DbContextOptions：</p>
-<pre class=" language-aspnet"><code class="language-aspnet">  public YourContext(DbContextOptions<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span> options)
+<pre class="line-numbers language-aspnet"><code class="language-aspnet">  public YourContext(DbContextOptions<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span> options)
             : base(options)
         { }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">

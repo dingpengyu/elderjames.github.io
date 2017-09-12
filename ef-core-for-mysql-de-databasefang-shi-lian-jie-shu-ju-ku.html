@@ -105,7 +105,7 @@
 
         
             
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?tBL1lTWwcN+S42nZObHMzQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
                 <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
@@ -334,7 +334,8 @@
     <!-- Custom Head -->
     
 
-<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-vs.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -537,10 +538,10 @@
 <li>Microsoft.EntityFrameworkCore.SqlServer.Design</li>
 </ul>
 <p>目前MySQL方面还没有这些工具包，就自然不能执行从数据库创建模型的命令（如下）了。</p>
-<pre class=" language-bash"><code class="language-bash">Scaffold-DbContext <span class="token string">"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;"</span> Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">Scaffold-DbContext <span class="token string">"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;"</span> Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因此，我们目前只能手动创建模型，并且在DbContext中将模型与数据库中相应的表绑定起来，具体方法就是在DbContext中重写OnModelCreating方法：</p>
-<pre class=" language-aspnet"><code class="language-aspnet">        protected override void OnModelCreating(ModelBuilder builder)
+<pre class="line-numbers language-aspnet"><code class="language-aspnet">        protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SliderPicture</span><span class="token punctuation">></span></span>(e =>
             {
@@ -555,7 +556,7 @@
                 .HasIndex(x => x.CreateTime);
             });
         }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>希望.NET Core能尽快完善并增加更强大的特性，我想这也是所以.NETer的希望。</p>
 
         

@@ -105,7 +105,7 @@
 
         
             
-                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?tBL1lTWwcN+S42nZObHMzQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
                 <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
@@ -334,7 +334,8 @@
     <!-- Custom Head -->
     
 
-<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-vs.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -546,17 +547,17 @@
 <li>安装 <a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> 命令行输入 <code>npm</code>,有相关信息则安装成功 </li>
 <li>安装 <a href="http://git-scm.com/" target="_blank" rel="external">Git</a> 命令行输入<code>Git</code>，有相关信息则安装成功</li>
 <li><p>在命令行输入以下命令安装Hexo</p>
-<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>初始化博客</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 初始化一个目录，&lt;folder>不填则为当前目录</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 初始化一个目录，&lt;folder>不填则为当前目录</span>
 $ hexo init <span class="token operator">&lt;</span>folder<span class="token operator">></span>
 $ <span class="token function">cd</span> <span class="token operator">&lt;</span>folder<span class="token operator">></span>
 
 <span class="token comment" spellcheck="true"># 安装依赖包</span>
 $ <span class="token function">npm</span> <span class="token function">install</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>新建完成后，指定文件夹的目录如下：</p>
 <pre><code>.
 ├── _config.yml   -&gt; 全局配置文件
@@ -568,11 +569,11 @@ $ <span class="token function">npm</span> <span class="token function">install</
 └── themes        -&gt; 主题文件夹。Hexo 会根据主题来生成静态页面
 </code></pre></li>
 <li><p>输入以下命令，启动站点查看效果</p>
-<pre class=" language-bash"><code class="language-bash">$ hexo server
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ hexo server
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果想更换端口，可以在命令后追加参数</p>
-<pre class=" language-bash"><code class="language-bash">$ hexo server -p 8080
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ hexo server -p 8080
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>此时在浏览器访问 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 就可以看到博客效果啦！</p>
 <p>什么?默认主题不好看？别急，后面会讲如何安装主题~ 接下来介绍如何发布到Github！</p>
 </li>
@@ -584,25 +585,25 @@ $ <span class="token function">npm</span> <span class="token function">install</
 </li>
 <li><p>部署配置</p>
 <p>在开始之前，您必须先在 _config.yml 中修改参数</p>
-<pre class=" language-yml"><code class="language-yml">deploy:
+<pre class="line-numbers language-yml"><code class="language-yml">deploy:
  type: git
  repo: https://github.com/ElderJames/elderjames.github.io.git
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>命令行输入以下命令，安装部署工具 hexo-deployer-git</p>
-<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>输入以下命令，编译并发布到Github</p>
-<pre class=" language-bash"><code class="language-bash">$ hexo deploy --generate
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ hexo deploy --generate
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><em>这个命令是可以分开的，一个是编译静态文件，一个是发布，具体请<a href="https://hexo.io/zh-cn/docs/generating.html" target="_blank" rel="external">参阅文档</a></em></p>
 </li>
 <li><p>如果成功提交到Github,则可以马上访问仓库名的那个地址 <a href="https://elderjames.github.io" target="_blank" rel="external">https://elderjames.github.io</a></p>
 </li>
 </ol>
-<h2 id="尝试写一篇新文章"><a href="#尝试写一篇新文章" class="headerlink" title="尝试写一篇新文章"></a>尝试写一篇新文章</h2><pre class=" language-bash"><code class="language-bash">  $ hexo new <span class="token string">"My New Post"</span>
-</code></pre>
+<h2 id="尝试写一篇新文章"><a href="#尝试写一篇新文章" class="headerlink" title="尝试写一篇新文章"></a>尝试写一篇新文章</h2><pre class="line-numbers language-bash"><code class="language-bash">  $ hexo new <span class="token string">"My New Post"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>  主题在Github上有很多了，比如我现在安装这个，只要把主题文件复制到 themes 目录下，每个子目录代表一个主题。主题还能有很多扩展的设置，具体可能要参考主题的文档。</p>
 <h2 id="从Ghost迁移文章"><a href="#从Ghost迁移文章" class="headerlink" title="从Ghost迁移文章"></a>从Ghost迁移文章</h2><p>  由于我之前的博客部署在 AWS 上，是 Ghost 博客系统，好处是文章用 markdown 编写，可以很好的迁移到 Hexo。</p>
 <ol>
@@ -610,12 +611,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <p>访问 <a href="http://yourblog.com/ghost/debug/" target="_blank" rel="external">http://yourblog.com/ghost/debug/</a> , 点击 【导出】按钮下载一个 Json 文件。</p>
 </li>
 <li><p>安装迁移工具</p>
-<pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-migrator-ghost
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-migrator-ghost
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>输入以下命令导入文章到 Hexo, <code>&lt;source&gt;</code> 为第0步下载的json文件的路径。</p>
-<pre class=" language-bash"><code class="language-bash">$ hexo migrate ghost <span class="token operator">&lt;</span>source<span class="token operator">></span>
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ hexo migrate ghost <span class="token operator">&lt;</span>source<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ol>
 <p>然后，可以愉快得看到 <code>./source/_posts</code>（如果有草稿，则包括<code>./source/_dragts</code>）文件夹里已经出现了原来在 Ghost 中的文章。</p>
