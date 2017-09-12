@@ -4,7 +4,7 @@
     
     <entry>
       <title><![CDATA[ASP.NET Core中为指定类添加WebApi服务功能]]></title>
-      <url>/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html</url>
+      <url>/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>POCO Controller是 <strong>ASP.NET Core</strong> 中的一个特性，虽然在2015年刚发布的时候就有这个特性了，可是大多数开发者都只是按原有的方式去写，而没有用到这个特性。其实，如果利用这个特性进行稍微封装后，用在SOA架构中Service层的场景中是极其便利的。这篇文章主要就是说我最近在学习使用开源AOP库AspectCore写WebApi动态代理客户端的时候，实现为普通类无添加WebApi服务的过程。</p>
 <h3 id="POCO控制器简介"><a href="#POCO控制器简介" class="headerlink" title="POCO控制器简介"></a>POCO控制器简介</h3><p>POCO控制器就是ASP.NET Core项目中所有带有<code>Controller</code>后缀的类、或者标记了<code>[Controller]</code>特性的类，虽然没有像模版项目中那样继承自<strong>Controller类</strong>，也会被识别为控制器，拥有跟普通控制器一样的功能，像下面这段代码中，两个类都会被识别成控制器：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PocoController</span>
@@ -956,13 +956,13 @@ user = git
         
         <tags>
             
-            <tag> Linux </tag>
-            
-            <tag> Ubuntu </tag>
-            
             <tag> git </tag>
             
             <tag> gogs </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
         
@@ -1116,11 +1116,11 @@ user = git
         
         <tags>
             
-            <tag> mono </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> mono </tag>
             
         </tags>
         
@@ -1457,6 +1457,31 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -1486,31 +1511,6 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>

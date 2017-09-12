@@ -8,13 +8,13 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Tue, 12 Sep 2017 16:54:53 GMT</pubDate>
+    <pubDate>Tue, 12 Sep 2017 17:01:54 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>ASP.NET Core中为指定类添加WebApi服务功能</title>
-      <link>https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html</link>
-      <guid>https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html</guid>
+      <link>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</link>
+      <guid>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</guid>
       <pubDate>Tue, 12 Sep 2017 17:00:00 GMT</pubDate>
       <description>
       
@@ -25,7 +25,7 @@
       
       </description>
       
-      <comments>https://yangshunjie.com/add-the-webapi-service-to-the-general-class-using-the-POCO-controller-feature-of-ASP.NET-Core.html#disqus_thread</comments>
+      <comments>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html#disqus_thread</comments>
     </item>
     
     <item>
