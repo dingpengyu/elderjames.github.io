@@ -8,14 +8,14 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Wed, 13 Sep 2017 09:46:10 GMT</pubDate>
+    <pubDate>Wed, 13 Sep 2017 09:59:50 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>ASP.NET Core中动态为控制器类型添加特性</title>
       <link>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</link>
       <guid>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</guid>
-      <pubDate>Wed, 13 Sep 2017 17:45:22 GMT</pubDate>
+      <pubDate>Wed, 13 Sep 2017 17:59:22 GMT</pubDate>
       <description>
       
         

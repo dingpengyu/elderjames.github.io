@@ -11,10 +11,10 @@
 <p>用到的技术点主要是<strong>反射</strong>和利用MVC框架给出的<strong>配置点</strong>。</p>
 <p>MVC框架给出的配置点在<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="external"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="external"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="external"><code>IParameterModelConvention</code></a>三个接口。顾名思义，它们分别对应控制器、操作、参数的类型配置，在它们的<code>Apply</code>方法中，传入了一个MVC启动阶段扫描到的类型，开发者可以通过给这个类型添加各种MVC特性，如<code>RouteData</code>、<code>Attributes</code>、<code>Filters</code>等。但是，这些特性组合是有规则的，不能一股脑儿地都添加进去，MVC的机制中会用<code>SelectorModel</code>来将特性进行分组。</p>
 <p>例如有以下的操作方法和它的特性：</p>
-<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token punctuation">[</span>HttpGet<span class="token punctuation">]</span>
-    <span class="token punctuation">[</span><span class="token function">AcceptVerbs</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span> <span class="token string">"PUT"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token punctuation">[</span><span class="token function">HttpPost</span><span class="token punctuation">(</span><span class="token string">"Api/Things"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">DoThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token punctuation">[</span>HttpGet<span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token function">AcceptVerbs</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span> <span class="token string">"PUT"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token function">HttpPost</span><span class="token punctuation">(</span><span class="token string">"Api/Things"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">DoThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么MVC中就需要把他们分为两组：</p>
 <ol>
@@ -91,7 +91,7 @@
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面代码其实还省略了其它的请求方式，我的源码中是有的，大家也可以前去查看。除了<code>ActionModelConvention</code>，还需要写<code>ControllerModelConvention</code>和<code>ParameterModelConvention</code>。</p>
-<h3 id="配置到MVC框架"><a href="#配置到MVC框架" class="headerlink" title="配置到MVC框架"></a>配置到MVC框架</h3><p>核心的代码写好了，那么怎么让它起作用呢？其实官方的源码已经提供了示例：<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/test/WebSites/ApplicationModelWebSite/Startup.cs#L16" target="_blank" rel="external">Mvc/test/WebSites/ApplicationModelWebSite/Startup.cs</a>，我们只需在<code>services.AddMvc()</code>后面再将我们的配置类型添加紧<a href="https://github.com/aspnet/Mvc/blob/b4fe715c71f472180069f674bde3ef8014064d64/src/Microsoft.AspNetCore.Mvc.Core/MvcOptions.cs#L59" target="_blank" rel="external">MvcOptions.Conventions</a>属性上就好了，这个属性是用来添加所有模型配置的，然后MVC启动后会把这些配置都扫描处理一遍。</p>
+<h3 id="配置到MVC框架"><a href="#配置到MVC框架" class="headerlink" title="配置到MVC框架"></a>配置到MVC框架</h3><p>核心的代码写好了，那么怎么让它起作用呢？其实官方的源码已经提供了示例：<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/test/WebSites/ApplicationModelWebSite/Startup.cs#L16" target="_blank" rel="external">Mvc/test/WebSites/ApplicationModelWebSite/Startup.cs</a>，我们只需在<code>services.AddMvc()</code>里的<code>setupAction</code>委托中将我们的配置类型添加到<a href="https://github.com/aspnet/Mvc/blob/b4fe715c71f472180069f674bde3ef8014064d64/src/Microsoft.AspNetCore.Mvc.Core/MvcOptions.cs#L59" target="_blank" rel="external">MvcOptions.Conventions</a>属性里就好了，这个属性是用来添加所有模型配置的，然后MVC启动后会把这些配置都扫描处理一遍。</p>
 <p>来看看我这里的实现：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//AddMvc也一样，这里用AddMvcCore只是为了减少依赖</span>
 services<span class="token punctuation">.</span><span class="token function">AddMvcCore</span><span class="token punctuation">(</span>opt<span class="token operator">=</span><span class="token operator">></span>
@@ -156,7 +156,7 @@ services<span class="token punctuation">.</span><span class="token function">Add
 <p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="external">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
 <p><img src="/images/add_webapi_to_class/1.png" alt=""></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这篇文章中主要介绍了通过实现<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="external"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="external"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="external"><code>IParameterModelConvention</code></a>三个接口实现为指定为控制器的类型添加MVC特性的方法。</p>
-<p>本篇文章发现源码的部分受到<a href="https://github.com/maxzhang1985" target="_blank" rel="external"><em>max zhang</em></a> 和他的群里的群友<em>福州 | Today</em>的帮助，在此表示感谢。</p>
+<p>本篇文章发现源码的部分受到<a href="https://github.com/maxzhang1985" target="_blank" rel="external"><em>max zhang</em></a> 和他的群里的群友<em>福州 | Today</em>的帮助，在此表示衷心的感谢。</p>
 <p>在接下来的文章中，会介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="external"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="external">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
 <p><strong>感谢阅读和批评指教！</strong></p>
 <p>[温馨提示：为方便大家看文中提到的源码，原文中有大量指向源码链接，如果您看的是没有链接的转载，可以再来看我的原文。]</p>
@@ -176,6 +176,8 @@ services<span class="token punctuation">.</span><span class="token function">Add
             <tag> ASP.NET Core </tag>
             
             <tag> WebApi </tag>
+            
+            <tag> MVC </tag>
             
         </tags>
         
@@ -394,9 +396,9 @@ services<span class="token punctuation">.</span><span class="token function">Add
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
             <tag> DDD </tag>
             
@@ -785,9 +787,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -1022,9 +1024,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -1054,9 +1056,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -1639,25 +1641,6 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -1687,6 +1670,31 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
@@ -1742,12 +1750,6 @@ reproxy=/  http://127.0.0.1:236
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
   
