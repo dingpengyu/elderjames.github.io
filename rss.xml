@@ -8,8 +8,25 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Wed, 13 Sep 2017 02:35:24 GMT</pubDate>
+    <pubDate>Wed, 13 Sep 2017 09:46:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>ASP.NET Core中动态为控制器类型添加特性</title>
+      <link>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</link>
+      <guid>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</guid>
+      <pubDate>Wed, 13 Sep 2017 17:45:22 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;我在上一篇文章&lt;a href=&quot;https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-i
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>ASP.NET Core中为指定类添加WebApi服务功能</title>
@@ -338,24 +355,6 @@
       </description>
       
       <comments>https://yangshunjie.com/xiu-fu-apt-getbao-guan-li.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>C#利用反射机制动态创建泛型接口实例</title>
-      <link>https://yangshunjie.com/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html</link>
-      <guid>https://yangshunjie.com/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html</guid>
-      <pubDate>Mon, 21 Mar 2016 19:19:10 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;我很懒，不希望写重复的copy代码，所以希望在写代码时能尽量简化和重用，一些设计上有但没必要的能不写就不写，但当然必须要实现。&lt;/p&gt;
-&lt;p&gt;最近学会用C#的反射机制，觉得非
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/dong-tai-chuang-jian-fan-xing-jie-kou-shi-li.html#disqus_thread</comments>
     </item>
     
   </channel>

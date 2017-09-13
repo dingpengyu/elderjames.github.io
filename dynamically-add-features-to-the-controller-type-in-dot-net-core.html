@@ -39,7 +39,7 @@
     
     <title>
         
-            Visual Studio 2017 正式版安装问题及解决方案记录 | 
+            ASP.NET Core中动态为控制器类型添加特性 | 
         
         ElderJames&#39; Blog
     </title>
@@ -51,7 +51,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="James Yeung">
     <meta name="description" itemprop="description" content="学习、札记、分享">
-    <meta name="keywords" content="ElderJames&#39; Blog,Visual Studio">
+    <meta name="keywords" content="ElderJames&#39; Blog,.NET Core,ASP.NET Core,WebApi">
 
     <!-- Import lsloader -->
     <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
@@ -266,18 +266,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://yangshunjie.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Visual Studio 2017 正式版安装问题及解决方案记录 | ElderJames&#39; Blog">
+    <meta property="og:title" content="ASP.NET Core中动态为控制器类型添加特性 | ElderJames&#39; Blog">
     <meta property="og:image" content="https://yangshunjie.com/img/favicon.png" />
     <meta property="og:description" content="学习、札记、分享">
-    <meta property="og:article:tag" content="Visual Studio"> 
+    <meta property="og:article:tag" content=".NET Core"> <meta property="og:article:tag" content="ASP.NET Core"> <meta property="og:article:tag" content="WebApi"> 
 
     
-        <meta property="article:published_time" content="Tue Mar 14 2017 10:05:42 GMT+0000" />
-        <meta property="article:modified_time" content="Tue Mar 14 2017 13:48:30 GMT+0000" />
+        <meta property="article:published_time" content="Wed Sep 13 2017 17:45:22 GMT+0000" />
+        <meta property="article:modified_time" content="Wed Sep 13 2017 09:46:10 GMT+0000" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="Visual Studio 2017 正式版安装问题及解决方案记录 | ElderJames&#39; Blog">
+    <meta name="twitter:title" content="ASP.NET Core中动态为控制器类型添加特性 | ElderJames&#39; Blog">
     <meta name="twitter:description" content="学习、札记、分享">
     <meta name="twitter:image" content="https://yangshunjie.com/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -285,7 +285,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html" />
+        <link rel="canonical" href="https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -297,10 +297,10 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html",
-    "headline": "Visual Studio 2017 正式版安装问题及解决方案记录",
-    "datePublished": "Tue Mar 14 2017 10:05:42 GMT+0000",
-    "dateModified": "Tue Mar 14 2017 13:48:30 GMT+0000",
+    "mainEntityOfPage": "https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html",
+    "headline": "ASP.NET Core中动态为控制器类型添加特性",
+    "datePublished": "Wed Sep 13 2017 17:45:22 GMT+0000",
+    "dateModified": "Wed Sep 13 2017 09:46:10 GMT+0000",
     "author": {
         "@type": "Person",
         "name": "James Yeung",
@@ -318,7 +318,7 @@
             "url": "/img/favicon.png"
         }
     },
-    "keywords": ",Visual StudioElderJames&#39; Blog",
+    "keywords": ",.NET Core,ASP.NET Core,WebApiElderJames&#39; Blog",
     "description": "学习、札记、分享",
 }
 </script>
@@ -385,7 +385,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Win7-无法安装Cordova"><span class="post-toc-number">1.</span> <span class="post-toc-text">Win7 无法安装Cordova</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Cordova-无法编译成Android"><span class="post-toc-number">2.</span> <span class="post-toc-text">Cordova 无法编译成Android</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">实现原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#学以致用"><span class="post-toc-number">2.</span> <span class="post-toc-text">学以致用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置到MVC框架"><span class="post-toc-number">3.</span> <span class="post-toc-text">配置到MVC框架</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#比较完整才代码实现"><span class="post-toc-number">4.</span> <span class="post-toc-text">比较完整才代码实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
     </ul>
     
 
@@ -404,20 +404,11 @@
                 
     <!-- Paradox Post Header -->
     
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script type="text/ls-javascript" id="post-thumbnail-script">
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-</script>
-
-        
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/images/add_webapi_to_class/title.png)">
     
             <p class="article-headline-p">
-                Visual Studio 2017 正式版安装问题及解决方案记录
+                ASP.NET Core中动态为控制器类型添加特性
             </p>
         </div>
 
@@ -436,7 +427,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>James Yeung</strong>
-        <span>3月 14, 2017</span>
+        <span>9月 13, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -458,7 +449,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADh0lEQVR42u3au3LbQBAEQP3/T8upq2RDM7t3JINGxJIo8NAMRvv4+nb9dX0hwIEDBw4cOHDgwIHjgzm+4uvn+3/eZ3bP5zv8/O3ze+rPxYEDBw4cFzh+iaLHY7XHff4ykr9NXifPggMHDhw4bnM8Hy4Byh8sv8P/HqkNexw4cODA8ZkcSeFUR118hlkRiAMHDhw4Ppmjbc8lHEmz8iwrDhw4cOB4DUcbjZvYS1D2P7neK8WBAwcOHIcWGj759Rv2O3DgwIEDx+Jqy7wkaJOozodS9RPhwIEDB46jHLORUv4A7TCpLQLbxYthrxQHDhw4cMQceYG0CeO2GNuUZzU6Dhw4cOA4ypFEXR63pwq8PCYP/BYHDhw4cFzgeH68ZC0gwc0bfG1Ut/fEgQMHDhz3OPICKS/58vefLflmXzAOHDhw4LjB0Ybo7HCz1YTZkAkHDhw4cLyLo20Oblp7+XhpRjkrHXHgwIEDx1mOJKhamjyYZ9DJ0KsoL3HgwIEDxwWO2fJZ21icLbRt4v87uHDgwIEDxz2O2et8vNQuLmzitjgzDhw4cOB4CUdS/LTLDfk92wFV2yjEgQMHDhz3OPKPmY2RisWCOGhPFY04cODAgeMeR3vQG0sJm9BdtRpx4MCBA8dRjtk4py3z2kWEtqWYF5M4cODAgeOVHLPHfg6/vLTLKU81EHHgwIEDx22OfD1uU5K1xHl5lnwuDhw4cOB4DUd+oLYJmI+p2pHSsQDGgQMHDhzXOL7jqx3/tDR5oB4YmOHAgQMHjqMcm2JpFnJ5Q3ATyUWDEgcOHDhwHOXYh1byzs1Aa0aT/wOBAwcOHDjOciSHmMVh+xizGM7vEI2dcODAgQPHmqMtrvJ424+a8tjOvyocOHDgwHGboy3VZgOqfKSUl4htQYgDBw4cOF7DkTf1kqNsBlf5mCppIBZrdjhw4MCB4wJHHmZ5+ZccaF/mtRcOHDhw4HgNx6wkyxcd9pF8Krz/cWccOHDgwHGUo42oIsBG5VbbakzuP9zvwIEDBw4cC45Th7hX/uWFXx7/OHDgwIHjNkdR9iwic18E5pRRcYgDBw4cON7KkR9xFr2bEvFYcxAHDhw4cLyJY1NWzT6r/Scg4cOBAwcOHPc42qIrQdwsseXrEe3QCwcOHDhw3ObYLzTkHx817OK4Tb5OHDhw4MDxSg4XDhw4cODAgQMHDhw4Puz6A3uIJKWJil0NAAAAAElFTkSuQmCC">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADiUlEQVR42u3aS27cQAwFQN//0sk2QGL5PbJ7ZgKUVkasSM3Sgubn65frj+sLAQ4cOHDgwIEDBw4cH8zxFV9/3/+PR39z//M9z3cm55zFggMHDhw47nH8kIoCjuRwz3zPlM/PmcWCAwcOHDhucyTHav9XEl6L+HySOhYcOHDgwPFWjrZk2ifjJHgcOHDgwPH/csyO1ZZhScLeJHIcOHDgwPEajrbpliTUJAEnz5yNuK73SnHgwIEDx6GFhk/++Q37HThw4MCBY3G1yw2ztYZNSVZHhAMHDhw4jnJs2nDPbcFnmqRg2yT+4uPhwIEDB44LHO2LZ227U8GcKjtx4MCBA8cNjiTUvFRLxlTtOkX723aRAgcOHDhwnOVIiqgcpS3nZqVXXnZG58SBAwcOHEc59uOiHLFNk20xlv+JgAMHDhw4bnPkyTIvq2Zwm98O34IDBw4cOI5y5KtpCdksNbbvPdVAxIEDBw4cNzhmbbvXrL61A6r8w+DAgQMHjtscp4Dy0mu13HaocYkDBw4cOG5wzNYR9oOffUm2ORUOHDhw4LjHkR89HzLlKwV5sZe8pV1lwIEDBw4cNzjyFDVr6s3Kxbb9t1qMwIEDBw4cFzhmY6Tnlz0/bRZkCxcVgThw4MCB4yhHElJ+0KRtN0NvE3NxThw4cODAcYEjb9W1w6T9YClvArZvx4EDBw4c9ziSgqdt3uWDqCQZzxCjRQ0cOHDgwHGNYz8EygM++/Y8PePAgQMHjldy5CG1bcHNEGszWIqiwIEDBw4cRznatlqS6vIA8jKv/YTDsRMOHDhw4Di60LAp2JLx1akScRY8Dhw4cOD4HI7nhJok3c1iRDsku55oceDAgQPHoUQ7C7sdHSVl4Wyd7tv7ceDAgQPHUY78BXkzrj307ANs/kTAgQMHDhz3ONpyKw+mXY/YJ9oZCg4cOHDguMHRps9ZYdauOLSpPb9w4MCBA8dtjvyaFVqzUm1TLuLAgQMHjndxtMkpSYdJ8C1Qe7YCDgcOHDhwXOBoR0RtgpytTeTLE/laQ5RoceDAgQPHIY5Ns++5kZf/y+xjtK1MHDhw4MDxORybRYe2qGuTbvKcooTDgQMHDhwv52jHSO0yRJ4sN8t2OHDgwIHjHkf7gllLMU/bs9R+LNHiwIEDB44FR7vQsC/b2rWJdlWiSMA4cODAgeMohwsHDhw4cODAgQMHDhwfdv0G6TpXSH76vsoAAAAASUVORK5CYII=">
     
 </ul>
 
@@ -472,7 +463,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Visual-Studio/">Visual Studio</a>
+        <a class="post_tag-link" href="/tags/NET-Core/">.NET Core</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/ASP-NET-Core/">ASP.NET Core</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/WebApi/">WebApi</a>
     </ul>
     
 
@@ -499,7 +490,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Visual Studio 2017 正式版安装问题及解决方案记录&url=https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html&pic=https://yangshunjie.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ASP.NET Core中动态为控制器类型添加特性&url=https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html&pic=https://yangshunjie.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -520,7 +511,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=ElderJames&#39; Blog&title=Visual Studio 2017 正式版安装问题及解决方案记录&summary=学习、札记、分享&pics=https://yangshunjie.com/img/favicon.png&url=https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=ElderJames&#39; Blog&title=ASP.NET Core中动态为控制器类型添加特性&summary=学习、札记、分享&pics=https://yangshunjie.com/img/favicon.png&url=https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -538,13 +529,161 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <script src="\assets\js\APlayer.min.js"> </script><p>##Visual Studio 2017正式版终于出来啦！</p>
-<p>下载地址：<a href="https://www.visualstudio.com/zh-hans/" target="_blank" rel="external">请到主页</a></p>
-<p>推荐使用安装器下载，速度比以前快了很多！必装的Web和.NET Core组件只需要15分钟就可以安装完（当然，视网速而定，15分钟是用100M/bs的宽带下载的，下载峰值在5M/s左右）</p>
-<p>以下是记录了一些安装中遇到的问题，会不定时更新。</p>
-<h4 id="Win7-无法安装Cordova"><a href="#Win7-无法安装Cordova" class="headerlink" title="Win7 无法安装Cordova"></a>Win7 无法安装Cordova</h4><p>因为Cordova组件需要PowerShell 6.0，而Win7是不自带的（Win8-Win10自带）,所以先下载PowerShell 6.0吧！</p>
-<p><a href="https://www.microsoft.com/en-us/download/details.aspx?id=34595" target="_blank" rel="external">PowerShell 6.0下载地址</a></p>
-<h4 id="Cordova-无法编译成Android"><a href="#Cordova-无法编译成Android" class="headerlink" title="Cordova 无法编译成Android"></a>Cordova 无法编译成Android</h4><p>可能是Gradle压缩包损坏导致，重新下载压缩包放到目录C:\Users\Administrator.gradle\wrapper\dists[gradle-2.13-all]下<br><a href="https://services.gradle.org/distributions/" target="_blank" rel="external">单独下载Gradle</a></p>
+        <script src="\assets\js\APlayer.min.js"> </script><p>我在上一篇文章<a href="https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html">《ASP.NET Core中为指定类添加WebApi服务功能》</a>中介绍了如何为指定类型增加WebApi服务功能，达到了一定的解耦效果（不再需要继承Controller类，不再需要Controller后缀名），但是，<code>Route</code>、<code>HttpGet</code>之类的特性类型还是需要用Mvc的，那么今天这篇文章，就介绍如何把这些标签的依赖也消灭掉。</p>
+<p>如果还没看上一篇文章又不了解如何指定类型为控制器的朋友，最好先看一下上一篇文章，因为要实现本文介绍的功能，是需要先实现上一篇文章所介绍的功能的。</p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>在没有MVC引用的类库中自定义<code>RouteAttribute</code>、<code>HttpGetAttribute</code>、<code>HttpPostAttribute</code>等等跟MVC配对的特性标签类型；其次，在定义服务接口时把这些特性标记到方法声明上面；最后在ASP.NET Core 服务启动时自动按照指定的接口上的特性给相应的接口添加MVC的标签，使得动态指定的类型也能获得MVC的路由和请求方法限制的功能。</p>
+<p>用到的技术点主要是<strong>反射</strong>和利用MVC框架给出的<strong>配置点</strong>。</p>
+<p>MVC框架给出的配置点在<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="external"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="external"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="external"><code>IParameterModelConvention</code></a>三个接口。顾名思义，它们分别对应控制器、操作、参数的类型配置，在它们的<code>Apply</code>方法中，传入了一个MVC启动阶段扫描到的类型，开发者可以通过给这个类型添加各种MVC特性，如<code>RouteData</code>、<code>Attributes</code>、<code>Filters</code>等。但是，这些特性组合是有规则的，不能一股脑儿地都添加进去，MVC的机制中会用<code>SelectorModel</code>来将特性进行分组。</p>
+<p>例如有以下的操作方法和它的特性：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token punctuation">[</span>HttpGet<span class="token punctuation">]</span>
+    <span class="token punctuation">[</span><span class="token function">AcceptVerbs</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span> <span class="token string">"PUT"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token punctuation">[</span><span class="token function">HttpPost</span><span class="token punctuation">(</span><span class="token string">"Api/Things"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">DoThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么MVC中就需要把他们分为两组：</p>
+<ol>
+<li><code>[HttpPost(&quot;Api/Things&quot;)]</code></li>
+<li><code>[HttpGet], [AcceptVerbs(&quot;POST&quot;, &quot;PUT&quot;)]</code></li>
+</ol>
+<p>所以，这个分组的规则，我们怎么去处理呢？其实，在MVC的源码中就有这样的方法<a href="https://github.com/aspnet/Mvc/blob/de389226011fb15140ee0a8d6a2429b2eb943f3a/src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultApplicationModelProvider.cs#L439" target="_blank" rel="external"><code>IList&lt;SelectorModel&gt; CreateSelectors(IList&lt;object&gt; attributes)</code></a>，我们把它复制过来就好了。</p>
+<h3 id="学以致用"><a href="#学以致用" class="headerlink" title="学以致用"></a>学以致用</h3><p>回到我们的需求，我们需要把指定类型的方法都加上MVC特性，就需要自定义一些<code>ModelConvention</code>。由于我们的需求比较简单，只需特性作用按类型来使指定类型获得MVC特性，我们只需在构造方法中传入指定类型，分别为控制器、操作和参数这三个作用类型都定义一个。由于篇幅问题，下面只贴Action的实现来讲解，另外两个大家可以看我项目中的<a href="https://github.com/ElderJames/shriek-fx/tree/master/src/Shriek.ServiceProxy.Http.Server/Internal" target="_blank" rel="external">源码</a>。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">using</span> HttpGet <span class="token operator">=</span> Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Mvc<span class="token punctuation">.</span>HttpGetAttribute<span class="token punctuation">;</span>
+<span class="token keyword">using</span> HttpPost <span class="token operator">=</span> Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Mvc<span class="token punctuation">.</span>HttpPostAttribute<span class="token punctuation">;</span>
+<span class="token keyword">using</span> Route <span class="token operator">=</span> Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Mvc<span class="token punctuation">.</span>RouteAttribute<span class="token punctuation">;</span>
+
+<span class="token keyword">internal</span> <span class="token keyword">class</span> <span class="token class-name">ActionModelConvention</span> <span class="token punctuation">:</span> IActionModelConvention
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//构造方法传入指定接口类型</span>
+    <span class="token keyword">public</span> <span class="token function">ActionModelConvention</span><span class="token punctuation">(</span>Type serviceType<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>serviceType <span class="token operator">=</span> serviceType<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> Type serviceType <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Apply</span><span class="token punctuation">(</span>ActionModel action<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//判断是否为指定接口类型的实现类</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>serviceType<span class="token punctuation">.</span><span class="token function">IsAssignableFrom</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>Controller<span class="token punctuation">.</span>ControllerType<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">var</span> actionParams <span class="token operator">=</span> action<span class="token punctuation">.</span>ActionMethod<span class="token punctuation">.</span><span class="token function">GetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//这串linq是查询出接口类型中与当前action相对应的方法，从中获取特性</span>
+        <span class="token keyword">var</span> method <span class="token operator">=</span> serviceType<span class="token punctuation">.</span><span class="token function">GetMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">FirstOrDefault</span><span class="token punctuation">(</span>mth <span class="token operator">=</span><span class="token operator">></span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> mthParams <span class="token operator">=</span> mth<span class="token punctuation">.</span><span class="token function">GetParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> action<span class="token punctuation">.</span>ActionMethod<span class="token punctuation">.</span>Name <span class="token operator">==</span> mth<span class="token punctuation">.</span>Name
+                   <span class="token operator">&amp;&amp;</span> actionParams<span class="token punctuation">.</span>Length <span class="token operator">==</span> mthParams<span class="token punctuation">.</span>Length
+                   <span class="token operator">&amp;&amp;</span> actionParams<span class="token punctuation">.</span><span class="token function">Any</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> mthParams<span class="token punctuation">.</span><span class="token function">Where</span><span class="token punctuation">(</span>o <span class="token operator">=</span><span class="token operator">></span> x<span class="token punctuation">.</span>Name <span class="token operator">==</span> o<span class="token punctuation">.</span>Name<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Any</span><span class="token punctuation">(</span>o <span class="token operator">=</span><span class="token operator">></span> x<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> o<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">var</span> attrs <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">GetCustomAttributes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> actionAttrs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span><span class="token keyword">object</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> att <span class="token keyword">in</span> attrs<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//下面的HttpMethodAttribute是我们自己写的特性类型</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>att <span class="token keyword">is</span> HttpMethodAttribute methodAttr<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">var</span> httpMethod <span class="token operator">=</span> methodAttr<span class="token punctuation">.</span>Method<span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> path <span class="token operator">=</span> methodAttr<span class="token punctuation">.</span>Path<span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>httpMethod <span class="token operator">==</span> HttpMethod<span class="token punctuation">.</span>Get<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token comment" spellcheck="true">//添加的HttpGet和HttpPost使用了命名空间别名</span>
+                        actionAttrs<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>Activator<span class="token punctuation">.</span><span class="token function">CreateInstance</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>HttpGet<span class="token punctuation">)</span><span class="token punctuation">,</span> path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>httpMethod <span class="token operator">==</span> HttpMethod<span class="token punctuation">.</span>Post<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        actionAttrs<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>Activator<span class="token punctuation">.</span><span class="token function">CreateInstance</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>HttpPost<span class="token punctuation">)</span><span class="token punctuation">,</span> path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                 <span class="token comment" spellcheck="true">//下面的RouteAttribute是我们自己写的特性类型</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>att <span class="token keyword">is</span> RouteAttribute routeAttr<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    actionAttrs<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>Activator<span class="token punctuation">.</span><span class="token function">CreateInstance</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>Route<span class="token punctuation">)</span><span class="token punctuation">,</span> routeAttr<span class="token punctuation">.</span>Template<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>actionAttrs<span class="token punctuation">.</span><span class="token function">Any</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            action<span class="token punctuation">.</span>Selectors<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//AddRange静态方法就是从源码中复制过来的</span>
+            ModelConventionHelper<span class="token punctuation">.</span><span class="token function">AddRange</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>Selectors<span class="token punctuation">,</span> ModelConventionHelper<span class="token punctuation">.</span><span class="token function">CreateSelectors</span><span class="token punctuation">(</span>actionAttrs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面代码其实还省略了其它的请求方式，我的源码中是有的，大家也可以前去查看。除了<code>ActionModelConvention</code>，还需要写<code>ControllerModelConvention</code>和<code>ParameterModelConvention</code>。</p>
+<h3 id="配置到MVC框架"><a href="#配置到MVC框架" class="headerlink" title="配置到MVC框架"></a>配置到MVC框架</h3><p>核心的代码写好了，那么怎么让它起作用呢？其实官方的源码已经提供了示例：<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/test/WebSites/ApplicationModelWebSite/Startup.cs#L16" target="_blank" rel="external">Mvc/test/WebSites/ApplicationModelWebSite/Startup.cs</a>，我们只需在<code>services.AddMvc()</code>后面再将我们的配置类型添加紧<a href="https://github.com/aspnet/Mvc/blob/b4fe715c71f472180069f674bde3ef8014064d64/src/Microsoft.AspNetCore.Mvc.Core/MvcOptions.cs#L59" target="_blank" rel="external">MvcOptions.Conventions</a>属性上就好了，这个属性是用来添加所有模型配置的，然后MVC启动后会把这些配置都扫描处理一遍。</p>
+<p>来看看我这里的实现：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//AddMvc也一样，这里用AddMvcCore只是为了减少依赖</span>
+services<span class="token punctuation">.</span><span class="token function">AddMvcCore</span><span class="token punctuation">(</span>opt<span class="token operator">=</span><span class="token operator">></span>
+    <span class="token punctuation">{</span>
+        opt<span class="token punctuation">.</span>Conventions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ControllerModelConvention</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>TestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        opt<span class="token punctuation">.</span>Conventions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ActionModelConvention</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>TestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        opt<span class="token punctuation">.</span>Conventions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ParameterModelConvention</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>TestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然了，我这里是因为指定类型是通过反射获取的，所以用了Type类型作为参数，大家也可以用泛型，在构造方法里获取对象类型。</p>
+<h3 id="比较完整才代码实现"><a href="#比较完整才代码实现" class="headerlink" title="比较完整才代码实现"></a>比较完整才代码实现</h3><p>接下来，除了这三个<code>ModelConvention</code>类型，我把整个实现代码贴一下，让大家看得比较直观，最后会跟上一篇文章的实现加入进来。因为，如果没有昨天的工作，我们指定的类型不被MVC识别为控制器的话，我们是无法实现为这些类型添加MVC属性的。</p>
+<p>首先，先创建一个控制台程序，引入一下Nuget包</p>
+<pre class="line-numbers language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.Hosting<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2.0.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.Mvc.Core<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2.0.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>接着，定义一个接口以及它的实现，接口中标记了一些自定义特性，而实现类中完全没有：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ITestService</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">"{name}"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> HttpGet<span class="token punctuation">]</span>
+    <span class="token keyword">string</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">string</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestService</span> <span class="token punctuation">:</span> ITestService
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">string</span> name<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"Hello "</span> <span class="token operator">+</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后在控制台程序的入口文件Program.cs的Main方法中写入一下代码：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> <span class="token keyword">class</span> <span class="token class-name">Program</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+       <span class="token keyword">new</span> <span class="token class-name">WebHostBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">UseKestrel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">UseUrls</span><span class="token punctuation">(</span><span class="token string">"http://localhost:8080"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">ConfigureServices</span><span class="token punctuation">(</span>services <span class="token operator">=</span><span class="token operator">></span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//使用AddMvc亦可</span>
+                services<span class="token punctuation">.</span><span class="token function">AddMvcCore</span><span class="token punctuation">(</span>opt<span class="token operator">=</span><span class="token operator">></span>
+                <span class="token punctuation">{</span>
+                    opt<span class="token punctuation">.</span>Conventions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ControllerModelConvention</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>TestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    opt<span class="token punctuation">.</span>Conventions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ActionModelConvention</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>TestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    opt<span class="token punctuation">.</span>Conventions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ParameterModelConvention</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>TestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true">//下面这段是上一篇文章里的内容</span>
+                <span class="token punctuation">.</span><span class="token function">ConfigureApplicationPartManager</span><span class="token punctuation">(</span>manager <span class="token operator">=</span><span class="token operator">></span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">var</span> featureProvider <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServiceControllerFeatureProvider</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>ITestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    manager<span class="token punctuation">.</span>FeatureProviders<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>featureProvider<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">Configure</span><span class="token punctuation">(</span>app <span class="token operator">=</span><span class="token operator">></span> app<span class="token punctuation">.</span><span class="token function">UseMvc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="external">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
+<p><img src="/images/add_webapi_to_class/1.png" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这篇文章中主要介绍了通过实现<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="external"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="external"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="external"><code>IParameterModelConvention</code></a>三个接口实现为指定为控制器的类型添加MVC特性的方法。</p>
+<p>本篇文章发现源码的部分受到<a href="https://github.com/maxzhang1985" target="_blank" rel="external"><em>max zhang</em></a> 和他的群里的群友<em>福州 | Today</em>的帮助，在此表示感谢。</p>
+<p>在接下来的文章中，会介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="external"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="external">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
+<p><strong>感谢阅读和批评指教！</strong></p>
+<p>[温馨提示：为方便大家看文中提到的源码，原文中有大量指向源码链接，如果您看的是没有链接的转载，可以再来看我的原文。]</p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
@@ -553,7 +692,7 @@
                             <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
                         </strong>
                         <br>
-                        <strong>本文链接：</strong><a href="https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html">https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</a>
+                        <strong>本文链接：</strong><a href="https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html">https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</a>
                     </p>
                 </blockquote>
         
@@ -602,21 +741,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/migrate-blog-from-ghost-to-hexo-and-github.html" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/n.html" id="post_nav-older" class="next-content">
+        <a href="/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

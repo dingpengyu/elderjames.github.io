@@ -9,10 +9,30 @@
     
     
     
+  <url>
+    <loc>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</loc>
+    <lastmod>2017-09-13T09:46:10.385Z</lastmod>
+    <data>
+        <display>
+        <title>更换阿里云Docker镜像源</title>
+        <pubTime>2017-09-12T11:54:17.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docker" url="https://yangshunjie.com/categories/Docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
-    <lastmod>2017-09-13T02:35:24.317Z</lastmod>
+    <lastmod>2017-09-13T09:46:10.385Z</lastmod>
     <data>
         <display>
         <title>给你的域名加把锁：免费Https申请</title>
@@ -37,28 +57,8 @@
 
     
   <url>
-    <loc>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</loc>
-    <lastmod>2017-09-13T02:35:24.316Z</lastmod>
-    <data>
-        <display>
-        <title>更换阿里云Docker镜像源</title>
-        <pubTime>2017-09-12T11:54:17.000Z</pubTime>
-        
-        <tag>Docker</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docker" url="https://yangshunjie.com/categories/Docker/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yangshunjie.com/ddd-project-collection.html</loc>
-    <lastmod>2017-09-13T02:35:24.298Z</lastmod>
+    <lastmod>2017-09-13T09:46:10.354Z</lastmod>
     <data>
         <display>
         <title>领域驱动设计（DDD）项目收集</title>
@@ -81,8 +81,32 @@
 
     
   <url>
+    <loc>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</loc>
+    <lastmod>2017-09-13T09:46:10.354Z</lastmod>
+    <data>
+        <display>
+        <title>ASP.NET Core中动态为控制器类型添加特性</title>
+        <pubTime>2017-09-13T17:45:22.000Z</pubTime>
+        
+        <tag>.NET Core</tag>
+         
+        <tag>ASP.NET Core</tag>
+         
+        <tag>WebApi</tag>
+         
+         
+           
+             
+              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</loc>
-    <lastmod>2017-09-13T02:35:24.298Z</lastmod>
+    <lastmod>2017-09-13T09:46:10.338Z</lastmod>
     <data>
         <display>
         <title>ASP.NET Core中为指定类添加WebApi服务功能</title>
@@ -93,6 +117,8 @@
         <tag>ASP.NET Core</tag>
          
         <tag>WebApi</tag>
+         
+        <tag>MVC</tag>
          
          
            
