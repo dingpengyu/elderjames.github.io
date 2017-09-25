@@ -39,7 +39,7 @@
     
     <title>
         
-            时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式 | 
+            时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储 | 
         
         ElderJames&#39; Blog
     </title>
@@ -266,18 +266,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://yangshunjie.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式 | ElderJames&#39; Blog">
+    <meta property="og:title" content="时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储 | ElderJames&#39; Blog">
     <meta property="og:image" content="https://yangshunjie.com/img/favicon.png" />
     <meta property="og:description" content="学习、札记、分享">
     <meta property="og:article:tag" content=".NET Core"> <meta property="og:article:tag" content="InfluxDB"> 
 
     
         <meta property="article:published_time" content="Tue Sep 26 2017 00:44:01 GMT+0000" />
-        <meta property="article:modified_time" content="Mon Sep 25 2017 17:39:59 GMT+0000" />
+        <meta property="article:modified_time" content="Mon Sep 25 2017 18:30:14 GMT+0000" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式 | ElderJames&#39; Blog">
+    <meta name="twitter:title" content="时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储 | ElderJames&#39; Blog">
     <meta name="twitter:description" content="学习、札记、分享">
     <meta name="twitter:image" content="https://yangshunjie.com/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -298,9 +298,9 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "mainEntityOfPage": "https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html",
-    "headline": "时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式",
+    "headline": "时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储",
     "datePublished": "Tue Sep 26 2017 00:44:01 GMT+0000",
-    "dateModified": "Mon Sep 25 2017 17:39:59 GMT+0000",
+    "dateModified": "Mon Sep 25 2017 18:30:14 GMT+0000",
     "author": {
         "@type": "Person",
         "name": "James Yeung",
@@ -385,7 +385,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装与使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装与使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NET-客户端"><span class="post-toc-number">2.</span> <span class="post-toc-text">.NET 客户端</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NET-客户端"><span class="post-toc-number">1.</span> <span class="post-toc-text">.NET 客户端</span></a></li></ol>
     </ul>
     
 
@@ -408,7 +408,7 @@
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(https://www.msolution.io/wp-content/uploads/2015/12/influxdb.png)">
     
             <p class="article-headline-p">
-                时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式
+                时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储
             </p>
         </div>
 
@@ -490,7 +490,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式&url=https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html&pic=https://yangshunjie.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储&url=https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html&pic=https://yangshunjie.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -511,7 +511,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=ElderJames&#39; Blog&title=时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式&summary=学习、札记、分享&pics=https://yangshunjie.com/img/favicon.png&url=https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=ElderJames&#39; Blog&title=时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储&summary=学习、札记、分享&pics=https://yangshunjie.com/img/favicon.png&url=https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -530,51 +530,6 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <script src="\assets\js\APlayer.min.js"> </script><p>我上一篇文章<a href="/influxdb-in-dotNEt-Core-1-Introduction.html">《InfluxDB在.NET Core中的使用——（1）InfluxDB简介》</a>中简单介绍了InfluxDB的相关概念，本文将继续介绍下半部分，就是在.NET Core中的使用方法。</p>
-<h2 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h2><p>安装方法很简单，除了在官方网站<a href="https://influxdata.com/downloads/#influxdb" target="_blank" rel="external">https://influxdata.com/downloads/#influxdb</a>下载安装程序外，官方还提供了Docker镜像，我就是在Docker Hub拉取镜像并且部署的，毕竟才14MB大小，而且还与本机环境隔离。</p>
-<p>安装好后，数据库服务的地址是<a href="http://localhost:8086，初始用户名是admin，初始密码也是admin。数据库可以通过发送Http请求来操作。" target="_blank" rel="external">http://localhost:8086，初始用户名是admin，初始密码也是admin。数据库可以通过发送Http请求来操作。</a></p>
-<ul>
-<li><p>创建一个数据库：</p>
-<p>  <code>curl -i -XPOST http://localhost:8086/query --data-urlencode &quot;q=CREATE DATABASE mydb&quot;</code></p>
-</li>
-<li><p>写入一个Point(记录)：</p>
-<p>  <code>curl -i -XPOST &#39;http://localhost:8086/write?db=mydb&#39; --data-binary &#39;cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000&#39;</code></p>
-</li>
-<li><p>查询操作：</p>
-<p>  <code>curl -G &#39;http://localhost:8086/query?pretty=true&#39; --data-urlencode &quot;db=mydb&quot; --data-urlencode &quot;q=SELECT \&quot;value\&quot; FROM \&quot;cpu_load_short\&quot; WHERE \&quot;region\&quot;=&#39;us-west&#39;&quot;</code></p>
-<p>  返回的会是一段Json数据：</p>
-</li>
-</ul>
-<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
-    <span class="token property">"results"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        <span class="token punctuation">{</span>
-            <span class="token property">"statement_id"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
-            <span class="token property">"series"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token punctuation">{</span>
-                    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"cpu_load_short"</span><span class="token punctuation">,</span>
-                    <span class="token property">"columns"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                        <span class="token string">"time"</span><span class="token punctuation">,</span>
-                        <span class="token string">"value"</span>
-                    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-                    <span class="token property">"values"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-                        <span class="token punctuation">[</span>
-                            <span class="token string">"2015-01-29T21:55:43.702900257Z"</span><span class="token punctuation">,</span>
-                            <span class="token number">2</span>
-                        <span class="token punctuation">]</span><span class="token punctuation">,</span>
-                        <span class="token punctuation">[</span>
-                            <span class="token string">"2015-01-29T21:55:43.702900257Z"</span><span class="token punctuation">,</span>
-                            <span class="token number">0.55</span>
-                        <span class="token punctuation">]</span><span class="token punctuation">,</span>
-                        <span class="token punctuation">[</span>
-                            <span class="token string">"2015-06-11T20:46:02Z"</span><span class="token punctuation">,</span>
-                            <span class="token number">0.64</span>
-                        <span class="token punctuation">]</span>
-                    <span class="token punctuation">]</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">]</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="NET-客户端"><a href="#NET-客户端" class="headerlink" title=".NET 客户端"></a>.NET 客户端</h2><p>正因为InfluxDB是通过http请求来操作数据库，所以在.NET Core中使用很简单，只需要用HttpClient封装一个客户端、并且按照InfluxDB的数据结构去解析数据就行了。而且，已经有大神开发出了一个开源的可用于.NET Core的InfluxDB客户端项目 <a href="https://github.com/pootzko/InfluxData.Net" target="_blank" rel="external">InfluxData.Net</a> ，本文将利用这个客户端项目结合.NET Core自带的依赖注入框架和仓储模式，去封装一个事件存储的InfluxDB实现的类库。</p>
 <hr>
 <p>未完待续。</p>
