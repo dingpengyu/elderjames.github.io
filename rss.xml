@@ -8,8 +8,43 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Thu, 14 Sep 2017 05:29:12 GMT</pubDate>
+    <pubDate>Mon, 25 Sep 2017 17:20:06 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式</title>
+      <link>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</link>
+      <guid>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</guid>
+      <pubDate>Tue, 26 Sep 2017 00:44:01 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;我上一篇文章&lt;a href=&quot;/influxdb-in-dotNEt-Core-by-ioc-and-repository-pattern.html&quot;&gt;《InfluxDB在.
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>时序数据库InfluxDB在.NET Core中的使用——（1）InfluxDB简介</title>
+      <link>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</link>
+      <guid>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</guid>
+      <pubDate>Mon, 25 Sep 2017 22:56:01 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;InfluxD
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>ASP.NET Core中动态为控制器类型添加特性</title>
@@ -321,40 +356,6 @@
       </description>
       
       <comments>https://yangshunjie.com/git-cao-zuo-bi-ji.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ubuntu 搭建Gogs ：轻量Git Web端管理系统</title>
-      <link>https://yangshunjie.com/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html</link>
-      <guid>https://yangshunjie.com/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html</guid>
-      <pubDate>Sat, 26 Mar 2016 22:36:31 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;Gogs是国人开发的开源git管理系统，类似gitlab，可在服务器上搭建私人的git版本管理系统。内建很多功能，但俾比gitlab安装更方便，占用更少的资源。&lt;br&gt;详细介
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>修复apt-get包管理</title>
-      <link>https://yangshunjie.com/xiu-fu-apt-getbao-guan-li.html</link>
-      <guid>https://yangshunjie.com/xiu-fu-apt-getbao-guan-li.html</guid>
-      <pubDate>Thu, 24 Mar 2016 11:31:49 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;1.通过&lt;code&gt;wget http://oss.aliyuncs.com/aliyunecs/update_source.tgz&lt;/code&gt; 下载update_sour
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/xiu-fu-apt-getbao-guan-li.html#disqus_thread</comments>
     </item>
     
   </channel>
