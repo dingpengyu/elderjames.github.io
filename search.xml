@@ -7,8 +7,195 @@
       <url>/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>我上一篇文章<a href="/influxdb-in-dotNEt-Core-1-Introduction.html">《InfluxDB在.NET Core中的使用——（1）InfluxDB简介》</a>中简单介绍了InfluxDB的相关概念，本文将继续介绍下半部分，就是在.NET Core中的使用方法。</p>
 <h2 id="NET-客户端"><a href="#NET-客户端" class="headerlink" title=".NET 客户端"></a>.NET 客户端</h2><p>正因为InfluxDB是通过http请求来操作数据库，所以在.NET Core中使用很简单，只需要用HttpClient封装一个客户端、并且按照InfluxDB的数据结构去解析数据就行了。而且，已经有大神开发出了一个开源的可用于.NET Core的InfluxDB客户端项目 <a href="https://github.com/pootzko/InfluxData.Net" target="_blank" rel="external">InfluxData.Net</a> ，本文将利用这个客户端项目结合.NET Core自带的依赖注入框架和仓储模式，去封装一个事件存储的InfluxDB实现的类库。</p>
-<hr>
-<p>未完待续。</p>
+<h2 id="如何设计"><a href="#如何设计" class="headerlink" title="如何设计"></a>如何设计</h2><ol>
+<li>把配置信息和InfluxDB客户端实例封装成一个服务。</li>
+<li>用这个服务去实现原来定义的事件仓储接口。</li>
+<li>遵循.NET Core的IoC风格，用<code>.Addxxx(option=&gt;{})</code>的方法配置数据库并且注册服务。</li>
+</ol>
+<h2 id="Show-Code"><a href="#Show-Code" class="headerlink" title="Show Code"></a>Show Code</h2><h4 id="InfluxDBOptions-cs"><a href="#InfluxDBOptions-cs" class="headerlink" title="InfluxDBOptions.cs"></a>InfluxDBOptions.cs</h4><p><code>InfluxDBOptions</code>类是一个配置类，主要有主机名<code>Host</code>( IP +端口号)，用户名 <code>UserName</code>，密码 <code>Password</code>，数据库名 <code>DatabaseName</code>。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">/// &lt;summary></span>
+<span class="token comment" spellcheck="true">/// InfluxDB设置</span>
+<span class="token comment" spellcheck="true">/// &lt;/summary></span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InfluxDBOptions</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Host <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">string</span> UserName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Password <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">string</span> DatabaseName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="InfluxDbContext-cs"><a href="#InfluxDbContext-cs" class="headerlink" title="InfluxDbContext.cs"></a>InfluxDbContext.cs</h4><p><code>InfluxDbContext</code> 类是InfluxDB上下文的意思，里面封装了 InfluxDbClient 的一些基本组成部分，数据库对象<code>Database</code>，客户端对象<code>Client</code>(不知道为啥要在<code>InfluxDbClient</code>内定义一个Client对象)，以及我们上面设计的配置对象<code>InfluxDBOptions</code>。</p>
+<p>另外还有<code>EnsureDbCreated</code>、<code>WriteAsync</code>和<code>QueryAsync</code>，其中<code>EnsureDbCreated</code>是确保数据库已创建，而<code>WriteAsync</code>和<code>QueryAsync</code>是对原来客户端读写方法的简化。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InfluxDbContext</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token function">InfluxDbContext</span><span class="token punctuation">(</span>InfluxDBOptions options<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        Options <span class="token operator">=</span> options<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InfluxDbClient</span><span class="token punctuation">(</span>options<span class="token punctuation">.</span>Host<span class="token punctuation">,</span> options<span class="token punctuation">.</span>UserName<span class="token punctuation">,</span> options<span class="token punctuation">.</span>Password<span class="token punctuation">,</span> InfluxDbVersion<span class="token punctuation">.</span>v_1_0_0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>Client <span class="token operator">=</span> client<span class="token punctuation">.</span>Client<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>Database <span class="token operator">=</span> client<span class="token punctuation">.</span>Database<span class="token punctuation">;</span>
+        <span class="token function">EnsureDbCreated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> IDatabaseClientModule Database <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> IBasicClientModule Client <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> InfluxDBOptions Options <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> Task <span class="token function">EnsureDbCreated</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> dbs <span class="token operator">=</span> <span class="token keyword">await</span> Database<span class="token punctuation">.</span><span class="token function">GetDatabasesAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dbs<span class="token punctuation">.</span><span class="token function">All</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> x<span class="token punctuation">.</span>Name <span class="token operator">!=</span> Options<span class="token punctuation">.</span>DatabaseName<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">await</span> Database<span class="token punctuation">.</span><span class="token function">CreateDatabaseAsync</span><span class="token punctuation">(</span>Options<span class="token punctuation">.</span>DatabaseName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/// &lt;summary></span>
+    <span class="token comment" spellcheck="true">/// 查询一个Serie</span>
+    <span class="token comment" spellcheck="true">/// &lt;/summary></span>
+    <span class="token comment" spellcheck="true">/// &lt;param name="query">&lt;/param></span>
+    <span class="token comment" spellcheck="true">/// &lt;returns>&lt;/returns></span>
+    <span class="token keyword">public</span> <span class="token keyword">async</span> Task<span class="token operator">&lt;</span>Serie<span class="token operator">></span> <span class="token function">QueryAsync</span><span class="token punctuation">(</span><span class="token keyword">string</span> query<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token keyword">await</span> Client<span class="token punctuation">.</span><span class="token function">QueryAsync</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> Options<span class="token punctuation">.</span>DatabaseName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> result<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">FirstOrDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/// &lt;summary></span>
+    <span class="token comment" spellcheck="true">/// 写入一个Point</span>
+    <span class="token comment" spellcheck="true">/// &lt;/summary></span>
+    <span class="token comment" spellcheck="true">/// &lt;param name="point">&lt;/param></span>
+    <span class="token comment" spellcheck="true">/// &lt;returns>&lt;/returns></span>
+    <span class="token keyword">public</span> <span class="token keyword">async</span> Task<span class="token operator">&lt;</span>IInfluxDataApiResponse<span class="token operator">></span> <span class="token function">WriteAsync</span><span class="token punctuation">(</span>Point point<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">await</span> Client<span class="token punctuation">.</span><span class="token function">WriteAsync</span><span class="token punctuation">(</span>point<span class="token punctuation">,</span> Options<span class="token punctuation">.</span>DatabaseName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="IEventStorageRepository-cs"><a href="#IEventStorageRepository-cs" class="headerlink" title="IEventStorageRepository.cs"></a>IEventStorageRepository.cs</h4><p><code>IEventStorageRepository</code>事件仓储接口是我设计的，只有两个方法，一个存储方法<code>Store</code>，一个查询方法<code>GetEvents</code>。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IEventStorageRepository</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">Store</span><span class="token punctuation">(</span>StoredEvent theEvent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    IEnumerable<span class="token operator">&lt;</span>StoredEvent<span class="token operator">></span> <span class="token function">GetEvents</span><span class="token punctuation">(</span>Guid aggregateId<span class="token punctuation">,</span> <span class="token keyword">int</span> afterVersion <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中<code>StoredEvent</code>是一个继承了Event的特殊类，用来保存事件的相关属性。关于这个类的设计在这不是重点，可以到我的项目<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Storage/StoredEvent.cs" target="_blank" rel="external">【Shriek】</a>中一窥究竟。</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StoredEvent</span> <span class="token punctuation">:</span> Event
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token function">StoredEvent</span><span class="token punctuation">(</span>Event @<span class="token keyword">event</span><span class="token punctuation">,</span> <span class="token keyword">string</span> data<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        AggregateId <span class="token operator">=</span> @<span class="token keyword">event</span><span class="token punctuation">.</span>AggregateId<span class="token punctuation">;</span>
+        Data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+        Version <span class="token operator">=</span> @<span class="token keyword">event</span><span class="token punctuation">.</span>Version<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token function">StoredEvent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+    <span class="token punctuation">[</span>Key<span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> Id <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">protected</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//事件的序列化json字符串</span>
+    <span class="token keyword">public</span> <span class="token keyword">string</span> Data <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="EventStorageRepository-cs"><a href="#EventStorageRepository-cs" class="headerlink" title="EventStorageRepository.cs"></a>EventStorageRepository.cs</h4><p>仓储实现类</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EventStorageRepository</span> <span class="token punctuation">:</span> IEventStorageRepository
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">readonly</span> InfluxDbContext _dbContext<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">const</span> <span class="token keyword">string</span> TableName <span class="token operator">=</span> <span class="token string">"events"</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">EventStorageRepository</span><span class="token punctuation">(</span>InfluxDbContext dbContext<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_dbContext <span class="token operator">=</span> dbContext<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> IEnumerable<span class="token operator">&lt;</span>StoredEvent<span class="token operator">></span> <span class="token function">GetEvents</span><span class="token punctuation">(</span>Guid aggregateId<span class="token punctuation">,</span> <span class="token keyword">int</span> afterVersion <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> query <span class="token operator">=</span> $<span class="token string">"SELECT * FROM {TableName} WHERE AggregateId='{aggregateId}' AND Version >= {afterVersion}"</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> result <span class="token operator">=</span> _dbContext<span class="token punctuation">.</span><span class="token function">QueryAsync</span><span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">.</span>Result<span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> result <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">StoredEvent</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token punctuation">:</span> <span class="token function">SerieToStoredEvent</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Store</span><span class="token punctuation">(</span>StoredEvent theEvent<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> point <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Point</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            Name <span class="token operator">=</span> TableName<span class="token punctuation">,</span>
+            Tags <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">object</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token punctuation">{</span><span class="token string">"AggregateId"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>AggregateId<span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            Fields <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">object</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token punctuation">{</span><span class="token string">"Data"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>Data<span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span><span class="token string">"EventType"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>MessageType<span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span><span class="token string">"User"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>User<span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span><span class="token string">"Version"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>Version<span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            Timestamp <span class="token operator">=</span> theEvent<span class="token punctuation">.</span>Timestamp
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">var</span> result <span class="token operator">=</span> _dbContext<span class="token punctuation">.</span><span class="token function">WriteAsync</span><span class="token punctuation">(</span>point<span class="token punctuation">)</span><span class="token punctuation">.</span>Result<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">.</span>Success<span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">InfluxDataException</span><span class="token punctuation">(</span><span class="token string">"事件插入失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> IEnumerable<span class="token operator">&lt;</span>StoredEvent<span class="token operator">></span> <span class="token function">SerieToStoredEvent</span><span class="token punctuation">(</span>Serie serie<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> serie<span class="token punctuation">.</span>Values<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">new</span> <span class="token class-name">StoredEvent</span>
+        <span class="token punctuation">{</span>
+            AggregateId <span class="token operator">=</span> Guid<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"AggregateId"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Version <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"Version"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Data <span class="token operator">=</span> item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"Data"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span><span class="token string">@"\", string.Empty),
+            User = item[serie.Columns.IndexOf("</span>User"<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            MessageType <span class="token operator">=</span> item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"EventType"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span><span class="token string">@"\"</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Timestamp <span class="token operator">=</span> DateTime<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="EventStorageInfluxDBExtensions-cs"><a href="#EventStorageInfluxDBExtensions-cs" class="headerlink" title="EventStorageInfluxDBExtensions.cs"></a>EventStorageInfluxDBExtensions.cs</h4><p>IoC注册及配置扩展类</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">EventStorageInfluxDBExtensions</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">AddInfluxDbEventStorage</span><span class="token punctuation">(</span><span class="token keyword">this</span> IServiceCollection services<span class="token punctuation">,</span> Action<span class="token operator">&lt;</span>InfluxDBOptions<span class="token operator">></span> optionAction<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> options <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InfluxDBOptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">optionAction</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        services<span class="token punctuation">.</span><span class="token function">AddScoped</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        services<span class="token punctuation">.</span><span class="token generic-method function">AddScoped<span class="token punctuation">&lt;</span>InfluxDbContext<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        services<span class="token punctuation">.</span><span class="token generic-method function">AddScoped<span class="token punctuation">&lt;</span>IEventStorageRepository<span class="token punctuation">,</span> EventStorageRepository<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        services<span class="token punctuation">.</span><span class="token generic-method function">AddScoped<span class="token punctuation">&lt;</span>IMementoRepository<span class="token punctuation">,</span> MementoRepository<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        services<span class="token punctuation">.</span><span class="token generic-method function">AddScoped<span class="token punctuation">&lt;</span>IEventStorage<span class="token punctuation">,</span> SqlEventStorage<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token keyword">var</span> services <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServiceCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    services<span class="token punctuation">.</span><span class="token function">AddInfluxDbEventStorage</span><span class="token punctuation">(</span>options <span class="token operator">=</span><span class="token operator">></span>
+    <span class="token punctuation">{</span>
+        options<span class="token punctuation">.</span>Host <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">GetSection</span><span class="token punctuation">(</span><span class="token string">"InfluxDBConnection:Host"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+        options<span class="token punctuation">.</span>Password <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">GetSection</span><span class="token punctuation">(</span><span class="token string">"InfluxDBConnection:Password"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+        options<span class="token punctuation">.</span>UserName <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">GetSection</span><span class="token punctuation">(</span><span class="token string">"InfluxDBConnection:UserName"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+        options<span class="token punctuation">.</span>DatabaseName <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">GetSection</span><span class="token punctuation">(</span><span class="token string">"InfluxDBConnection:DatabaseName"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>配置文件<code>appsettings.json</code>中的配置</p>
+<pre class="line-numbers language-json"><code class="language-json">  <span class="token property">"InfluxDBConnection"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"Host"</span><span class="token operator">:</span> <span class="token string">"http://localhost:8086"</span><span class="token punctuation">,</span>
+    <span class="token property">"DatabaseName"</span><span class="token operator">:</span> <span class="token string">"event_store"</span><span class="token punctuation">,</span>
+    <span class="token property">"UserName"</span><span class="token operator">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
+    <span class="token property">"Password"</span><span class="token operator">:</span> <span class="token string">"admin"</span>
+  <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>大功告成~由于太晚了，我先贴上代码，有空再补上说明咯！</p>
 ]]></content>
       
         <categories>
@@ -1287,13 +1474,13 @@ user = git
         
         <tags>
             
-            <tag> Linux </tag>
-            
-            <tag> Ubuntu </tag>
-            
             <tag> git </tag>
             
             <tag> gogs </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
         
@@ -1447,11 +1634,11 @@ user = git
         
         <tags>
             
-            <tag> mono </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> mono </tag>
             
         </tags>
         
@@ -1801,14 +1988,14 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -1847,12 +2034,6 @@ reproxy=/  http://127.0.0.1:236
     <entry>
       <title><![CDATA[标签]]></title>
       <url>/tags.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -1897,6 +2078,12 @@ reproxy=/  http://127.0.0.1:236
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
   
