@@ -9,9 +9,10 @@
     
     
     
+    
   <url>
     <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
-    <lastmod>2017-09-25T18:30:14.219Z</lastmod>
+    <lastmod>2017-09-26T12:57:58.202Z</lastmod>
     <data>
         <display>
         <title>给你的域名加把锁：免费Https申请</title>
@@ -35,10 +36,9 @@
     </url>
 
     
-    
   <url>
     <loc>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</loc>
-    <lastmod>2017-09-25T18:30:14.219Z</lastmod>
+    <lastmod>2017-09-26T12:57:58.202Z</lastmod>
     <data>
         <display>
         <title>更换阿里云Docker镜像源</title>
@@ -57,8 +57,52 @@
 
     
   <url>
+    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</loc>
+    <lastmod>2017-09-26T12:57:58.187Z</lastmod>
+    <data>
+        <display>
+        <title>时序数据库InfluxDB在.NET Core中的使用——（1）InfluxDB简介及使用</title>
+        <pubTime>2017-09-25T22:56:01.000Z</pubTime>
+        
+        <tag>.NET Core</tag>
+         
+        <tag>InfluxDB</tag>
+         
+         
+           
+             
+              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</loc>
+    <lastmod>2017-09-26T12:57:58.187Z</lastmod>
+    <data>
+        <display>
+        <title>时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储</title>
+        <pubTime>2017-09-26T00:44:01.000Z</pubTime>
+        
+        <tag>.NET Core</tag>
+         
+        <tag>InfluxDB</tag>
+         
+         
+           
+             
+              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yangshunjie.com/ddd-project-collection.html</loc>
-    <lastmod>2017-09-25T18:30:14.203Z</lastmod>
+    <lastmod>2017-09-26T12:57:58.187Z</lastmod>
     <data>
         <display>
         <title>领域驱动设计（DDD）项目收集</title>
@@ -81,56 +125,12 @@
 
     
   <url>
-    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</loc>
-    <lastmod>2017-09-25T18:30:14.203Z</lastmod>
+    <loc>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</loc>
+    <lastmod>2017-09-26T12:57:58.174Z</lastmod>
     <data>
         <display>
-        <title>时序数据库InfluxDB在.NET Core中的使用——（1）InfluxDB简介及使用</title>
-        <pubTime>2017-09-25T22:56:01.000Z</pubTime>
-        
-        <tag>.NET Core</tag>
-         
-        <tag>InfluxDB</tag>
-         
-         
-           
-             
-              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</loc>
-    <lastmod>2017-09-25T18:30:14.203Z</lastmod>
-    <data>
-        <display>
-        <title>时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储</title>
-        <pubTime>2017-09-26T00:44:01.000Z</pubTime>
-        
-        <tag>.NET Core</tag>
-         
-        <tag>InfluxDB</tag>
-         
-         
-           
-             
-              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</loc>
-    <lastmod>2017-09-25T18:30:14.203Z</lastmod>
-    <data>
-        <display>
-        <title>ASP.NET Core中动态为控制器类型添加特性</title>
-        <pubTime>2017-09-13T17:59:22.000Z</pubTime>
+        <title>ASP.NET Core中为指定类添加WebApi服务功能</title>
+        <pubTime>2017-09-12T17:00:00.000Z</pubTime>
         
         <tag>.NET Core</tag>
          
@@ -151,12 +151,12 @@
 
     
   <url>
-    <loc>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</loc>
-    <lastmod>2017-09-25T18:30:14.203Z</lastmod>
+    <loc>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</loc>
+    <lastmod>2017-09-26T12:57:58.174Z</lastmod>
     <data>
         <display>
-        <title>ASP.NET Core中为指定类添加WebApi服务功能</title>
-        <pubTime>2017-09-12T17:00:00.000Z</pubTime>
+        <title>ASP.NET Core中动态为控制器类型添加特性</title>
+        <pubTime>2017-09-13T17:59:22.000Z</pubTime>
         
         <tag>.NET Core</tag>
          
@@ -455,13 +455,13 @@
         <title>Ubuntu 搭建Gogs ：轻量Git Web端管理系统</title>
         <pubTime>2016-03-26T22:36:31.000Z</pubTime>
         
-        <tag>git</tag>
-         
-        <tag>gogs</tag>
-         
         <tag>Linux</tag>
          
         <tag>Ubuntu</tag>
+         
+        <tag>git</tag>
+         
+        <tag>gogs</tag>
          
          
            
@@ -497,11 +497,11 @@
         <title>Ubuntu安装mono 4.2.1 最新版教程</title>
         <pubTime>2015-12-03T12:00:04.000Z</pubTime>
         
+        <tag>mono</tag>
+         
         <tag>Linux</tag>
          
         <tag>Ubuntu</tag>
-         
-        <tag>mono</tag>
          
          
            
