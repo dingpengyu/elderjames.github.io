@@ -76,7 +76,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="IEventStorageRepository-cs"><a href="#IEventStorageRepository-cs" class="headerlink" title="IEventStorageRepository.cs"></a>IEventStorageRepository.cs</h4><p><code>IEventStorageRepository</code>事件仓储接口是我设计的，只有两个方法，一个存储方法<code>Store</code>，一个查询方法<code>GetEvents</code>。</p>
+<h4 id="IEventStorageRepository-cs"><a href="#IEventStorageRepository-cs" class="headerlink" title="IEventStorageRepository.cs"></a>IEventStorageRepository.cs</h4><p><code>IEventStorageRepository</code>事件仓储接口是我设计的，只有两个方法，一个存储方法<code>Store</code>，一个查询方法<code>GetEvents</code>。有这个接口，我可以设计不同的ORM和数据库仓储，如已经实现的InMemory、EFCore、MongoDB、LiteDB，以及本篇的主角InfluxDB。</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IEventStorageRepository</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">void</span> <span class="token function">Store</span><span class="token punctuation">(</span>StoredEvent theEvent<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -117,6 +117,8 @@
 
     <span class="token keyword">public</span> IEnumerable<span class="token operator">&lt;</span>StoredEvent<span class="token operator">></span> <span class="token function">GetEvents</span><span class="token punctuation">(</span>Guid aggregateId<span class="token punctuation">,</span> <span class="token keyword">int</span> afterVersion <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//查询语法跟普通sql是基本一致的，一定要注意，比价大小的字段一定是要在Fields中。Tags中的可以比较字符串是否相等</span>
+        <span class="token comment" spellcheck="true">//另外，time是默认的索引，也可以比价大小</span>
         <span class="token keyword">var</span> query <span class="token operator">=</span> $<span class="token string">"SELECT * FROM {TableName} WHERE AggregateId='{aggregateId}' AND Version >= {afterVersion}"</span><span class="token punctuation">;</span>
         <span class="token keyword">var</span> result <span class="token operator">=</span> _dbContext<span class="token punctuation">.</span><span class="token function">QueryAsync</span><span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">.</span>Result<span class="token punctuation">;</span>
 
@@ -125,13 +127,17 @@
 
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Store</span><span class="token punctuation">(</span>StoredEvent theEvent<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//实例化一个Point</span>
         <span class="token keyword">var</span> point <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Point</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//表名</span>
             Name <span class="token operator">=</span> TableName<span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//用作索引的字段放到Tags里（只支持字符串，不能比较大小）</span>
             Tags <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">object</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
                 <span class="token punctuation">{</span><span class="token string">"AggregateId"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>AggregateId<span class="token punctuation">}</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//其他字段放到Fields里，参数值支持系统基本类型，不支持实体类</span>
             Fields <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token punctuation">,</span> <span class="token keyword">object</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
                 <span class="token punctuation">{</span><span class="token string">"Data"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>Data<span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -139,21 +145,25 @@
                 <span class="token punctuation">{</span><span class="token string">"User"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>User<span class="token punctuation">}</span><span class="token punctuation">,</span>
                 <span class="token punctuation">{</span><span class="token string">"Version"</span><span class="token punctuation">,</span> theEvent<span class="token punctuation">.</span>Version<span class="token punctuation">}</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//时间戳，默认是当前时间，此处用事件的时间戳比较准确</span>
             Timestamp <span class="token operator">=</span> theEvent<span class="token punctuation">.</span>Timestamp
         <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
         <span class="token keyword">var</span> result <span class="token operator">=</span> _dbContext<span class="token punctuation">.</span><span class="token function">WriteAsync</span><span class="token punctuation">(</span>point<span class="token punctuation">)</span><span class="token punctuation">.</span>Result<span class="token punctuation">;</span>
 
+        <span class="token comment" spellcheck="true">//结果返回是否写入成功</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">.</span>Success<span class="token punctuation">)</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">InfluxDataException</span><span class="token punctuation">(</span><span class="token string">"事件插入失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
+    <span class="token comment" spellcheck="true">//从Serie取数据转换为StoredEvent，需要一个个字段去取，所有字段都在Serie.Values中了</span>
     <span class="token keyword">private</span> <span class="token keyword">static</span> IEnumerable<span class="token operator">&lt;</span>StoredEvent<span class="token operator">></span> <span class="token function">SerieToStoredEvent</span><span class="token punctuation">(</span>Serie serie<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         <span class="token keyword">return</span> serie<span class="token punctuation">.</span>Values<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">new</span> <span class="token class-name">StoredEvent</span>
         <span class="token punctuation">{</span>
             AggregateId <span class="token operator">=</span> Guid<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"AggregateId"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             Version <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"Version"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">//这里的Replace是客户端的一个bug，已经提交Pull Request</span>
             Data <span class="token operator">=</span> item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"Data"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span><span class="token string">@"\", string.Empty),
             User = item[serie.Columns.IndexOf("</span>User"<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             MessageType <span class="token operator">=</span> item<span class="token punctuation">[</span>serie<span class="token punctuation">.</span>Columns<span class="token punctuation">.</span><span class="token function">IndexOf</span><span class="token punctuation">(</span><span class="token string">"EventType"</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span><span class="token string">@"\"</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -161,7 +171,7 @@
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="EventStorageInfluxDBExtensions-cs"><a href="#EventStorageInfluxDBExtensions-cs" class="headerlink" title="EventStorageInfluxDBExtensions.cs"></a>EventStorageInfluxDBExtensions.cs</h4><p>IoC注册及配置扩展类</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">EventStorageInfluxDBExtensions</span>
 <span class="token punctuation">{</span>
@@ -1975,31 +1985,6 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
@@ -2032,8 +2017,39 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[标签]]></title>
       <url>/tags.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -2078,12 +2094,6 @@ reproxy=/  http://127.0.0.1:236
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
 ]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
   
