@@ -2036,14 +2036,14 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
+      <title><![CDATA[标签]]></title>
+      <url>/tags.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags.html</url>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
