@@ -8,14 +8,14 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Thu, 23 Nov 2017 10:20:51 GMT</pubDate>
+    <pubDate>Thu, 23 Nov 2017 10:46:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>ASP.NET Core 奇技淫巧（1）：中间件实现服务端静态化缓存</title>
-      <link>https://yangshunjie.com/A-Middleware-Implement-For-Server-Static-Cache-In-AspNetCore.html</link>
-      <guid>https://yangshunjie.com/A-Middleware-Implement-For-Server-Static-Cache-In-AspNetCore.html</guid>
-      <pubDate>Thu, 23 Nov 2017 13:17:34 GMT</pubDate>
+      <link>https://yangshunjie.com/A-Middleware-Implement-For-Server-Side-Static-Caching-In-AspNetCore.html</link>
+      <guid>https://yangshunjie.com/A-Middleware-Implement-For-Server-Side-Static-Caching-In-AspNetCore.html</guid>
+      <pubDate>Thu, 23 Nov 2017 18:31:34 GMT</pubDate>
       <description>
       
         
@@ -25,7 +25,7 @@
       
       </description>
       
-      <comments>https://yangshunjie.com/A-Middleware-Implement-For-Server-Static-Cache-In-AspNetCore.html#disqus_thread</comments>
+      <comments>https://yangshunjie.com/A-Middleware-Implement-For-Server-Side-Static-Caching-In-AspNetCore.html#disqus_thread</comments>
     </item>
     
     <item>

@@ -4,7 +4,7 @@
     
     <entry>
       <title><![CDATA[ASP.NET Core 奇技淫巧（1）：中间件实现服务端静态化缓存]]></title>
-      <url>/A-Middleware-Implement-For-Server-Static-Cache-In-AspNetCore.html</url>
+      <url>/A-Middleware-Implement-For-Server-Side-Static-Caching-In-AspNetCore.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><p>最近在公司成功落地了一个用ASP.NET Core 开发前台的CMS项目，虽然对于表层的开发是兼容MVC5的，但是作为爱好者当然要用尽量多的ASP.NET Core新功能了。</p>
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在项目开发的过程中，为了满足需求，还是有许多功能要自己“发明”，也就是已有技术的组(qi)合(yin)运(ji)用(qiao)。本例先讲讲如果用中间件开发所有CMS都需要的服务端静态缓存方法。</p>
 <p>CMS系统的一大痛点是一个页面要查询的内容很多，所以常常为了减轻服务器压力，都会使用到各种缓存技术。比如静态文件的CDN缓存、客户端缓存、还有就是服务端静态化缓存。</p>
@@ -2273,14 +2273,14 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
+      <title><![CDATA[标签]]></title>
+      <url>/tags.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags.html</url>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
