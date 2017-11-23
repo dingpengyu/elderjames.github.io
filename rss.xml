@@ -8,8 +8,25 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Thu, 23 Nov 2017 10:46:45 GMT</pubDate>
+    <pubDate>Thu, 23 Nov 2017 14:57:46 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Core奇技淫巧（2）：中间件中渲染Razor视图</title>
+      <link>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</link>
+      <guid>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</guid>
+      <pubDate>Thu, 23 Nov 2017 21:50:39 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;上一篇文章&lt;a href=&quot;A-Midd
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>ASP.NET Core 奇技淫巧（1）：中间件实现服务端静态化缓存</title>
@@ -338,23 +355,6 @@
       </description>
       
       <comments>https://yangshunjie.com/as.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>从旧版.NET Core 升级到.NET Core 1.0正式版</title>
-      <link>https://yangshunjie.com/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html</link>
-      <guid>https://yangshunjie.com/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html</guid>
-      <pubDate>Thu, 30 Jun 2016 14:00:33 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;6月28日凌晨，RedHat 开发者大会上微软正式发布.NET Core正式版，我作为.NET爱好者，马上就想安装来玩玩，不过因为之前电脑上就装有旧版本，在这次正式版的安装中
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html#disqus_thread</comments>
     </item>
     
   </channel>
