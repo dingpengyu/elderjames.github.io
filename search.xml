@@ -236,66 +236,57 @@
 <pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token keyword">var</span> hasExpire <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">.</span><span class="token function">TryParse</span><span class="token punctuation">(</span>Configuration<span class="token punctuation">[</span><span class="token string">"html_cache_expire_time"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">out</span> <span class="token keyword">var</span> expire<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">if</span> <span class="token punctuation">(</span>hasExpire <span class="token operator">&amp;&amp;</span> expire <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//文件缓存</span>
+        app<span class="token punctuation">.</span><span class="token function">Use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>context<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> url <span class="token operator">=</span> context<span class="token punctuation">.</span>Request<span class="token punctuation">.</span>Path<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> th <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MD5CryptoServiceProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> data <span class="token operator">=</span> th<span class="token punctuation">.</span><span class="token function">ComputeHash</span><span class="token punctuation">(</span>Encoding<span class="token punctuation">.</span>Unicode<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> key <span class="token operator">=</span> Convert<span class="token punctuation">.</span><span class="token function">ToBase64String</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> Base64FormattingOptions<span class="token punctuation">.</span>None<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> path <span class="token operator">=</span> HttpUtility<span class="token punctuation">.</span><span class="token function">UrlEncode</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">var</span> timeTicks <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span>DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Ticks <span class="token operator">/</span> <span class="token number">10000000</span> <span class="token operator">/</span> expire <span class="token operator">*</span> <span class="token number">10000000</span> <span class="token operator">*</span> expire<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">const</span> <span class="token keyword">string</span> filePath <span class="token operator">=</span> <span class="token string">"static/cache/"</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> fileName <span class="token operator">=</span> path <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> timeTicks<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token string">"yyyyMMddHHmmss"</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".html"</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> fullPath <span class="token operator">=</span> Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>filePath<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>File<span class="token punctuation">.</span><span class="token function">Exists</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
-                <span class="token comment" spellcheck="true">//文件缓存</span>
-                app<span class="token punctuation">.</span><span class="token function">Use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>context<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
-                <span class="token punctuation">{</span>
-                    <span class="token keyword">var</span> url <span class="token operator">=</span> context<span class="token punctuation">.</span>Request<span class="token punctuation">.</span>Path<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">var</span> th <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MD5CryptoServiceProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">var</span> data <span class="token operator">=</span> th<span class="token punctuation">.</span><span class="token function">ComputeHash</span><span class="token punctuation">(</span>Encoding<span class="token punctuation">.</span>Unicode<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">var</span> key <span class="token operator">=</span> Convert<span class="token punctuation">.</span><span class="token function">ToBase64String</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> Base64FormattingOptions<span class="token punctuation">.</span>None<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">var</span> path <span class="token operator">=</span> HttpUtility<span class="token punctuation">.</span><span class="token function">UrlEncode</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                    <span class="token keyword">var</span> timeTicks <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span>DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Ticks <span class="token operator">/</span> <span class="token number">10000000</span> <span class="token operator">/</span> expire <span class="token operator">*</span> <span class="token number">10000000</span> <span class="token operator">*</span> expire<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                    <span class="token keyword">const</span> <span class="token keyword">string</span> filePath <span class="token operator">=</span> <span class="token string">"static/cache/"</span><span class="token punctuation">;</span>
-                    <span class="token keyword">var</span> fileName <span class="token operator">=</span> path <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> timeTicks<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token string">"yyyyMMddHHmmss"</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".html"</span><span class="token punctuation">;</span>
-                    <span class="token keyword">var</span> fullPath <span class="token operator">=</span> Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>filePath<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>File<span class="token punctuation">.</span><span class="token function">Exists</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">)</span><span class="token punctuation">)</span>
-                    <span class="token punctuation">{</span>
-                        <span class="token keyword">await</span> context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span><span class="token function">SendFileAsync</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-                    <span class="token keyword">else</span>
-                    <span class="token punctuation">{</span>
-                        <span class="token keyword">var</span> originalBody <span class="token operator">=</span> context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body<span class="token punctuation">;</span>
-
-                        <span class="token keyword">try</span>
-                        <span class="token punctuation">{</span>
-                            <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token keyword">var</span> memStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemoryStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                            <span class="token punctuation">{</span>
-                                context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> memStream<span class="token punctuation">;</span>
-                                <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                                <span class="token keyword">if</span> <span class="token punctuation">(</span>context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>StatusCode <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>HttpStatusCode<span class="token punctuation">.</span>OK<span class="token punctuation">)</span>
-                                <span class="token punctuation">{</span>
-                                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Directory<span class="token punctuation">.</span><span class="token function">Exists</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">)</span>
-                                        Directory<span class="token punctuation">.</span><span class="token function">CreateDirectory</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                                    memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-                                    <span class="token keyword">var</span> responseBody <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>memStream<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                                    <span class="token keyword">await</span> File<span class="token punctuation">.</span><span class="token function">WriteAllTextAsync</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">,</span> Regex<span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span>responseBody<span class="token punctuation">,</span> <span class="token string">"\\n+\\s+"</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                                    memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-                                    <span class="token keyword">await</span> memStream<span class="token punctuation">.</span><span class="token function">CopyToAsync</span><span class="token punctuation">(</span>originalBody<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                                <span class="token punctuation">}</span>
-                            <span class="token punctuation">}</span>
-                        <span class="token punctuation">}</span>
-                        <span class="token keyword">finally</span>
-                        <span class="token punctuation">{</span>
-                            context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> originalBody<span class="token punctuation">;</span>
-                        <span class="token punctuation">}</span>
-                    <span class="token punctuation">}</span>
-
-                    <span class="token comment" spellcheck="true">//清理超时文件</span>
-                    Task<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
-                    <span class="token punctuation">{</span>
-                        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> file <span class="token keyword">in</span> Directory<span class="token punctuation">.</span><span class="token function">GetFiles</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Where</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">!</span>x<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>timeTicks<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token string">"yyyyMMddHHmmss"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        <span class="token punctuation">{</span>
-                            File<span class="token punctuation">.</span><span class="token function">Delete</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token punctuation">}</span>
-                    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">await</span> context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span><span class="token function">SendFileAsync</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">var</span> originalBody <span class="token operator">=</span> context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body<span class="token punctuation">;</span>
+
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token keyword">var</span> memStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemoryStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> memStream<span class="token punctuation">;</span>
+                        <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>StatusCode <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>HttpStatusCode<span class="token punctuation">.</span>OK<span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Directory<span class="token punctuation">.</span><span class="token function">Exists</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                                Directory<span class="token punctuation">.</span><span class="token function">CreateDirectory</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                            memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                            <span class="token keyword">var</span> responseBody <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>memStream<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token keyword">await</span> File<span class="token punctuation">.</span><span class="token function">WriteAllTextAsync</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">,</span> Regex<span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span>responseBody<span class="token punctuation">,</span> <span class="token string">"\\n+\\s+"</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                            <span class="token keyword">await</span> memStream<span class="token punctuation">.</span><span class="token function">CopyToAsync</span><span class="token punctuation">(</span>originalBody<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">finally</span>
+                <span class="token punctuation">{</span>
+                    context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> originalBody<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>其实这个中间件还是有很多改进的地方，比如定义一套规则来给不同页面设置不同的超时时间，这样有的需要实时更新的内容就可以被区分开，而基本不变的内容就可以一直使用缓存。</p>
 ]]></content>
       
@@ -1490,9 +1481,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> Mysql </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> Mysql </tag>
             
         </tags>
         
@@ -1517,9 +1508,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> Mysql </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> Mysql </tag>
             
         </tags>
         
@@ -2305,6 +2296,18 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[留言板]]></title>
       <url>/contact.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
@@ -2341,18 +2344,6 @@ reproxy=/  http://127.0.0.1:236
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
