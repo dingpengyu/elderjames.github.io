@@ -8,8 +8,25 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Mon, 16 Oct 2017 06:01:09 GMT</pubDate>
+    <pubDate>Thu, 23 Nov 2017 10:04:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>ASP.NET Core 奇技淫巧（1）：中间件实现服务端静态化缓存</title>
+      <link>https://yangshunjie.com/A-Middleware-Implement-For-Server-Static-Cache-In-ASPNetCore.html</link>
+      <guid>https://yangshunjie.com/A-Middleware-Implement-For-Server-Static-Cache-In-ASPNetCore.html</guid>
+      <pubDate>Thu, 23 Nov 2017 13:17:34 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;分享&quot;&gt;&lt;a href=&quot;#分享&quot; class=&quot;headerlink&quot; title=&quot;分享&quot;&gt;&lt;/a&gt;分享&lt;/h2&gt;&lt;p&gt;最近在公司成功落地了一个用ASP.NET
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/A-Middleware-Implement-For-Server-Static-Cache-In-ASPNetCore.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储</title>
@@ -338,24 +355,6 @@
       </description>
       
       <comments>https://yangshunjie.com/cong-jiu-ban-net-core-sheng-ji-dao-net-core-1-0zheng-shi-ban.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>git 操作笔记</title>
-      <link>https://yangshunjie.com/git-cao-zuo-bi-ji.html</link>
-      <guid>https://yangshunjie.com/git-cao-zuo-bi-ji.html</guid>
-      <pubDate>Mon, 28 Mar 2016 14:17:16 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;code&gt;$ cd myproject&lt;/code&gt;  你建立的项目文件夹&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$ git init&lt;/code&gt;   执行git的本地初始化&lt;/p&gt;
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/git-cao-zuo-bi-ji.html#disqus_thread</comments>
     </item>
     
   </channel>

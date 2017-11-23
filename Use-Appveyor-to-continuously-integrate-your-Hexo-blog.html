@@ -534,7 +534,7 @@
 <p>距离我建立这个博客都过去一周了，一直都在做这个站点的建设。首先是找到个好看的主题，之后绑定自己的https域名，然后是寻找更多玩法，比如放了只可爱的猫咪在右下角，它会跟随者你的鼠标摇头摆尾~比如在底部贴了我的GitHub贡献马赛克，在我的朋友页面抓取我的Github followers，还有就是这篇文章的重点，用AppVeyor去持续集成Hexo博客。</p>
 <p>AppVeyor是目前唯一支持.NET开源项目的持续集成功能，运行环境是Windows，身为.NET开发者和软粉的我，怎么不支持一下这个有情怀的服务商呢？</p>
 <p><del>太晚了，挖坑，明天继续写。</del> </p>
-<h4 id="第一步，创建CI项目"><a href="#第一步，创建CI项目" class="headerlink" title="第一步，创建CI项目"></a>第一步，创建CI项目</h4><p>访问<a href="https://ci.appveyor.com/projects" target="_blank" rel="external">AppVeyor网站</a>，注册或使用Github帐号授权登录，在PROJECTS页面点击【NEW PROJECT】，然后在右侧选择你的Hexo博客所在的仓库。</p>
+<h4 id="第一步，创建CI项目"><a href="#第一步，创建CI项目" class="headerlink" title="第一步，创建CI项目"></a>第一步，创建CI项目</h4><p>访问<a href="https://ci.appveyor.com/projects" target="_blank" rel="noopener">AppVeyor网站</a>，注册或使用Github帐号授权登录，在PROJECTS页面点击【NEW PROJECT】，然后在右侧选择你的Hexo博客所在的仓库。</p>
 <p><img src="/images/1.png" alt=""></p>
 <h4 id="第二步，配置项目和环境变量"><a href="#第二步，配置项目和环境变量" class="headerlink" title="第二步，配置项目和环境变量"></a>第二步，配置项目和环境变量</h4><p>点击项目里的[SETTING]选项卡，配置以下几项：</p>
 <ol>
@@ -575,8 +575,8 @@
 <p><img src="/images/4.png" alt=""></p>
 <p>点击边栏下方的【Personal access tokens】选项卡，并点击右上方的【Generate new token】按钮。Token description任意填写，下方的选项中全选repo即可。</p>
 <p>最后，点击下方绿色的【Generate token】按钮。此时就能得到你的Access Token。</p>
-<p>也可以参考<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="external">官方文档</a></p>
-<h4 id="第四步，加密Access-Token"><a href="#第四步，加密Access-Token" class="headerlink" title="第四步，加密Access Token"></a>第四步，加密Access Token</h4><p>由于这个AccessToken是可以直接操作你的仓库的，而且配置文件是公开的，所以这时就要求对AccessToken进行加密。可到<a href="https://ci.appveyor.com/tools/encrypt" target="_blank" rel="external">AppVeyor Token加密页面</a>进行加密。把加密后的字符串填入下一步中的配置文件里。</p>
+<p>也可以参考<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="noopener">官方文档</a></p>
+<h4 id="第四步，加密Access-Token"><a href="#第四步，加密Access-Token" class="headerlink" title="第四步，加密Access Token"></a>第四步，加密Access Token</h4><p>由于这个AccessToken是可以直接操作你的仓库的，而且配置文件是公开的，所以这时就要求对AccessToken进行加密。可到<a href="https://ci.appveyor.com/tools/encrypt" target="_blank" rel="noopener">AppVeyor Token加密页面</a>进行加密。把加密后的字符串填入下一步中的配置文件里。</p>
 <h4 id="第五步，配置文件"><a href="#第五步，配置文件" class="headerlink" title="第五步，配置文件"></a>第五步，配置文件</h4><p>在Hexo的<strong>根目录</strong>下新建一个<code>appveyor.yml</code>文件，写下以下内容</p>
 <pre class="line-numbers language-yaml"><code class="language-yaml">
 <span class="token key atrule">clone_depth</span><span class="token punctuation">:</span> <span class="token number">5</span>
@@ -621,12 +621,12 @@
 <p>大致的意思是从github仓库的当前分支拉取下来，编译成静态文件后，在push到目标分支。由于AppVeyor环境中是通过Access Token访问我们的仓库的，而Hexo自带的部署则在访问的过程中需要我们输入帐号密码，所以Hexo g -d的命令就不适合在这里使用。需要先编译成静态文件，再把public文件夹的静态文件push到目标分支。</p>
 <p>最后，把这个文件提交到Github上就可以测试了！在AppVeyor的首页可以看到部署的过程和结果~</p>
 <p><img src="/images/5.png" alt=""></p>
-<p>别说我没告诉你，还可以添加一枚徽章装装逼哦！<a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io/branch/files" target="_blank" rel="external"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" alt="Build status"></a></p>
-<p>可以看看我的<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml" target="_blank" rel="external">配置文件</a>，以及底部的两篇参考文章~</p>
+<p>别说我没告诉你，还可以添加一枚徽章装装逼哦！<a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io/branch/files" target="_blank" rel="noopener"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" alt="Build status"></a></p>
+<p>可以看看我的<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml" target="_blank" rel="noopener">配置文件</a>，以及底部的两篇参考文章~</p>
 <p>参考文章：</p>
 <ul>
-<li><a href="http://www.shong.win/blog/2017/02/19/hexo-ci/" target="_blank" rel="external">Hexo利用AppVeyor持续集成</a></li>
-<li><a href="https://formulahendry.github.io/2016/12/04/hexo-ci/" target="_blank" rel="external">Hexo的版本控制与持续集成</a></li>
+<li><a href="http://www.shong.win/blog/2017/02/19/hexo-ci/" target="_blank" rel="noopener">Hexo利用AppVeyor持续集成</a></li>
+<li><a href="https://formulahendry.github.io/2016/12/04/hexo-ci/" target="_blank" rel="noopener">Hexo的版本控制与持续集成</a></li>
 </ul>
 <div id="aplayer0" class="aplayer" style="margin-bottom: 20px;width:400px;"></div>
 		<script>
@@ -807,7 +807,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
             </ul>
         </li>
         
@@ -825,7 +825,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -899,7 +899,7 @@
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">29</span>
+                <span class="sidebar-badge">30</span>
             </a>
         </li>
         
@@ -1247,19 +1247,49 @@ console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viose
             </div>
             
                 
-    <script type="text/javascript" src="/live2d/script.js"></script>
-    <canvas id="live2dcanvas" width="150" height="300" class="live2d"></canvas>
+  <div id="hexo-helper-live2d">
+      <canvas id="live2dcanvas" width="150" height="300" class="live2d"></canvas>
+  </div>
     <style>
-      #live2dcanvas {
+      #live2dcanvas{
+      	-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
         position: fixed;
+        width: 150px;
+        height: 300px;
+        opacity:1;
+        
         right: 0px;
         z-index: 999;
         pointer-events: none;
-        bottom: 60px;
+        bottom: -20px;
       }
+	  
     </style>
-    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json",0.5)</script>
-  
+    <script src="/live2d/device.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+	  if(typeof(device) != "undefined"){
+        if(device.mobile()){
+          document.getElementById("live2dcanvas").style.width = '75px';
+          document.getElementById("live2dcanvas").style.height = '150px';
+          document.write('<script type="text/javascript" src="/live2d/script.js"><\/script>');
+          document.write('<script>loadlive2d("live2dcanvas", "/live2d/assets/tororo.model.json", 0.5)<\/script>');
+        }else{
+          document.write('<script type="text/javascript" src="/live2d/script.js"><\/script>');
+          document.write('<script>loadlive2d("live2dcanvas", "/live2d/assets/tororo.model.json", 0.5)<\/script>');
+        }
+	  }else{
+        document.write('<script type="text/javascript" src="/live2d/script.js"><\/script>');
+        document.write('<script>loadlive2d("live2dcanvas", "/live2d/assets/tororo.model.json", 0.5)<\/script>');    
+	  }
+    })();
+    </script>
+
             
         </body>
     

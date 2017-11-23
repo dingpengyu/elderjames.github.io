@@ -3,10 +3,241 @@
   
     
     <entry>
+      <title><![CDATA[ASP.NET Core 奇技淫巧（1）：中间件实现服务端静态化缓存]]></title>
+      <url>/A-Middleware-Implement-For-Server-Static-Cache-In-ASPNetCore.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><p>最近在公司成功落地了一个用ASP.NET Core 开发前台的CMS项目，虽然对于表层的开发是兼容MVC5的，但是作为爱好者当然要用尽量多的ASP.NET Core新功能了。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在项目开发的过程中，为了满足需求，还是有许多功能要自己“发明”，也就是已有技术的组(qi)合(yin)运(ji)用(qiao)。本例先讲讲如果用中间件开发所有CMS都需要的服务端静态缓存方法。</p>
+<p>CMS系统的一大痛点是一个页面要查询的内容很多，所以常常为了减轻服务器压力，都会使用到各种缓存技术。比如静态文件的CDN缓存、客户端缓存、还有就是服务端静态化缓存。</p>
+<p>服务端静态化缓存在这里指的是把页面事先生成出来保存为静态文件，当用户请求服务器时，可以直接把页面输出给用户，而不再进行查询数据库之类的操作，已达到提高响应速度、减轻服务器压力的效果。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>由于服务端静态化缓存的实现核心是需要拦截请求并且直接返回HTML内容，在MVC5时代，我们可以用过滤器（Filter）来处理，类似如下代码：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token punctuation">[</span><span class="token function">AttributeUsage</span><span class="token punctuation">(</span>AttributeTargets<span class="token punctuation">.</span>Class <span class="token operator">|</span> AttributeTargets<span class="token punctuation">.</span>Method<span class="token punctuation">,</span> AllowMultiple <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">,</span> Inherited <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StaticFileHandlerFilterAttribute</span> <span class="token punctuation">:</span> ActionFilterAttribute
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/// &lt;summary></span>
+        <span class="token comment" spellcheck="true">/// 过期时间，以小时为单位</span>
+        <span class="token comment" spellcheck="true">/// &lt;/summary></span>
+        <span class="token keyword">public</span> <span class="token keyword">int</span> Expiration <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnResultExecuted</span><span class="token punctuation">(</span>ResultExecutedContext filterContext<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> actionResult <span class="token operator">=</span> filterContext<span class="token punctuation">.</span>Result<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>actionResult <span class="token keyword">is</span> ViewResult<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">var</span> fileInfo <span class="token operator">=</span> <span class="token function">GetFileInfo</span><span class="token punctuation">(</span>filterContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>fileInfo<span class="token punctuation">.</span>Exists <span class="token operator">&amp;&amp;</span> fileInfo<span class="token punctuation">.</span>CreationTime<span class="token punctuation">.</span><span class="token function">AddHours</span><span class="token punctuation">(</span>Expiration <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> Expiration<span class="token punctuation">)</span> <span class="token operator">></span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">)</span>
+                    <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>fileInfo<span class="token punctuation">.</span>Exists<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    fileInfo<span class="token punctuation">.</span><span class="token function">Delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">using</span> <span class="token punctuation">(</span>FileStream fs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileStream</span><span class="token punctuation">(</span>fileInfo<span class="token punctuation">.</span>FullName<span class="token punctuation">,</span> FileMode<span class="token punctuation">.</span>CreateNew<span class="token punctuation">,</span> FileAccess<span class="token punctuation">.</span>Write<span class="token punctuation">,</span> FileShare<span class="token punctuation">.</span>None<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">using</span> <span class="token punctuation">(</span>StreamWriter sw <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamWriter</span><span class="token punctuation">(</span>fs<span class="token punctuation">,</span> Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">var</span> viewResult <span class="token operator">=</span> actionResult <span class="token keyword">as</span> ViewResult<span class="token punctuation">;</span>
+                        <span class="token keyword">var</span> viewContext <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ViewContext</span><span class="token punctuation">(</span>filterContext<span class="token punctuation">.</span>Controller<span class="token punctuation">.</span>ControllerContext<span class="token punctuation">,</span> viewResult<span class="token punctuation">.</span>View<span class="token punctuation">,</span> viewResult<span class="token punctuation">.</span>ViewData<span class="token punctuation">,</span> viewResult<span class="token punctuation">.</span>TempData<span class="token punctuation">,</span> sw<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        viewResult<span class="token punctuation">.</span>View<span class="token punctuation">.</span><span class="token function">Render</span><span class="token punctuation">(</span>viewContext<span class="token punctuation">,</span> sw<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">OnActionExecuting</span><span class="token punctuation">(</span>ActionExecutingContext filterContext<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> fileInfo <span class="token operator">=</span> <span class="token function">GetFileInfo</span><span class="token punctuation">(</span>filterContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>fileInfo<span class="token punctuation">.</span>Exists<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">using</span> <span class="token punctuation">(</span>FileStream fs <span class="token operator">=</span> File<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>fileInfo<span class="token punctuation">.</span>FullName<span class="token punctuation">,</span> FileMode<span class="token punctuation">.</span>Open<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">using</span> <span class="token punctuation">(</span>StreamReader sr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>fs<span class="token punctuation">,</span> Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        ContentResult contentresult <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ContentResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        contentresult<span class="token punctuation">.</span>Content <span class="token operator">=</span> sr<span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        contentresult<span class="token punctuation">.</span>ContentType <span class="token operator">=</span> <span class="token string">"text/html"</span><span class="token punctuation">;</span>
+                        filterContext<span class="token punctuation">.</span>Result <span class="token operator">=</span> contentresult<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>而在ASP.NET Core中，我们也可以在Filte中实现，但是，更方便、更牛、更快的方式就是在中间件中实现了。</p>
+<p><img src="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/_static/request-delegate-pipeline.png" alt="中间件示意图"></p>
+<p>中间件运行在请求管道中，个人理解是可以看成是一个递归方法，只不过是调用不同的中间件，中间件中调用下一个中间件、知道最后一个执行完成，会沿路返回上一个中间件……说得可能不清楚，但是看代码和调试一下就能明白了。下面用代码层错误拦截的中间件作为一个中间件生命周期的示例：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    app<span class="token punctuation">.</span><span class="token function">Use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>context<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//执行下一个中间件前执行的代码</span>
+            <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//上一个中间件执行后执行</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>StatusCode <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//执行完后会继续执行上一个中间件next委托之后的语句</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>中间件是写在Startup.cs文件的<code>Configure</code>方法中，以<code>app.Use()</code>方法的执行顺序添加中间件，然后会从上往下运行，遇到<code>next</code>委托就会跳入下一个中间件，不执行<code>next</code>委托就会返回上一个中间件。</p>
+<p>好了，关于中间件的具体介绍可以看<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware?tabs=aspnetcore2x" target="_blank" rel="noopener">官方文档</a></p>
+<h2 id="实现服务端静态化缓存中间件"><a href="#实现服务端静态化缓存中间件" class="headerlink" title="实现服务端静态化缓存中间件"></a>实现服务端静态化缓存中间件</h2><p>下面介绍思路，实现静态化缓存的核心是需要<strong>从请求响应中获取内容，并且转换为字符串保存到文件中</strong>。</p>
+<p>这个功能点用以下代码和注释进行讲解：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//获取响应体的引用</span>
+<span class="token keyword">var</span> originalBody <span class="token operator">=</span> context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body<span class="token punctuation">;</span>
+
+<span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//因为响应体实例是只读的，需要创建一个内存流实例，用来获取响应流内容</span>
+    <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token keyword">var</span> memStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemoryStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//把内存流的引用设置到Response.Body，假装是真的响应体接收数据</span>
+        context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> memStream<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//然后执行下一个中间件，等待有响应返回</span>
+        <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//需要判断响应是否正确，总不能把不正确的内容缓存起来吧</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>StatusCode <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>HttpStatusCode<span class="token punctuation">.</span>OK<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//检测文件存放目录</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Directory<span class="token punctuation">.</span><span class="token function">Exists</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                Directory<span class="token punctuation">.</span><span class="token function">CreateDirectory</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//把内存流的当前操作位置设为0，因为响应写入的过程中位置会在末尾。</span>
+            memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//读取内存流的内容，转换为字符串</span>
+            <span class="token keyword">var</span> responseBody <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>memStream<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//把字符串写入文件，这里还稍微压缩了一下</span>
+            <span class="token keyword">await</span> File<span class="token punctuation">.</span><span class="token function">WriteAllTextAsync</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">,</span> Regex<span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span>responseBody<span class="token punctuation">,</span> <span class="token string">"\\n+\\s+"</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//在此把内存流的当前操作位置设为0</span>
+            memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//还需要把流复制到之前引用的响应体实例</span>
+            <span class="token keyword">await</span> memStream<span class="token punctuation">.</span><span class="token function">CopyToAsync</span><span class="token punctuation">(</span>originalBody<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">finally</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//把响应体实例引用重新设置到响应体</span>
+    context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> originalBody<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>好了，这样响应的内容终于可以缓存起来了，下次请求直接把静态文件输出就是了。但是，好像还有问题：</p>
+<blockquote>
+<ol>
+<li>如何对特定的请求的url做缓存；</li>
+<li>如何设置过期时间。</li>
+</ol>
+</blockquote>
+<p>解决这两个问题的关键就在文件名上了，对于第一点很容易理解，直接把url作为文件名不就完了。没错，但是要注意特殊字符的问题，我这里就用md5处理一下了，这样相同的请求url就会返回相同的静态文件里的内容。</p>
+<p>但是网站要更新，不能永久都是一样的数据呀，这时就需要设置缓存时间了。这里又会产生两个问题：</p>
+<blockquote>
+<ol>
+<li>如何在文件上标识产生缓存时的时间；</li>
+<li>如何判断时间是否超时。</li>
+</ol>
+</blockquote>
+<p>针对这两个问题，我也考虑了很久，总是觉得直接在文件名上记录缓存时间和判断超时就好了,这也有两种方法：</p>
+<blockquote>
+<ol>
+<li>读取文件名上的时间，与当前时间比对；</li>
+<li>在超时时间内都能产生相同的文件名，判断是否存在这个文件。</li>
+</ol>
+</blockquote>
+<p>从代码简洁的考虑上，我选择挑战难度大一点的第二个方法。那么如何使程序在超时时间内都产生相同的文件名呢？其实只需要实现一个算法，在一段时间内产生的时间对象都是相同的时间，忽略中间的时间变化。这个是不是很像小学数学求近似数里的去尾法?或者我们经常用到的<code>&quot;/&quot;</code>运算符，会吧小数点去掉。而在本例中，实现利用整除发忽略一段时间中的时间变化，生成同一个时间的算法和代码如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">       <span class="token keyword">var</span> timeTicks <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span>DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Ticks <span class="token operator">/</span> <span class="token number">10000000</span> <span class="token operator">/</span> expire <span class="token operator">*</span> <span class="token number">10000000</span> <span class="token operator">*</span> expire<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>哈哈，只要一行代码,整除去掉多余的时间再乘回来构造一段时间内不变的时间。其实运行一下可以发现，如果超时时间设置成60秒，那么单位秒上的值会变成00。设置为3600秒，那么分秒两个单位都是0，因此会有一个弊端，真正缓存的时间很可能比设置的值短的，这个要看需求的容忍度啦！</p>
+<p>就这样，问题一个个被解决，下面给出完整的中间件代码：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token keyword">var</span> hasExpire <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">.</span><span class="token function">TryParse</span><span class="token punctuation">(</span>Configuration<span class="token punctuation">[</span><span class="token string">"html_cache_expire_time"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">out</span> <span class="token keyword">var</span> expire<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>hasExpire <span class="token operator">&amp;&amp;</span> expire <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//文件缓存</span>
+                app<span class="token punctuation">.</span><span class="token function">Use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>context<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">var</span> url <span class="token operator">=</span> context<span class="token punctuation">.</span>Request<span class="token punctuation">.</span>Path<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> th <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MD5CryptoServiceProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> data <span class="token operator">=</span> th<span class="token punctuation">.</span><span class="token function">ComputeHash</span><span class="token punctuation">(</span>Encoding<span class="token punctuation">.</span>Unicode<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> key <span class="token operator">=</span> Convert<span class="token punctuation">.</span><span class="token function">ToBase64String</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> Base64FormattingOptions<span class="token punctuation">.</span>None<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> path <span class="token operator">=</span> HttpUtility<span class="token punctuation">.</span><span class="token function">UrlEncode</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">var</span> timeTicks <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span>DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span>Ticks <span class="token operator">/</span> <span class="token number">10000000</span> <span class="token operator">/</span> expire <span class="token operator">*</span> <span class="token number">10000000</span> <span class="token operator">*</span> expire<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">const</span> <span class="token keyword">string</span> filePath <span class="token operator">=</span> <span class="token string">"static/cache/"</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> fileName <span class="token operator">=</span> path <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> timeTicks<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token string">"yyyyMMddHHmmss"</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".html"</span><span class="token punctuation">;</span>
+                    <span class="token keyword">var</span> fullPath <span class="token operator">=</span> Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>filePath<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>File<span class="token punctuation">.</span><span class="token function">Exists</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">await</span> context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span><span class="token function">SendFileAsync</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">var</span> originalBody <span class="token operator">=</span> context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body<span class="token punctuation">;</span>
+
+                        <span class="token keyword">try</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token keyword">var</span> memStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemoryStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                            <span class="token punctuation">{</span>
+                                context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> memStream<span class="token punctuation">;</span>
+                                <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                <span class="token keyword">if</span> <span class="token punctuation">(</span>context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>StatusCode <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>HttpStatusCode<span class="token punctuation">.</span>OK<span class="token punctuation">)</span>
+                                <span class="token punctuation">{</span>
+                                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Directory<span class="token punctuation">.</span><span class="token function">Exists</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                                        Directory<span class="token punctuation">.</span><span class="token function">CreateDirectory</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                                    memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                                    <span class="token keyword">var</span> responseBody <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StreamReader</span><span class="token punctuation">(</span>memStream<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                    <span class="token keyword">await</span> File<span class="token punctuation">.</span><span class="token function">WriteAllTextAsync</span><span class="token punctuation">(</span>fullPath<span class="token punctuation">,</span> Regex<span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span>responseBody<span class="token punctuation">,</span> <span class="token string">"\\n+\\s+"</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                    memStream<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                                    <span class="token keyword">await</span> memStream<span class="token punctuation">.</span><span class="token function">CopyToAsync</span><span class="token punctuation">(</span>originalBody<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                <span class="token punctuation">}</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                        <span class="token keyword">finally</span>
+                        <span class="token punctuation">{</span>
+                            context<span class="token punctuation">.</span>Response<span class="token punctuation">.</span>Body <span class="token operator">=</span> originalBody<span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+
+                    <span class="token comment" spellcheck="true">//清理超时文件</span>
+                    Task<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> file <span class="token keyword">in</span> Directory<span class="token punctuation">.</span><span class="token function">GetFiles</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Where</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">!</span>x<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>timeTicks<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token string">"yyyyMMddHHmmss"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            File<span class="token punctuation">.</span><span class="token function">Delete</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>其实这个中间件还是有很多改进的地方，比如定义一套规则来给不同页面设置不同的超时时间，这样有的需要实时更新的内容就可以被区分开，而基本不变的内容就可以一直使用缓存。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> .NET Core </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> .NET Core </tag>
+            
+            <tag> ASP.NET Core </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储]]></title>
       <url>/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>我上一篇文章<a href="/influxdb-in-dotNEt-Core-1-Introduction.html">《InfluxDB在.NET Core中的使用——（1）InfluxDB简介》</a>中简单介绍了InfluxDB的相关概念，本文将继续介绍下半部分，就是在.NET Core中的使用方法。</p>
-<h2 id="NET-客户端"><a href="#NET-客户端" class="headerlink" title=".NET 客户端"></a>.NET 客户端</h2><p>正因为InfluxDB是通过http请求来操作数据库，所以在.NET Core中使用很简单，只需要用HttpClient封装一个客户端、并且按照InfluxDB的数据结构去解析数据就行了。而且，已经有大神开发出了一个开源的可用于.NET Core的InfluxDB客户端项目 <a href="https://github.com/pootzko/InfluxData.Net" target="_blank" rel="external">InfluxData.Net</a> ，本文将利用这个客户端项目结合.NET Core自带的依赖注入框架和仓储模式，去封装一个事件存储的InfluxDB实现的类库。</p>
+<h2 id="NET-客户端"><a href="#NET-客户端" class="headerlink" title=".NET 客户端"></a>.NET 客户端</h2><p>正因为InfluxDB是通过http请求来操作数据库，所以在.NET Core中使用很简单，只需要用HttpClient封装一个客户端、并且按照InfluxDB的数据结构去解析数据就行了。而且，已经有大神开发出了一个开源的可用于.NET Core的InfluxDB客户端项目 <a href="https://github.com/pootzko/InfluxData.Net" target="_blank" rel="noopener">InfluxData.Net</a> ，本文将利用这个客户端项目结合.NET Core自带的依赖注入框架和仓储模式，去封装一个事件存储的InfluxDB实现的类库。</p>
 <h2 id="如何设计"><a href="#如何设计" class="headerlink" title="如何设计"></a>如何设计</h2><ol>
 <li>把配置信息和InfluxDB客户端实例封装成一个服务。</li>
 <li>用这个服务去实现原来定义的事件仓储接口。</li>
@@ -84,7 +315,7 @@
     IEnumerable<span class="token operator">&lt;</span>StoredEvent<span class="token operator">></span> <span class="token function">GetEvents</span><span class="token punctuation">(</span>Guid aggregateId<span class="token punctuation">,</span> <span class="token keyword">int</span> afterVersion <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>其中<code>StoredEvent</code>是一个继承了Event的特殊类，用来保存事件的相关属性。关于这个类的设计在这不是重点，可以到我的项目<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Storage/StoredEvent.cs" target="_blank" rel="external">【Shriek】</a>中一窥究竟。</p>
+<p>其中<code>StoredEvent</code>是一个继承了Event的特殊类，用来保存事件的相关属性。关于这个类的设计在这不是重点，可以到我的项目<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Storage/StoredEvent.cs" target="_blank" rel="noopener">【Shriek】</a>中一窥究竟。</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StoredEvent</span> <span class="token punctuation">:</span> Event
 <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token function">StoredEvent</span><span class="token punctuation">(</span>Event @<span class="token keyword">event</span><span class="token punctuation">,</span> <span class="token keyword">string</span> data<span class="token punctuation">)</span>
@@ -271,7 +502,7 @@
 <li>只能使用Field进行比较操作</li>
 <li>如果需要使用int,float,boolean类型进行存储,只能使用Field</li>
 </ul>
-<h2 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h2><p>安装方法很简单，除了在官方网站<a href="https://influxdata.com/downloads/#influxdb" target="_blank" rel="external">https://influxdata.com/downloads/#influxdb</a>下载安装程序外，官方还提供了Docker镜像，我就是在Docker Hub拉取镜像并且部署的，毕竟才14MB大小，而且还与本机环境隔离。</p>
+<h2 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h2><p>安装方法很简单，除了在官方网站<a href="https://influxdata.com/downloads/#influxdb" target="_blank" rel="noopener">https://influxdata.com/downloads/#influxdb</a>下载安装程序外，官方还提供了Docker镜像，我就是在Docker Hub拉取镜像并且部署的，毕竟才14MB大小，而且还与本机环境隔离。</p>
 <p>安装好后，数据库服务的地址是<code>http://localhost:8086</code>，初始用户名是admin，初始密码也是admin。数据库可以通过发送Http请求来操作，操作语句与sql语言基本保持一致。</p>
 <ul>
 <li><p>创建一个数据库：</p>
@@ -316,8 +547,8 @@
     <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本篇文章主要介绍了InfluxDB的基本概念以及安装和基本操作方法，更详细的介绍请参阅<a href="https://docs.influxdata.com/influxdb/v1.3/guides" target="_blank" rel="external">官方文档</a>以及热心开发者发表的<a href="https://www.linuxdaxue.com/series/influxdb-series/" target="_blank" rel="external">系列教程</a></p>
-<p>性能测试参考：<a href="http://www.cnblogs.com/MikeZhang/p/InfluxDBTest20170212.html" target="_blank" rel="external">http://www.cnblogs.com/MikeZhang/p/InfluxDBTest20170212.html</a></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本篇文章主要介绍了InfluxDB的基本概念以及安装和基本操作方法，更详细的介绍请参阅<a href="https://docs.influxdata.com/influxdb/v1.3/guides" target="_blank" rel="noopener">官方文档</a>以及热心开发者发表的<a href="https://www.linuxdaxue.com/series/influxdb-series/" target="_blank" rel="noopener">系列教程</a></p>
+<p>性能测试参考：<a href="http://www.cnblogs.com/MikeZhang/p/InfluxDBTest20170212.html" target="_blank" rel="noopener">http://www.cnblogs.com/MikeZhang/p/InfluxDBTest20170212.html</a></p>
 <p>下一篇，我将动手利用一款InfluxDB客户端结合.NET Core自带IoC框架和仓储模式实现事件存储。</p>
 ]]></content>
       
@@ -345,7 +576,7 @@
 <p>如果还没看上一篇文章又不了解如何指定类型为控制器的朋友，最好先看一下上一篇文章，因为要实现本文介绍的功能，是需要先实现上一篇文章所介绍的功能的。</p>
 <h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>在没有MVC引用的类库中自定义<code>RouteAttribute</code>、<code>HttpGetAttribute</code>、<code>HttpPostAttribute</code>等等跟MVC配对的特性标签类型；其次，在定义服务接口时把这些特性标记到方法声明上面；最后在ASP.NET Core 服务启动时自动按照指定的接口上的特性给相应的接口添加MVC的标签，使得动态指定的类型也能获得MVC的路由和请求方法限制的功能。</p>
 <p>用到的技术点主要是<strong>反射</strong>和利用MVC框架给出的<strong>配置点</strong>。</p>
-<p>MVC框架给出的配置点在<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="external"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="external"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="external"><code>IParameterModelConvention</code></a>三个接口。顾名思义，它们分别对应控制器、操作、参数的类型配置，在它们的<code>Apply</code>方法中，传入了一个MVC启动阶段扫描到的类型，开发者可以通过给这个类型添加各种MVC特性，如<code>RouteData</code>、<code>Attributes</code>、<code>Filters</code>等。但是，这些特性组合是有规则的，不能一股脑儿地都添加进去，MVC的机制中会用<code>SelectorModel</code>来将特性进行分组。</p>
+<p>MVC框架给出的配置点在<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="noopener"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="noopener"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="noopener"><code>IParameterModelConvention</code></a>三个接口。顾名思义，它们分别对应控制器、操作、参数的类型配置，在它们的<code>Apply</code>方法中，传入了一个MVC启动阶段扫描到的类型，开发者可以通过给这个类型添加各种MVC特性，如<code>RouteData</code>、<code>Attributes</code>、<code>Filters</code>等。但是，这些特性组合是有规则的，不能一股脑儿地都添加进去，MVC的机制中会用<code>SelectorModel</code>来将特性进行分组。</p>
 <p>例如有以下的操作方法和它的特性：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token punctuation">[</span>HttpGet<span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token function">AcceptVerbs</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span> <span class="token string">"PUT"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
@@ -357,8 +588,8 @@
 <li><code>[HttpPost(&quot;Api/Things&quot;)]</code></li>
 <li><code>[HttpGet], [AcceptVerbs(&quot;POST&quot;, &quot;PUT&quot;)]</code></li>
 </ol>
-<p>所以，这个分组的规则，我们怎么去处理呢？其实，在MVC的源码中就有这样的方法<a href="https://github.com/aspnet/Mvc/blob/de389226011fb15140ee0a8d6a2429b2eb943f3a/src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultApplicationModelProvider.cs#L439" target="_blank" rel="external"><code>IList&lt;SelectorModel&gt; CreateSelectors(IList&lt;object&gt; attributes)</code></a>，我们把它复制过来就好了。</p>
-<h3 id="学以致用"><a href="#学以致用" class="headerlink" title="学以致用"></a>学以致用</h3><p>回到我们的需求，我们需要把指定类型的方法都加上MVC特性，就需要自定义一些<code>ModelConvention</code>。由于我们的需求比较简单，只需特性作用按类型来使指定类型获得MVC特性，我们只需在构造方法中传入指定类型，分别为控制器、操作和参数这三个作用类型都定义一个。由于篇幅问题，下面只贴Action的实现来讲解，另外两个大家可以看我<a href="https://github.com/ElderJames/shriek-fx/tree/master/src/Shriek.ServiceProxy.Http.Server/Internal" target="_blank" rel="external">项目中的源码</a>。</p>
+<p>所以，这个分组的规则，我们怎么去处理呢？其实，在MVC的源码中就有这样的方法<a href="https://github.com/aspnet/Mvc/blob/de389226011fb15140ee0a8d6a2429b2eb943f3a/src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultApplicationModelProvider.cs#L439" target="_blank" rel="noopener"><code>IList&lt;SelectorModel&gt; CreateSelectors(IList&lt;object&gt; attributes)</code></a>，我们把它复制过来就好了。</p>
+<h3 id="学以致用"><a href="#学以致用" class="headerlink" title="学以致用"></a>学以致用</h3><p>回到我们的需求，我们需要把指定类型的方法都加上MVC特性，就需要自定义一些<code>ModelConvention</code>。由于我们的需求比较简单，只需特性作用按类型来使指定类型获得MVC特性，我们只需在构造方法中传入指定类型，分别为控制器、操作和参数这三个作用类型都定义一个。由于篇幅问题，下面只贴Action的实现来讲解，另外两个大家可以看我<a href="https://github.com/ElderJames/shriek-fx/tree/master/src/Shriek.ServiceProxy.Http.Server/Internal" target="_blank" rel="noopener">项目中的源码</a>。</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">using</span> HttpGet <span class="token operator">=</span> Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Mvc<span class="token punctuation">.</span>HttpGetAttribute<span class="token punctuation">;</span>
 <span class="token keyword">using</span> HttpPost <span class="token operator">=</span> Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Mvc<span class="token punctuation">.</span>HttpPostAttribute<span class="token punctuation">;</span>
 <span class="token keyword">using</span> Route <span class="token operator">=</span> Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Mvc<span class="token punctuation">.</span>RouteAttribute<span class="token punctuation">;</span>
@@ -426,8 +657,8 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>上面代码其实还省略了其它的请求方式，我的源码中是有的，大家也可以前去查看。除了<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek.ServiceProxy.Http.Server/Internal/ActionModelConvention.cs" target="_blank" rel="external"><code>ActionModelConvention</code></a>，还需要写<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek.ServiceProxy.Http.Server/Internal/ControllerModelConvention.cs" target="_blank" rel="external"><code>ControllerModelConvention</code></a>和<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek.ServiceProxy.Http.Server/Internal/ParameterModelConvention.cs" target="_blank" rel="external"><code>ParameterModelConvention</code></a>。</p>
-<h3 id="配置到MVC框架"><a href="#配置到MVC框架" class="headerlink" title="配置到MVC框架"></a>配置到MVC框架</h3><p>核心的代码写好了，那么怎么让它起作用呢？其实官方的源码已经提供了示例：<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/test/WebSites/ApplicationModelWebSite/Startup.cs#L16" target="_blank" rel="external">Mvc/test/WebSites/ApplicationModelWebSite/Startup.cs</a>，我们只需在<code>services.AddMvc()</code>里的<code>setupAction</code>委托中将我们的配置类型添加到<a href="https://github.com/aspnet/Mvc/blob/b4fe715c71f472180069f674bde3ef8014064d64/src/Microsoft.AspNetCore.Mvc.Core/MvcOptions.cs#L59" target="_blank" rel="external">MvcOptions.Conventions</a>属性里就好了，这个属性是用来添加所有模型配置的，然后MVC启动后会把这些配置都扫描处理一遍。</p>
+<p>上面代码其实还省略了其它的请求方式，我的源码中是有的，大家也可以前去查看。除了<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek.ServiceProxy.Http.Server/Internal/ActionModelConvention.cs" target="_blank" rel="noopener"><code>ActionModelConvention</code></a>，还需要写<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek.ServiceProxy.Http.Server/Internal/ControllerModelConvention.cs" target="_blank" rel="noopener"><code>ControllerModelConvention</code></a>和<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek.ServiceProxy.Http.Server/Internal/ParameterModelConvention.cs" target="_blank" rel="noopener"><code>ParameterModelConvention</code></a>。</p>
+<h3 id="配置到MVC框架"><a href="#配置到MVC框架" class="headerlink" title="配置到MVC框架"></a>配置到MVC框架</h3><p>核心的代码写好了，那么怎么让它起作用呢？其实官方的源码已经提供了示例：<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/test/WebSites/ApplicationModelWebSite/Startup.cs#L16" target="_blank" rel="noopener">Mvc/test/WebSites/ApplicationModelWebSite/Startup.cs</a>，我们只需在<code>services.AddMvc()</code>里的<code>setupAction</code>委托中将我们的配置类型添加到<a href="https://github.com/aspnet/Mvc/blob/b4fe715c71f472180069f674bde3ef8014064d64/src/Microsoft.AspNetCore.Mvc.Core/MvcOptions.cs#L59" target="_blank" rel="noopener">MvcOptions.Conventions</a>属性里就好了，这个属性是用来添加所有模型配置的，然后MVC启动后会把这些配置都扫描处理一遍。</p>
 <p>来看看我这里的实现：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//假设我们定义了这样的接口</span>
 <span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
@@ -497,11 +728,11 @@ services<span class="token punctuation">.</span><span class="token function">Add
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="external">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
+<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="noopener">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
 <p><img src="/images/add_webapi_to_class/1.png" alt=""></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这篇文章中主要介绍了通过实现<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="external"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="external"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="external"><code>IParameterModelConvention</code></a>三个接口实现为指定为控制器的类型添加MVC特性的方法。</p>
-<p>本篇文章发现源码的部分受到<a href="https://github.com/maxzhang1985" target="_blank" rel="external"><em>max zhang</em></a> 和他的群里的群友<em>福州 | Today</em>的帮助，在此表示衷心的感谢。</p>
-<p>在接下来的文章中，会介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="external"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="external">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这篇文章中主要介绍了通过实现<a href="https://github.com/aspnet/Mvc/blob/de1b763d963f8be612d93889e08e43f67c98d0d5/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IControllerModelConvention.cs" target="_blank" rel="noopener"><code>IControllerModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/b6a6b50776bb1ee49c0bca1353375e964101bb8a/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IActionModelConvention.cs" target="_blank" rel="noopener"><code>IActionModelConvention</code></a>、<a href="https://github.com/aspnet/Mvc/blob/16c267d95eafbf310f17bc938d00048a541be0d0/src/Microsoft.AspNetCore.Mvc.Core/ApplicationModels/IParameterModelConvention.cs" target="_blank" rel="noopener"><code>IParameterModelConvention</code></a>三个接口实现为指定为控制器的类型添加MVC特性的方法。</p>
+<p>本篇文章发现源码的部分受到<a href="https://github.com/maxzhang1985" target="_blank" rel="noopener"><em>max zhang</em></a> 和他的群里的群友<em>福州 | Today</em>的帮助，在此表示衷心的感谢。</p>
+<p>在接下来的文章中，会介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="noopener"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="noopener">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
 <p><strong>感谢阅读和批评指教！</strong></p>
 <p>[温馨提示：为方便大家看文中提到的源码，原文中有大量指向源码链接，如果您看的是没有链接的转载，可以再来看我的原文。]</p>
 ]]></content>
@@ -549,10 +780,10 @@ services<span class="token punctuation">.</span><span class="token function">Add
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="POCO控制器原理"><a href="#POCO控制器原理" class="headerlink" title="POCO控制器原理"></a>POCO控制器原理</h3><p>其实，在ASP.NET Core中，已经不像旧版本的 ASP.NET WebApi 那样，通过ControllerFactory来创建Controller，多亏于ASP.NET Core一脉相承的IoC框架 <code>Microsoft.Extensions.DependencyInjection</code>，ASP.NET Core中的内部实现变得更优雅。其中POCO控制器的核心原理就在<a href="https://github.com/aspnet/Mvc/blob/2bacb6003f3bc2c3b58107c1118346dca3f5fa13/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/IApplicationFeatureProviderOfT.cs" target="_blank" rel="external"><code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code></a>这个接口的实现<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="external"><code>ControllerFeatureProvider</code></a>。</p>
-<p>通过<a href="https://github.com/aspnet/Mvc/search?p=1&amp;q=IApplicationFeatureProvider&amp;type=&amp;utf8=%E2%9C%93" target="_blank" rel="external">aspnet/Mvc项目的Github源码仓库</a>中查询得知，Mvc里把Controller、ViewComponent、TagHelper、Views等组件定义为特性(Feature)，如<code>ControllerFeature</code>，特性里就存放了应用中被识别为相组件的类型的集合，如如<code>ControllerFeature</code>中就存放了所有<code>Controller</code>类型。<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>这个接口是用来给MVC框架提供控制器类型识别的接口，当把这个接口的实现注册到服务配置中，就能为其中识别的类型提供控制器功能。</p>
-<p><a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="external">ControllerFeatureProvider</a>是这个接口的默认实现，其中有一个方法<code>IsController(TypeInfo typeInfo)</code>的功能就是判断某类型是否为控制器的。而接口方法<code>PopulateFeature(IEnumerable&lt;ApplicationPart&gt; parts,ControllerFeature feature)</code>则为把传入的 “Mvc应用部分（<code>ApplicationPart</code>，大概是指Mvc的作用程序集）”中的类型都一一判断，如果是控制器，那么就加入控制器特性对象中。</p>
-<h3 id="实现自定义判断规则"><a href="#实现自定义判断规则" class="headerlink" title="实现自定义判断规则"></a>实现自定义判断规则</h3><p>通过上面的剖析，我们就知道要实现自定义的控制器判断规则，只需要重写<code>ControllerFeature</code>类或者重新实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口，但是由于<code>PopulateFeature</code>不是虚方法或抽象方法，所以不能被重写，那么只能重新写一个类来实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口了。为了兼容原来规则，我把原来的规则照搬过来，复制了<code>IsController</code>的方法（开源的好处），并且在<code>PopulateFeature</code>中加入了自己的规则。先贴代码，避免篇幅过长，<code>IsController</code>方法的实现就直接链接到<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L41" target="_blank" rel="external">源码</a>了：</p>
+<h3 id="POCO控制器原理"><a href="#POCO控制器原理" class="headerlink" title="POCO控制器原理"></a>POCO控制器原理</h3><p>其实，在ASP.NET Core中，已经不像旧版本的 ASP.NET WebApi 那样，通过ControllerFactory来创建Controller，多亏于ASP.NET Core一脉相承的IoC框架 <code>Microsoft.Extensions.DependencyInjection</code>，ASP.NET Core中的内部实现变得更优雅。其中POCO控制器的核心原理就在<a href="https://github.com/aspnet/Mvc/blob/2bacb6003f3bc2c3b58107c1118346dca3f5fa13/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/IApplicationFeatureProviderOfT.cs" target="_blank" rel="noopener"><code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code></a>这个接口的实现<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="noopener"><code>ControllerFeatureProvider</code></a>。</p>
+<p>通过<a href="https://github.com/aspnet/Mvc/search?p=1&amp;q=IApplicationFeatureProvider&amp;type=&amp;utf8=%E2%9C%93" target="_blank" rel="noopener">aspnet/Mvc项目的Github源码仓库</a>中查询得知，Mvc里把Controller、ViewComponent、TagHelper、Views等组件定义为特性(Feature)，如<code>ControllerFeature</code>，特性里就存放了应用中被识别为相组件的类型的集合，如如<code>ControllerFeature</code>中就存放了所有<code>Controller</code>类型。<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>这个接口是用来给MVC框架提供控制器类型识别的接口，当把这个接口的实现注册到服务配置中，就能为其中识别的类型提供控制器功能。</p>
+<p><a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="noopener">ControllerFeatureProvider</a>是这个接口的默认实现，其中有一个方法<code>IsController(TypeInfo typeInfo)</code>的功能就是判断某类型是否为控制器的。而接口方法<code>PopulateFeature(IEnumerable&lt;ApplicationPart&gt; parts,ControllerFeature feature)</code>则为把传入的 “Mvc应用部分（<code>ApplicationPart</code>，大概是指Mvc的作用程序集）”中的类型都一一判断，如果是控制器，那么就加入控制器特性对象中。</p>
+<h3 id="实现自定义判断规则"><a href="#实现自定义判断规则" class="headerlink" title="实现自定义判断规则"></a>实现自定义判断规则</h3><p>通过上面的剖析，我们就知道要实现自定义的控制器判断规则，只需要重写<code>ControllerFeature</code>类或者重新实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口，但是由于<code>PopulateFeature</code>不是虚方法或抽象方法，所以不能被重写，那么只能重新写一个类来实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口了。为了兼容原来规则，我把原来的规则照搬过来，复制了<code>IsController</code>的方法（开源的好处），并且在<code>PopulateFeature</code>中加入了自己的规则。先贴代码，避免篇幅过长，<code>IsController</code>方法的实现就直接链接到<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L41" target="_blank" rel="noopener">源码</a>了：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> <span class="token keyword">class</span> <span class="token class-name">ServiceControllerFeatureProvider</span> <span class="token punctuation">:</span> IApplicationFeatureProvider<span class="token operator">&lt;</span>ControllerFeature<span class="token operator">></span>
 <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">const</span> <span class="token keyword">string</span> ControllerTypeNameSuffix <span class="token operator">=</span> <span class="token string">"Controller"</span><span class="token punctuation">;</span>
@@ -596,8 +827,8 @@ services<span class="token punctuation">.</span><span class="token function">Add
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>其中TestService类就是会被识别为控制器的类，但是接口和实现是可以分开在不同程序集的。通过原本<code>ControllerFeatureProvider</code>类中<code>PopulateFeature</code>方法的<code>parts</code>参数中的类型是不包括除了引用了Mvc的程序集的其它程序集的，所以我这里用自己实现的类型扫描类<code>Reflection</code>中的<code>CurrentAssembiles</code>静态变量来获取当前应用程序的所有引用的（自己创建的项目）程序集的，具体实现的代码在我的框架[Shriek]的<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Utils/Reflection.cs" target="_blank" rel="external">源码中</a>。</p>
-<h3 id="配置自定义规则"><a href="#配置自定义规则" class="headerlink" title="配置自定义规则"></a>配置自定义规则</h3><p>现在，我们拥有了自定义控制器识别规则<code>ServiceControllerFeatureProvider</code>，那么，怎么配置到Mvc中呢？又要去翻源码了！在<code>MvcCoreMvcBuilderExtensions.cs</code>扩展类中，有一个<code>IMvcBuilder</code>的扩展方法<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcBuilderExtensions.cs#L93" target="_blank" rel="external"><code>ConfigureApplicationPartManager</code></a>（<code>IMvcCoreBuilder</code>也有这样的<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcCoreBuilderExtensions.cs#L152" target="_blank" rel="external">扩展方法</a>），它的参数是传入<code>ApplicationPartManager</code>参数的委托，而<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/ApplicationPartManager.cs#L13" target="_blank" rel="external"><code>ApplicationPartManager</code></a>中有一个<code>FeatureProviders</code>属性，用来存储所有<code>IApplicationFeatureProvider</code>实例，会在应用第一次运行的时候，循环这些“特性提供器”提供所有上面提到的MVC特性。所以，只要我们在这里添加我们自定义的控制器特性提供器，MVC框架内部就能识别我们的指定的类型为控制器，并为他们添加控制器的相关功能。</p>
+<p>其中TestService类就是会被识别为控制器的类，但是接口和实现是可以分开在不同程序集的。通过原本<code>ControllerFeatureProvider</code>类中<code>PopulateFeature</code>方法的<code>parts</code>参数中的类型是不包括除了引用了Mvc的程序集的其它程序集的，所以我这里用自己实现的类型扫描类<code>Reflection</code>中的<code>CurrentAssembiles</code>静态变量来获取当前应用程序的所有引用的（自己创建的项目）程序集的，具体实现的代码在我的框架[Shriek]的<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Utils/Reflection.cs" target="_blank" rel="noopener">源码中</a>。</p>
+<h3 id="配置自定义规则"><a href="#配置自定义规则" class="headerlink" title="配置自定义规则"></a>配置自定义规则</h3><p>现在，我们拥有了自定义控制器识别规则<code>ServiceControllerFeatureProvider</code>，那么，怎么配置到Mvc中呢？又要去翻源码了！在<code>MvcCoreMvcBuilderExtensions.cs</code>扩展类中，有一个<code>IMvcBuilder</code>的扩展方法<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcBuilderExtensions.cs#L93" target="_blank" rel="noopener"><code>ConfigureApplicationPartManager</code></a>（<code>IMvcCoreBuilder</code>也有这样的<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcCoreBuilderExtensions.cs#L152" target="_blank" rel="noopener">扩展方法</a>），它的参数是传入<code>ApplicationPartManager</code>参数的委托，而<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/ApplicationPartManager.cs#L13" target="_blank" rel="noopener"><code>ApplicationPartManager</code></a>中有一个<code>FeatureProviders</code>属性，用来存储所有<code>IApplicationFeatureProvider</code>实例，会在应用第一次运行的时候，循环这些“特性提供器”提供所有上面提到的MVC特性。所以，只要我们在这里添加我们自定义的控制器特性提供器，MVC框架内部就能识别我们的指定的类型为控制器，并为他们添加控制器的相关功能。</p>
 <p>设计有点绕，那么我们用代码来实现：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//示例直接new ServiceCollection对象，下面有完整的能运行的示例代码。</span>
 <span class="token keyword">var</span> services <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServiceCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -636,10 +867,10 @@ services<span class="token punctuation">.</span><span class="token function">Add
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="external">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
+<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="noopener">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
 <p><img src="/images/add_webapi_to_class/1.png" alt=""></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这篇文章中主要介绍了通过实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口实现设置指定类型为WebApi控制器的方法。</p>
-<p>在接下来的文章中，我会介绍如何从接口获取自定义特性标签，实现从接口获得mvc特性，使得接口和实现类都不依赖MVC库的方法，只要在接口中以标记特性的方式定义了路由和http方法，实现类的操作就都按照接口的路由和http方法去提供WebApi服务，最后还要介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="external"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="external">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
+<p>在接下来的文章中，我会介绍如何从接口获取自定义特性标签，实现从接口获得mvc特性，使得接口和实现类都不依赖MVC库的方法，只要在接口中以标记特性的方式定义了路由和http方法，实现类的操作就都按照接口的路由和http方法去提供WebApi服务，最后还要介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="noopener"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="noopener">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
 <p><strong>感谢阅读和批评指教！</strong></p>
 <p>[温馨提示：为方便大家看文中提到的源码，原文中有大量指向源码链接，如果您看的是没有链接的转载，可以再来看我的原文。]</p>
 ]]></content>
@@ -671,10 +902,10 @@ services<span class="token punctuation">.</span><span class="token function">Add
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>由于Docker技术比虚拟机技术更为轻便、快捷。自 2013 年 3 月以Apache 2.0授权协议开源后，到近两年成为当下分布式系统最热门的开发运维方式。由于国内网络连接Docker官方源很慢，甚至无法从官方源拉取镜像创建容器，所以这篇文章介绍如何把Docker源更换为阿里云的，使中国开发者也能学习并运用到Docker带来的DevOps变革。</p>
 <h4 id="运行环境-与换源无关-："><a href="#运行环境-与换源无关-：" class="headerlink" title="运行环境 (与换源无关)："></a>运行环境 (与换源无关)：</h4><ul>
 <li>Windows 10</li>
-<li>Docker for Windows <a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe" target="_blank" rel="external">下载</a></li>
-<li>Kitematic <a href="https://github.com/docker/kitematic/releases/download/v0.17.1/Kitematic-0.17.1-Windows.zip" target="_blank" rel="external">下载</a></li>
+<li>Docker for Windows <a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe" target="_blank" rel="noopener">下载</a></li>
+<li>Kitematic <a href="https://github.com/docker/kitematic/releases/download/v0.17.1/Kitematic-0.17.1-Windows.zip" target="_blank" rel="noopener">下载</a></li>
 </ul>
-<p>安装Docker的同时，我们可以先登录阿里云管理平台，通过前台页面进入【容器服务控制台】(<a href="https://cs.console.aliyun.com/#/repo" target="_blank" rel="external">https://cs.console.aliyun.com/#/repo</a>)</p>
+<p>安装Docker的同时，我们可以先登录阿里云管理平台，通过前台页面进入【容器服务控制台】(<a href="https://cs.console.aliyun.com/#/repo" target="_blank" rel="noopener">https://cs.console.aliyun.com/#/repo</a>)</p>
 <h4 id="登录阿里云容器服务控制台"><a href="#登录阿里云容器服务控制台" class="headerlink" title="登录阿里云容器服务控制台"></a>登录阿里云容器服务控制台</h4><p>容器控制台的入口不是在一开始登录控制台的页面里的，所以如果以后记不住这个地址，可以按以下页面进入。</p>
 <ol>
 <li><p>指向阿里云首页的导航栏“产品”选项，从下拉的列表中点击“容器服务”</p>
@@ -713,20 +944,20 @@ services<span class="token punctuation">.</span><span class="token function">Add
     <entry>
       <title><![CDATA[领域驱动设计（DDD）项目收集]]></title>
       <url>/ddd-project-collection.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做<a href="https://github.com/ElderJames/ShriekFx" target="_blank" rel="external">尖叫(Shriek)</a>的轻量DDD开源框架，下面列出一些在学习和开发过程中参考过的DDD开源项目。希望对淋浴驱动设计有兴趣的同行可以一起交流。</p>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>自从来了现在这家公司之后，就喜欢实践DDD开发程序，最近开始写一个叫做<a href="https://github.com/ElderJames/ShriekFx" target="_blank" rel="noopener">尖叫(Shriek)</a>的轻量DDD开源框架，下面列出一些在学习和开发过程中参考过的DDD开源项目。希望对淋浴驱动设计有兴趣的同行可以一起交流。</p>
 <h1 id="NET-Core"><a href="#NET-Core" class="headerlink" title=".NET Core"></a>.NET Core</h1><ul>
-<li><a href="https://github.com/Weapsy/Weapsy" target="_blank" rel="external">Weapsy</a></li>
-<li><a href="https://github.com/EduardoPires/EquinoxProject" target="_blank" rel="external">EquinoxProject</a></li>
-<li><a href="https://github.com/thangchung/magazine-website" target="_blank" rel="external">magazine-website</a></li>
-<li><a href="https://github.com/daxnet/Apworks" target="_blank" rel="external">Apworks</a></li>
-<li><a href="https://github.com/daxnet/we-text" target="_blank" rel="external">we-text</a></li>
-<li><a href="https://github.com/mastreeno/Merp" target="_blank" rel="external">Merp</a></li>
-<li><a href="https://github.com/Kation/ComBoost" target="_blank" rel="external">ComBoost</a></li>
+<li><a href="https://github.com/Weapsy/Weapsy" target="_blank" rel="noopener">Weapsy</a></li>
+<li><a href="https://github.com/EduardoPires/EquinoxProject" target="_blank" rel="noopener">EquinoxProject</a></li>
+<li><a href="https://github.com/thangchung/magazine-website" target="_blank" rel="noopener">magazine-website</a></li>
+<li><a href="https://github.com/daxnet/Apworks" target="_blank" rel="noopener">Apworks</a></li>
+<li><a href="https://github.com/daxnet/we-text" target="_blank" rel="noopener">we-text</a></li>
+<li><a href="https://github.com/mastreeno/Merp" target="_blank" rel="noopener">Merp</a></li>
+<li><a href="https://github.com/Kation/ComBoost" target="_blank" rel="noopener">ComBoost</a></li>
 </ul>
 <h1 id="NET"><a href="#NET" class="headerlink" title=".NET"></a>.NET</h1><ul>
-<li><a href="https://github.com/tangxuehua/enode" target="_blank" rel="external">ENode</a></li>
-<li><a href="https://github.com/ElderJames/MyDiary.CQRS" target="_blank" rel="external">MyDiary.CQRS</a></li>
-<li><a href="https://github.com/ElderJames/naa4e" target="_blank" rel="external">Microsoft .NET企业级应用架构设计（第2版）源码</a></li>
+<li><a href="https://github.com/tangxuehua/enode" target="_blank" rel="noopener">ENode</a></li>
+<li><a href="https://github.com/ElderJames/MyDiary.CQRS" target="_blank" rel="noopener">MyDiary.CQRS</a></li>
+<li><a href="https://github.com/ElderJames/naa4e" target="_blank" rel="noopener">Microsoft .NET企业级应用架构设计（第2版）源码</a></li>
 </ul>
 <p>最近身体不适，对这些项目的介绍我会在身体好了之后补上。</p>
 ]]></content>
@@ -766,12 +997,12 @@ services<span class="token punctuation">.</span><span class="token function">Add
 <h4 id="教程目标"><a href="#教程目标" class="headerlink" title="教程目标"></a>教程目标</h4><ol>
 <li>给自己的域名设置 Flexible SSL 认证，即网站到解析服务器间的加密传输，让域名可以使用https</li>
 <li>访问http域名，自动301跳转到https</li>
-<li>访问<a href="http://www.yourdomain.com" target="_blank" rel="external">http://www.yourdomain.com</a> ,会自动跳转到<a href="https://yourdomain.com（当然，可以反过来）" target="_blank" rel="external">https://yourdomain.com（当然，可以反过来）</a></li>
+<li>访问<a href="http://www.yourdomain.com" target="_blank" rel="noopener">http://www.yourdomain.com</a> ,会自动跳转到<a href="https://yourdomain.com（当然，可以反过来）" target="_blank" rel="noopener">https://yourdomain.com（当然，可以反过来）</a></li>
 </ol>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="注册CloudFlare帐户，并添加域名解析"><a href="#注册CloudFlare帐户，并添加域名解析" class="headerlink" title="注册CloudFlare帐户，并添加域名解析"></a>注册CloudFlare帐户，并添加域名解析</h5><p>访问<a href="https://www.cloudflare.com/a/sign-up" target="_blank" rel="external">CloudFlare注册页面</a>,简单地输入邮箱和密码就能注册成功好。</p>
-<h5 id="添加域名"><a href="#添加域名" class="headerlink" title="添加域名"></a>添加域名</h5><p>登录后，访问<a href="https://www.cloudflare.com/a/add-site" target="_blank" rel="external">Add Websites页面</a>添加一个域名，如我的是yangshunjie.com，然后点击【Begin Scan】扫描。大概需要等待1分钟，完成后点击【Continue Setup】继续下一步。</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="注册CloudFlare帐户，并添加域名解析"><a href="#注册CloudFlare帐户，并添加域名解析" class="headerlink" title="注册CloudFlare帐户，并添加域名解析"></a>注册CloudFlare帐户，并添加域名解析</h5><p>访问<a href="https://www.cloudflare.com/a/sign-up" target="_blank" rel="noopener">CloudFlare注册页面</a>,简单地输入邮箱和密码就能注册成功好。</p>
+<h5 id="添加域名"><a href="#添加域名" class="headerlink" title="添加域名"></a>添加域名</h5><p>登录后，访问<a href="https://www.cloudflare.com/a/add-site" target="_blank" rel="noopener">Add Websites页面</a>添加一个域名，如我的是yangshunjie.com，然后点击【Begin Scan】扫描。大概需要等待1分钟，完成后点击【Continue Setup】继续下一步。</p>
 <p><img src="/images/6.png" alt=""></p>
-<h5 id="设置解析项"><a href="#设置解析项" class="headerlink" title="设置解析项"></a>设置解析项</h5><p>这时，我们需要添加域名解析了，将域名解析到指向的服务器。这跟普通的域名解析绑定是一样的。如果要绑定Github Pages，就需要参考<a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider" target="_blank" rel="external">Github Help官方指南</a>添加A记录分别指向<code>192.30.252.153</code>和<code>192.30.252.154</code>。另外再设置一个www的CNAME记录，指向yangshunjie.com。</p>
+<h5 id="设置解析项"><a href="#设置解析项" class="headerlink" title="设置解析项"></a>设置解析项</h5><p>这时，我们需要添加域名解析了，将域名解析到指向的服务器。这跟普通的域名解析绑定是一样的。如果要绑定Github Pages，就需要参考<a href="https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider" target="_blank" rel="noopener">Github Help官方指南</a>添加A记录分别指向<code>192.30.252.153</code>和<code>192.30.252.154</code>。另外再设置一个www的CNAME记录，指向yangshunjie.com。</p>
 <p><img src="/images/7.png" alt=""></p>
 <h5 id="修改域名解析服务器"><a href="#修改域名解析服务器" class="headerlink" title="修改域名解析服务器"></a>修改域名解析服务器</h5><p>登录你的域名注册商的控制后台，把DNS解析服务器改为CloudFlare提供的两个地址。然后等待转移完成。我的域名是在阿里云注册的，所以这里截图演示一下：</p>
 <p><img src="/images/8.png" alt=""><br><img src="/images/9.png" alt=""></p>
@@ -817,7 +1048,7 @@ services<span class="token punctuation">.</span><span class="token function">Add
 <p>距离我建立这个博客都过去一周了，一直都在做这个站点的建设。首先是找到个好看的主题，之后绑定自己的https域名，然后是寻找更多玩法，比如放了只可爱的猫咪在右下角，它会跟随者你的鼠标摇头摆尾~比如在底部贴了我的GitHub贡献马赛克，在我的朋友页面抓取我的Github followers，还有就是这篇文章的重点，用AppVeyor去持续集成Hexo博客。</p>
 <p>AppVeyor是目前唯一支持.NET开源项目的持续集成功能，运行环境是Windows，身为.NET开发者和软粉的我，怎么不支持一下这个有情怀的服务商呢？</p>
 <p><del>太晚了，挖坑，明天继续写。</del> </p>
-<h4 id="第一步，创建CI项目"><a href="#第一步，创建CI项目" class="headerlink" title="第一步，创建CI项目"></a>第一步，创建CI项目</h4><p>访问<a href="https://ci.appveyor.com/projects" target="_blank" rel="external">AppVeyor网站</a>，注册或使用Github帐号授权登录，在PROJECTS页面点击【NEW PROJECT】，然后在右侧选择你的Hexo博客所在的仓库。</p>
+<h4 id="第一步，创建CI项目"><a href="#第一步，创建CI项目" class="headerlink" title="第一步，创建CI项目"></a>第一步，创建CI项目</h4><p>访问<a href="https://ci.appveyor.com/projects" target="_blank" rel="noopener">AppVeyor网站</a>，注册或使用Github帐号授权登录，在PROJECTS页面点击【NEW PROJECT】，然后在右侧选择你的Hexo博客所在的仓库。</p>
 <p><img src="/images/1.png" alt=""></p>
 <h4 id="第二步，配置项目和环境变量"><a href="#第二步，配置项目和环境变量" class="headerlink" title="第二步，配置项目和环境变量"></a>第二步，配置项目和环境变量</h4><p>点击项目里的[SETTING]选项卡，配置以下几项：</p>
 <ol>
@@ -858,8 +1089,8 @@ services<span class="token punctuation">.</span><span class="token function">Add
 <p><img src="/images/4.png" alt=""></p>
 <p>点击边栏下方的【Personal access tokens】选项卡，并点击右上方的【Generate new token】按钮。Token description任意填写，下方的选项中全选repo即可。</p>
 <p>最后，点击下方绿色的【Generate token】按钮。此时就能得到你的Access Token。</p>
-<p>也可以参考<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="external">官方文档</a></p>
-<h4 id="第四步，加密Access-Token"><a href="#第四步，加密Access-Token" class="headerlink" title="第四步，加密Access Token"></a>第四步，加密Access Token</h4><p>由于这个AccessToken是可以直接操作你的仓库的，而且配置文件是公开的，所以这时就要求对AccessToken进行加密。可到<a href="https://ci.appveyor.com/tools/encrypt" target="_blank" rel="external">AppVeyor Token加密页面</a>进行加密。把加密后的字符串填入下一步中的配置文件里。</p>
+<p>也可以参考<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="noopener">官方文档</a></p>
+<h4 id="第四步，加密Access-Token"><a href="#第四步，加密Access-Token" class="headerlink" title="第四步，加密Access Token"></a>第四步，加密Access Token</h4><p>由于这个AccessToken是可以直接操作你的仓库的，而且配置文件是公开的，所以这时就要求对AccessToken进行加密。可到<a href="https://ci.appveyor.com/tools/encrypt" target="_blank" rel="noopener">AppVeyor Token加密页面</a>进行加密。把加密后的字符串填入下一步中的配置文件里。</p>
 <h4 id="第五步，配置文件"><a href="#第五步，配置文件" class="headerlink" title="第五步，配置文件"></a>第五步，配置文件</h4><p>在Hexo的<strong>根目录</strong>下新建一个<code>appveyor.yml</code>文件，写下以下内容</p>
 <pre class="line-numbers language-yaml"><code class="language-yaml">
 <span class="token key atrule">clone_depth</span><span class="token punctuation">:</span> <span class="token number">5</span>
@@ -904,12 +1135,12 @@ services<span class="token punctuation">.</span><span class="token function">Add
 <p>大致的意思是从github仓库的当前分支拉取下来，编译成静态文件后，在push到目标分支。由于AppVeyor环境中是通过Access Token访问我们的仓库的，而Hexo自带的部署则在访问的过程中需要我们输入帐号密码，所以Hexo g -d的命令就不适合在这里使用。需要先编译成静态文件，再把public文件夹的静态文件push到目标分支。</p>
 <p>最后，把这个文件提交到Github上就可以测试了！在AppVeyor的首页可以看到部署的过程和结果~</p>
 <p><img src="/images/5.png" alt=""></p>
-<p>别说我没告诉你，还可以添加一枚徽章装装逼哦！<a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io/branch/files" target="_blank" rel="external"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" alt="Build status"></a></p>
-<p>可以看看我的<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml" target="_blank" rel="external">配置文件</a>，以及底部的两篇参考文章~</p>
+<p>别说我没告诉你，还可以添加一枚徽章装装逼哦！<a href="https://ci.appveyor.com/project/ElderJames/elderjames-github-io/branch/files" target="_blank" rel="noopener"><img src="https://ci.appveyor.com/api/projects/status/b0wack7uxrvifijj/branch/files?svg=true" alt="Build status"></a></p>
+<p>可以看看我的<a href="https://github.com/ElderJames/elderjames.github.io/blob/files/appveyor.yml" target="_blank" rel="noopener">配置文件</a>，以及底部的两篇参考文章~</p>
 <p>参考文章：</p>
 <ul>
-<li><a href="http://www.shong.win/blog/2017/02/19/hexo-ci/" target="_blank" rel="external">Hexo利用AppVeyor持续集成</a></li>
-<li><a href="https://formulahendry.github.io/2016/12/04/hexo-ci/" target="_blank" rel="external">Hexo的版本控制与持续集成</a></li>
+<li><a href="http://www.shong.win/blog/2017/02/19/hexo-ci/" target="_blank" rel="noopener">Hexo利用AppVeyor持续集成</a></li>
+<li><a href="https://formulahendry.github.io/2016/12/04/hexo-ci/" target="_blank" rel="noopener">Hexo的版本控制与持续集成</a></li>
 </ul>
 <div id="aplayer0" class="aplayer" style="margin-bottom: 20px;width:400px;"></div>
 		<script>
@@ -953,10 +1184,10 @@ services<span class="token punctuation">.</span><span class="token function">Add
 <p>因为最近使用学习angular、vue、cordova等框架和技术，慢慢喜欢上了用node来构建应用程序的过程。我原来的博客系统是Ghost,部署在亚马逊AWS上。最近AWS一年免费体验准备到期了，博客也要找个别的地方安放。</p>
 <p>早就知道了github上能搭建博客，但是之前是觉得构建起来很复杂，就没有尝试。这次，我就要尝试一下了！就是你现在看到的模样！</p>
 <p>这篇文章要记下来整个迁移过程。从hexo的安装、构建、部署、安装主题、从Ghost迁移文章。</p>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p><em><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="external">官方文档</a></em></p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p><em><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">官方文档</a></em></p>
 <ol>
-<li>安装 <a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a> 命令行输入 <code>npm</code>,有相关信息则安装成功 </li>
-<li>安装 <a href="http://git-scm.com/" target="_blank" rel="external">Git</a> 命令行输入<code>Git</code>，有相关信息则安装成功</li>
+<li>安装 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a> 命令行输入 <code>npm</code>,有相关信息则安装成功 </li>
+<li>安装 <a href="http://git-scm.com/" target="_blank" rel="noopener">Git</a> 命令行输入<code>Git</code>，有相关信息则安装成功</li>
 <li><p>在命令行输入以下命令安装Hexo</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -985,14 +1216,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <p>如果想更换端口，可以在命令后追加参数</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ hexo server -p 8080
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时在浏览器访问 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 就可以看到博客效果啦！</p>
+<p>此时在浏览器访问 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 就可以看到博客效果啦！</p>
 <p>什么?默认主题不好看？别急，后面会讲如何安装主题~ 接下来介绍如何发布到Github！</p>
 </li>
 </ol>
 <h2 id="发布到GitHub"><a href="#发布到GitHub" class="headerlink" title="发布到GitHub"></a>发布到GitHub</h2><p>接下来介绍如何把这个博客发布到Github Page。</p>
 <p>Github Pages是Github为开源项目提供展示文档和示例的功能，有300M的空间，但只是放置静态文件，所以Hexo就必须先编译成静态文件，再push到Github Pages仓库。</p>
 <ol>
-<li><p>创建Github仓库，名称必须是[Github用户名].github.io,例如本博客的仓库 <a href="https://elderjames.github.io" target="_blank" rel="external">elderjames.github.io</a>,然后获得git仓库的地址，如<a href="https://github.com/ElderJames/elderjames.github.io.git" target="_blank" rel="external">https://github.com/ElderJames/elderjames.github.io.git</a></p>
+<li><p>创建Github仓库，名称必须是[Github用户名].github.io,例如本博客的仓库 <a href="https://elderjames.github.io" target="_blank" rel="noopener">elderjames.github.io</a>,然后获得git仓库的地址，如<a href="https://github.com/ElderJames/elderjames.github.io.git" target="_blank" rel="noopener">https://github.com/ElderJames/elderjames.github.io.git</a></p>
 </li>
 <li><p>部署配置</p>
 <p>在开始之前，您必须先在 _config.yml 中修改参数</p>
@@ -1008,9 +1239,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <li><p>输入以下命令，编译并发布到Github</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ hexo deploy --generate
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><em>这个命令是可以分开的，一个是编译静态文件，一个是发布，具体请<a href="https://hexo.io/zh-cn/docs/generating.html" target="_blank" rel="external">参阅文档</a></em></p>
+<p><em>这个命令是可以分开的，一个是编译静态文件，一个是发布，具体请<a href="https://hexo.io/zh-cn/docs/generating.html" target="_blank" rel="noopener">参阅文档</a></em></p>
 </li>
-<li><p>如果成功提交到Github,则可以马上访问仓库名的那个地址 <a href="https://elderjames.github.io" target="_blank" rel="external">https://elderjames.github.io</a></p>
+<li><p>如果成功提交到Github,则可以马上访问仓库名的那个地址 <a href="https://elderjames.github.io" target="_blank" rel="noopener">https://elderjames.github.io</a></p>
 </li>
 </ol>
 <h2 id="尝试写一篇新文章"><a href="#尝试写一篇新文章" class="headerlink" title="尝试写一篇新文章"></a>尝试写一篇新文章</h2><pre class="line-numbers language-bash"><code class="language-bash">  $ hexo new <span class="token string">"My New Post"</span>
@@ -1019,7 +1250,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <h2 id="从Ghost迁移文章"><a href="#从Ghost迁移文章" class="headerlink" title="从Ghost迁移文章"></a>从Ghost迁移文章</h2><p>  由于我之前的博客部署在 AWS 上，是 Ghost 博客系统，好处是文章用 markdown 编写，可以很好的迁移到 Hexo。</p>
 <ol>
 <li><p>从Ghost博客导出博客数据，几下保存的路径</p>
-<p>访问 <a href="http://yourblog.com/ghost/debug/" target="_blank" rel="external">http://yourblog.com/ghost/debug/</a> , 点击 【导出】按钮下载一个 Json 文件。</p>
+<p>访问 <a href="http://yourblog.com/ghost/debug/" target="_blank" rel="noopener">http://yourblog.com/ghost/debug/</a> , 点击 【导出】按钮下载一个 Json 文件。</p>
 </li>
 <li><p>安装迁移工具</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> -g hexo-migrator-ghost
@@ -1056,12 +1287,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
       <title><![CDATA[Visual Studio 2017 正式版安装问题及解决方案记录]]></title>
       <url>/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>##Visual Studio 2017正式版终于出来啦！</p>
-<p>下载地址：<a href="https://www.visualstudio.com/zh-hans/" target="_blank" rel="external">请到主页</a></p>
+<p>下载地址：<a href="https://www.visualstudio.com/zh-hans/" target="_blank" rel="noopener">请到主页</a></p>
 <p>推荐使用安装器下载，速度比以前快了很多！必装的Web和.NET Core组件只需要15分钟就可以安装完（当然，视网速而定，15分钟是用100M/bs的宽带下载的，下载峰值在5M/s左右）</p>
 <p>以下是记录了一些安装中遇到的问题，会不定时更新。</p>
 <h4 id="Win7-无法安装Cordova"><a href="#Win7-无法安装Cordova" class="headerlink" title="Win7 无法安装Cordova"></a>Win7 无法安装Cordova</h4><p>因为Cordova组件需要PowerShell 6.0，而Win7是不自带的（Win8-Win10自带）,所以先下载PowerShell 6.0吧！</p>
-<p><a href="https://www.microsoft.com/en-us/download/details.aspx?id=34595" target="_blank" rel="external">PowerShell 6.0下载地址</a></p>
-<h4 id="Cordova-无法编译成Android"><a href="#Cordova-无法编译成Android" class="headerlink" title="Cordova 无法编译成Android"></a>Cordova 无法编译成Android</h4><p>可能是Gradle压缩包损坏导致，重新下载压缩包放到目录C:\Users\Administrator.gradle\wrapper\dists[gradle-2.13-all]下<br><a href="https://services.gradle.org/distributions/" target="_blank" rel="external">单独下载Gradle</a></p>
+<p><a href="https://www.microsoft.com/en-us/download/details.aspx?id=34595" target="_blank" rel="noopener">PowerShell 6.0下载地址</a></p>
+<h4 id="Cordova-无法编译成Android"><a href="#Cordova-无法编译成Android" class="headerlink" title="Cordova 无法编译成Android"></a>Cordova 无法编译成Android</h4><p>可能是Gradle压缩包损坏导致，重新下载压缩包放到目录C:\Users\Administrator.gradle\wrapper\dists[gradle-2.13-all]下<br><a href="https://services.gradle.org/distributions/" target="_blank" rel="noopener">单独下载Gradle</a></p>
 ]]></content>
       
         
@@ -1078,9 +1309,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
       <url>/n.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>npm由于很多时候都需要从国外的服务器下载组件，由于<strong>众所周知</strong>的原因，国内安装时往往会很慢甚至卡住安装不上的情况，这时就需要替换一下安装源，使用国内服务商提供的镜像：</p>
 <ul>
-<li><a href="http://npm.hacknodejs.com/" target="_blank" rel="external">http://npm.hacknodejs.com/</a></li>
-<li><a href="http://registry.npmjs.vitecho.com/" target="_blank" rel="external">http://registry.npmjs.vitecho.com/</a></li>
-<li><a href="https://registry.npm.taobao.org" target="_blank" rel="external">https://registry.npm.taobao.org</a></li>
+<li><a href="http://npm.hacknodejs.com/" target="_blank" rel="noopener">http://npm.hacknodejs.com/</a></li>
+<li><a href="http://registry.npmjs.vitecho.com/" target="_blank" rel="noopener">http://registry.npmjs.vitecho.com/</a></li>
+<li><a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></li>
 </ul>
 <p>####使用方法<br>永久使用镜像命令： </p>
 <p><code>npm config set registry https://registry.npm.taobao.org</code></p>
@@ -1142,9 +1373,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
     <entry>
       <title><![CDATA[EF Core For Mysql 的DataBase First（基于已有数据库）方式连接数据库]]></title>
       <url>/ef-core-for-mysql-de-databasefang-shi-lian-jie-shu-ju-ku.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>.NET要跨平台，就一定要使用同样可以跨平台的数据库，而轻量的MySQL自然是首选。.NET Core发展到现在，虽然官方的Entity Framework还没发布MySQL版本，但是刚认识的柚子大神已经首先把它做出来了（<a href="http://www.1234.sh/post/pomelo-data-mysql" target="_blank" rel="external">他的博客</a>）。</p>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>.NET要跨平台，就一定要使用同样可以跨平台的数据库，而轻量的MySQL自然是首选。.NET Core发展到现在，虽然官方的Entity Framework还没发布MySQL版本，但是刚认识的柚子大神已经首先把它做出来了（<a href="http://www.1234.sh/post/pomelo-data-mysql" target="_blank" rel="noopener">他的博客</a>）。</p>
 <p>同时，他也开源了它使用MySql for Entity Framework Core写的轻量博客系统，可惜在数据库连接是使用Code First。Code First当时是好，也是微软官方推荐的数据操作方式，可是，对于已有数据库的项目，希望创建基于已有数据库的.NET Core应用，或者对已有项目进行移植的开发者，就显得力不从心了。</p>
-<p>虽然官方有从数据库创建模型的方法（<a href="https://docs.efproject.net/en/latest/platforms/aspnetcore/existing-db.html" target="_blank" rel="external">地址</a>），但是它使用了下面这三个只适用于SqlServer的工具包：</p>
+<p>虽然官方有从数据库创建模型的方法（<a href="https://docs.efproject.net/en/latest/platforms/aspnetcore/existing-db.html" target="_blank" rel="noopener">地址</a>），但是它使用了下面这三个只适用于SqlServer的工具包：</p>
 <ul>
 <li>Microsoft.EntityFrameworkCore.SqlServer</li>
 <li>Microsoft.EntityFrameworkCore.Tools</li>
@@ -1188,12 +1419,12 @@ $ <span class="token function">npm</span> <span class="token function">install</
       <title><![CDATA[.NET Core以依赖注入的方式配置MySql的DbContext]]></title>
       <url>/yi-zhu-ru-de-fang-shi.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>使用ASP.NET Core开发Web项目，在很多方面都跟之前的.NET版本有很大不同，在Startup.cs的配置方面,一言不合就使用依赖注入。当然，这对于整个项目的解耦是极好的。这次踩的坑在DbContext的配置上。</p>
-<p>在<a href="http://www.1234.sh/post/pomelo-data-mysql" target="_blank" rel="external">柚子大神的博客</a>中,有介绍他移植过来的mysql for ef core的使用方法是在Startup中注册服务：</p>
+<p>在<a href="http://www.1234.sh/post/pomelo-data-mysql" target="_blank" rel="noopener">柚子大神的博客</a>中,有介绍他移植过来的mysql for ef core的使用方法是在Startup中注册服务：</p>
 <pre class="line-numbers language-aspnet"><code class="language-aspnet">services.AddDbContext<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span>(x => x.UseMySql("server=localhost;database=yourdb;uid=root;pwd=yourpwd"));
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但是，这样配置之后，又需要在YourContext中配置：<br><img src="/content/images/2016/07/0e1ef77c-b03e-439f-a894-cb1de1811695.png" alt=""></p>
 <p>这样的话，其实是等于配置了两次，在DbContext中是直接写ConnectionString的，不能（我还不会）从配置文件中读取。因此，需要寻找一个从Startup中配置的有效方法。</p>
-<p>通过对比MVC6项目模版的sqlserver配置方式，和<a href="https://docs.efproject.net/en/latest/miscellaneous/configuring-dbcontext.html" target="_blank" rel="external">官方文档的介绍</a>，发现DbContext里是可以通过注入的方式注册ConnectionString的，方法就是设置构造函数注入DbContextOptions：</p>
+<p>通过对比MVC6项目模版的sqlserver配置方式，和<a href="https://docs.efproject.net/en/latest/miscellaneous/configuring-dbcontext.html" target="_blank" rel="noopener">官方文档的介绍</a>，发现DbContext里是可以通过注入的方式注册ConnectionString的，方法就是设置构造函数注入DbContextOptions：</p>
 <pre class="line-numbers language-aspnet"><code class="language-aspnet">  public YourContext(DbContextOptions<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>YourContext</span><span class="token punctuation">></span></span> options)
             : base(options)
         { }
@@ -1267,29 +1498,29 @@ $ <span class="token function">npm</span> <span class="token function">install</
       <url>/net-core-zi-liao-zheng-li.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>##工具下载</p>
 <ul>
-<li><p><a href="http://download.microsoft.com/download/c/2/6/c26892d8-6a5d-4871-9d46-629f4d430146/vs2015.3.vsu.iso" target="_blank" rel="external">Visual Studio 2015 Update3 升级包</a></p>
+<li><p><a href="http://download.microsoft.com/download/c/2/6/c26892d8-6a5d-4871-9d46-629f4d430146/vs2015.3.vsu.iso" target="_blank" rel="noopener">Visual Studio 2015 Update3 升级包</a></p>
 </li>
-<li><p><a href="ed2k://|file|cn_visual_studio_professional_2015_with_update_3_x86_x64_dvd_8923256.iso|7745202176|DD35D3D169D553224BE5FB44E074ED5E|/" target="_blank" rel="external">Visual Studio Professional 2015 Update3</a></p>
+<li><p><a href="ed2k://|file|cn_visual_studio_professional_2015_with_update_3_x86_x64_dvd_8923256.iso|7745202176|DD35D3D169D553224BE5FB44E074ED5E|/" target="_blank" rel="noopener">Visual Studio Professional 2015 Update3</a></p>
 </li>
-<li><p><a href="http://download.microsoft.com/download/7/c/f/7cf151c3-b735-4e35-a1bb-9a48224f4a95/vs2015.3.ent_chs.iso" target="_blank" rel="external">Visual Studio Enterprise 2015 Update3</a> </p>
+<li><p><a href="http://download.microsoft.com/download/7/c/f/7cf151c3-b735-4e35-a1bb-9a48224f4a95/vs2015.3.ent_chs.iso" target="_blank" rel="noopener">Visual Studio Enterprise 2015 Update3</a> </p>
 </li>
-<li><p><a href="http://download.microsoft.com/download/5/d/1/5d1ec81e-bc59-448f-9ab6-27636d5cc18a/vs2015.3.com_chs.iso" target="_blank" rel="external">Visual Studio Community 2015 Update3</a></p>
+<li><p><a href="http://download.microsoft.com/download/5/d/1/5d1ec81e-bc59-448f-9ab6-27636d5cc18a/vs2015.3.com_chs.iso" target="_blank" rel="noopener">Visual Studio Community 2015 Update3</a></p>
 </li>
-<li><p><a href="http://download.microsoft.com/download/A/3/8/A38489F3-9777-41DD-83F8-2CBDFAB2520C/DotNetCore.1.0.0-VS2015Tools.Preview2.exe" target="_blank" rel="external">.NET Core for VS Tools</a></p>
+<li><p><a href="http://download.microsoft.com/download/A/3/8/A38489F3-9777-41DD-83F8-2CBDFAB2520C/DotNetCore.1.0.0-VS2015Tools.Preview2.exe" target="_blank" rel="noopener">.NET Core for VS Tools</a></p>
 </li>
-<li><p><a href="https://az764295.vo.msecnd.net/stable/e724f269ded347b49fcf1657fc576399354e6703/VSCodeSetup-stable.exe" target="_blank" rel="external">Visual Studio Code</a></p>
+<li><p><a href="https://az764295.vo.msecnd.net/stable/e724f269ded347b49fcf1657fc576399354e6703/VSCodeSetup-stable.exe" target="_blank" rel="noopener">Visual Studio Code</a></p>
 </li>
-<li><p><a href="https://download.microsoft.com/download/A/3/8/A38489F3-9777-41DD-83F8-2CBDFAB2520C/packages/DotNetCore.1.0.0-SDK.Preview2-x64.exe" target="_blank" rel="external">.NET Core SDK</a></p>
+<li><p><a href="https://download.microsoft.com/download/A/3/8/A38489F3-9777-41DD-83F8-2CBDFAB2520C/packages/DotNetCore.1.0.0-SDK.Preview2-x64.exe" target="_blank" rel="noopener">.NET Core SDK</a></p>
 </li>
 </ul>
 <p>##文档</p>
 <ul>
-<li><a href="http://www.cnblogs.com/dotNETCoreSG/p/aspnetcore-index.html" target="_blank" rel="external">ASP.NET Core 中文文档</a></li>
+<li><a href="http://www.cnblogs.com/dotNETCoreSG/p/aspnetcore-index.html" target="_blank" rel="noopener">ASP.NET Core 中文文档</a></li>
 </ul>
 <p>##部署</p>
 <ul>
-<li><a href="http://www.cnblogs.com/yunei/p/5662642.html" target="_blank" rel="external">Jexus 5.8.2 Beta1发布：为Asp.Net Core进入生产环境提供平台支持</a></li>
-<li><a href="http://www.cnblogs.com/gaobing/p/5663012.html" target="_blank" rel="external">ASP.NET Core “完整发布,自带运行时” 到jexus</a></li>
+<li><a href="http://www.cnblogs.com/yunei/p/5662642.html" target="_blank" rel="noopener">Jexus 5.8.2 Beta1发布：为Asp.Net Core进入生产环境提供平台支持</a></li>
+<li><a href="http://www.cnblogs.com/gaobing/p/5663012.html" target="_blank" rel="noopener">ASP.NET Core “完整发布,自带运行时” 到jexus</a></li>
 </ul>
 ]]></content>
       
@@ -1382,8 +1613,8 @@ $ <span class="token function">npm</span> <span class="token function">install</
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>6月28日凌晨，RedHat 开发者大会上微软正式发布.NET Core正式版，我作为.NET爱好者，马上就想安装来玩玩，不过因为之前电脑上就装有旧版本，在这次正式版的安装中遇到了一些坑，装了n遍，死活装不上，停留在旧版本。</p>
 <p>下载地址：</p>
 <ol>
-<li><a href="https://go.microsoft.com/fwlink/?LinkId=817245" target="_blank" rel="external">.NET Core for Visual Studio official MSI Installer</a><br>(需要先安装<a href="https://www.visualstudio.com/downloads/download-visual-studio-vs" target="_blank" rel="external">Visual Studio 2015 Update 3</a>)</li>
-<li><a href="https://go.microsoft.com/fwlink/?LinkID=809122" target="_blank" rel="external">.NET Core SDK for Windows</a></li>
+<li><a href="https://go.microsoft.com/fwlink/?LinkId=817245" target="_blank" rel="noopener">.NET Core for Visual Studio official MSI Installer</a><br>(需要先安装<a href="https://www.visualstudio.com/downloads/download-visual-studio-vs" target="_blank" rel="noopener">Visual Studio 2015 Update 3</a>)</li>
+<li><a href="https://go.microsoft.com/fwlink/?LinkID=809122" target="_blank" rel="noopener">.NET Core SDK for Windows</a></li>
 </ol>
 <p>然后，如果你电脑之前没安装过.NET Core,有装了Visual Studio 2015 的话，需要把VS升级到Update3，再安装.NET Core for Visual Studio official MSI Installer（里面已经包含.NET Core SDK）； 如果没装VS，也不打算使用VS的话，可以只安装.NET Core SDK。</p>
 <p>但是，如果以前安装过旧版的.NET Core，就需要先在【控制面板\所有控制面板项\程序和功能】中卸载以前的版本，并且==需要删除所有的环境变量==，在【控制面板\所有控制面板项\系统】中的左侧边栏中点击【高级系统设计】，在弹出的窗口中点击下方的环境变量按钮，在弹出的【环境变量】窗口中的【系统变量】一栏中找到“Path”变量，删除所有指向dotnet、dnx、dnu、dnvm目录的值，然后按“确定”保存退出。</p>
@@ -1427,7 +1658,7 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <p><code>$ git push origin test:master</code>         // 提交本地test分支作为远程的master分支</p>
 <p><code>$ git push origin test:test</code>             // 提交本地test分支作为远程的test分支</p>
 <p><code>$ git push origin :test</code>              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心</p>
-<p>文章来源：<a href="http://www.cnblogs.com/wangkangluo1/archive/2011/09/02/2164313.html" target="_blank" rel="external">git 远程分支创建与推送</a></p>
+<p>文章来源：<a href="http://www.cnblogs.com/wangkangluo1/archive/2011/09/02/2164313.html" target="_blank" rel="noopener">git 远程分支创建与推送</a></p>
 ]]></content>
       
         
@@ -1442,14 +1673,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
     <entry>
       <title><![CDATA[Ubuntu 搭建Gogs ：轻量Git Web端管理系统]]></title>
       <url>/ubuntu-da-jian-gogs-qing-liang-git-webduan-guan-li-xi-tong.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>Gogs是国人开发的开源git管理系统，类似gitlab，可在服务器上搭建私人的git版本管理系统。内建很多功能，但俾比gitlab安装更方便，占用更少的资源。<br>详细介绍还是看看官方网站吧：<a href="https://gogs.io" target="_blank" rel="external">https://gogs.io</a></p>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>Gogs是国人开发的开源git管理系统，类似gitlab，可在服务器上搭建私人的git版本管理系统。内建很多功能，但俾比gitlab安装更方便，占用更少的资源。<br>详细介绍还是看看官方网站吧：<a href="https://gogs.io" target="_blank" rel="noopener">https://gogs.io</a></p>
 <p>现在结合本人的安装过程，在这里做一个记录。适合小白参考。</p>
 <p>安装方法有三种：二进制安装，源码安装，包管理安装，我认为最方便的还是二进制安装。</p>
-<p>首先下载<a href="https://gogs.io/docs/installation/install_from_binary" target="_blank" rel="external">二进制包</a>，在这个页面上也有安装教程。</p>
+<p>首先下载<a href="https://gogs.io/docs/installation/install_from_binary" target="_blank" rel="noopener">二进制包</a>，在这个页面上也有安装教程。</p>
 <p>然后在解压后进入目录，执行 ./gogs web ，则能够启动服务进程，但这时的服务是临时的，一退出就会关闭，所以需要持续化进程配置。</p>
 <p>因为gogs的安装设置页面里的设置只能设置一次，以后要修改则要新建一个文件，所以这里最好先做好准备工作。</p>
 <ul>
-<li>反向代理 代理ip为 <a href="http://localhost:3000/" target="_blank" rel="external">http://localhost:3000/</a></li>
+<li>反向代理 代理ip为 <a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a></li>
 <li>持续进程 使用supervisor</li>
 </ul>
 <p><code>sudo apt-get -y install supervisor</code></p>
@@ -1505,7 +1736,7 @@ user = git
 <p><img src="https://img.alicdn.com/tps/TB1tGPGJFXXXXbwXVXXXXXXXXXX-878-324.jpg" alt=""><br><img src="https://img.alicdn.com/tps/TB1Fsr1JFXXXXcFXpXXXXXXXXXX-810-184.jpg" alt=""></p>
 <p>更新成功会提示”Success, exit now!“</p>
 <p>如问题还未解决,请联系售后技术支持。</p>
-<p>来源：<a href="http://www.iisiis.com/web/vps/1884.html" target="_blank" rel="external">http://www.iisiis.com/web/vps/1884.html</a></p>
+<p>来源：<a href="http://www.iisiis.com/web/vps/1884.html" target="_blank" rel="noopener">http://www.iisiis.com/web/vps/1884.html</a></p>
 ]]></content>
       
         
@@ -1630,7 +1861,7 @@ user = git
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>现在安装mono已经不用make命令来编译，可以直接执行<code>apt-get mono-complete</code>来安装最新的mono版本。</p>
 <p>下面看看怎么安装：</p>
 <ul>
-<li>首先，在mono-project的安装指南页面获得最新的注册信息，<br><a href="http://www.mono-project.com/docs/getting-started/install/linux/#debian-ubuntu-and-derivatives" target="_blank" rel="external">这是地址</a>。</li>
+<li>首先，在mono-project的安装指南页面获得最新的注册信息，<br><a href="http://www.mono-project.com/docs/getting-started/install/linux/#debian-ubuntu-and-derivatives" target="_blank" rel="noopener">这是地址</a>。</li>
 </ul>
 <p>然后按照上面的命令执行</p>
 <p><code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF</code></p>
@@ -1960,9 +2191,9 @@ reproxy=/  http://127.0.0.1:236
 <p>###总结</p>
 <p>这个部署过程让我学会node.js的部署，以及Jexus反向代理的一个用处，就是绑定域名到其他web Server的程序上，这样以后就可以在同一服务器上运行多种语言的程序了（我的服务器目前是.NET+PHP+Node.js）</p>
 <blockquote>
-<p><a href="http://www.applecho.com/installing-ghost-ubuntu/" target="_blank" rel="external">Ghost博客平台：在Ubuntu上安装Ghost</a></p>
-<p><a href="http://www.applecho.com/installing-ghost-pm2/" target="_blank" rel="external">Ghost博客平台：安装pm2</a></p>
-<p><a href="http://www.cnblogs.com/shanyou/archive/2013/05/04/3059950.html" target="_blank" rel="external">Jexus 负载均衡</a></p>
+<p><a href="http://www.applecho.com/installing-ghost-ubuntu/" target="_blank" rel="noopener">Ghost博客平台：在Ubuntu上安装Ghost</a></p>
+<p><a href="http://www.applecho.com/installing-ghost-pm2/" target="_blank" rel="noopener">Ghost博客平台：安装pm2</a></p>
+<p><a href="http://www.cnblogs.com/shanyou/archive/2013/05/04/3059950.html" target="_blank" rel="noopener">Jexus 负载均衡</a></p>
 </blockquote>
 ]]></content>
       
@@ -1985,14 +2216,33 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于我]]></title>
       <url>/about.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><ul>
 <li>杨舜杰</li>
 <li>男</li>
 <li>2016年于广东海洋大学计算机科学与技术专业毕业</li>
-<li>联系方式：<a href="mailto:shunjiey@hotmail.com" target="_blank" rel="external">shunjiey@hotmail.com</a></li>
-<li>Github: <a href="http://github.com/elderjames" target="_blank" rel="external">github.com/elderjames</a></li>
+<li>联系方式：<a href="mailto:shunjiey@hotmail.com" target="_blank" rel="noopener">shunjiey@hotmail.com</a></li>
+<li>Github: <a href="http://github.com/elderjames" target="_blank" rel="noopener">github.com/elderjames</a></li>
 </ul>
 <h3 id="兴趣"><a href="#兴趣" class="headerlink" title="兴趣"></a>兴趣</h3><ul>
 <li>喜欢接触新鲜事物，尤其是最新科技</li>
@@ -2009,30 +2259,11 @@ reproxy=/  http://127.0.0.1:236
 <li>据说每个程序员都有一个要改变世界的理想</li>
 </ul>
 <h3 id="目前"><a href="#目前" class="headerlink" title="目前"></a>目前</h3><ul>
-<li>就职于<a href="http://www.100cb.cn/" target="_blank" rel="external">广州百财帮网络金融信息服务有限公司</a> 任.NET开发工程师</li>
+<li>就职于<a href="http://www.100cb.cn/" target="_blank" rel="noopener">广州百财帮网络金融信息服务有限公司</a> 任.NET开发工程师</li>
 <li>业余喜欢学习前端、.NET Core、docker、Cordova 等技术</li>
 <li>想养只猫了</li>
 </ul>
 <input type="text">]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
@@ -2042,8 +2273,8 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -2073,7 +2304,7 @@ reproxy=/  http://127.0.0.1:236
 <li>Drink the milk</li>
 <li>Tweet that I remembered to buy the milk, and drank it</li>
 </ol>
-<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>如果要链接其它页面，可以直接把页面的 URL 粘贴过来，例如 <a href="http://www.ghostchina.com" target="_blank" rel="external">http://www.ghostchina.com</a> - 会被自动识别为链接。但是，如果你想自定义链接文本，可以像这样： <a href="http://www.ghostchina.com" target="_blank" rel="external">Ghost 中文网</a>。很简单吧！</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>如果要链接其它页面，可以直接把页面的 URL 粘贴过来，例如 <a href="http://www.ghostchina.com" target="_blank" rel="noopener">http://www.ghostchina.com</a> - 会被自动识别为链接。但是，如果你想自定义链接文本，可以像这样： <a href="http://www.ghostchina.com" target="_blank" rel="noopener">Ghost 中文网</a>。很简单吧！</p>
 <h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>插入图片也没问题！前提是你事先知道图片的 URL，然后像下面这样：</p>
 <p><img src="http://static.ghostchina.com/image/3/fe/34a9831916be9db1381ecb320491e.png" alt="The Ghost Logo"></p>
 <p>如果图片在本地的硬盘里怎么办？也很简单！像下面这样书写就能为图片预留一个位置，然后你可以继续写作，回头再通过拖拽的方式把图片上传到服务器上。</p>

@@ -273,7 +273,7 @@
 
     
         <meta property="article:published_time" content="Tue Sep 12 2017 17:00:00 GMT+0000" />
-        <meta property="article:modified_time" content="Mon Oct 16 2017 06:01:09 GMT+0000" />
+        <meta property="article:modified_time" content="Thu Nov 23 2017 10:04:14 GMT+0000" />
     
 
     <!-- The Twitter Card protocol -->
@@ -300,7 +300,7 @@
     "mainEntityOfPage": "https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html",
     "headline": "ASP.NET Core中为指定类添加WebApi服务功能",
     "datePublished": "Tue Sep 12 2017 17:00:00 GMT+0000",
-    "dateModified": "Mon Oct 16 2017 06:01:09 GMT+0000",
+    "dateModified": "Thu Nov 23 2017 10:04:14 GMT+0000",
     "author": {
         "@type": "Person",
         "name": "James Yeung",
@@ -548,10 +548,10 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="POCO控制器原理"><a href="#POCO控制器原理" class="headerlink" title="POCO控制器原理"></a>POCO控制器原理</h3><p>其实，在ASP.NET Core中，已经不像旧版本的 ASP.NET WebApi 那样，通过ControllerFactory来创建Controller，多亏于ASP.NET Core一脉相承的IoC框架 <code>Microsoft.Extensions.DependencyInjection</code>，ASP.NET Core中的内部实现变得更优雅。其中POCO控制器的核心原理就在<a href="https://github.com/aspnet/Mvc/blob/2bacb6003f3bc2c3b58107c1118346dca3f5fa13/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/IApplicationFeatureProviderOfT.cs" target="_blank" rel="external"><code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code></a>这个接口的实现<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="external"><code>ControllerFeatureProvider</code></a>。</p>
-<p>通过<a href="https://github.com/aspnet/Mvc/search?p=1&amp;q=IApplicationFeatureProvider&amp;type=&amp;utf8=%E2%9C%93" target="_blank" rel="external">aspnet/Mvc项目的Github源码仓库</a>中查询得知，Mvc里把Controller、ViewComponent、TagHelper、Views等组件定义为特性(Feature)，如<code>ControllerFeature</code>，特性里就存放了应用中被识别为相组件的类型的集合，如如<code>ControllerFeature</code>中就存放了所有<code>Controller</code>类型。<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>这个接口是用来给MVC框架提供控制器类型识别的接口，当把这个接口的实现注册到服务配置中，就能为其中识别的类型提供控制器功能。</p>
-<p><a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="external">ControllerFeatureProvider</a>是这个接口的默认实现，其中有一个方法<code>IsController(TypeInfo typeInfo)</code>的功能就是判断某类型是否为控制器的。而接口方法<code>PopulateFeature(IEnumerable&lt;ApplicationPart&gt; parts,ControllerFeature feature)</code>则为把传入的 “Mvc应用部分（<code>ApplicationPart</code>，大概是指Mvc的作用程序集）”中的类型都一一判断，如果是控制器，那么就加入控制器特性对象中。</p>
-<h3 id="实现自定义判断规则"><a href="#实现自定义判断规则" class="headerlink" title="实现自定义判断规则"></a>实现自定义判断规则</h3><p>通过上面的剖析，我们就知道要实现自定义的控制器判断规则，只需要重写<code>ControllerFeature</code>类或者重新实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口，但是由于<code>PopulateFeature</code>不是虚方法或抽象方法，所以不能被重写，那么只能重新写一个类来实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口了。为了兼容原来规则，我把原来的规则照搬过来，复制了<code>IsController</code>的方法（开源的好处），并且在<code>PopulateFeature</code>中加入了自己的规则。先贴代码，避免篇幅过长，<code>IsController</code>方法的实现就直接链接到<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L41" target="_blank" rel="external">源码</a>了：</p>
+<h3 id="POCO控制器原理"><a href="#POCO控制器原理" class="headerlink" title="POCO控制器原理"></a>POCO控制器原理</h3><p>其实，在ASP.NET Core中，已经不像旧版本的 ASP.NET WebApi 那样，通过ControllerFactory来创建Controller，多亏于ASP.NET Core一脉相承的IoC框架 <code>Microsoft.Extensions.DependencyInjection</code>，ASP.NET Core中的内部实现变得更优雅。其中POCO控制器的核心原理就在<a href="https://github.com/aspnet/Mvc/blob/2bacb6003f3bc2c3b58107c1118346dca3f5fa13/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/IApplicationFeatureProviderOfT.cs" target="_blank" rel="noopener"><code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code></a>这个接口的实现<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="noopener"><code>ControllerFeatureProvider</code></a>。</p>
+<p>通过<a href="https://github.com/aspnet/Mvc/search?p=1&amp;q=IApplicationFeatureProvider&amp;type=&amp;utf8=%E2%9C%93" target="_blank" rel="noopener">aspnet/Mvc项目的Github源码仓库</a>中查询得知，Mvc里把Controller、ViewComponent、TagHelper、Views等组件定义为特性(Feature)，如<code>ControllerFeature</code>，特性里就存放了应用中被识别为相组件的类型的集合，如如<code>ControllerFeature</code>中就存放了所有<code>Controller</code>类型。<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>这个接口是用来给MVC框架提供控制器类型识别的接口，当把这个接口的实现注册到服务配置中，就能为其中识别的类型提供控制器功能。</p>
+<p><a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L15" target="_blank" rel="noopener">ControllerFeatureProvider</a>是这个接口的默认实现，其中有一个方法<code>IsController(TypeInfo typeInfo)</code>的功能就是判断某类型是否为控制器的。而接口方法<code>PopulateFeature(IEnumerable&lt;ApplicationPart&gt; parts,ControllerFeature feature)</code>则为把传入的 “Mvc应用部分（<code>ApplicationPart</code>，大概是指Mvc的作用程序集）”中的类型都一一判断，如果是控制器，那么就加入控制器特性对象中。</p>
+<h3 id="实现自定义判断规则"><a href="#实现自定义判断规则" class="headerlink" title="实现自定义判断规则"></a>实现自定义判断规则</h3><p>通过上面的剖析，我们就知道要实现自定义的控制器判断规则，只需要重写<code>ControllerFeature</code>类或者重新实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口，但是由于<code>PopulateFeature</code>不是虚方法或抽象方法，所以不能被重写，那么只能重新写一个类来实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口了。为了兼容原来规则，我把原来的规则照搬过来，复制了<code>IsController</code>的方法（开源的好处），并且在<code>PopulateFeature</code>中加入了自己的规则。先贴代码，避免篇幅过长，<code>IsController</code>方法的实现就直接链接到<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/Controllers/ControllerFeatureProvider.cs#L41" target="_blank" rel="noopener">源码</a>了：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> <span class="token keyword">class</span> <span class="token class-name">ServiceControllerFeatureProvider</span> <span class="token punctuation">:</span> IApplicationFeatureProvider<span class="token operator">&lt;</span>ControllerFeature<span class="token operator">></span>
 <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">const</span> <span class="token keyword">string</span> ControllerTypeNameSuffix <span class="token operator">=</span> <span class="token string">"Controller"</span><span class="token punctuation">;</span>
@@ -595,8 +595,8 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>其中TestService类就是会被识别为控制器的类，但是接口和实现是可以分开在不同程序集的。通过原本<code>ControllerFeatureProvider</code>类中<code>PopulateFeature</code>方法的<code>parts</code>参数中的类型是不包括除了引用了Mvc的程序集的其它程序集的，所以我这里用自己实现的类型扫描类<code>Reflection</code>中的<code>CurrentAssembiles</code>静态变量来获取当前应用程序的所有引用的（自己创建的项目）程序集的，具体实现的代码在我的框架[Shriek]的<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Utils/Reflection.cs" target="_blank" rel="external">源码中</a>。</p>
-<h3 id="配置自定义规则"><a href="#配置自定义规则" class="headerlink" title="配置自定义规则"></a>配置自定义规则</h3><p>现在，我们拥有了自定义控制器识别规则<code>ServiceControllerFeatureProvider</code>，那么，怎么配置到Mvc中呢？又要去翻源码了！在<code>MvcCoreMvcBuilderExtensions.cs</code>扩展类中，有一个<code>IMvcBuilder</code>的扩展方法<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcBuilderExtensions.cs#L93" target="_blank" rel="external"><code>ConfigureApplicationPartManager</code></a>（<code>IMvcCoreBuilder</code>也有这样的<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcCoreBuilderExtensions.cs#L152" target="_blank" rel="external">扩展方法</a>），它的参数是传入<code>ApplicationPartManager</code>参数的委托，而<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/ApplicationPartManager.cs#L13" target="_blank" rel="external"><code>ApplicationPartManager</code></a>中有一个<code>FeatureProviders</code>属性，用来存储所有<code>IApplicationFeatureProvider</code>实例，会在应用第一次运行的时候，循环这些“特性提供器”提供所有上面提到的MVC特性。所以，只要我们在这里添加我们自定义的控制器特性提供器，MVC框架内部就能识别我们的指定的类型为控制器，并为他们添加控制器的相关功能。</p>
+<p>其中TestService类就是会被识别为控制器的类，但是接口和实现是可以分开在不同程序集的。通过原本<code>ControllerFeatureProvider</code>类中<code>PopulateFeature</code>方法的<code>parts</code>参数中的类型是不包括除了引用了Mvc的程序集的其它程序集的，所以我这里用自己实现的类型扫描类<code>Reflection</code>中的<code>CurrentAssembiles</code>静态变量来获取当前应用程序的所有引用的（自己创建的项目）程序集的，具体实现的代码在我的框架[Shriek]的<a href="https://github.com/ElderJames/shriek-fx/blob/master/src/Shriek/Utils/Reflection.cs" target="_blank" rel="noopener">源码中</a>。</p>
+<h3 id="配置自定义规则"><a href="#配置自定义规则" class="headerlink" title="配置自定义规则"></a>配置自定义规则</h3><p>现在，我们拥有了自定义控制器识别规则<code>ServiceControllerFeatureProvider</code>，那么，怎么配置到Mvc中呢？又要去翻源码了！在<code>MvcCoreMvcBuilderExtensions.cs</code>扩展类中，有一个<code>IMvcBuilder</code>的扩展方法<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcBuilderExtensions.cs#L93" target="_blank" rel="noopener"><code>ConfigureApplicationPartManager</code></a>（<code>IMvcCoreBuilder</code>也有这样的<a href="https://github.com/aspnet/Mvc/blob/1c4b0fcdf38320b2f02c0bb7c31df5bd391ace07/src/Microsoft.AspNetCore.Mvc.Core/DependencyInjection/MvcCoreMvcCoreBuilderExtensions.cs#L152" target="_blank" rel="noopener">扩展方法</a>），它的参数是传入<code>ApplicationPartManager</code>参数的委托，而<a href="https://github.com/aspnet/Mvc/blob/760c8f38678118734399c58c2dac981ea6e47046/src/Microsoft.AspNetCore.Mvc.Core/ApplicationParts/ApplicationPartManager.cs#L13" target="_blank" rel="noopener"><code>ApplicationPartManager</code></a>中有一个<code>FeatureProviders</code>属性，用来存储所有<code>IApplicationFeatureProvider</code>实例，会在应用第一次运行的时候，循环这些“特性提供器”提供所有上面提到的MVC特性。所以，只要我们在这里添加我们自定义的控制器特性提供器，MVC框架内部就能识别我们的指定的类型为控制器，并为他们添加控制器的相关功能。</p>
 <p>设计有点绕，那么我们用代码来实现：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//示例直接new ServiceCollection对象，下面有完整的能运行的示例代码。</span>
 <span class="token keyword">var</span> services <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServiceCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -635,10 +635,10 @@ services<span class="token punctuation">.</span><span class="token function">Add
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="external">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
+<p>一切编译通过后，点击运行，在浏览器中访问”<a href="http://localhost:8080/test/elderjames" target="_blank" rel="noopener">http://localhost:8080/test/elderjames</a>”，如果看到返回了“Hello elderjames”，那么就大功告成啦！</p>
 <p><img src="/images/add_webapi_to_class/1.png" alt=""></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这篇文章中主要介绍了通过实现<code>IApplicationFeatureProvider&lt;ControllerFeature&gt;</code>接口实现设置指定类型为WebApi控制器的方法。</p>
-<p>在接下来的文章中，我会介绍如何从接口获取自定义特性标签，实现从接口获得mvc特性，使得接口和实现类都不依赖MVC库的方法，只要在接口中以标记特性的方式定义了路由和http方法，实现类的操作就都按照接口的路由和http方法去提供WebApi服务，最后还要介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="external"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="external">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
+<p>在接下来的文章中，我会介绍如何从接口获取自定义特性标签，实现从接口获得mvc特性，使得接口和实现类都不依赖MVC库的方法，只要在接口中以标记特性的方式定义了路由和http方法，实现类的操作就都按照接口的路由和http方法去提供WebApi服务，最后还要介绍使用功能强大的.NTE Core开源AOP框架<a href="https://github.com/dotnetcore/AspectCore-Framework" target="_blank" rel="noopener"><strong>AspectCore</strong></a>实现的动态代理客户端，注册以上所说的接口，即可获得可以调用对应的WebApi服务的功能。这些工作的源码可以在<a href="https://github.com/ElderJames/shriek-fx/tree/master/samples/Shriek.Samples.WebApiProxy" target="_blank" rel="noopener">我的框架示例项目</a>中运行，大家有兴趣可以看看效果。</p>
 <p><strong>感谢阅读和批评指教！</strong></p>
 <p>[温馨提示：为方便大家看文中提到的源码，原文中有大量指向源码链接，如果您看的是没有链接的转载，可以再来看我的原文。]</p>
 
@@ -806,7 +806,7 @@ services<span class="token punctuation">.</span><span class="token function">Add
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
             </ul>
         </li>
         
@@ -824,7 +824,7 @@ services<span class="token punctuation">.</span><span class="token function">Add
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -898,7 +898,7 @@ services<span class="token punctuation">.</span><span class="token function">Add
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">29</span>
+                <span class="sidebar-badge">30</span>
             </a>
         </li>
         
@@ -1246,19 +1246,49 @@ console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viose
             </div>
             
                 
-    <script type="text/javascript" src="/live2d/script.js"></script>
-    <canvas id="live2dcanvas" width="150" height="300" class="live2d"></canvas>
+  <div id="hexo-helper-live2d">
+      <canvas id="live2dcanvas" width="150" height="300" class="live2d"></canvas>
+  </div>
     <style>
-      #live2dcanvas {
+      #live2dcanvas{
+      	-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
         position: fixed;
+        width: 150px;
+        height: 300px;
+        opacity:1;
+        
         right: 0px;
         z-index: 999;
         pointer-events: none;
-        bottom: 60px;
+        bottom: -20px;
       }
+	  
     </style>
-    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/tororo/tororo.model.json",0.5)</script>
-  
+    <script src="/live2d/device.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+	  if(typeof(device) != "undefined"){
+        if(device.mobile()){
+          document.getElementById("live2dcanvas").style.width = '75px';
+          document.getElementById("live2dcanvas").style.height = '150px';
+          document.write('<script type="text/javascript" src="/live2d/script.js"><\/script>');
+          document.write('<script>loadlive2d("live2dcanvas", "/live2d/assets/tororo.model.json", 0.5)<\/script>');
+        }else{
+          document.write('<script type="text/javascript" src="/live2d/script.js"><\/script>');
+          document.write('<script>loadlive2d("live2dcanvas", "/live2d/assets/tororo.model.json", 0.5)<\/script>');
+        }
+	  }else{
+        document.write('<script type="text/javascript" src="/live2d/script.js"><\/script>');
+        document.write('<script>loadlive2d("live2dcanvas", "/live2d/assets/tororo.model.json", 0.5)<\/script>');    
+	  }
+    })();
+    </script>
+
             
         </body>
     
