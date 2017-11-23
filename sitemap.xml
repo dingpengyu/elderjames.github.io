@@ -2,107 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yangshunjie.com/timeline.html</loc>
-    
-    <lastmod>2017-11-23T10:11:16.158Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://yangshunjie.com/tags.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.158Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.568Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yangshunjie.com/gallery/index.html</loc>
+    <loc>https://yangshunjie.com/timeline.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.127Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.568Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/about.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.127Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.536Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yangshunjie.com/categories.html</loc>
+    <loc>https://yangshunjie.com/gallery/index.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.127Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yangshunjie.com/friends.html</loc>
-    
-    <lastmod>2017-11-23T10:11:16.127Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yangshunjie.com/contact.html</loc>
-    
-    <lastmod>2017-11-23T10:11:16.127Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
-    
-    <lastmod>2017-11-23T10:11:16.111Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.536Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.111Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.536Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</loc>
+    <loc>https://yangshunjie.com/categories.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.096Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</loc>
-    
-    <lastmod>2017-11-23T10:11:16.096Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.536Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</loc>
+    <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.080Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.536Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/friends.html</loc>
+    
+    <lastmod>2017-11-23T10:20:51.536Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/contact.html</loc>
+    
+    <lastmod>2017-11-23T10:20:51.536Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/ddd-project-collection.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.080Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.520Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</loc>
+    
+    <lastmod>2017-11-23T10:20:51.520Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</loc>
+    
+    <lastmod>2017-11-23T10:20:51.520Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</loc>
+    
+    <lastmod>2017-11-23T10:20:51.520Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/A-Middleware-Implement-For-Server-Static-Cache-In-AspNetCore.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.080Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.520Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</loc>
     
-    <lastmod>2017-11-23T10:11:16.080Z</lastmod>
+    <lastmod>2017-11-23T10:20:51.520Z</lastmod>
     
   </url>
   
