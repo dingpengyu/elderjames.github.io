@@ -8,11 +8,11 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Fri, 24 Nov 2017 06:48:18 GMT</pubDate>
+    <pubDate>Fri, 24 Nov 2017 16:06:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>Core奇技淫巧（2）：中间件中渲染Razor视图</title>
+      <title>ASP.NET Core奇技淫巧（2）：中间件中渲染Razor视图</title>
       <link>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</link>
       <guid>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</guid>
       <pubDate>Thu, 23 Nov 2017 21:50:39 GMT</pubDate>
