@@ -12,7 +12,7 @@
     
   <url>
     <loc>https://yangshunjie.com/how-to-request-a-free-https.html</loc>
-    <lastmod>2017-11-23T15:25:37.532Z</lastmod>
+    <lastmod>2017-11-24T06:48:18.560Z</lastmod>
     <data>
         <display>
         <title>给你的域名加把锁：免费Https申请</title>
@@ -38,7 +38,7 @@
     
   <url>
     <loc>https://yangshunjie.com/change-the-docker-image-origin-to-aliyun.html</loc>
-    <lastmod>2017-11-23T15:25:37.532Z</lastmod>
+    <lastmod>2017-11-24T06:48:18.560Z</lastmod>
     <data>
         <display>
         <title>更换阿里云Docker镜像源</title>
@@ -57,8 +57,52 @@
 
     
   <url>
+    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</loc>
+    <lastmod>2017-11-24T06:48:18.513Z</lastmod>
+    <data>
+        <display>
+        <title>时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储</title>
+        <pubTime>2017-09-26T00:44:01.000Z</pubTime>
+        
+        <tag>.NET Core</tag>
+         
+        <tag>InfluxDB</tag>
+         
+         
+           
+             
+              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</loc>
+    <lastmod>2017-11-24T06:48:18.497Z</lastmod>
+    <data>
+        <display>
+        <title>时序数据库InfluxDB在.NET Core中的使用——（1）InfluxDB简介及使用</title>
+        <pubTime>2017-09-25T22:56:01.000Z</pubTime>
+        
+        <tag>.NET Core</tag>
+         
+        <tag>InfluxDB</tag>
+         
+         
+           
+             
+              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yangshunjie.com/A-Middleware-Implement-For-Server-Side-Static-Caching-In-AspNetCore.html</loc>
-    <lastmod>2017-11-23T15:25:37.516Z</lastmod>
+    <lastmod>2017-11-24T06:48:18.497Z</lastmod>
     <data>
         <display>
         <title>ASP.NET Core 奇技淫巧（1）：中间件实现服务端静态化缓存</title>
@@ -80,7 +124,7 @@
     
   <url>
     <loc>https://yangshunjie.com/dynamically-add-features-to-the-controller-type-in-dot-net-core.html</loc>
-    <lastmod>2017-11-23T15:25:37.516Z</lastmod>
+    <lastmod>2017-11-24T06:48:18.497Z</lastmod>
     <data>
         <display>
         <title>ASP.NET Core中动态为控制器类型添加特性</title>
@@ -105,16 +149,16 @@
 
     
   <url>
-    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-1-Introduction.html</loc>
-    <lastmod>2017-11-23T15:25:37.516Z</lastmod>
+    <loc>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</loc>
+    <lastmod>2017-11-24T06:48:18.497Z</lastmod>
     <data>
         <display>
-        <title>时序数据库InfluxDB在.NET Core中的使用——（1）InfluxDB简介及使用</title>
-        <pubTime>2017-09-25T22:56:01.000Z</pubTime>
+        <title>Core奇技淫巧（2）：中间件中渲染Razor视图</title>
+        <pubTime>2017-11-23T21:50:39.000Z</pubTime>
         
         <tag>.NET Core</tag>
          
-        <tag>InfluxDB</tag>
+        <tag>ASP.NET Core</tag>
          
          
            
@@ -128,7 +172,7 @@
     
   <url>
     <loc>https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html</loc>
-    <lastmod>2017-11-23T15:25:37.516Z</lastmod>
+    <lastmod>2017-11-24T06:48:18.497Z</lastmod>
     <data>
         <display>
         <title>ASP.NET Core中为指定类添加WebApi服务功能</title>
@@ -153,38 +197,16 @@
 
     
   <url>
-    <loc>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</loc>
-    <lastmod>2017-11-23T15:25:37.516Z</lastmod>
-    <data>
-        <display>
-        <title>Core奇技淫巧（2）：中间件中渲染Razor视图</title>
-        <pubTime>2017-11-23T21:50:39.000Z</pubTime>
-        
-        <tag>.NET Core</tag>
-         
-        <tag>ASP.NET Core</tag>
-         
-         
-           
-             
-              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://yangshunjie.com/ddd-project-collection.html</loc>
-    <lastmod>2017-11-23T15:25:37.516Z</lastmod>
+    <lastmod>2017-11-24T06:48:18.497Z</lastmod>
     <data>
         <display>
         <title>领域驱动设计（DDD）项目收集</title>
         <pubTime>2017-08-25T15:58:36.000Z</pubTime>
         
-        <tag>.NET Core</tag>
-         
         <tag>.NET</tag>
+         
+        <tag>.NET Core</tag>
          
         <tag>DDD</tag>
          
@@ -192,28 +214,6 @@
            
              
               <breadCrumb title="DDD" url="https://yangshunjie.com/categories/DDD/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</loc>
-    <lastmod>2017-11-23T15:25:37.516Z</lastmod>
-    <data>
-        <display>
-        <title>时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储</title>
-        <pubTime>2017-09-26T00:44:01.000Z</pubTime>
-        
-        <tag>.NET Core</tag>
-         
-        <tag>InfluxDB</tag>
-         
-         
-           
-             
-              <breadCrumb title=".NET Core" url="https://yangshunjie.com/categories/NET-Core/"/>
           
         </display>
     </data>
@@ -308,9 +308,9 @@
         <title>ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext</title>
         <pubTime>2016-09-22T13:58:52.000Z</pubTime>
         
-        <tag>.NET Core</tag>
-         
         <tag>.NET</tag>
+         
+        <tag>.NET Core</tag>
          
          
            
@@ -441,9 +441,9 @@
         <title>ASP.NET Core使用Session方法</title>
         <pubTime>2016-07-08T14:18:16.000Z</pubTime>
         
-        <tag>.NET Core</tag>
-         
         <tag>.NET</tag>
+         
+        <tag>.NET Core</tag>
          
          
            
@@ -460,9 +460,9 @@
         <title>从旧版.NET Core 升级到.NET Core 1.0正式版</title>
         <pubTime>2016-06-30T14:00:33.000Z</pubTime>
         
-        <tag>.NET Core</tag>
-         
         <tag>.NET</tag>
+         
+        <tag>.NET Core</tag>
          
          
            
