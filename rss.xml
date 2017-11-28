@@ -8,11 +8,28 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Fri, 24 Nov 2017 16:06:07 GMT</pubDate>
+    <pubDate>Tue, 28 Nov 2017 17:19:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>ASP.NET Core奇技淫巧（2）：中间件中渲染Razor视图</title>
+      <title>ASP.NET Core 中的SEO优化（3）:自定义路由匹配和生成</title>
+      <link>https://yangshunjie.com/A-Middleware-Implement-For-Customized-Routing-In-AspNetCore.html</link>
+      <guid>https://yangshunjie.com/A-Middleware-Implement-For-Customized-Routing-In-AspNetCore.html</guid>
+      <pubDate>Wed, 29 Nov 2017 18:31:34 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;前两篇文章主要总结了CMS系统两个技术点
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/A-Middleware-Implement-For-Customized-Routing-In-AspNetCore.html#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>ASP.NET Core 中的SEO优化（2）：中间件中渲染Razor视图</title>
       <link>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</link>
       <guid>https://yangshunjie.com/A-Middleware-Implement-For-Rendering-Razor-Views-In-AspNetCore.html</guid>
       <pubDate>Thu, 23 Nov 2017 21:50:39 GMT</pubDate>
@@ -29,7 +46,7 @@
     </item>
     
     <item>
-      <title>ASP.NET Core 奇技淫巧（1）：中间件实现服务端静态化缓存</title>
+      <title>ASP.NET Core 中的SEO优化（1）：中间件实现服务端静态化缓存</title>
       <link>https://yangshunjie.com/A-Middleware-Implement-For-Server-Side-Static-Caching-In-AspNetCore.html</link>
       <guid>https://yangshunjie.com/A-Middleware-Implement-For-Server-Side-Static-Caching-In-AspNetCore.html</guid>
       <pubDate>Thu, 23 Nov 2017 18:31:34 GMT</pubDate>
@@ -337,24 +354,6 @@
       </description>
       
       <comments>https://yangshunjie.com/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>ASP.NET Core使用Session方法</title>
-      <link>https://yangshunjie.com/as.html</link>
-      <guid>https://yangshunjie.com/as.html</guid>
-      <pubDate>Fri, 08 Jul 2016 14:18:16 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;在project.json配置文件中引入程序集：&lt;code&gt;&amp;quot;Microsoft.AspNetCore.Session&amp;quot;: &amp;quot;
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/as.html#disqus_thread</comments>
     </item>
     
   </channel>
