@@ -538,49 +538,56 @@
 <li><p>在配置文件config.json中，修改替换所有的<code>upfile</code> 为<code>file</code>，这里是因为七牛的上传接口要求文件上传控件（input）的name为file。</p>
 </li>
 <li><p>然后在最后加上几个配置项：</p>
-<pre><code>
-  /*七牛配置*/
-  &quot;access_key&quot;: &quot;&quot;,
-  &quot;secret_key&quot;: &quot;&quot;,
-  &quot;bucket&quot;: &quot;mybucket&quot;,
-  &quot;domain&quot;: &quot;http://xxx.com/&quot;,//七牛默认域名或者自定义域名
-  &quot;uploadUrl&quot;:&quot;http://upload.qiniu.com/&quot;,//七牛上传文件的域名
-  &quot;imageFieldName&quot;: &quot;file&quot;, /* 提交的图片表单名称 */
-  &quot;tokenAction&quot;: &quot;/Admin/Attachment/Token&quot;,//获取上传凭证token的Action
-</code></pre></li>
-<li><p>在路径 ueditor/dialogs/image/image.js 中找到<code>header[&#39;X_Requested_With&#39;] = &#39;XMLHttpRequest&#39;;</code> 在下面添加以下代码：</p>
 </li>
 </ul>
-<pre><code>  var filename = file.file.name;
-  var token = &quot;&quot;;
-  console.log(filename);
-  $.ajax({
-       dataType: &#39;text&#39;,
-       async: false,
-       url: editor.getOpt(&#39;tokenAction&#39;) + &quot;?file=&quot; + filename+&quot;&amp;type=img&quot;,
-       success: function (data) {
-           oken = data;
-       }
-   });
-   data[&#39;token&#39;] = token;
-</code></pre><ul>
+<pre class="line-numbers language-js"><code class="language-js">
+    <span class="token comment" spellcheck="true">/*七牛配置*/</span>
+    <span class="token string">"access_key"</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+    <span class="token string">"secret_key"</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+    <span class="token string">"bucket"</span><span class="token punctuation">:</span> <span class="token string">"mybucket"</span><span class="token punctuation">,</span>
+    <span class="token string">"domain"</span><span class="token punctuation">:</span> <span class="token string">"http://xxx.com/"</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//七牛默认域名或者自定义域名</span>
+    <span class="token string">"uploadUrl"</span><span class="token punctuation">:</span><span class="token string">"http://upload.qiniu.com/"</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//七牛上传文件的域名</span>
+    <span class="token string">"imageFieldName"</span><span class="token punctuation">:</span> <span class="token string">"file"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">/* 提交的图片表单名称 */</span>
+    <span class="token string">"tokenAction"</span><span class="token punctuation">:</span> <span class="token string">"/Admin/Attachment/Token"</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">//获取上传凭证token的Action</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>在路径 ueditor/dialogs/image/image.js 中找到<code>header[&#39;X_Requested_With&#39;] = &#39;XMLHttpRequest&#39;;</code> 在下面添加以下代码：</li>
+</ul>
+<pre class="line-numbers language-js"><code class="language-js">  <span class="token keyword">var</span> filename <span class="token operator">=</span> file<span class="token punctuation">.</span>file<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> token <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+       dataType<span class="token punctuation">:</span> <span class="token string">'text'</span><span class="token punctuation">,</span>
+       <span class="token keyword">async</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+       url<span class="token punctuation">:</span> editor<span class="token punctuation">.</span><span class="token function">getOpt</span><span class="token punctuation">(</span><span class="token string">'tokenAction'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"?file="</span> <span class="token operator">+</span> filename<span class="token operator">+</span><span class="token string">"&amp;type=img"</span><span class="token punctuation">,</span>
+       success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           oken <span class="token operator">=</span> data<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   data<span class="token punctuation">[</span><span class="token string">'token'</span><span class="token punctuation">]</span> <span class="token operator">=</span> token<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
 <li><p>在这段代码的上面，找到<code>uploader.option(&#39;server&#39;, url);</code><br>注释并修改为<code>uploader.option(&#39;server&#39;,editor.getOpt(&#39;uploadUrl&#39;));</code></p>
 </li>
 <li><p>在这段代码下面寻找<code>uploader.on(&#39;uploadSuccess&#39;, function (file, ret) {</code>，并在这个方法中的<code>if (json.state == &#39;SUCCESS&#39;) {</code>增加一行代码：</p>
-<pre><code>    //在返回的地址加上七牛设置里的域名
-    json.url = editor.getOpt(&#39;domain&#39;) + json.url;
-</code></pre></li>
-<li><p>另外在attachment.js、video.js 的相同地方按上面所说的修改。</p>
 </li>
+</ul>
+<pre class="line-numbers language-js"><code class="language-js">      <span class="token comment" spellcheck="true">//在返回的地址加上七牛设置里的域名</span>
+      json<span class="token punctuation">.</span>url <span class="token operator">=</span> editor<span class="token punctuation">.</span><span class="token function">getOpt</span><span class="token punctuation">(</span><span class="token string">'domain'</span><span class="token punctuation">)</span> <span class="token operator">+</span> json<span class="token punctuation">.</span>url<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>另外在attachment.js、video.js 的相同地方按上面所说的修改。</li>
 </ul>
 <p>###后台部分</p>
 <ul>
 <li><p>引入Qiniu SDK,添加一个获取token的服务:</p>
 </li>
-<li><p>添加获取token的Action（事先已经含有UEditor SDK的代码）：<br><img src="http://cdn.blog.yangshunjie.com/image/2/80/e2d2079f10dae2c8d51d0b96fe131.png" alt=" "></p>
+<li><p>添加获取token的Action（事先已经含有UEditor SDK的代码）：</p>
 </li>
-<li><p>OssService.cs 中相关代码</p>
-</li>
+</ul>
+<p><img src="http://cdn.blog.yangshunjie.com/image/2/80/e2d2079f10dae2c8d51d0b96fe131.png" alt=" "></p>
+<ul>
+<li>OssService.cs 中相关代码</li>
 </ul>
 <p><img src="http://cdn.blog.yangshunjie.com/image/d/b4/cbafea85536df7484629196a29cd6.png" alt=""><br><img src="http://cdn.blog.yangshunjie.com/image/4/18/4538ae76b6e196c09489c059a8651.png" alt=""></p>
 <p>这样就基本可以实现将图片上传到七牛的空间了。而如果想在自己的服务器保留一份文件，可以在token中加如CallbackUrl 和 CallbackBody，使七牛在上传完成后对本地的服务器发出请求，把文件的参数发到本地服务器，这时本地服务器即刻按照返回的文件路径将文件抓取到本地服务器中。这部分我还没着手做，下次再继续写吧！</p>
@@ -749,7 +756,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
             </ul>
         </li>
         
@@ -767,7 +774,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -841,7 +848,7 @@
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">32</span>
+                <span class="sidebar-badge">33</span>
             </a>
         </li>
         

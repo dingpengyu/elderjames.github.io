@@ -8,8 +8,26 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Tue, 28 Nov 2017 17:19:07 GMT</pubDate>
+    <pubDate>Sat, 02 Dec 2017 09:29:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>ASP.NET Core 中的SEO优化（4）：自定义视图路径及主题切换</title>
+      <link>https://yangshunjie.com/Customized-View-Path-And-Theme-Switching-In-AspNetCore.html</link>
+      <guid>https://yangshunjie.com/Customized-View-Path-And-Theme-Switching-In-AspNetCore.html</guid>
+      <pubDate>Thu, 30 Nov 2017 21:44:19 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;系列回顾&quot;&gt;&lt;a href=&quot;#系列回顾&quot; class=&quot;headerlink&quot; title=&quot;系列回顾&quot;&gt;&lt;/a&gt;系列回顾&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a hre
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/Customized-View-Path-And-Theme-Switching-In-AspNetCore.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>ASP.NET Core 中的SEO优化（3）:自定义路由匹配和生成</title>
@@ -335,25 +353,6 @@
       </description>
       
       <comments>https://yangshunjie.com/net-core-zi-liao-zheng-li.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>记在Mono 4.2 上EF使用Select操作时会发生的错误</title>
-      <link>https://yangshunjie.com/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html</link>
-      <guid>https://yangshunjie.com/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html</guid>
-      <pubDate>Tue, 12 Jul 2016 10:38:39 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;错误提示：The classes in the module cannot be loaded.&lt;/p&gt;
-&lt;p&gt;代码还原：&lt;/p&gt;
-&lt;pre class=&quot;line-numb
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/yun-xing-zai-monoshang-de-efyun-xing-cuo-wu.html#disqus_thread</comments>
     </item>
     
   </channel>

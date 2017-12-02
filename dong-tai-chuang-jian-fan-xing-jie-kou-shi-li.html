@@ -533,92 +533,95 @@
 <p>最近学会用C#的反射机制，觉得非常好，可以通过类名实例化一个对应的对象。于是我就想到了在设计业务层时，一些通用的数据库操作是以泛型基类的形式供给各个模型使用的，只需替换传入的模型的类型参数，即刻操作相应的模型，而对于一些模型需要的特殊操作，则以这个基类派生出包含特殊方法的子类来实现。</p>
 <p>但是这里会出现一些问题，就是在各层透明的情况下，其他层是不知道模型是否包含有特殊的方法，最初的解决方法是为每个模型都写一个继承业务基类的子类，就算它里面是空的（没有特殊方法）。而现在，通过反射，我们可以很好地实现统一的业务实例化操作，实现自动判断该模型是否拥有对应的业务子类。</p>
 <p>先设计一个泛型接口<code>IService&lt;T&gt;</code>,声明两个方法：</p>
-<pre><code>namespace Service
-{
-   public Interface IService&lt;T&gt; where T : class
-   {
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> Service
+<span class="token punctuation">{</span>
+   <span class="token keyword">public</span> Interface <span class="token class-name">IService</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token keyword">where</span> T <span class="token punctuation">:</span> <span class="token keyword">class</span>
+   <span class="token punctuation">{</span>
 
-      IRepository&lt;T&gt; _repo { get; }
-      void SetRespository(IRepository&lt;T&gt; repo);
-      T Add(T entity);
-      bool Update(T entity);
-   }
-}
-</code></pre><p>然后再写一个基础类，继承这个接口：</p>
-<pre><code>namespace Service
-{
-      public class BaseService&lt;T&gt; : IService&lt;T&gt; where T : class
-    {
-        IRepository&lt;T&gt; _repo ;
-        public void SetRespository(IRepository&lt;T&gt; repo)
-        {
-            _repo=repo;
-        }
-        public T Add(T entity){}
-        public bool Update(T entity){}
-    }
-}
-</code></pre><p>设计业务工厂类，提供统一的实例化出口</p>
-<pre><code>    /// &lt;summary&gt;
-    /// 业务工厂类
-    /// &lt;para&gt;所有业务类都必须从这里产生&lt;/para&gt;
-    /// &lt;/summary&gt;
-    public class ServiceFactory
-    {
-        //获取当前程序集中的所有类的类型
-        static Type[] ts = Assembly.GetExecutingAssembly().GetTypes();
+      IRepository<span class="token operator">&lt;</span>T<span class="token operator">></span> _repo <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+      <span class="token keyword">void</span> <span class="token function">SetRespository</span><span class="token punctuation">(</span>IRepository<span class="token operator">&lt;</span>T<span class="token operator">></span> repo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      T <span class="token function">Add</span><span class="token punctuation">(</span>T entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">bool</span> <span class="token function">Update</span><span class="token punctuation">(</span>T entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后再写一个基础类，继承这个接口：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> Service
+<span class="token punctuation">{</span>
+      <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BaseService</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">:</span> IService<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token keyword">where</span> T <span class="token punctuation">:</span> <span class="token keyword">class</span>
+    <span class="token punctuation">{</span>
+        IRepository<span class="token operator">&lt;</span>T<span class="token operator">></span> _repo <span class="token punctuation">;</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">SetRespository</span><span class="token punctuation">(</span>IRepository<span class="token operator">&lt;</span>T<span class="token operator">></span> repo<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            _repo<span class="token operator">=</span>repo<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> T <span class="token function">Add</span><span class="token punctuation">(</span>T entity<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token keyword">bool</span> <span class="token function">Update</span><span class="token punctuation">(</span>T entity<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>设计业务工厂类，提供统一的实例化出口</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">/// &lt;summary></span>
+    <span class="token comment" spellcheck="true">/// 业务工厂类</span>
+    <span class="token comment" spellcheck="true">/// &lt;para>所有业务类都必须从这里产生&lt;/para></span>
+    <span class="token comment" spellcheck="true">/// &lt;/summary></span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ServiceFactory</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//获取当前程序集中的所有类的类型</span>
+        <span class="token keyword">static</span> Type<span class="token punctuation">[</span><span class="token punctuation">]</span> ts <span class="token operator">=</span> Assembly<span class="token punctuation">.</span><span class="token function">GetExecutingAssembly</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">GetTypes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        /// &lt;summary&gt;
-        /// 动态映射创建实现了IService&lt;T&gt;接口的实例
-        /// &lt;para&gt;如果字符集中已有继承了BaseService&lt;T&gt;的类，则返回该类的实例,
-        /// 否则返回BaseService&lt;T&gt; 的实例&lt;/para&gt;
-        /// &lt;/summary&gt;
-        /// &lt;typeparam name=&quot;T&quot;&gt;数据模型&lt;/typeparam&gt;
-        /// &lt;param name=&quot;repo&quot;&gt;仓储实例&lt;/param&gt;
-        /// &lt;returns&gt;实现IService&lt;T&gt;接口的实例对象&lt;/returns&gt;
-        public static IService&lt;T&gt; GetService&lt;T&gt;(IRepository repo) where T : class
-        {
-            //获取传入类型的 System.Type 对象
-            Type TType = typeof(T);
-            //取当前线程内存块中可能已存储的Service对象
-            var _service = CallContext.GetData($&quot;BaseService&lt;{TType.Name}&gt;&quot;) as IService&lt;T&gt;;
+        <span class="token comment" spellcheck="true">/// &lt;summary></span>
+        <span class="token comment" spellcheck="true">/// 动态映射创建实现了IService&lt;T>接口的实例</span>
+        <span class="token comment" spellcheck="true">/// &lt;para>如果字符集中已有继承了BaseService&lt;T>的类，则返回该类的实例,</span>
+        <span class="token comment" spellcheck="true">/// 否则返回BaseService&lt;T> 的实例&lt;/para></span>
+        <span class="token comment" spellcheck="true">/// &lt;/summary></span>
+        <span class="token comment" spellcheck="true">/// &lt;typeparam name="T">数据模型&lt;/typeparam></span>
+        <span class="token comment" spellcheck="true">/// &lt;param name="repo">仓储实例&lt;/param></span>
+        <span class="token comment" spellcheck="true">/// &lt;returns>实现IService&lt;T>接口的实例对象&lt;/returns></span>
+        <span class="token keyword">public</span> <span class="token keyword">static</span> IService<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token generic-method function">GetService<span class="token punctuation">&lt;</span>T<span class="token punctuation">></span></span><span class="token punctuation">(</span>IRepository repo<span class="token punctuation">)</span> <span class="token keyword">where</span> T <span class="token punctuation">:</span> <span class="token keyword">class</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//获取传入类型的 System.Type 对象</span>
+            Type TType <span class="token operator">=</span> <span class="token keyword">typeof</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//取当前线程内存块中可能已存储的Service对象</span>
+            <span class="token keyword">var</span> _service <span class="token operator">=</span> CallContext<span class="token punctuation">.</span><span class="token function">GetData</span><span class="token punctuation">(</span>$<span class="token string">"BaseService&lt;{TType.Name}>"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> IService<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">;</span>
 
-            if (_service != null) return _service;
-            //查询扩展业务类是否存在于程序集中
-            Type _class = ts.FirstOrDefault(o =&gt; o.Name.Equals(TType.Name + &quot;Service&quot;));
-            try
-            {
-                if (_class != null)
-                {
-                    _service = Activator.CreateInstance(_class) as IService&lt;T&gt;;
-                }
-                else
-                {
-                    _service = Activator.CreateInstance(typeof(BaseService&lt;T&gt;)) as IService&lt;T&gt;;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($&quot;无法实例化{typeof(BaseService&lt;T&gt;).Name}:{ex.Message}&quot;);
-            }
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>_service <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> _service<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//查询扩展业务类是否存在于程序集中</span>
+            Type _class <span class="token operator">=</span> ts<span class="token punctuation">.</span><span class="token function">FirstOrDefault</span><span class="token punctuation">(</span>o <span class="token operator">=</span><span class="token operator">></span> o<span class="token punctuation">.</span>Name<span class="token punctuation">.</span><span class="token function">Equals</span><span class="token punctuation">(</span>TType<span class="token punctuation">.</span>Name <span class="token operator">+</span> <span class="token string">"Service"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>_class <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    _service <span class="token operator">=</span> Activator<span class="token punctuation">.</span><span class="token function">CreateInstance</span><span class="token punctuation">(</span>_class<span class="token punctuation">)</span> <span class="token keyword">as</span> IService<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    _service <span class="token operator">=</span> Activator<span class="token punctuation">.</span><span class="token function">CreateInstance</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>BaseService<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> IService<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span><span class="token punctuation">(</span>$<span class="token string">"无法实例化{typeof(BaseService&lt;T>).Name}:{ex.Message}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
 
-            //获取泛型类定义的type类型
-            var _repoType = repo.GetType().GetGenericTypeDefinition();
-            //传入泛型类型参数
-            _repoType = _repoType.MakeGenericType(typeof(T));
-            //实例化仓储类
-            var _repo = Activator.CreateInstance(_repoType) as IRepository&lt;T&gt;;
-            //注入DbContext
-            _repo.SetDbContext(repo.db);
-            //注入仓储类
-            _service.SetRespository(_repo);
+            <span class="token comment" spellcheck="true">//获取泛型类定义的type类型</span>
+            <span class="token keyword">var</span> _repoType <span class="token operator">=</span> repo<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">GetGenericTypeDefinition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//传入泛型类型参数</span>
+            _repoType <span class="token operator">=</span> _repoType<span class="token punctuation">.</span><span class="token function">MakeGenericType</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//实例化仓储类</span>
+            <span class="token keyword">var</span> _repo <span class="token operator">=</span> Activator<span class="token punctuation">.</span><span class="token function">CreateInstance</span><span class="token punctuation">(</span>_repoType<span class="token punctuation">)</span> <span class="token keyword">as</span> IRepository<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//注入DbContext</span>
+            _repo<span class="token punctuation">.</span><span class="token function">SetDbContext</span><span class="token punctuation">(</span>repo<span class="token punctuation">.</span>db<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//注入仓储类</span>
+            _service<span class="token punctuation">.</span><span class="token function">SetRespository</span><span class="token punctuation">(</span>_repo<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            //将对象保存到当前线程的内存块中
-            CallContext.SetData($&quot;BaseService&lt;{TType.Name}&gt;&quot;, _service);
-            return _service;
-        }
-    }
-</code></pre>
+            <span class="token comment" spellcheck="true">//将对象保存到当前线程的内存块中</span>
+            CallContext<span class="token punctuation">.</span><span class="token function">SetData</span><span class="token punctuation">(</span>$<span class="token string">"BaseService&lt;{TType.Name}>"</span><span class="token punctuation">,</span> _service<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> _service<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>
@@ -783,7 +786,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/12/">十二月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">4</span></a>
             </ul>
         </li>
         
@@ -801,7 +804,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/NET-Core/">.NET Core<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/DDD/">DDD<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Docker/">Docker<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Github-Pages/">Github Pages<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Hexo/">Hexo<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -875,7 +878,7 @@
         <li>
             <a href="/archives">
                 文章总数
-                <span class="sidebar-badge">32</span>
+                <span class="sidebar-badge">33</span>
             </a>
         </li>
         
