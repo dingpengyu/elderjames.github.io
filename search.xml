@@ -2092,13 +2092,13 @@ user = git
         
         <tags>
             
-            <tag> Linux </tag>
-            
-            <tag> Ubuntu </tag>
-            
             <tag> git </tag>
             
             <tag> gogs </tag>
+            
+            <tag> Linux </tag>
+            
+            <tag> Ubuntu </tag>
             
         </tags>
         
@@ -2255,11 +2255,11 @@ user = git
         
         <tags>
             
-            <tag> mono </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> mono </tag>
             
         </tags>
         
@@ -2603,14 +2603,15 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
-      <title><![CDATA[分类]]></title>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
+      <title><![CDATA[分类]]></title>
+      <url>/categories.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -2621,10 +2622,9 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
@@ -2660,14 +2660,14 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[标签]]></title>
-      <url>/tags.html</url>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
+      <title><![CDATA[标签]]></title>
+      <url>/tags.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
