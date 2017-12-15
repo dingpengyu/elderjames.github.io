@@ -3,6 +3,45 @@
   
     
     <entry>
+      <title><![CDATA[我的第一块树莓派]]></title>
+      <url>/my-first-respberry-pi.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="圣诞节前，收到一块树莓派！"><a href="#圣诞节前，收到一块树莓派！" class="headerlink" title="圣诞节前，收到一块树莓派！"></a>圣诞节前，收到一块树莓派！</h1><p>在此感谢俊儿~</p>
+<h1 id="开箱图"><a href="#开箱图" class="headerlink" title="开箱图"></a>开箱图</h1><p><img src="/images/pi/1.png" alt=""></p>
+<p><img src="/images/pi/2.jpg" alt=""></p>
+<p><img src="/images/pi/3.jpg" alt=""></p>
+<p><img src="/images/pi/4.jpg" alt=""></p>
+<p><img src="/images/pi/5.jpg" alt=""></p>
+<p><img src="/images/pi/6.jpg" alt=""></p>
+<p><img src="/images/pi/7.jpg" alt=""></p>
+<h1 id="系统界面"><a href="#系统界面" class="headerlink" title="系统界面"></a>系统界面</h1><p><img src="/images/pi/8.png" alt=""><br>（远程桌面访问桌面）</p>
+<h1 id="起个名字"><a href="#起个名字" class="headerlink" title="起个名字"></a>起个名字</h1><p>外表可爱，内里厉害，就以漫威里的A.I.D.A命名吧！</p>
+<h1 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h1><ol>
+<li>熟悉系统</li>
+<li>借以学习Python</li>
+<li>学习一点硬件知识</li>
+<li>开发成个人助手</li>
+<li>智能家庭、影音和服务托管</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> 树莓派 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 树莓派 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[ASP.NET Core 中的SEO优化（4）：自定义视图路径及主题切换]]></title>
       <url>/Customized-View-Path-And-Theme-Switching-In-AspNetCore.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="系列回顾"><a href="#系列回顾" class="headerlink" title="系列回顾"></a>系列回顾</h2><ul>
@@ -1343,9 +1382,9 @@ services<span class="token punctuation">.</span><span class="token function">Add
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
             <tag> DDD </tag>
             
@@ -1736,9 +1775,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -1976,9 +2015,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -2008,9 +2047,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -2603,27 +2642,8 @@ reproxy=/  http://127.0.0.1:236
   
     
     <entry>
-      <title><![CDATA[留言板]]></title>
-      <url>/contact.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[分类]]></title>
       <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[相册]]></title>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[朋友们]]></title>
-      <url>/friends.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
@@ -2660,14 +2680,33 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
+      <title><![CDATA[留言板]]></title>
+      <url>/contact.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[朋友们]]></title>
+      <url>/friends.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[相册]]></title>
+      <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[标签]]></title>
       <url>/tags.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
