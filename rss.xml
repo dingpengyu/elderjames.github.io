@@ -8,8 +8,26 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Fri, 15 Dec 2017 09:43:03 GMT</pubDate>
+    <pubDate>Wed, 17 Jan 2018 11:13:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>.Net Core on Linux 操作笔记</title>
+      <link>https://yangshunjie.com/net-core-on-linux-operation-note.html</link>
+      <guid>https://yangshunjie.com/net-core-on-linux-operation-note.html</guid>
+      <pubDate>Wed, 17 Jan 2018 18:26:05 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;本文将记录一些在Linux系统上.NET Core相关操作出问题的解决方法。不定时更新~&lt;/p&gt;
+&lt;h2 id=&quot;更新sdk后dotnet命令失效：&quot;&gt;&lt;a href=&quot;#更
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/net-core-on-linux-operation-note.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>我的第一块树莓派</title>
@@ -334,23 +352,6 @@
       </description>
       
       <comments>https://yangshunjie.com/yi-zhu-ru-de-fang-shi.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>使用SecureCRT连接免费的亚马逊云服务器</title>
-      <link>https://yangshunjie.com/shi-yong-securecrtlian-jie-ya-ma-xun-yun-fu-wu-qi.html</link>
-      <guid>https://yangshunjie.com/shi-yong-securecrtlian-jie-ya-ma-xun-yun-fu-wu-qi.html</guid>
-      <pubDate>Tue, 19 Jul 2016 22:09:21 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;亚马逊AWS有一年的免费体验，相比国内的阿里云、腾讯云的优惠政策更实在，而且又不用认证、也不用备案，一个邮箱帐号就能获得，简直就是我等学生（虽然已经不是了，但刚出来工作没几个
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/shi-yong-securecrtlian-jie-ya-ma-xun-yun-fu-wu-qi.html#disqus_thread</comments>
     </item>
     
   </channel>

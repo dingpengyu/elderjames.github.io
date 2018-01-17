@@ -3,6 +3,59 @@
   
     
     <entry>
+      <title><![CDATA[.Net Core on Linux 操作笔记]]></title>
+      <url>/net-core-on-linux-operation-note.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>本文将记录一些在Linux系统上.NET Core相关操作出问题的解决方法。不定时更新~</p>
+<h2 id="更新sdk后dotnet命令失效："><a href="#更新sdk后dotnet命令失效：" class="headerlink" title="更新sdk后dotnet命令失效："></a>更新sdk后dotnet命令失效：</h2><p>执行以下命令创建软连接</p>
+<p><code>ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet</code></p>
+<hr>
+<h2 id="systemctl-配置示例"><a href="#systemctl-配置示例" class="headerlink" title="systemctl 配置示例"></a>systemctl 配置示例</h2><pre class="line-numbers language-sh"><code class="language-sh">[Unit]  
+Description=百银网前台  
+Documentation=  
+
+Wants=network.target  
+After=network.target  
+
+[Service]  
+User=root
+Group=root
+Nice=5  
+KillMode=control-group  
+SuccessExitStatus=0 1  
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false  
+Environment=ASPNETCORE_URLS=http://10.116.150.120:1025 #服务url环境变量，应用内没指定时有效
+
+NoNewPrivileges=true  
+PrivateTmp=true  
+InaccessibleDirectories=/sys /srv -/opt /media -/lost+found  
+ReadWriteDirectories=/usr/local/nginx/html/jjw_cms_web
+WorkingDirectory=/usr/local/nginx/html/jjw_cms_web
+ExecStart=/usr/bin/dotnet /usr/local/nginx/html/jjw_cms_web/JJW.CMS.Web.dll #执行命令
+
+[Install]  
+WantedBy=multi-user.target
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> .NET Core </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> .NET Core </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[我的第一块树莓派]]></title>
       <url>/my-first-respberry-pi.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="圣诞节前，收到一块树莓派！"><a href="#圣诞节前，收到一块树莓派！" class="headerlink" title="圣诞节前，收到一块树莓派！"></a>圣诞节前，收到一块树莓派！</h1><p>在此感谢俊儿~</p>
@@ -1382,9 +1435,9 @@ services<span class="token punctuation">.</span><span class="token function">Add
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
             <tag> DDD </tag>
             
@@ -1775,9 +1828,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -1820,9 +1873,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> Mysql </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -1847,9 +1900,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> Mysql </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -2015,9 +2068,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -2047,9 +2100,9 @@ $ <span class="token function">npm</span> <span class="token function">install</
         
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> .NET </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
         
@@ -2131,13 +2184,13 @@ user = git
         
         <tags>
             
-            <tag> git </tag>
-            
-            <tag> gogs </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> git </tag>
+            
+            <tag> gogs </tag>
             
         </tags>
         
@@ -2294,11 +2347,11 @@ user = git
         
         <tags>
             
+            <tag> mono </tag>
+            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
-            
-            <tag> mono </tag>
             
         </tags>
         
@@ -2397,9 +2450,9 @@ collation-server=utf8_general_ci
         
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> 七牛 </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
         
@@ -2706,12 +2759,6 @@ reproxy=/  http://127.0.0.1:236
     </entry>
     
     <entry>
-      <title><![CDATA[时间轴]]></title>
-      <url>/timeline.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[标签]]></title>
       <url>/tags.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
@@ -2758,6 +2805,12 @@ reproxy=/  http://127.0.0.1:236
 
 <p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[时间轴]]></title>
+      <url>/timeline.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
   
