@@ -274,7 +274,7 @@
 
     
         <meta property="article:published_time" content="Tue Sep 12 2017 17:00:00 GMT+0000">
-        <meta property="article:modified_time" content="Mon Jan 29 2018 09:30:14 GMT+0000">
+        <meta property="article:modified_time" content="Thu May 03 2018 03:31:58 GMT+0000">
     
 
     <!-- The Twitter Card protocol -->
@@ -297,7 +297,7 @@
     "mainEntityOfPage": "https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-in-asp-net-core.html",
     "headline": "ASP.NET Core中为指定类添加WebApi服务功能",
     "datePublished": "Tue Sep 12 2017 17:00:00 GMT+0000",
-    "dateModified": "Mon Jan 29 2018 09:30:14 GMT+0000",
+    "dateModified": "Thu May 03 2018 03:31:58 GMT+0000",
     "author": {
         "@type": "Person",
         "name": "James Yeung",
@@ -577,7 +577,8 @@
         <span class="token comment" spellcheck="true">//...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面代码的原理，是按照我的框架的需求来改写的，构造方法传入的参数ServiceTypes是定义了服务方法的接口的类型，接口和对应实现类似于以下代码，这些代码可以写在一个.NET Core控制台项目中。</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ITestService</span>
 <span class="token punctuation">{</span>
@@ -606,7 +607,8 @@ services<span class="token punctuation">.</span><span class="token function">Add
             <span class="token keyword">var</span> featureProvider <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServiceControllerFeatureProvider</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>ITestService<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             manager<span class="token punctuation">.</span>FeatureProviders<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>featureProvider<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="看看效果"><a href="#看看效果" class="headerlink" title="看看效果"></a>看看效果</h3><p>现在，在TestService类所在项目文件中引入以下Nuget包（没错，运行一个webapi只需要两个Nuget包）：</p>
 <pre class="line-numbers language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.Hosting<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2.0.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>PackageReference</span> <span class="token attr-name">Include</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Microsoft.AspNetCore.Mvc.Core<span class="token punctuation">"</span></span> <span class="token attr-name">Version</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2.0.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
