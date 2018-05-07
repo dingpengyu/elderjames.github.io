@@ -276,9 +276,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
             <tag> DDD </tag>
             
@@ -400,9 +400,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
       
@@ -502,9 +502,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
       
@@ -525,9 +525,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
       
@@ -720,17 +720,17 @@
     </entry>
     
     <entry>
-      <title>分类</title>
-      <link href="/categories.html"/>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-    </entry>
-    
-    <entry>
       <title>留言板</title>
       <link href="/contact.html"/>
       <url>/contact.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>有什么想说，就到这里留言吧！我会很快给你答复！</p>]]></content>
+    </entry>
+    
+    <entry>
+      <title>分类</title>
+      <link href="/categories.html"/>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
@@ -748,16 +748,16 @@
     </entry>
     
     <entry>
-      <title>标签</title>
-      <link href="/tags.html"/>
-      <url>/tags.html</url>
+      <title>时间轴</title>
+      <link href="/timeline.html"/>
+      <url>/timeline.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
     <entry>
-      <title>时间轴</title>
-      <link href="/timeline.html"/>
-      <url>/timeline.html</url>
+      <title>标签</title>
+      <link href="/tags.html"/>
+      <url>/tags.html</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
     </entry>
     
