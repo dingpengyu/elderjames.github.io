@@ -8,8 +8,25 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Mon, 07 May 2018 02:33:33 GMT</pubDate>
+    <pubDate>Tue, 08 May 2018 05:21:05 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>AutoMapper自动注册映射关系配置</title>
+      <link>https://yangshunjie.com/AutoMappers-automatic-registration-mapping-relationship-configuration.html</link>
+      <guid>https://yangshunjie.com/AutoMappers-automatic-registration-mapping-relationship-configuration.html</guid>
+      <pubDate>Tue, 08 May 2018 10:29:00 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/AutoMappers-automatic-registration-mapping-relationship-configuration.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>.Net Core on Linux 操作笔记</title>
@@ -20,8 +37,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;本文将记录一些在Linux系统上.NET Core相关操作出问题的解决方法。不定时更新~&lt;/p&gt;
-&lt;h2 id=&quot;更新sdk后dotnet命令失效：&quot;&gt;&lt;a href=&quot;#更
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -38,7 +54,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;圣诞节前，收到一块树莓派！&quot;&gt;&lt;a href=&quot;#圣诞节前，收到一块树莓派！&quot; class=&quot;headerlink&quot; title=&quot;圣诞节前，收到一块树莓派！&quot;&gt;&lt;
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -55,8 +71,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;系列回顾&quot;&gt;&lt;a href=&quot;#系列回顾&quot; class=&quot;headerlink&quot; title=&quot;系列回顾&quot;&gt;&lt;/a&gt;系列回顾&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a hre
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -73,7 +88,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;前两篇文章主要总结了CMS系统两个技术点
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -90,7 +105,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;上一篇文章&lt;a href=&quot;A-Midd
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -107,7 +122,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;分享&quot;&gt;&lt;a href=&quot;#分享&quot; class=&quot;headerlink&quot; title=&quot;分享&quot;&gt;&lt;/a&gt;分享&lt;/h2&gt;&lt;p&gt;最近在公司成功落地了一个用ASP.NET
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -124,7 +139,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;我上一篇文章&lt;a href=&quot;/influxdb-in-dotNEt-Core-1-Introduction.html&quot;&gt;《InfluxDB在.NET Core中的使用——（
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -141,8 +156,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;InfluxD
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -159,7 +173,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;我在上一篇文章&lt;a href=&quot;https://yangshunjie.com/add-the-webapi-service-to-the-specified-class-i
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -176,7 +190,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;POCO Controller是 &lt;strong&gt;ASP.NET Core&lt;/strong&gt; 中的一个特性，虽然在2015年刚发布的时候就有这个特性了，可是大多数开发者都只是
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -207,7 +221,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;自从来了现在这家公司之后，就喜欢实践DD
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -238,9 +252,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;炎热的盛夏，真的是让人难以入眠。在这种不免之夜，如果还加上停电……简直就是惨绝人寰了！&lt;/p&gt;
-&lt;p&gt;还好，今晚没停电，可以让我吹着风扇安心去写这篇文章。&lt;/p&gt;
-&lt;p&gt;距离
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -257,8 +269,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;很高兴用上了hexo来搭建博客！&lt;/p&gt;
-&lt;p&gt;因为最近使用学习angular、vue、cordova等框架和技术，慢慢喜欢上了用node来构建应用程序的过程。我原来的博客系
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -275,8 +286,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;##Visual Studio 2017正式版终于出来啦！&lt;/p&gt;
-&lt;p&gt;下载地址：&lt;a href=&quot;https://www.visualstudio.com/zh-hans
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -293,7 +303,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;npm由于很多时候都需要从国外的服务器下载组件，由于&lt;strong&gt;众所周知&lt;/strong&gt;的原因，国内安装时往往会很慢甚至卡住安装不上的情况，这时就需要替换一下安装源，使
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -310,9 +320,7 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;很高兴，我的博客又回来了。&lt;/p&gt;
-&lt;p&gt;在使用.NET Core来开发项目已经有两个多月了，想在这里记录一些在.NET Core中比较方便的知识。&lt;/p&gt;
-&lt;p&gt;这里讲一讲
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
@@ -329,29 +337,12 @@
       
         
         
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;.NET要跨平台，就一定要使用同样可以跨平台的数据库，而轻量的MySQL自然是首选。.NET Core发展到现在，虽然官方的Entity Framework还没发布MySQL
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
         
       
       </description>
       
       <comments>https://yangshunjie.com/ef-core-for-mysql-de-databasefang-shi-lian-jie-shu-ju-ku.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>.NET Core以依赖注入的方式配置MySql的DbContext</title>
-      <link>https://yangshunjie.com/yi-zhu-ru-de-fang-shi.html</link>
-      <guid>https://yangshunjie.com/yi-zhu-ru-de-fang-shi.html</guid>
-      <pubDate>Sat, 30 Jul 2016 11:04:28 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;使用ASP.NET Core开发Web项目，在很多方面都跟之前的.NET版本有很大不同，在Startup.cs的配置方面,一言不合就使用依赖注入。当然，这对于整个项目的解耦是
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/yi-zhu-ru-de-fang-shi.html#disqus_thread</comments>
     </item>
     
   </channel>
