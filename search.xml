@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>Angular组件集成UEditor并支持服务端渲染</title>
+      <link href="/Angular-integrating-with-UEditor-and-ssr-supporting.html"/>
+      <url>/Angular-integrating-with-UEditor-and-ssr-supporting.html</url>
+      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Angular、React和Vue 被誉为现今最强大的前端三大框架，其中React和Vue在移动端（web、rn）开发方面如鱼得水，而Angular凭借优秀的模块化设计、工程化构建以及强类型语言Typescript加持，在大中型规模的应用开发上相比另外两个框架更能大展拳脚。</p><p>本人作为偏向后端（大部分是.NET）的开发者，对Angular的最主要需求就是中台(管理后台)应用了。随着.NET Core的开源和壮大，它以很快的速度与“现代”技术接轨，比如跨平台特性使得在微服务、容器技术以及DevOps上与其他平台有着平等的地位；更高的性能、更轻的体量使得它有着比一直以此特点著称的Node.js更加有优势……自从了解到ASP.NET Core框架下的JavascriptService项目后，我就一直在关注着他的发展，这是因为它支持了Angular、React和Vue 这类单页应用（single page application, spa）的服务端渲染（server-side rendering, ssr）的特性。服务端渲染主要是在完全支持前后端分离开发的优点的同时，弥补了spa需要在浏览器完全加载后才开始渲染页面导致的首屏加载慢、难以进行SEO优化的缺点。</p><p>所谓服务端渲染，其实并不是什么新技术，就是从服务端渲染出HTML数据返回给浏览器的过程，这在spa应用大行其道之前，随着网页的诞生就发展起来了的。到了现在，.Net、Java、PHP、Node.j、Python等等都有自己的服务端渲染模版框架，技术点也是大同小异，无非就是老掉牙的MVC模式，将后端数据与前端模版一起渲染出HTML代码输送到浏览器上再展示出图文并茂的网页来。</p><p>但是，到了Spa时代，Spa都是把模版、静态文件等都下载到本地后请求服务端数据，再结合模版渲染出html,最后才能在浏览器展示出页面。虽然首屏加载会慢，但通过页面上的内部路由（链接）去跳转页面就很快，因为已经没有了模版加载的过程，只需请求服务器获取小量的数据即可。不过，这样的应用对首屏加载速度和SEO优化要求比较苛刻的产品就无法满足需求了，于是各家都发现还是老技术好，开始了对服务端渲染的支持。其中Angular就有专门的Universal项目来做这方面的支持。</p><p>我一直在关注Angular的支持ssr中台组件库项目，但在差不多两年的时间里，我找遍整个Github的很多组件库项目，都很少有比较完整且支持ssr的，大多数都只是“Demo”、“Starter”类项目。我甚至给几个组件比较完整的项目提了issue，得到的答复大都是由于第三方组件依赖window、document等浏览器特有对象，不予实现。</p><p>没办法，得知Angular 6.0和Material2 6.0发布之际，决定自己来对某个组件库做改造吧！</p><p>早在去年的Angular 4.0版本，Angular Universal项目就组件完善了。还在beta版本的Material组件库也有消息逐步支持了。如今6.0发布，我独钟的Material已经有很漂亮的基本组件了，决定马上开干！</p><p>请大家Star一下我两天前才发布的项目<a href="https://github.com/ElderJames/aspnetcore-material-universal" target="_blank" rel="noopener">ElderJames/aspnetcore-material-universal</a></p><p>此项目修改自angular-material-app项目，因为此项目大部分组件都是来自原生的Material组件，所以让它支持SSR会比较方便。</p><p>要支持SSR，就必须不能有对window、document等浏览器对象的引用，否则就会报错无法运行。所以对存在需要引用这些对象的情况，一般会是先判断是否在浏览器环境执行。</p><p>而到了集成功能最完善的富文本编辑器UEditor时遇到了棘手问题，我花了一天时间才算是解决了。</p><h4 id="解决难点1：避免浏览器对象引用"><a href="#解决难点1：避免浏览器对象引用" class="headerlink" title="解决难点1：避免浏览器对象引用"></a>解决难点1：<em>避免浏览器对象引用</em></h4><p>UEditor的js库“日久失修”，本身就不支持模块化，window引用直接暴露在全局环境，也就是一加载就会引用……所以必须对它本身进行修改，在原有代码前加入判断。</p><p>先把js库下载并放在assets（或其他用来放置静态文件的）目录，分别在<a href="https://github.com/ElderJames/aspnetcore-material-universal/blob/master/ClientApp/assets/neditor/neditor.all.js" target="_blank" rel="noopener">neditor.all.js</a>、<a href="https://github.com/ElderJames/aspnetcore-material-universal/blob/master/ClientApp/assets/neditor/neditor.config.js" target="_blank" rel="noopener">neditor.copnfig.js</a>、<a href="https://github.com/ElderJames/aspnetcore-material-universal/blob/master/ClientApp/assets/neditor/i18n/zh-cn/zh-cn.js" target="_blank" rel="noopener">zh-cn.js</a>文件源程序前加入以下代码：</p><pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> window <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span>  <span class="token keyword">return</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h4 id="解决难点2：模块化引用"><a href="#解决难点2：模块化引用" class="headerlink" title="解决难点2：模块化引用"></a>解决难点2：<em>模块化引用</em></h4><p>UEditor本身的使用方式是在html文件通过<code>&lt;script&gt;</code>标签引入以上3个js文件，然后操作一个由这些文件构造的<strong>UE</strong>对象。而在spa中，还使用<code>&lt;script&gt;</code>方式引入js的话，就会导致js暴露到外部，每个页面都会加载，达不到模块化的要求，所以我们必须用模块化的f方式引入这些文件。没错，就是<code>import</code>关键字。但是import之后，怎么在模块中取得UE对象呢？通过一翻查询，在<code>import</code>前先使用<code>declare</code>关键字声明这个对象，<code>import</code>后就能引用了。如下所示：</p><pre class="line-numbers language-js"><code class="language-js">declare <span class="token keyword">let</span> UE<span class="token punctuation">:</span> any<span class="token punctuation">;</span><span class="token keyword">import</span> <span class="token string">'../../../assets/neditor/neditor.config.js'</span><span class="token punctuation">;</span><span class="token keyword">import</span> <span class="token string">'../../../assets/neditor/neditor.all.js'</span><span class="token punctuation">;</span><span class="token keyword">import</span> <span class="token string">'../../../assets/neditor/i18n/zh-cn/zh-cn.js'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>注意，使用<code>import</code>方式引入js文件的话，内部对静态文件的引入就会错乱，我们需要在UEditor的配置项指定静态资源路径:</p><pre class="line-numbers language-js"><code class="language-js">UEDITOR_HOME_URL<span class="token punctuation">:</span> <span class="token string">'/assets/neditor/'</span>`<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h4 id="解决难点3：绑定Dom元素"><a href="#解决难点3：绑定Dom元素" class="headerlink" title="解决难点3：绑定Dom元素"></a>解决难点3：<em>绑定Dom元素</em></h4><p>UEditor的初始化要求传入一个元素的id，来让UEditor能绑定到指定的元素。但是Angular的模板渲染是通过虚拟Dom的方式，显然UEditor无法绑定Dom，只能等虚拟Dom渲染出真实Dom时才能绑定，那么就还要留意Angular渲染相关的生命周期钩子了。</p><p>通过注入ElementRef对象来获取当前模板的真实dom元素：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">UEditorComponent</span> <span class="token keyword">implements</span> <span class="token class-name">ControlValueAccessor</span><span class="token punctuation">,</span> OnInit<span class="token punctuation">,</span> OnDestroy <span class="token punctuation">{</span>    isBowser<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>    editor_text<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>    elementRef<span class="token punctuation">:</span> ElementRef<span class="token punctuation">;</span>    <span class="token keyword">constructor</span><span class="token punctuation">(</span>elementRef<span class="token punctuation">:</span> ElementRef<span class="token punctuation">,</span> render<span class="token punctuation">:</span> Renderer2<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">this</span><span class="token punctuation">.</span>isBowser <span class="token operator">=</span> <span class="token keyword">typeof</span> window <span class="token operator">!==</span> <span class="token string">'undefined'</span><span class="token punctuation">;</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>isBowser<span class="token punctuation">)</span>            <span class="token keyword">return</span><span class="token punctuation">;</span>        <span class="token keyword">this</span><span class="token punctuation">.</span>elementRef <span class="token operator">=</span> elementRef<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>ngOnInit</code>钩子中进行每次组建渲染后的UEditor初始化，<code>ngOnDestroy</code>钩子进行UEditor实例的释放，防止内存泄漏。</p><pre><code>    ngOnDestroy() {        if (!this.isBowser)            return;        console.log(&#39;destroy。。。&#39;);        this.ue &amp;&amp; this.ue.destroy();        this.ue = null;        this.isReady = false;    }    ngOnInit() {        if (!this.isBowser)            return;        var id = new Date().getUTCMilliseconds() + &#39;&#39;;        this.elementRef.nativeElement.id = id;        let con: any = _.merge({}, this.defaultConfig, this.config);        this.ue = UE.getEditor(id, con);        this.registerEvents();    }</code></pre><p>好了，先写到这里，相信这次实践能对其他类似的js库的ssr支持集成带来有用的经验。</p>]]></content>
+      
+      <categories>
+          
+          <category> Angular </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Angular </tag>
+            
+            <tag> Typescript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>(转) TinyMCE with SSR and webpack</title>
       <link href="/TinyMCE-with-SSR-and-webpack.html"/>
       <url>/TinyMCE-with-SSR-and-webpack.html</url>
@@ -467,9 +490,9 @@
       
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> Mysql </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
       
@@ -484,9 +507,9 @@
       
         <tags>
             
-            <tag> .NET Core </tag>
-            
             <tag> Mysql </tag>
+            
+            <tag> .NET Core </tag>
             
         </tags>
       
@@ -607,13 +630,13 @@
       
         <tags>
             
-            <tag> git </tag>
-            
-            <tag> gogs </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> git </tag>
+            
+            <tag> gogs </tag>
             
         </tags>
       
@@ -662,11 +685,11 @@
       
         <tags>
             
+            <tag> mono </tag>
+            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
-            
-            <tag> mono </tag>
             
         </tags>
       
@@ -777,30 +800,9 @@
     </entry>
     
     <entry>
-      <title>分类</title>
-      <link href="/categories.html"/>
-      <url>/categories.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-    </entry>
-    
-    <entry>
       <title>相册</title>
       <link href="/gallery/index.html"/>
       <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-    </entry>
-    
-    <entry>
-      <title>关于我</title>
-      <link href="/about.html"/>
-      <url>/about.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="博客历程"><a href="#博客历程" class="headerlink" title="博客历程"></a>博客历程</h3><h4 id="2003-2012"><a href="#2003-2012" class="headerlink" title="2003 - 2012"></a>2003 - 2012</h4><p>微信朋友圈上线之前，都是QQ空间为主，只有熟悉的人能看，里面有相册、和自己的一些作品、生活随笔等等。还小嘛，都是青葱往事，基本没有上去看了。</p><h4 id="2013"><a href="#2013" class="headerlink" title="2013"></a>2013</h4><p>在新浪云搭过Wordpress，没正经写什么。</p><h4 id="2014"><a href="#2014" class="headerlink" title="2014"></a>2014</h4><p>注册了阿里云学生服务器，开始把写的程序放上去跑，有了自己的域名yangshunjie.com，搭了个wordpress，尝试各种插件。</p><h4 id="2015-2016"><a href="#2015-2016" class="headerlink" title="2015 - 2016"></a>2015 - 2016</h4><p>注册了AWS，并且用两个邮箱申请了两年的试用服务器。搭载ghost博客系统，开始写一些技术博客了。</p><h4 id="2017"><a href="#2017" class="headerlink" title="2017"></a>2017</h4><p>之前用的虚拟信用卡被注销了，没有信用卡，不能再申请AWS了，于是就在github用Hexo搭建现在这个博客。除了简单免费，还能增加commit数，并且不时为Material主题项目提一下pr。</p><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><p><img src="/images/cat/2.jpg" alt=""></p><ul><li>杨舜杰</li><li>男</li><li>2016年于广东海洋大学计算机科学与技术专业毕业</li><li>联系方式：<a href="mailto:shunjiey@hotmail.com" target="_blank" rel="noopener">shunjiey@hotmail.com</a></li><li>Github: <a href="http://github.com/elderjames" target="_blank" rel="noopener">github.com/elderjames</a></li></ul><h3 id="兴趣"><a href="#兴趣" class="headerlink" title="兴趣"></a>兴趣</h3><ul><li>喜欢接触新鲜事物，尤其是最新科技</li><li>时刻关注国内外科技动态，尤爱数码产品</li><li>《哈利波特》是童年，周杰伦是青春，大学后迷上美剧</li><li>以前喜欢动手做东西，后来喜欢动手写程序</li></ul><h3 id="大学经历"><a href="#大学经历" class="headerlink" title="大学经历"></a>大学经历</h3><ul><li>大一爱上了轮滑，在轮协认识了很多朋友</li><li>曾任校学生会网络信息部委员、部长</li><li>开发校园助手爱海大，公众号8000+关注，毕业后就弃坑了。</li></ul><h3 id="理想"><a href="#理想" class="headerlink" title="理想"></a>理想</h3><ul><li>据说每个程序员都有一个要用代码改变世界的理想</li></ul><h3 id="目前"><a href="#目前" class="headerlink" title="目前"></a>目前</h3><ul><li>就职于<a href="http://www.100cb.cn/" target="_blank" rel="noopener">广州百财帮网络金融信息服务有限公司</a> 任.NET开发工程师</li><li>业余喜欢学习前端、.NET Core、Docker、Cordova 等技术</li><li>终于有猫了！！起名巴克比克，来自哈利波特里的神奇动物，灰白色，最喜欢舔自己的羽毛。</li></ul><p><img src="/images/cat/1.jpg" alt=""></p>]]></content>
-    </entry>
-    
-    <entry>
-      <title>时间轴</title>
-      <link href="/timeline.html"/>
-      <url>/timeline.html</url>
       <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
     </entry>
     
@@ -812,10 +814,31 @@
     </entry>
     
     <entry>
+      <title>时间轴</title>
+      <link href="/timeline.html"/>
+      <url>/timeline.html</url>
+      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    </entry>
+    
+    <entry>
       <title>欢迎使用 Ghost 博客系统</title>
       <link href="/welcome-to-ghost-2.html"/>
       <url>/welcome-to-ghost-2.html</url>
       <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Yeah，博客上线了！这篇文章的目的是向你介绍 Ghost 编辑器并帮你快速上手。通过 <code>&lt;your blog URL&gt;/ghost/</code> 链接就可以登录系统后台管理你的博客内容了。当你进入后台，你就能看到左侧文章列表处列出的这篇文章，右侧就是这篇文章的预览效果。点击预览栏右上角的铅笔图标就能进入内容编辑页面。 </p><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><p>Ghost 使用 Markdown 语法书写内容。简单来说，Markdown 就是一种简化的书写格式！</p><p>用 Markdown 语法写作是很容易的。在编辑界面的左侧就是你写作的地方。在你认为需要的时候，可以使用以下这些语法来格式化你的内容。例如下面这个无序列表：</p><ul><li>Item number one</li><li>Item number two<ul><li>A nested item</li></ul></li><li>A final item</li></ul><p>还可以是有序列表：</p><ol><li>Remember to buy some milk</li><li>Drink the milk</li><li>Tweet that I remembered to buy the milk, and drank it</li></ol><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>如果要链接其它页面，可以直接把页面的 URL 粘贴过来，例如 <a href="http://www.ghostchina.com" target="_blank" rel="noopener">http://www.ghostchina.com</a> - 会被自动识别为链接。但是，如果你想自定义链接文本，可以像这样： <a href="http://www.ghostchina.com" target="_blank" rel="noopener">Ghost 中文网</a>。很简单吧！</p><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>插入图片也没问题！前提是你事先知道图片的 URL，然后像下面这样：</p><p><img src="http://static.ghostchina.com/image/3/fe/34a9831916be9db1381ecb320491e.png" alt="The Ghost Logo"></p><p>如果图片在本地的硬盘里怎么办？也很简单！像下面这样书写就能为图片预留一个位置，然后你可以继续写作，回头再通过拖拽的方式把图片上传到服务器上。</p><p>![一张图片]</p><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>有些时候我们需要引用别人说的话，可以这样：</p><blockquote><p>Wisdomous - it’s definitely a word.</p></blockquote><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>或许你是个码农，需要贴一些代码到文章里，可以通过两个引号（Tab 键上面的那个键）加入行内代码 <code>&lt;code&gt;</code>。如果需要加入大段的代码，可以在代码前加 4 个空格缩进，这就是 Markdown 的语法。</p><pre><code>.awesome-thing {    display: block;    width: 100%;}</code></pre><h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>在任一新行输入 3 个或更多的短横线（减号）就是一条分隔线了。</p><hr><h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><p>Markdown 还有一个特别用法，就是在你需要的时候可以直接书写 HTML 代码。</p><input type="text" placeholder="这是个输入框！"><p>只要掌握了上面的这些介绍，你就已经入门了！继续写作吧！</p>]]></content>
+    </entry>
+    
+    <entry>
+      <title>分类</title>
+      <link href="/categories.html"/>
+      <url>/categories.html</url>
+      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    </entry>
+    
+    <entry>
+      <title>关于我</title>
+      <link href="/about.html"/>
+      <url>/about.html</url>
+      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="博客历程"><a href="#博客历程" class="headerlink" title="博客历程"></a>博客历程</h3><h4 id="2003-2012"><a href="#2003-2012" class="headerlink" title="2003 - 2012"></a>2003 - 2012</h4><p>微信朋友圈上线之前，都是QQ空间为主，只有熟悉的人能看，里面有相册、和自己的一些作品、生活随笔等等。还小嘛，都是青葱往事，基本没有上去看了。</p><h4 id="2013"><a href="#2013" class="headerlink" title="2013"></a>2013</h4><p>在新浪云搭过Wordpress，没正经写什么。</p><h4 id="2014"><a href="#2014" class="headerlink" title="2014"></a>2014</h4><p>注册了阿里云学生服务器，开始把写的程序放上去跑，有了自己的域名yangshunjie.com，搭了个wordpress，尝试各种插件。</p><h4 id="2015-2016"><a href="#2015-2016" class="headerlink" title="2015 - 2016"></a>2015 - 2016</h4><p>注册了AWS，并且用两个邮箱申请了两年的试用服务器。搭载ghost博客系统，开始写一些技术博客了。</p><h4 id="2017"><a href="#2017" class="headerlink" title="2017"></a>2017</h4><p>之前用的虚拟信用卡被注销了，没有信用卡，不能再申请AWS了，于是就在github用Hexo搭建现在这个博客。除了简单免费，还能增加commit数，并且不时为Material主题项目提一下pr。</p><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><p><img src="/images/cat/2.jpg" alt=""></p><ul><li>杨舜杰</li><li>男</li><li>2016年于广东海洋大学计算机科学与技术专业毕业</li><li>联系方式：<a href="mailto:shunjiey@hotmail.com" target="_blank" rel="noopener">shunjiey@hotmail.com</a></li><li>Github: <a href="http://github.com/elderjames" target="_blank" rel="noopener">github.com/elderjames</a></li></ul><h3 id="兴趣"><a href="#兴趣" class="headerlink" title="兴趣"></a>兴趣</h3><ul><li>喜欢接触新鲜事物，尤其是最新科技</li><li>时刻关注国内外科技动态，尤爱数码产品</li><li>《哈利波特》是童年，周杰伦是青春，大学后迷上美剧</li><li>以前喜欢动手做东西，后来喜欢动手写程序</li></ul><h3 id="大学经历"><a href="#大学经历" class="headerlink" title="大学经历"></a>大学经历</h3><ul><li>大一爱上了轮滑，在轮协认识了很多朋友</li><li>曾任校学生会网络信息部委员、部长</li><li>开发校园助手爱海大，公众号8000+关注，毕业后就弃坑了。</li></ul><h3 id="理想"><a href="#理想" class="headerlink" title="理想"></a>理想</h3><ul><li>据说每个程序员都有一个要用代码改变世界的理想</li></ul><h3 id="目前"><a href="#目前" class="headerlink" title="目前"></a>目前</h3><ul><li>就职于<a href="http://www.100cb.cn/" target="_blank" rel="noopener">广州百财帮网络金融信息服务有限公司</a> 任.NET开发工程师</li><li>业余喜欢学习前端、.NET Core、Docker、Cordova 等技术</li><li>终于有猫了！！起名巴克比克，来自哈利波特里的神奇动物，灰白色，最喜欢舔自己的羽毛。</li></ul><p><img src="/images/cat/1.jpg" alt=""></p>]]></content>
     </entry>
     
   

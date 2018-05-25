@@ -45,7 +45,7 @@
     
     <title>
         
-            归档: 2015/12 | 
+            Angular组件集成UEditor并支持服务端渲染 | 
         
         ElderJames&#39; Blog
     </title>
@@ -56,7 +56,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="学习、札记、分享">
-    <meta name="keywords" content="ElderJames&#39; Blog">
+    <meta name="keywords" content="ElderJames&#39; Blog,Angular,Typescript">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -83,6 +83,9 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?dCMfpMJ5TkVPFBDBk3GX2g==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
 
@@ -243,7 +246,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="ElderJames&#39; Blog">
-    <meta name="msapplication-starturl" content="https://yangshunjie.com/archives/2015/12/">
+    <meta name="msapplication-starturl" content="https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="ElderJames&#39; Blog">
@@ -262,13 +265,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://yangshunjie.com/archives/2015/12/">
+    <meta property="og:url" content="https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档: 2015/12 | ElderJames&#39; Blog">
+    <meta property="og:title" content="Angular组件集成UEditor并支持服务端渲染 | ElderJames&#39; Blog">
     <meta property="og:image" content="/img/favicon.png">
     <meta property="og:description" content="学习、札记、分享">
-    
+    <meta property="og:article:tag" content="Angular"> <meta property="og:article:tag" content="Typescript"> 
 
+    
+        <meta property="article:published_time" content="Sat May 26 2018 00:35:00 GMT+0000">
+        <meta property="article:modified_time" content="Fri May 25 2018 16:37:11 GMT+0000">
     
 
     <!-- The Twitter Card protocol -->
@@ -276,13 +282,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://yangshunjie.com/archives/2015/12/index.html" />
+        <link rel="canonical" href="https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html",
+    "headline": "Angular组件集成UEditor并支持服务端渲染",
+    "datePublished": "Sat May 26 2018 00:35:00 GMT+0000",
+    "dateModified": "Fri May 25 2018 16:37:11 GMT+0000",
+    "author": {
+        "@type": "Person",
+        "name": "James Yeung",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://avatars0.githubusercontent.com/u/7550366?v=4&amp;s=460"
+        },
+        "description": "学习/创作/分享"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "ElderJames&#39; Blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",Angular,TypescriptElderJames&#39; Blog",
+    "description": "学习、札记、分享",
+}
+</script>
 
 
     
@@ -317,93 +353,341 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决难点1：避免浏览器对象引用"><span class="post-toc-number">1.</span> <span class="post-toc-text">解决难点1：避免浏览器对象引用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决难点2：模块化引用"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决难点2：模块化引用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决难点3：绑定Dom元素"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决难点3：绑定Dom元素</span></a></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html">Ubuntu安装mono 4.2.1 最新版教程</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            现在安装mono...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/the-lastest-way-to-install-mono-4-2-1-on-ubuntu.html" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="https://avatars0.githubusercontent.com/u/7550366?v=4&amp;s=460" width="44px" height="44px" alt="James Yeung's avatar">
-            </div>
-            <div>
-                <strong>James Yeung</strong>
-                <span>12月 03, 2015</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                Angular组件集成UEditor并支持服务端渲染
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="https://avatars0.githubusercontent.com/u/7550366?v=4&s=460" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>James Yeung</strong>
+        <span>5月 26, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC00lEQVR42u3awW7cMAwE0Pz/T7fXAIW9M6K32JWeT0WQ2Hw6dEBSP3+OfH6wsbGxsbGxsbGxP5L9Ez9Xf3X/8+Rtv3/z6q8eqBkbGxt7a/aL//ovPhzFxj+Ypw69rhkbGxv7APbVx3LkfRETzFU9ec3Y2NjY2Hkrct+W3B/K5CvY2NjY2G2A5Yy1CEzqwcbGxsZuBzRzahKN80PExsbGPo2dD+g/59//db+NjY2N/cHsybi/LWgt9ubLCWxsbOy92Wsj/jY8nmpsJoMqbGxs7L3ZedF5ufdFTw7ijUMlbGxs7C9k5+WuDe7bgJwfRzFUwsbGxt6C3S4AkrZkvkIuMHFDgo2Njb0rex4PSYBNfp4H6os3Y2NjY2/KzuPh2aaiHRI9UC02Njb21uy1+MkZa0fWxhg2Njb2mey29DZs2qLXWp3RUAkbGxt7I3Z7HO1qYX7Qk6uf2NjY2Luy2zVtuyq4D5j8ENtGaHGWho2Njf2F7Lx5mERUvo6dX+jBxsbGPo2dD3eScf/86s9knLTYimBjY2N/OXvtws0abG3YlIfZiwqxsbGxj2G3Q6IW9uyxFnViY2NjH8BuF7GLV2fKkGvff/kGbGxs7E3Z+WimjY3894trN3EcYmNjY5/DzsF5I7E2ys/Z7ZoBGxsb+2R2e+EmYczbmyRisbGxsc9hJx9+90qgPfS1GrCxsbF3Zd/zkpfm46SibSjfEMUeNjY29qbsdohffyweEq2tEJILmtjY2Nh7s9snX+VGg54AOR9vYWNjY+/NbkNirbVYG1rlQVUverGxsbG3Y7eh1Q6AJo1KHmCPLXqxsbGxv5bdjpAmF3cmK4f8WLGxsbGx2+LyAMvfnx/9i0U1NjY2Nvb98H0pfpJ2aG0x8MZWBBsbG/uD2c9+OD+g9rJOPnLCxsbGPofdXnDMY6+OmfiL9fIYGxsbe1P2OQ82NjY2NjY2Njb2xzx/AS9zSUui/1myAAAAAElFTkSuQmCC">
+    
+</ul>
+
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Angular/">Angular</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Typescript/">Typescript</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Angular组件集成UEditor并支持服务端渲染&url=https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html&pic=https://yangshunjie.com/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=ElderJames&#39; Blog&title=Angular组件集成UEditor并支持服务端渲染&summary=学习、札记、分享&pics=https://yangshunjie.com/img/favicon.png&url=https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
     
 </div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Angular、React和Vue 被誉为现今最强大的前端三大框架，其中React和Vue在移动端（web、rn）开发方面如鱼得水，而Angular凭借优秀的模块化设计、工程化构建以及强类型语言Typescript加持，在大中型规模的应用开发上相比另外两个框架更能大展拳脚。</p>
+<p>本人作为偏向后端（大部分是.NET）的开发者，对Angular的最主要需求就是中台(管理后台)应用了。随着.NET Core的开源和壮大，它以很快的速度与“现代”技术接轨，比如跨平台特性使得在微服务、容器技术以及DevOps上与其他平台有着平等的地位；更高的性能、更轻的体量使得它有着比一直以此特点著称的Node.js更加有优势……自从了解到ASP.NET Core框架下的JavascriptService项目后，我就一直在关注着他的发展，这是因为它支持了Angular、React和Vue 这类单页应用（single page application, spa）的服务端渲染（server-side rendering, ssr）的特性。服务端渲染主要是在完全支持前后端分离开发的优点的同时，弥补了spa需要在浏览器完全加载后才开始渲染页面导致的首屏加载慢、难以进行SEO优化的缺点。</p>
+<p>所谓服务端渲染，其实并不是什么新技术，就是从服务端渲染出HTML数据返回给浏览器的过程，这在spa应用大行其道之前，随着网页的诞生就发展起来了的。到了现在，.Net、Java、PHP、Node.j、Python等等都有自己的服务端渲染模版框架，技术点也是大同小异，无非就是老掉牙的MVC模式，将后端数据与前端模版一起渲染出HTML代码输送到浏览器上再展示出图文并茂的网页来。</p>
+<p>但是，到了Spa时代，Spa都是把模版、静态文件等都下载到本地后请求服务端数据，再结合模版渲染出html,最后才能在浏览器展示出页面。虽然首屏加载会慢，但通过页面上的内部路由（链接）去跳转页面就很快，因为已经没有了模版加载的过程，只需请求服务器获取小量的数据即可。不过，这样的应用对首屏加载速度和SEO优化要求比较苛刻的产品就无法满足需求了，于是各家都发现还是老技术好，开始了对服务端渲染的支持。其中Angular就有专门的Universal项目来做这方面的支持。</p>
+<p>我一直在关注Angular的支持ssr中台组件库项目，但在差不多两年的时间里，我找遍整个Github的很多组件库项目，都很少有比较完整且支持ssr的，大多数都只是“Demo”、“Starter”类项目。我甚至给几个组件比较完整的项目提了issue，得到的答复大都是由于第三方组件依赖window、document等浏览器特有对象，不予实现。</p>
+<p>没办法，得知Angular 6.0和Material2 6.0发布之际，决定自己来对某个组件库做改造吧！</p>
+<p>早在去年的Angular 4.0版本，Angular Universal项目就组件完善了。还在beta版本的Material组件库也有消息逐步支持了。如今6.0发布，我独钟的Material已经有很漂亮的基本组件了，决定马上开干！</p>
+<p>请大家Star一下我两天前才发布的项目<a href="https://github.com/ElderJames/aspnetcore-material-universal" target="_blank" rel="noopener">ElderJames/aspnetcore-material-universal</a></p>
+<p>此项目修改自angular-material-app项目，因为此项目大部分组件都是来自原生的Material组件，所以让它支持SSR会比较方便。</p>
+<p>要支持SSR，就必须不能有对window、document等浏览器对象的引用，否则就会报错无法运行。所以对存在需要引用这些对象的情况，一般会是先判断是否在浏览器环境执行。</p>
+<p>而到了集成功能最完善的富文本编辑器UEditor时遇到了棘手问题，我花了一天时间才算是解决了。</p>
+<h4 id="解决难点1：避免浏览器对象引用"><a href="#解决难点1：避免浏览器对象引用" class="headerlink" title="解决难点1：避免浏览器对象引用"></a>解决难点1：<em>避免浏览器对象引用</em></h4><p>UEditor的js库“日久失修”，本身就不支持模块化，window引用直接暴露在全局环境，也就是一加载就会引用……所以必须对它本身进行修改，在原有代码前加入判断。</p>
+<p>先把js库下载并放在assets（或其他用来放置静态文件的）目录，分别在<a href="https://github.com/ElderJames/aspnetcore-material-universal/blob/master/ClientApp/assets/neditor/neditor.all.js" target="_blank" rel="noopener">neditor.all.js</a>、<a href="https://github.com/ElderJames/aspnetcore-material-universal/blob/master/ClientApp/assets/neditor/neditor.config.js" target="_blank" rel="noopener">neditor.copnfig.js</a>、<a href="https://github.com/ElderJames/aspnetcore-material-universal/blob/master/ClientApp/assets/neditor/i18n/zh-cn/zh-cn.js" target="_blank" rel="noopener">zh-cn.js</a>文件源程序前加入以下代码：</p>
+<pre class="line-numbers language-js"><code class="language-js">
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> window <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="解决难点2：模块化引用"><a href="#解决难点2：模块化引用" class="headerlink" title="解决难点2：模块化引用"></a>解决难点2：<em>模块化引用</em></h4><p>UEditor本身的使用方式是在html文件通过<code>&lt;script&gt;</code>标签引入以上3个js文件，然后操作一个由这些文件构造的<strong>UE</strong>对象。而在spa中，还使用<code>&lt;script&gt;</code>方式引入js的话，就会导致js暴露到外部，每个页面都会加载，达不到模块化的要求，所以我们必须用模块化的f方式引入这些文件。没错，就是<code>import</code>关键字。但是import之后，怎么在模块中取得UE对象呢？通过一翻查询，在<code>import</code>前先使用<code>declare</code>关键字声明这个对象，<code>import</code>后就能引用了。如下所示：</p>
+<pre class="line-numbers language-js"><code class="language-js">declare <span class="token keyword">let</span> UE<span class="token punctuation">:</span> any<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token string">'../../../assets/neditor/neditor.config.js'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'../../../assets/neditor/neditor.all.js'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'../../../assets/neditor/i18n/zh-cn/zh-cn.js'</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，使用<code>import</code>方式引入js文件的话，内部对静态文件的引入就会错乱，我们需要在UEditor的配置项指定静态资源路径:</p>
+<pre class="line-numbers language-js"><code class="language-js">UEDITOR_HOME_URL<span class="token punctuation">:</span> <span class="token string">'/assets/neditor/'</span>`
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="解决难点3：绑定Dom元素"><a href="#解决难点3：绑定Dom元素" class="headerlink" title="解决难点3：绑定Dom元素"></a>解决难点3：<em>绑定Dom元素</em></h4><p>UEditor的初始化要求传入一个元素的id，来让UEditor能绑定到指定的元素。但是Angular的模板渲染是通过虚拟Dom的方式，显然UEditor无法绑定Dom，只能等虚拟Dom渲染出真实Dom时才能绑定，那么就还要留意Angular渲染相关的生命周期钩子了。</p>
+<p>通过注入ElementRef对象来获取当前模板的真实dom元素：</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">UEditorComponent</span> <span class="token keyword">implements</span> <span class="token class-name">ControlValueAccessor</span><span class="token punctuation">,</span> OnInit<span class="token punctuation">,</span> OnDestroy <span class="token punctuation">{</span>
+
+    isBowser<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    editor_text<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    elementRef<span class="token punctuation">:</span> ElementRef<span class="token punctuation">;</span>
+
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span>elementRef<span class="token punctuation">:</span> ElementRef<span class="token punctuation">,</span> render<span class="token punctuation">:</span> Renderer2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>isBowser <span class="token operator">=</span> <span class="token keyword">typeof</span> window <span class="token operator">!==</span> <span class="token string">'undefined'</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>isBowser<span class="token punctuation">)</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>elementRef <span class="token operator">=</span> elementRef<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>ngOnInit</code>钩子中进行每次组建渲染后的UEditor初始化，<code>ngOnDestroy</code>钩子进行UEditor实例的释放，防止内存泄漏。</p>
+<pre><code>    ngOnDestroy() {
+        if (!this.isBowser)
+            return;
+
+        console.log(&#39;destroy。。。&#39;);
+
+        this.ue &amp;&amp; this.ue.destroy();
+        this.ue = null;
+
+        this.isReady = false;
+    }
+
+    ngOnInit() {
+        if (!this.isBowser)
+            return;
+
+        var id = new Date().getUTCMilliseconds() + &#39;&#39;;
+        this.elementRef.nativeElement.id = id;
+
+        let con: any = _.merge({}, this.defaultConfig, this.config);
+        this.ue = UE.getEditor(id, con);
+
+        this.registerEvents();
+
+    }
+</code></pre><p>好了，先写到这里，相信这次实践能对其他类似的js库的ssr支持集成带来有用的经验。</p>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            本文原创授权为：署名-非商业性使用-禁止演绎 4.0 国际 (CC BY-NC-ND 4.0) <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">协议普通文本</a> | <a rel="law-license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">协议法律文本</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html">https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: '695234dcb3266b06c9bc',
+            clientSecret: '9012a4415f4672e4858df564fc9999e9b6d5cec0',
+            repo: 'elderjames.github.io',
+            owner: 'ElderJames',
+            admin: ['ElderJames'],
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/TinyMCE-with-SSR-and-webpack.html" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -811,6 +1095,10 @@ It will not impact the appearance and can give developers a lot of support :)
 <!-- Import prettify js  -->
 
     
+        
+            <script>lsloader.load("prettify_js","//cdn.bootcss.com/prettify/r298/prettify.min.js", true)</script>
+        
+    
 
 
 
@@ -823,6 +1111,11 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 
     
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
         
     
     

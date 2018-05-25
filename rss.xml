@@ -8,8 +8,25 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Fri, 25 May 2018 05:01:56 GMT</pubDate>
+    <pubDate>Fri, 25 May 2018 16:37:11 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Angular组件集成UEditor并支持服务端渲染</title>
+      <link>https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html</link>
+      <guid>https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html</guid>
+      <pubDate>Sat, 26 May 2018 00:35:00 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/Angular-integrating-with-UEditor-and-ssr-supporting.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>(转) TinyMCE with SSR and webpack</title>
@@ -326,23 +343,6 @@
       </description>
       
       <comments>https://yangshunjie.com/n.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>ASP.NET Core中使用依赖注入获得请求生命周期内唯一的DbContext</title>
-      <link>https://yangshunjie.com/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html</link>
-      <guid>https://yangshunjie.com/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html</guid>
-      <pubDate>Thu, 22 Sep 2016 13:58:52 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/asp-net-corezhong-shi-yong-qing-qiu-sheng-ming-zhou-qi-nei-wei-yi-de-dbcontext.html#disqus_thread</comments>
     </item>
     
   </channel>
