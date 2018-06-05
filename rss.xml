@@ -8,8 +8,25 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Thu, 31 May 2018 03:28:14 GMT</pubDate>
+    <pubDate>Tue, 05 Jun 2018 05:51:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>无显示器使用Wifi-VNC启动BerryBoot安装树莓派多系统</title>
+      <link>https://yangshunjie.com/boot-the-berryboot-installer-for-raspberry-pi-with-wifi-and-vnc-but-no-screen.html</link>
+      <guid>https://yangshunjie.com/boot-the-berryboot-installer-for-raspberry-pi-with-wifi-and-vnc-but-no-screen.html</guid>
+      <pubDate>Tue, 05 Jun 2018 13:36:41 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/boot-the-berryboot-installer-for-raspberry-pi-with-wifi-and-vnc-but-no-screen.html#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Angular组件集成UEditor并支持服务端渲染</title>
@@ -326,23 +343,6 @@
       </description>
       
       <comments>https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>NPM 国内镜像</title>
-      <link>https://yangshunjie.com/n.html</link>
-      <guid>https://yangshunjie.com/n.html</guid>
-      <pubDate>Thu, 22 Sep 2016 15:18:28 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/n.html#disqus_thread</comments>
     </item>
     
   </channel>
