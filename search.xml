@@ -370,9 +370,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
             <tag> DDD </tag>
             
@@ -494,9 +494,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
       
@@ -596,9 +596,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
       
@@ -619,9 +619,9 @@
       
         <tags>
             
-            <tag> .NET </tag>
-            
             <tag> .NET Core </tag>
+            
+            <tag> .NET </tag>
             
         </tags>
       
@@ -651,13 +651,13 @@
       
         <tags>
             
-            <tag> git </tag>
-            
-            <tag> gogs </tag>
-            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
+            
+            <tag> git </tag>
+            
+            <tag> gogs </tag>
             
         </tags>
       
@@ -706,11 +706,11 @@
       
         <tags>
             
+            <tag> mono </tag>
+            
             <tag> Linux </tag>
             
             <tag> Ubuntu </tag>
-            
-            <tag> mono </tag>
             
         </tags>
       
@@ -828,13 +828,6 @@
     </entry>
     
     <entry>
-      <title>相册</title>
-      <link href="/gallery/index.html"/>
-      <url>/gallery/index.html</url>
-      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-    </entry>
-    
-    <entry>
       <title>标签</title>
       <link href="/tags.html"/>
       <url>/tags.html</url>
@@ -845,6 +838,13 @@
       <title>时间轴</title>
       <link href="/timeline.html"/>
       <url>/timeline.html</url>
+      <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    </entry>
+    
+    <entry>
+      <title>相册</title>
+      <link href="/gallery/index.html"/>
+      <url>/gallery/index.html</url>
       <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
     </entry>
     

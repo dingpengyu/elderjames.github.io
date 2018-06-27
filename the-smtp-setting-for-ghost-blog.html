@@ -81,7 +81,7 @@
     <!-- Import CSS -->
     
         <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?976y5g1pRWbrdcUItimr0g==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?ZR/a/XkP2uIFNL7SjAHHcg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?eXkKIGXLBtkgeML0A1Jlsg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
             
@@ -349,8 +349,8 @@
 
                     
                         <!-- Hamburger Button -->
-                        <button aria-label="Menu" class="MD-burger-icon sidebar-toggle">
-                            <span class="MD-burger-layer"></span>
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
                         </button>
                     
 
@@ -580,18 +580,31 @@
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
 
 <script>
+    var id = location.pathname;
+
+    if (Date.parse('Tue Oct 13 2015 16:57:04 GMT+0000') - Date.parse('2018-03-01') > 0 ||
+        'false' === 'true') {
+        id = md5(location.pathname)
+    }
+
+    if ('false' === 'true') {
+        id = location.pathname;
+    }
+
     var gitalk = new Gitalk({
-            clientID: '695234dcb3266b06c9bc',
-            clientSecret: '9012a4415f4672e4858df564fc9999e9b6d5cec0',
-            repo: 'elderjames.github.io',
-            owner: 'ElderJames',
-            admin: ['ElderJames'],
-            // facebook-like distraction free mode
-            distractionFreeMode: false
-        })
-   gitalk.render('gitalk-container')
+        clientID: '695234dcb3266b06c9bc',
+        clientSecret: '9012a4415f4672e4858df564fc9999e9b6d5cec0',
+        repo: 'elderjames.github.io',
+        owner: 'ElderJames',
+        admin: ['ElderJames'],
+        id: id,
+        // facebook-like distraction free mode
+        distractionFreeMode: false
+    })
+    gitalk.render('gitalk-container')
 </script>
 </div>
 <style>
@@ -982,7 +995,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
-    <script>lsloader.load("js_js","/js/js.min.js?ffyN6nCpcbPqRFNtUXcbbw==", true)</script>
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
 
 
 
