@@ -8,7 +8,7 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>学习、札记、分享</description>
-    <pubDate>Wed, 27 Jun 2018 04:37:25 GMT</pubDate>
+    <pubDate>Thu, 26 Jul 2018 06:00:01 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -182,6 +182,23 @@
     </item>
     
     <item>
+      <title>Windows 10 上使用 Git 时登录框问题</title>
+      <link>https://yangshunjie.com/the-basic-credential-prompt-for-git-on-windows-10.html</link>
+      <guid>https://yangshunjie.com/the-basic-credential-prompt-for-git-on-windows-10.html</guid>
+      <pubDate>Thu, 23 Nov 2017 18:31:34 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+        
+      
+      </description>
+      
+      <comments>https://yangshunjie.com/the-basic-credential-prompt-for-git-on-windows-10.html#disqus_thread</comments>
+    </item>
+    
+    <item>
       <title>时序数据库InfluxDB在.NET Core中的使用——（2）IoC和仓储模式实现事件存储</title>
       <link>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</link>
       <guid>https://yangshunjie.com/influxdb-in-dotNEt-Core-2-ioc-and-repository-pattern.html</guid>
@@ -326,23 +343,6 @@
       </description>
       
       <comments>https://yangshunjie.com/migrate-blog-from-ghost-to-hexo-and-github.html#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Visual Studio 2017 正式版安装问题及解决方案记录</title>
-      <link>https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</link>
-      <guid>https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html</guid>
-      <pubDate>Tue, 14 Mar 2017 10:05:42 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-        
-      
-      </description>
-      
-      <comments>https://yangshunjie.com/visual-studio-2017-zheng-shi-ban-an-zhuang-wen-ti-ji-jie-jue-fang-an-ji-lu.html#disqus_thread</comments>
     </item>
     
   </channel>
